@@ -1,0 +1,9 @@
+
+# Branch / tag / version of a Site's source
+
+name: string
+
+# Full domain + optional path
+mapping:
+  type: string
+  optional: true

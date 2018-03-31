@@ -1,0 +1,6 @@
+auth: required
+
+role:
+  Admin: all
+
+
