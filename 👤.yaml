@@ -1,6 +1,12 @@
 auth: required
 
-role:
-  Admin: all
+#role:
+  #TBDnew:
+    #/: none
 
+  #On:
+  #implied  /: all
 
+#groups:
+ # All:
+  #  - On
