@@ -1,0 +1,14 @@
+form .show-verb,
+form .show-verb{
+  display: none;
+}
+
+form.submitted .show-verb,
+form.submitted .show-verb{
+  display: initial;
+}
+
+form.submitted .hide-verb,
+form.submitted .hide-verb{
+  display: none;
+}

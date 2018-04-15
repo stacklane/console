@@ -1,0 +1,27 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/nav as nav-item }}
+{{% partial /_layout }}
+
+{{% import {org, project} from '🔗' }}
+
+{{< layout}}
+
+{{$nav}}
+
+{{< nav-item}}
+{{$label}}{{org.uid}}{{/label}}
+{{/ nav-item}}
+
+{{< nav-item}}
+{{$label}}{{project.uid}}{{/label}}
+{{/ nav-item}}
+
+{{/nav}}
+
+{{$content}}
+
+Project Home
+
+
+{{/content}}
+{{/layout}}

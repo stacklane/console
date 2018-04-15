@@ -1,0 +1,164 @@
+
+$link-color: #0099e5;
+$font-family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+////
+
+@import "/bootstrap/functions";
+@import "/bootstrap/variables";
+@import "/bootstrap/mixins";
+//@import "bootstrap/print";
+@import "/bootstrap/reboot";
+@import "/bootstrap/type";
+//@import "bootstrap/images";
+@import "/bootstrap/code";
+@import "/bootstrap/grid";
+@import "/bootstrap/tables";
+@import "/bootstrap/forms";
+@import "/bootstrap/buttons";
+//@import "bootstrap/transitions";
+@import "/bootstrap/dropdown";
+//@import "bootstrap/button-group";
+@import "/bootstrap/input-group";
+//@import "bootstrap/custom-forms";
+@import "/bootstrap/nav";
+@import "/bootstrap/navbar";
+@import "/bootstrap/card";
+//@import "bootstrap/breadcrumb";
+//@import "bootstrap/pagination";
+@import "/bootstrap/badge";
+//@import "/bootstrap/jumbotron";
+@import "/bootstrap/alert";
+//@import "bootstrap/progress";
+//@import "bootstrap/media";
+@import "/bootstrap/list-group";
+//import "bootstrap/close";
+
+// JS @import "bootstrap/modal";
+// JS depends on popper: @import "bootstrap/tooltip";
+// JS depends on popper: @import "bootstrap/popover";
+//@import "bootstrap/carousel";
+
+@import "/bootstrap/utilities";
+
+////////////////////////
+
+@import "blankslate";
+@import "/js/app/form";
+
+/** TODO test **/
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: green;
+}
+
+/*
+#brand{
+  position: absolute;
+  left: -66px;
+  width: 50px;
+  height: 100%;
+  background-image: url(...Stacklane_logo/sl-128-png.png);
+  background-position: 50% 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-blend-mode: luminosity;
+  opacity: .7;
+}*/
+
+
+/**
+ * Horizontal scrolling for small device
+ *
+ * Might prefer instead stacking the navbar (already occurs, but needs display fixes)
+
+header{
+  overflow-y: hidden;
+
+  .navbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+}
+*/
+
+/*
+@include media-breakpoint-down(xs){
+  .sr-only-xs{
+    @include sr-only;
+  }
+
+  header .navbar .sr-only-xs{
+    display:none;
+  }
+}*/
+
+h1 > .badge, h2 > .badge, h3 > .badge, h4 > .badge, h5 > .badge, h6 > .badge{
+  vertical-align: text-top;
+}
+
+
+
+header {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
+
+  .navbar {
+    padding: 0;
+  }
+
+  .nav-link.active:after {
+    content: '';
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    bottom: 0;
+    position: absolute;
+    background: blue;
+    width: 50%;
+    left: 25%;
+  }
+
+  .nav-link svg {
+    height: 1rem;
+    vertical-align: text-top;
+  }
+
+  .nav-link {
+    padding-top: .875rem;
+    padding-bottom: .875rem;
+    font-size: .875rem;
+    color: $secondary;
+    fill: $secondary;
+    transition: color 0.5s ease, fill 0.25s ease;
+  }
+
+  .nav-link:hover {
+    color: $blue;
+    fill: $blue;
+  }
+
+  .nav-link.active {
+    font-weight: 500;
+    color: $gray-800;
+    fill: $gray-800;
+    position: relative;
+  }
+
+  /**
+   * .dropped is not standard but comes from /js/dropdown.js
+   * see _dropdown.scss for styling
+   */
+  .nav-item.dropdown.dropped > .nav-link.dropdown-toggle{
+    @include gradient-bg($dropdown-link-hover-bg);
+  }
+}
+

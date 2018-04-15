@@ -1,12 +1,17 @@
 auth: required
 
-#role:
-  #TBDnew:
-    #/: none
+role:
+  GroupOwner: all
+  GroupMember: all
+  ProjectOwner: all
+  ProjectMember: all
 
-  #On:
-  #implied  /: all
-
-#groups:
- # All:
-  #  - On
+groups:
+  GroupOwners:
+    - GroupOwner
+  GroupMembers:
+    - GroupMember
+  ProjectOwners:
+    - ProjectOwner
+  ProjectMembers:
+    - ProjectMember
