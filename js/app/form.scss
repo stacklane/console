@@ -2,7 +2,12 @@ form.submitted .form-processing{
   display: inline-block;
 }
 
+/**
+ * The following handles the wait indicator.
+ */
+
 // <div class="form-processing"><div></div><div></div><div></div><div></div></div>
+
 .form-processing {
   display: none;
   position: relative;

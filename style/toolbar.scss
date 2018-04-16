@@ -1,0 +1,65 @@
+@import "/bootstrap/functions";
+@import "/bootstrap/variables";
+@import "/bootstrap/mixins";
+
+header {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
+
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .navbar {
+    padding: 0;
+  }
+
+  .nav-link.active:after {
+    content: '';
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    bottom: 0;
+    position: absolute;
+    background: blue;
+    width: 50%;
+    left: 25%;
+  }
+
+  .nav-link svg {
+    height: 1rem;
+    vertical-align: text-top;
+  }
+
+  .nav-link {
+    padding-top: .875rem;
+    padding-bottom: .875rem;
+    font-size: .875rem;
+    color: $secondary;
+    fill: $secondary;
+    transition: color 0.5s ease, fill 0.25s ease;
+  }
+
+  .nav-link:hover {
+    color: $blue;
+    fill: $blue;
+  }
+
+  .nav-link.active {
+    font-weight: 500;
+    color: $gray-800;
+    fill: $gray-800;
+    position: relative;
+  }
+
+  /**
+   * .dropped is not standard but comes from /js/dropdown.js
+   * see _dropdown.scss for styling
+   */
+  .nav-item.dropdown.dropped > .nav-link.dropdown-toggle{
+    @include gradient-bg($dropdown-link-hover-bg);
+  }
+}

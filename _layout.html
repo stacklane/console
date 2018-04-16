@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{$title}}{{/title}} | {{🎨.name}}</title>
+    <title>{{🎨.name}}</title>
+    <!-- {{$title}}{{/title}} -->
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,9 +21,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/stimulus@1.0.1/dist/stimulus.umd.js" integrity="sha256-ciNsRv7Hd2qLYBflmBAEREHKZS/XvgYvvoM8HKP9vfQ=" crossorigin="anonymous"></script>
 
     <script defer data-turbolinks-track="reload" src="/js/app/init.js"></script>
+    <script defer data-turbolinks-track="reload" src="/js/app/notify.js"></script>
     <script defer data-turbolinks-track="reload" src="/js/app/dropdown.js"></script>
     <script defer data-turbolinks-track="reload" src="/js/app/form.js"></script>
-    <script defer data-turbolinks-track="reload" src="/js/app/notify.js"></script>
 
     {{% import {Me} from '👤' }}
 </head>

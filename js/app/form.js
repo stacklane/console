@@ -102,7 +102,7 @@
             if (typeof this.element.getAttribute('data-notification') === 'string'){
                 var detail = {message: this.element.getAttribute('data-notification'),
                             track: this.element.getAttribute('data-notification-track') == 'true'};
-                document.dispatchEvent(new CustomEvent('notification', {detail: detail}));
+                window.notify(detail);
             }
         }
 
@@ -123,17 +123,17 @@
             }).then(function(json) {
                 if (json.notifications){
                     for (var i = 0; i < json.notifications.length; i++) {
-                        document.dispatchEvent(new CustomEvent('notification', {detail: json.notifications[i]}));
+                        window.notify(json.notifications[i]);
                     }
                 }
 
                 if (json.redirect){
-                    var replace = thiz.data.get('turbolinksReplace') == 'true';
-                    var clearCache = thiz.data.get('turbolinksClearCache') == 'true';
-                    var enabled = Turbolinks instanceof object && Turbolinks.supported && thiz.data.get('turbolinks') != 'false';
+                    var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && thiz.element.getAttribute('data-turbolinks') != 'false';
                     if (enabled){
+                        var action = thiz.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
+                        var clearCache = thiz.element.getAttribute('data-turbolinks-clear-cache') == 'true';
                         if (clearCache) Turbolinks.clearCache();
-                        Turbolinks.visit(json.redirect, {action: (replace ? 'replace' : 'advanced')});
+                        Turbolinks.visit(json.redirect, {action: (action == null ? 'replace' : action)});
                     } else {
                         window.location.href = json.redirect;
                     }
@@ -155,6 +155,7 @@
                 }
             }).catch(function(ex) {
                 console.log('form submit failed', ex)
+                window.notify('Error');
             })
         }
 

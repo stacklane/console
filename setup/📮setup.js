@@ -3,6 +3,7 @@ import {url} from "form";
 
 
 ({
+    "redirect": "/",
     "notifications":[
         {message:'Hi there'}
     ],
