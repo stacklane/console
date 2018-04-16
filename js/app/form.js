@@ -5,12 +5,17 @@
  * - data-ajax -- Submit using ajax
  *
  * If needed, fetch polyfill https://github.com/github/fetch
+ *
+ * Considers setCustomValidity to be for server side.
  */
 (function () {
+    'use strict';
     const SUBMITTED = "submitted";
+    const SR_PROCESSING = "Processing";
+
     app.register("form", class extends Stimulus.Controller {
-        isAjax(){ return this.element.getAttribute('data-ajax') == 'true'  /*|| this.element.classList.contains('ajax')*/; }
-        isValidate(){ return this.element.getAttribute('data-validate') == 'true' /*|| this.element.classList.contains('validate')*/; }
+        isAjax(){ return this.element.getAttribute('data-ajax') == 'true' ; }
+        isValidate(){ return this.element.getAttribute('data-validate') == 'true'; }
 
         //https://getbootstrap.com/docs/4.0/components/forms/#disabled-forms
         disable() {
@@ -18,19 +23,49 @@
             for (var i = 0; i < f.length; i++) f[i].setAttribute('disabled', 'disabled');
         }
 
+        enable(){
+            this.element.classList.remove(SUBMITTED);
+            var f = this.element.getElementsByTagName('fieldset');
+            for (var i = 0; i < f.length; i++) f[i].removeAttribute('disabled');
+        }
+
         connect(){
             if (this.element.tagName != 'FORM') throw new Error("Expected <form>");
 
             if (this.isValidate()) {
-                this.element.setAttribute("novalidate", "novalidate"); // Turn off browser validation to use JS only
+                // Disable, because we are controlling it via JS here
+                this.element.setAttribute("novalidate", "novalidate");
             }
+
+            this._addProgress();
 
             var thiz = this;
 
-            this.element.addEventListener('submit', function(event) {
+            var inputs = this.element.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++){
+                var input = inputs[i];
+                input.addEventListener('input', function(e){
+                    // For initial form input, everything would be valid.
+                    // In that case, wait until they submit the form to check validity.
+                    // In other words, this logic is for after the first time a form has been submitted.
+                    if (input.validity.customError) {
+                        input.setCustomValidity(''); // For server side
+                        //input.checkValidity(); // Reset pseudo classes TODO is this necessary?
+                    }
+                });
+            }
+
+            this.element.addEventListener('submit', function(event){
                 var submitting = true;
+
+                thiz._resetValidation();
+
                 if (thiz.isValidate()) {
-                    if (thiz.element.checkValidity() === false) {
+                    //if (thiz.element.checkValidity() === false) {
+                    if (thiz.element.reportValidity() === false){
+                        // We're using a combo of browser validity, with some Bootstrap classes.
+                        // Browser validity (via reportValidity) is to show the messages in a native way,
+                        // AND for use of setCustomValidity
                         event.preventDefault();
                         event.stopPropagation();
                         submitting = false;
@@ -38,18 +73,29 @@
                     // See: https://getbootstrap.com/docs/4.1/components/forms/#custom-styles
                     thiz.element.classList.add('was-validated');
                 }
+
                 if (submitting){
                     thiz.element.classList.add(SUBMITTED);
                     thiz.disable();
-                    thiz._notify(event.target);
+                    thiz._notify(event.currentTarget);
 
                     if (thiz.isAjax()) {
                         event.preventDefault();
                         event.stopPropagation();
-                        thiz._submitAjax(event.target);
+                        thiz._submitAjax(event.currentTarget);
                     }
                 }
             }, false);
+        }
+
+        _addProgress(){
+            var b = this.element.getElementsByTagName('button');
+            for (var i = 0; i < b.length; i++){
+                if (b[i].getAttribute('type') == 'submit'){
+                    b[i].innerHTML += '<div class="form-processing"><div></div><div></div><div></div><div></div><span class="sr-only">' + SR_PROCESSING + '</span></div></div>';
+                    break;
+                }
+            }
         }
 
         _notify(target){
@@ -60,19 +106,12 @@
             }
         }
 
+        _resetValidation(){
+            var inputs = this.element.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) inputs[i].setCustomValidity('');
+        }
 
-        /**
-         * Expects the following response form:
-         *
-         * {
-         *   "redirect"
-         *   or
-         *   "errors":[
-         *
-         *   ]
-         * }
-         */
-        _submitAjax(target){
+        _submitAjax(){
             var thiz = this;
 
             fetch(this.element.getAttribute('action'), {
@@ -82,6 +121,12 @@
             }).then(function(response) {
                 return response.json()
             }).then(function(json) {
+                if (json.notifications){
+                    for (var i = 0; i < json.notifications.length; i++) {
+                        document.dispatchEvent(new CustomEvent('notification', {detail: json.notifications[i]}));
+                    }
+                }
+
                 if (json.redirect){
                     var replace = thiz.data.get('turbolinksReplace') == 'true';
                     var clearCache = thiz.data.get('turbolinksClearCache') == 'true';
@@ -93,9 +138,20 @@
                         window.location.href = json.redirect;
                     }
                 } else if (json.errors){
-                    console.log(json.errors);
-                } else {
-
+                    var inputs = thiz.element.getElementsByTagName('input');
+                    for (var i = 0; i < inputs.length; i++) {
+                        for (var e = 0; e < json.errors.length; e++) {
+                            if (json.errors[i].name == inputs[i].getAttribute('name')) {
+                                if (typeof json.errors[i].message === 'string') {
+                                    inputs[i].setCustomValidity(json.errors[i].message);
+                                } else {
+                                    inputs[i].setCustomValidity('Invalid');
+                                }
+                            }
+                        }
+                    }
+                    thiz.enable();
+                    thiz.element.reportValidity();
                 }
             }).catch(function(ex) {
                 console.log('form submit failed', ex)

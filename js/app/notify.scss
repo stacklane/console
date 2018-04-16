@@ -1,0 +1,29 @@
+
+/**
+ * The overall behavior and timing of this is similar to GCP Console.
+ *
+ * Including: the idea that the notification message popup is *independent* from
+ * any on-page status -- meaning the on-page status may be longer than the notification display.
+ * The hiding of the notification after N seconds doesn't mean the operation is done.
+ *
+ * In short, this is best coupled with other notification/progress/status functionality.
+ */
+
+#notification{
+  position: fixed;
+  bottom: 1.5rem;
+  left: 2rem;
+  padding: 1rem;
+  background: black;
+  color: white;
+
+  transform: translate(0, 200%);
+  transition: transform 0.25s 0ms cubic-bezier(0.4, 0, 1, 1), -webkit-transform 0.25s 0ms cubic-bezier(0.4, 0, 1, 1);
+  will-change: transform;
+}
+
+#notification.notification-active{
+  transform: translate(0);
+  transition: transform 0.25s 0ms cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.25s 0ms cubic-bezier(0, 0, 0.2, 1);
+  pointer-events: auto;
+}

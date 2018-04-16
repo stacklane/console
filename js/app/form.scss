@@ -1,14 +1,61 @@
-form .show-verb,
-form .show-verb{
-  display: none;
+form.submitted .form-processing{
+  display: inline-block;
 }
 
-form.submitted .show-verb,
-form.submitted .show-verb{
-  display: initial;
-}
-
-form.submitted .hide-verb,
-form.submitted .hide-verb{
+// <div class="form-processing"><div></div><div></div><div></div><div></div></div>
+.form-processing {
   display: none;
+  position: relative;
+  width: 26px;
+  height: 6px;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.form-processing div {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.form-processing div:nth-child(1) {
+  left: 0px;
+  animation: form-processing1 0.6s infinite;
+}
+.form-processing div:nth-child(2) {
+  left: 0px;
+  animation: form-processing2 0.6s infinite;
+}
+.form-processing div:nth-child(3) {
+  left: 10px;
+  animation: form-processing2 0.6s infinite;
+}
+.form-processing div:nth-child(4) {
+  left: 20px;
+  animation: form-processing3 0.6s infinite;
+}
+@keyframes form-processing1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes form-processing3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes form-processing2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(10px, 0);
+  }
 }
