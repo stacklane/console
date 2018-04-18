@@ -1,7 +1,7 @@
 body{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
-.provider-button:disabled {
+.provider-button:disabled, .provider-button.disabled{
   opacity: 0.65;
 }
 .provider-button{

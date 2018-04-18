@@ -1,17 +1,20 @@
 auth: required
 
 role:
-  GroupOwner: all
-  GroupMember: all
+  OrgOwner: all
+  OrgMember: all
   ProjectOwner: all
   ProjectMember: all
 
 groups:
-  GroupOwners:
-    - GroupOwner
-  GroupMembers:
-    - GroupMember
+  OrgOwners:
+    - OrgOwner
+  OrgMembers:
+    - OrgMember
   ProjectOwners:
     - ProjectOwner
   ProjectMembers:
     - ProjectMember
+
+# TODO wrong/temporary
+#default: all

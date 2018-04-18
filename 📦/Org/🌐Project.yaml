@@ -9,7 +9,9 @@ source: string
 
 # Provisioned live data namespace, which may be used in
 # multiple Versions.
-data: string
+data:
+  type: string
+  optional: true
 
 # Maps to Version.name
 # The Version that is currently considered live/production
