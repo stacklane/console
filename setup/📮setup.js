@@ -2,8 +2,6 @@
 import {url} from "form";
 import {Org, OrgUser, Project, ProjectUser} from '📦';
 
-//let errors = [];
-
 // TODO verify they don't have any org's at all to be accessing this script.
 
 // TODO check for existing/dup org id.
@@ -38,6 +36,6 @@ try {
 
 } catch (e){
 
-    ({info: e.message});
+    ({error: e.message});
 
 }

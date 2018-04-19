@@ -1,45 +1,51 @@
 /**
  * To be used in conjunction with other on-page progress indicators.
- * Purposefully transient (like GCP Console), and auto-hide doesn't represent completion.
+ * Purposefully transient and auto-hide doesn't represent completion.
  */
 (function (window) {
     'use strict';
 
     const AUTO_HIDE_MS = 5500;
-    const CLASSES = "shadow";
-    const ID = "message";
-
-    var lastTimeout = 0;
+    const MESSAGES_CLASSES = "messages messages-bottom-left";
+    const MESSAGE_CLASSES = "message shadow";
+    const MESSAGES_ID = "messages";
+    const EVT = "messages:post";
 
     // Initial page load
     {
         var messages = document.createElement('div');
-        messages.id = ID;
-        messages.setAttribute('class', CLASSES);
+        messages.id = MESSAGES_ID;
+        messages.setAttribute('class', MESSAGES_CLASSES);
         document.body.appendChild(messages);
         // TODO could look for an initial message in a meta element.
     }
 
     // Convenience over CustomEvent
-    window.postMessage = function(message, track){
-        var detail = (typeof(message) === 'object') ? message : {info: message, track: track};
-        document.dispatchEvent(new CustomEvent(ID, {detail: detail}));
-    }
+    window.Messages = {
+        post: function(message) {
+            var detail = (typeof(message) === 'object') ? message : {info: message};
+            document.dispatchEvent(new CustomEvent(EVT, {detail: detail}));
+        }
+    };
 
     // Carry over existing div to next body
     // Similar idea to turbolinks permanent option
-    // Use cloneNode so no chance to see it removed from existing document.
-    document.addEventListener('turbolinks:before-render', function(e){
-        var messages = document.getElementById(ID);
-        var clone = messages.cloneNode(true);
-        e.data.newBody.appendChild(clone);
-    });
+    // Use cloneNode so no chance to see it removed from existing/current document.
+    // This appears to be fired for cached pages too (good)
+    if (typeof Turbolinks !== 'undefined' && Turbolinks.supported) {
+        document.addEventListener('turbolinks:before-render', function (e) {
+            var existing = e.data.newBody.getElementsByClassName('messages'); // can't use ID lookup on an Element
+            if (existing.length > 0) existing[0].remove();
 
-    // Ignores anything that doesn't look like a message
-    document.addEventListener(ID, function(e){
-        if (lastTimeout != 0) clearTimeout(lastTimeout); // Prior to new message to avoid multiple in-flight timeouts.
+            var messages = document.getElementById(MESSAGES_ID);
+            var clone = messages.cloneNode(true);
 
-        var messages = document.getElementById(ID);
+            e.data.newBody.appendChild(clone);
+        });
+    }
+
+    // Ignores any event data that doesn't look like a message
+    document.addEventListener(EVT, function(e){
         var message = e.detail;
         var txt = '';
         var cls = '';
@@ -60,19 +66,33 @@
 
         if (txt.length == 0) return;
 
-        messages.innerText = txt;
-        messages.setAttribute('class', CLASSES + ' message-show ' + cls);
+        var uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
 
-        lastTimeout = setTimeout(function(){
+        var newMessage = document.createElement('div');
+        newMessage.id = uniqid;
+        newMessage.innerText = txt;
+        newMessage.setAttribute('class', MESSAGE_CLASSES + ' ' + cls);
+
+        var messages = document.getElementById(MESSAGES_ID);
+        messages.appendChild(newMessage);
+
+        // Must occur async, evidently, otherwise the animation won't show.
+        setTimeout(function(){
+            newMessage.setAttribute('class', MESSAGE_CLASSES + ' message-show '  + cls);
+        }, 1);
+
+        setTimeout(function(){
             // Must lookup element in case we've cloned it after a redirect
-            lastTimeout = 0; document.getElementById(ID).setAttribute('class', CLASSES + ' message-hide ' + cls);
+            document.getElementById(uniqid).setAttribute('class', MESSAGE_CLASSES + ' message-hide ' + cls);
+            // Must be greater than CSS hide transition
+            setTimeout(function(){document.getElementById(uniqid).remove()}, 300);
         }, AUTO_HIDE_MS);
 
         if (e.detail.track == true){
-            var stored = sessionStorage.getItem(ID);
+            var stored = sessionStorage.getItem(MESSAGES_ID);
             stored = (stored == null) ? [] : JSON.parse(n);
             stored.unshift({message: e.detail.message, ts: new Date().getTime()});
-            sessionStorage.setItem(ID, JSON.stringify(n));
+            sessionStorage.setItem(MESSAGES_ID, JSON.stringify(n));
         }
     });
 })(window);

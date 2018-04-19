@@ -2,19 +2,34 @@
 @import "/bootstrap/variables";
 @import "/bootstrap/mixins";
 
-/**
- * Initial page state
- */
-
-#message{
+#messages{
   position: fixed;
+  z-index: 999999;
+  pointer-events: none;
+}
+
+#messages.messages-bottom-left{
   bottom: 1.5rem;
   left: 2rem;
+}
+
+//#messages *{
+ // box-sizing: border-box
+//}
+
+.message{
+  width: 300px;
+  overflow: hidden;
+
+  margin-top: .25rem;
+  position: relative;
   padding: 1rem;
   background: black;
   color: white;
+
+  opacity: 0;
   transform: translate(0, 200%);
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 /**
@@ -22,24 +37,25 @@
  * (initial insert of element into DOM).
  */
 
-#message.message-hide{
+.message.message-hide{
   transform: translate(0, 200%);
-  transition: transform 0.25s 0ms cubic-bezier(0.4, 0, 1, 1), -webkit-transform 0.25s 0ms cubic-bezier(0.4, 0, 1, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 1, 1), opacity .25s;
 }
 
-#message.message-show{
+.message.message-show{
+  opacity: 1;
   transform: translate(0);
-  transition: transform 0.25s 0ms cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.25s 0ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1), opacity .25s;
 }
 
-#message.message-error{
+.message.message-error{
   background: $danger;
 }
 
-#message.message-success{
+.message.message-success{
   background: $success;
 }
 
-#message.message-warn{
+.message.message-warn{
   background: $warning;
 }

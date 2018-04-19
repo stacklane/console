@@ -13,7 +13,7 @@
     const SUBMITTED = "submitted";
     const SR_PROCESSING = "Processing";
 
-    app.register("form", class extends Stimulus.Controller {
+    App.register("form", class extends Stimulus.Controller {
         isAjax(){ return this.element.getAttribute('data-ajax') == 'true' ; }
         isValidate(){ return this.element.getAttribute('data-validate') == 'true'; }
 
@@ -103,7 +103,7 @@
             if (typeof this.element.getAttribute('data-message-info') === 'string'){
                 var detail = {info: this.element.getAttribute('data-message-info'),
                             track: this.element.getAttribute('data-message-info-track') == 'true'};
-                window.notify(detail);
+                Messages.post(detail);
             }
         }
 
@@ -131,7 +131,7 @@
         }
 
         _handleMsg(msg){
-            (msg.field) ? this._fieldMsg(msg) : window.postMessage(msg);
+            (msg.field) ? this._fieldMsg(msg) : Messages.post(msg);
         }
 
         _handleJSON(json){
@@ -142,10 +142,10 @@
             }
 
             if (json.redirect) {
-                var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && thiz.element.getAttribute('data-turbolinks') != 'false';
+                var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && this.element.getAttribute('data-turbolinks') != 'false';
                 if (enabled) {
-                    var action = thiz.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
-                    var clearCache = thiz.element.getAttribute('data-turbolinks-clear-cache') == 'true';
+                    var action = this.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
+                    var clearCache = this.element.getAttribute('data-turbolinks-clear-cache') == 'true';
                     if (clearCache) Turbolinks.clearCache();
                     Turbolinks.visit(json.redirect, {action: (action == null ? 'replace' : action)});
                 } else {
@@ -165,19 +165,19 @@
             }).then(function (response) {
 
                 if (response.status == 403) { // Standard for permissions access issue
-                    thiz._handleJSON( {error: 'Not accessible with current permissions'} );
+                    Messages.post( {error: 'Not accessible with current permissions'} );
                 } else {
                     response.json().then(function (json) {
                         thiz._handleJSON(json);
                     }).catch(function (e) {
                         // JSON parsing error
-                        window.notify('Unexpected server response');
+                        Messages.post('Unexpected server response');
                         console.error('Expected JSON response', response);
                     });
                 }
 
             }).catch(function (ex) {
-                window.notify({error:'Submission Error: ' + ex.message});
+                Messages.post({error:'Submission Error: ' + ex.message});
                 console.error('Form submit failed', ex);
             });
 

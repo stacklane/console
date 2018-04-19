@@ -17,4 +17,4 @@ groups:
     - ProjectMember
 
 # TODO wrong/temporary
-#default: all
+default: all

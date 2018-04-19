@@ -3,7 +3,7 @@
  */
 (function () {
     'use strict';
-    app.register("dropdown", class extends Stimulus.Controller {
+    App.register("dropdown", class extends Stimulus.Controller {
         _menu(){
             return this.element.getElementsByClassName('dropdown-menu')[0];
         }

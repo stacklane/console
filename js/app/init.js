@@ -1,4 +1,4 @@
 (function (window) {
     'use strict';
-    window.app = Stimulus.Application.start();
+    window.App = Stimulus.Application.start();
 })(window);
