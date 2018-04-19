@@ -9,44 +9,35 @@ import {Org, OrgUser, Project, ProjectUser} from '📦';
 // TODO check for existing/dup org id.
 
 if (url == null || !url.startsWith("https://github.com/") || !url.endsWith(".git")){
-    throw ({errors:[{name:'url', message:'Invalid github.com URL: ' + url}]});
+    throw ({field:'url', error: 'Invalid github.com URL'});
 }
 
-//if (errors.length > 0) {
+// Format: https://github.com/org/repo.git
 
-    //({errors: errors});
+try {
 
-//} else {
+    let split = url.split('/');
+    let orgId = split[3];
+    let projectId = split[4].split('.')[0];
 
-    // Format: https://github.com/org/repo.git
+    let org = new Org().uid(orgId);
 
-    try {
+    let project = org(() => {
+        let orgUser = OrgUser.me(); // TODO group
 
-        let split = url.split('/');
-        let orgId = split[3];
-        let projectId = split[4].split('.')[0];
+        let project = new Project().uid(projectId).source(url);
 
-        let org = new Org().uid(orgId);
-
-        let project = org(() => {
-            let orgUser = OrgUser.me(); // TODO group
-
-            let project = new Project().uid(projectId).source(url);
-
-            project(() => {
-                let projectUser = ProjectUser.me(); // TODO group
-            });
-
-            return project;
+        project(() => {
+            let projectUser = ProjectUser.me(); // TODO group
         });
 
+        return project;
+    });
 
-        ({redirect: `/${orgId}/${projectId}/`, notifications: [{message: 'New project created'}]});
+    ({redirect: `/${orgId}/${projectId}/`, success: 'New project created'});
 
-    } catch (e){
+} catch (e){
 
-        ({notifications: [{message: e.message}]});
+    ({info: e.message});
 
-    }
-
-//}
+}

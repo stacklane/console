@@ -1,8 +1,12 @@
+@import "/bootstrap/functions";
+@import "/bootstrap/variables";
+@import "/bootstrap/mixins";
+
 /**
- * Initial state off page
+ * Initial page state
  */
 
-#notification{
+#message{
   position: fixed;
   bottom: 1.5rem;
   left: 2rem;
@@ -18,12 +22,24 @@
  * (initial insert of element into DOM).
  */
 
-#notification.notification-hide{
+#message.message-hide{
   transform: translate(0, 200%);
   transition: transform 0.25s 0ms cubic-bezier(0.4, 0, 1, 1), -webkit-transform 0.25s 0ms cubic-bezier(0.4, 0, 1, 1);
 }
 
-#notification.notification-show{
+#message.message-show{
   transform: translate(0);
   transition: transform 0.25s 0ms cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.25s 0ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+#message.message-error{
+  background: $danger;
+}
+
+#message.message-success{
+  background: $success;
+}
+
+#message.message-warn{
+  background: $warning;
 }

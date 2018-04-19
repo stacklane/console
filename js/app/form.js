@@ -100,9 +100,9 @@
         }
 
         _notify(target){
-            if (typeof this.element.getAttribute('data-notification') === 'string'){
-                var detail = {message: this.element.getAttribute('data-notification'),
-                            track: this.element.getAttribute('data-notification-track') == 'true'};
+            if (typeof this.element.getAttribute('data-message-info') === 'string'){
+                var detail = {info: this.element.getAttribute('data-message-info'),
+                            track: this.element.getAttribute('data-message-info-track') == 'true'};
                 window.notify(detail);
             }
         }
@@ -112,11 +112,33 @@
             for (var i = 0; i < inputs.length; i++) inputs[i].setCustomValidity('');
         }
 
-        _handleJSON(json){
-            if (json.notifications) {
-                for (var i = 0; i < json.notifications.length; i++) {
-                    window.notify(json.notifications[i]);
+        /**
+         * {field:'x', error:'y'}
+         */
+        _fieldMsg(msg){
+            var inputs = this.element.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+                if (msg.field == inputs[i].getAttribute('name')) {
+                    if (typeof msg.error === 'string') {
+                        inputs[i].setCustomValidity(msg.error);
+                    } else {
+                        inputs[i].setCustomValidity(msg.field);
+                    }
                 }
+            }
+            this.enable();
+            this.element.reportValidity();
+        }
+
+        _handleMsg(msg){
+            (msg.field) ? this._fieldMsg(msg) : window.postMessage(msg);
+        }
+
+        _handleJSON(json){
+            if (json.messages) {
+                for (var i = 0; i < json.messages.length; i++) this._handleMsg(json.messages[i]); // Many
+            } else {
+                this._handleMsg(json); // One
             }
 
             if (json.redirect) {
@@ -129,54 +151,35 @@
                 } else {
                     window.location.href = json.redirect;
                 }
-            } else if (json.errors) {
-                var inputs = thiz.element.getElementsByTagName('input');
-                for (var i = 0; i < inputs.length; i++) {
-                    for (var e = 0; e < json.errors.length; e++) {
-                        if (json.errors[i].name == inputs[i].getAttribute('name')) {
-                            if (typeof json.errors[i].message === 'string') {
-                                inputs[i].setCustomValidity(json.errors[i].message);
-                            } else {
-                                inputs[i].setCustomValidity('Invalid');
-                            }
-                        }
-                    }
-                }
-                thiz.enable();
-                thiz.element.reportValidity();
             }
         }
 
         _submitAjax(formData){
             var thiz = this;
 
-            try {
-                fetch(thiz.element.getAttribute('action'), {
-                    method: thiz.element.getAttribute('method'),
-                    credentials: 'same-origin',
-                    mode: 'same-origin',
-                    body: formData
-                }).then(function (response) {
+            fetch(thiz.element.getAttribute('action'), {
+                method: thiz.element.getAttribute('method'),
+                credentials: 'same-origin',
+                mode: 'same-origin',
+                body: formData
+            }).then(function (response) {
 
-                    if (response.status == 403) { // Standard for permissions access issue
-                        thiz._handleJSON( {notifications: [{message: 'Not accessible with current permissions'}]} );
-                    } else {
-                        response.json().then(function (json) {
-                            thiz._handleJSON(json);
-                        }).catch(function (e) {
-                            // JSON parsing error
-                            window.notify('Unexpected server response');
-                            console.error('Expected JSON response', response);
-                        });
-                    }
+                if (response.status == 403) { // Standard for permissions access issue
+                    thiz._handleJSON( {error: 'Not accessible with current permissions'} );
+                } else {
+                    response.json().then(function (json) {
+                        thiz._handleJSON(json);
+                    }).catch(function (e) {
+                        // JSON parsing error
+                        window.notify('Unexpected server response');
+                        console.error('Expected JSON response', response);
+                    });
+                }
 
-                }).catch(function (ex) {
-                    window.notify('Submission Error: ' + ex.message);
-                    console.error('Form submit failed', ex);
-                });
-            } catch (r){
-                console.log('bob: ' + r);
-            }
+            }).catch(function (ex) {
+                window.notify({error:'Submission Error: ' + ex.message});
+                console.error('Form submit failed', ex);
+            });
 
         }
 
