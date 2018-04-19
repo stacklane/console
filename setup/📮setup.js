@@ -2,21 +2,21 @@
 import {url} from "form";
 import {Org, OrgUser, Project, ProjectUser} from '📦';
 
-let errors = [];
+//let errors = [];
 
 // TODO verify they don't have any org's at all to be accessing this script.
 
 // TODO check for existing/dup org id.
 
 if (url == null || !url.startsWith("https://github.com/") || !url.endsWith(".git")){
-    errors.push({name:'url', message:'Invalid github.com URL: ' + url});
+    throw ({errors:[{name:'url', message:'Invalid github.com URL: ' + url}]});
 }
 
-if (errors.length > 0) {
+//if (errors.length > 0) {
 
-    ({errors: errors});
+    //({errors: errors});
 
-} else {
+//} else {
 
     // Format: https://github.com/org/repo.git
 
@@ -49,4 +49,4 @@ if (errors.length > 0) {
 
     }
 
-}
+//}

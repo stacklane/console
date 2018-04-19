@@ -1,0 +1,4 @@
+
+# Make everything in this directory accessible from anywhere.
+
+auth: optional

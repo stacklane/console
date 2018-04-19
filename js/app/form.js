@@ -112,58 +112,72 @@
             for (var i = 0; i < inputs.length; i++) inputs[i].setCustomValidity('');
         }
 
+        _handleJSON(json){
+            if (json.notifications) {
+                for (var i = 0; i < json.notifications.length; i++) {
+                    window.notify(json.notifications[i]);
+                }
+            }
+
+            if (json.redirect) {
+                var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && thiz.element.getAttribute('data-turbolinks') != 'false';
+                if (enabled) {
+                    var action = thiz.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
+                    var clearCache = thiz.element.getAttribute('data-turbolinks-clear-cache') == 'true';
+                    if (clearCache) Turbolinks.clearCache();
+                    Turbolinks.visit(json.redirect, {action: (action == null ? 'replace' : action)});
+                } else {
+                    window.location.href = json.redirect;
+                }
+            } else if (json.errors) {
+                var inputs = thiz.element.getElementsByTagName('input');
+                for (var i = 0; i < inputs.length; i++) {
+                    for (var e = 0; e < json.errors.length; e++) {
+                        if (json.errors[i].name == inputs[i].getAttribute('name')) {
+                            if (typeof json.errors[i].message === 'string') {
+                                inputs[i].setCustomValidity(json.errors[i].message);
+                            } else {
+                                inputs[i].setCustomValidity('Invalid');
+                            }
+                        }
+                    }
+                }
+                thiz.enable();
+                thiz.element.reportValidity();
+            }
+        }
+
         _submitAjax(formData){
             var thiz = this;
 
-            fetch(thiz.element.getAttribute('action'), {
-                method: thiz.element.getAttribute('method'),
-                credentials: 'same-origin',
-                body: formData
-            }).then(function(response) {
+            try {
+                fetch(thiz.element.getAttribute('action'), {
+                    method: thiz.element.getAttribute('method'),
+                    credentials: 'same-origin',
+                    mode: 'same-origin',
+                    body: formData
+                }).then(function (response) {
 
-                response.json().then(function(json){
-                    if (json.notifications){
-                        for (var i = 0; i < json.notifications.length; i++) {
-                            window.notify(json.notifications[i]);
-                        }
+                    if (response.status == 403) { // Standard for permissions access issue
+                        thiz._handleJSON( {notifications: [{message: 'Not accessible with current permissions'}]} );
+                    } else {
+                        response.json().then(function (json) {
+                            thiz._handleJSON(json);
+                        }).catch(function (e) {
+                            // JSON parsing error
+                            window.notify('Unexpected server response');
+                            console.error('Expected JSON response', response);
+                        });
                     }
 
-                    if (json.redirect){
-                        var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && thiz.element.getAttribute('data-turbolinks') != 'false';
-                        if (enabled){
-                            var action = thiz.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
-                            var clearCache = thiz.element.getAttribute('data-turbolinks-clear-cache') == 'true';
-                            if (clearCache) Turbolinks.clearCache();
-                            Turbolinks.visit(json.redirect, {action: (action == null ? 'replace' : action)});
-                        } else {
-                            window.location.href = json.redirect;
-                        }
-                    } else if (json.errors){
-                        var inputs = thiz.element.getElementsByTagName('input');
-                        for (var i = 0; i < inputs.length; i++) {
-                            for (var e = 0; e < json.errors.length; e++) {
-                                if (json.errors[i].name == inputs[i].getAttribute('name')) {
-                                    if (typeof json.errors[i].message === 'string') {
-                                        inputs[i].setCustomValidity(json.errors[i].message);
-                                    } else {
-                                        inputs[i].setCustomValidity('Invalid');
-                                    }
-                                }
-                            }
-                        }
-                        thiz.enable();
-                        thiz.element.reportValidity();
-                    }
-                }).catch(function(e){
-                    // JSON parsing error
-                    window.notify('Unexpected server response');
-                    console.error('Expected JSON response', response);
+                }).catch(function (ex) {
+                    window.notify('Submission Error: ' + ex.message);
+                    console.error('Form submit failed', ex);
                 });
+            } catch (r){
+                console.log('bob: ' + r);
+            }
 
-            }).catch(function(ex) {
-                window.notify('Submission Error: ' + ex.message);
-                console.error('Form submit failed', ex);
-            });
         }
 
         /**
