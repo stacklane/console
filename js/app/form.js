@@ -61,7 +61,6 @@
                 thiz._resetValidation();
 
                 if (thiz.isValidate()) {
-                    //if (thiz.element.checkValidity() === false) {
                     if (thiz.element.reportValidity() === false){
                         // We're using a combo of browser validity, with some Bootstrap classes.
                         // Browser validity (via reportValidity) is to show the messages in a native way,
@@ -75,7 +74,7 @@
                 }
 
                 if (submitting){
-                    var formData = new FormData(thiz.element); // must occur before disabling form.
+                    var formData = new FormData(thiz.element); // Must be constructed before disabling form.
                     thiz.element.classList.add(SUBMITTED);
                     thiz.disable();
                     thiz._notify(event.currentTarget);
@@ -161,7 +160,10 @@
                 method: thiz.element.getAttribute('method'),
                 credentials: 'same-origin',
                 mode: 'same-origin',
-                body: formData
+                body: formData,
+                headers:{
+                    Accept: 'application/json' // Ensures that any errors/exceptions are also in JSON
+                }
             }).then(function (response) {
 
                 if (response.status == 403) { // Standard for permissions access issue
