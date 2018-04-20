@@ -125,8 +125,6 @@
                     }
                 }
             }
-            this.enable();
-            this.element.reportValidity();
         }
 
         _handleMsg(msg){
@@ -152,8 +150,10 @@
                 } else {
                     window.location.href = json.redirect;
                 }
-                Progress.step(); // From here Progress already handles 'turbolinks:request-end'
+                Progress.step(); // From here waiting on 'turbolinks:request-end', which Progress already handles.
             } else {
+                this.enable();
+                this.element.reportValidity();
                 Progress.end();
             }
         }
