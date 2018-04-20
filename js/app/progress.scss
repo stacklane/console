@@ -1,0 +1,41 @@
+@import "/bootstrap/functions";
+@import "/bootstrap/variables";
+@import "/bootstrap/mixins";
+
+.w-10{
+  width: 10% !important;
+}
+
+.turbolinks-progress-bar {
+  visibility: hidden;
+}
+
+#global-progress.progress{
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  height: 0px;
+  pointer-events: none;
+  transition: height 400ms ease-out;
+  background:transparent;
+  width:100%;
+}
+
+#global-progress.progress.show{
+  height: 2px;
+}
+
+#global-progress.progress .progress-bar{
+  width: 0%; // Effectively the initial state on first display
+  pointer-events: none;
+  box-shadow: $box-shadow-sm;
+
+  /* suitable transition already in Bootstrap code
+  -moz-transition: width 500ms ease-out,opacity 400ms linear;
+  -ms-transition: width 500ms ease-out,opacity 400ms linear;
+  -o-transition: width 500ms ease-out,opacity 400ms linear;
+  -webkit-transition: width 500ms ease-out,opacity 400ms linear;
+  transition: width 500ms ease-out,opacity 400ms linear;
+  */
+}

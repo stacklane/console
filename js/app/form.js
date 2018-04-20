@@ -134,6 +134,8 @@
         }
 
         _handleJSON(json){
+            Progress.step();
+
             if (json.messages) {
                 for (var i = 0; i < json.messages.length; i++) this._handleMsg(json.messages[i]); // Many
             } else {
@@ -150,11 +152,16 @@
                 } else {
                     window.location.href = json.redirect;
                 }
+                Progress.step(); // From here Progress already handles 'turbolinks:request-end'
+            } else {
+                Progress.end();
             }
         }
 
         _submitAjax(formData){
             var thiz = this;
+
+            Progress.optimistic();
 
             fetch(thiz.element.getAttribute('action'), {
                 method: thiz.element.getAttribute('method'),
@@ -166,12 +173,15 @@
                 }
             }).then(function (response) {
 
+                Progress.step();
+
                 if (response.status == 403) { // Standard for permissions access issue
                     Messages.post( {error: 'Not accessible with current permissions'} );
                 } else {
                     response.json().then(function (json) {
                         thiz._handleJSON(json);
                     }).catch(function (e) {
+                        Progress.end();
                         // JSON parsing error
                         Messages.post('Unexpected server response');
                         console.error('Expected JSON response', response);
@@ -179,6 +189,7 @@
                 }
 
             }).catch(function (ex) {
+                Progress.end();
                 Messages.post({error:'Submission Error: ' + ex.message});
                 console.error('Form submit failed', ex);
             });

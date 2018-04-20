@@ -30,7 +30,7 @@ $enable-rounded: false;
 @import "/bootstrap/badge";
 //@import "/bootstrap/jumbotron";
 @import "/bootstrap/alert";
-//@import "bootstrap/progress";
+@import "/bootstrap/progress";
 //@import "bootstrap/media";
 @import "/bootstrap/list-group";
 //import "bootstrap/close";
@@ -48,10 +48,7 @@ $enable-rounded: false;
 @import "toolbar";
 @import "/js/app/form";
 @import "/js/app/message";
-
-.turbolinks-progress-bar {
-  //visibility: hidden;
-}
+@import "/js/app/progress";
 
 h1 > .badge, h2 > .badge, h3 > .badge, h4 > .badge, h5 > .badge, h6 > .badge{
   vertical-align: text-top;
