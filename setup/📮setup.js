@@ -32,7 +32,7 @@ try {
         return project;
     });
 
-    ({redirect: `/${orgId}/${projectId}/`, success: 'New project "' + projectId + "' created"});
+    ({redirect: `/${orgId}/${projectId}/`, success: 'New project "' + projectId + '" created'});
 
 } catch (e){
 

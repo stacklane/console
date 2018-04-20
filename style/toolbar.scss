@@ -2,31 +2,26 @@
 @import "/bootstrap/variables";
 @import "/bootstrap/mixins";
 
+/**
+ * No padding by default -- relies on nav-link/navbar-text to have padding,
+ *  which creates "full toolbar height" buttons and links.
+ */
 header {
+  background: white;
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
 
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 
   .navbar {
     padding: 0;
   }
 
-  .nav-link.active:after {
-    content: '';
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    bottom: 0;
-    position: absolute;
-    background: blue;
-    width: 50%;
-    left: 25%;
+  .nav-link, .navbar-text{
+    padding-top: .75rem;
+    padding-bottom: .75rem;
   }
 
   .nav-link svg {
@@ -35,11 +30,8 @@ header {
   }
 
   .nav-link {
-    padding-top: .875rem;
-    padding-bottom: .875rem;
-    font-size: .875rem;
-    color: $secondary;
-    fill: $secondary;
+    color: $gray-600;
+    fill: $gray-600;
     transition: color 0.5s ease, fill 0.25s ease;
   }
 
@@ -53,6 +45,24 @@ header {
     color: $gray-800;
     fill: $gray-800;
     position: relative;
+  }
+
+  /**
+   * Highlight bar underneath active link.
+   */
+  .nav-link.active:after {
+    content: '';
+    display: block;
+    /*margin-left: auto;
+    margin-right: auto;*/
+    height: 2px;
+    /*border-top-left-radius: 3px;
+    border-top-right-radius: 3px;*/
+    bottom: 0;
+    position: absolute;
+    background: $blue;
+    width: 50%;
+    left: 25%;
   }
 
   /**

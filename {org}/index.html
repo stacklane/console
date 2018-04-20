@@ -2,6 +2,7 @@
 {{% partial /_partials/nav as nav-item }}
 {{% partial /_layout }}
 {{% import {org} from '🔗' }}
+{{% import {Projects} from '📤' }}
 
 {{< layout}}
 
@@ -16,10 +17,22 @@
 
 {{$content}}
 
+<div class="mt-4">
+    {{#Projects by 2 as grp}}
+    <div class="card-deck small">
+        {{#grp as project}}
+        <a class="card mb-4 card-link card-identifiable" href="/{{org.uid}}/{{project.uid}}/">
+            <div class="card-body">
+                <h6 class="card-title mb-0">{{project.uid}}</h6>
+                <p class="card-text">
 
-Org Home
-
-
+                </p>
+            </div>
+        </a>
+        {{/grp}}
+    </div>
+    {{/Projects}}
+</div>
 
 {{/content}}
 {{/layout}}
