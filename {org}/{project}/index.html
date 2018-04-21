@@ -1,5 +1,6 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/nav as nav-item }}
+{{% partial /_partials/_nav/ as nav }}
+{{% svg /_icons/ as ic }}
 {{% partial /_layout }}
 
 {{% import {org, project} from '🔗' }}
@@ -8,21 +9,28 @@
 
 {{$nav}}
 
-{{< nav-item}}
+{{< nav-link}}
 {{$path}}/{{org.uid}}/{{/path}}
 {{$label}}{{org.uid}}{{/label}}
-{{/ nav-item}}
+{{/ nav-link}}
 
-<li class="nav-item"><span class="navbar-text">/</span></li>
+{{< nav-text}}{{$label}}/{{/label}}{{/ nav-text}}
 
-<li class="nav-item"><span class="navbar-text active">{{project.uid}}</span></li>
+{{< nav-text-active}}{{$label}}{{project.uid}}{{/label}}{{/ nav-text-active}}
+
+{{< nav-spacer}}{{/ nav-spacer}}
+
+{{< nav-link}}
+{{$path}}keys/{{/path}}
+{{$label}}Keys{{/label}}
+{{$icon}}{{>ic-key}}{{/icon}}
+{{/ nav-link}}
 
 {{/nav}}
 
 {{$content}}
 
 Project Home
-
 
 {{/content}}
 {{/layout}}

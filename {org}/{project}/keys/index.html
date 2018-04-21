@@ -1,0 +1,58 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/_nav/ as nav }}
+{{% svg /_icons/ as ic }}
+{{% partial /_layout }}
+
+{{% import {org, project} from '🔗' }}
+
+{{< layout}}
+
+{{$nav}}
+
+{{< nav-link}}
+{{$path}}/{{org.uid}}/{{/path}}
+{{$label}}{{org.uid}}{{/label}}
+{{/ nav-link}}
+
+{{< nav-text}}{{$label}}/{{/label}}{{/ nav-text}}
+
+{{< nav-link}}
+{{$path}}/{{org.uid}}/{{project.uid}}/{{/path}}
+{{$label}}{{project.uid}}{{/label}}
+{{/ nav-link}}
+
+{{< nav-spacer}}{{/ nav-spacer}}
+
+{{< nav-link-active}}
+{{$label}}Keys{{/label}}
+{{$icon}}{{> ic-key}}{{/icon}}
+{{/ nav-link-active}}
+
+{{/nav}}
+
+{{$content}}
+
+<div class="blankslate">
+
+    {{> ic-key}}
+
+    <h1>Welcome to Project Keys</h1>
+
+    <p>
+        This is a secure vault for third party API credentials.
+        Code running from within this Project will have access to
+        these keys for third party authentication, but will never
+        be able to expose them publicly.
+    </p>
+
+    <hr class="my-5">
+
+    <div class="text-left">
+
+
+    </div>
+
+</div>
+
+{{/content}}
+{{/layout}}

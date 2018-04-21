@@ -1,5 +1,5 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/nav as nav-item }}
+{{% partial /_partials/_nav/ as nav }}
 {{% partial /_layout }}
 {{% import {org} from '🔗' }}
 {{% import {Projects} from '📤' }}
@@ -8,7 +8,7 @@
 
 {{$nav}}
 
-<li class="nav-item"><span class="navbar-text active">{{org.uid}}</span></li>
+{{< nav-text-active}}{{$label}}{{org.uid}}{{/label}}{{/ nav-text-active}}
 
 {{/nav}}
 

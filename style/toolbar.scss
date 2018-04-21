@@ -17,6 +17,12 @@ header {
 
   .navbar {
     padding: 0;
+    font-size: .9rem;
+  }
+
+  .nav-item-spacer{
+    display:inline-block;
+    width: 1.5rem;
   }
 
   .navbar-nav {
