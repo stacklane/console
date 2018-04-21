@@ -1,6 +1,7 @@
 
 import {url} from "form";
 import {Org, OrgUser, Project, ProjectUser} from '📦';
+import {IsReservedWord} from "📤";
 
 // TODO verify they don't have any org's at all to be accessing this script.
 
@@ -14,13 +15,13 @@ let split = url.split('/');
 let orgId = split[3];
 let projectId = split[4].split('.')[0];
 
-if (Org.uid(orgId).count()){
-    throw ({warn: `Organization "${orgId}" already exists`});
-}
+if (IsReservedWord(orgId)) throw ({warn: `Organization ID "${orgId}" is reserved.`});
+if (IsReservedWord(projectId)) throw ({warn: `Project ID "${projectId}" is reserved.`});
+if (Org.uid(orgId).count()) throw ({warn: `Organization "${orgId}" already exists`});
 
 let org = new Org().uid(orgId);
 
-let project = org(() => {
+org(() => {
     let orgUser = OrgUser.me(); // TODO group
 
     let project = new Project().uid(projectId).source(url);
@@ -28,8 +29,6 @@ let project = org(() => {
     project(() => {
         let projectUser = ProjectUser.me(); // TODO group
     });
-
-    return project;
 });
 
 ({redirect: `/${orgId}/${projectId}/`, success: `New project "${projectId}" created`});

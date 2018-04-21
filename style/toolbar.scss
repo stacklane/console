@@ -19,57 +19,56 @@ header {
     padding: 0;
   }
 
-  .nav-link, .navbar-text{
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-  }
+  .navbar-nav {
 
-  .nav-link svg {
-    height: 1rem;
-    vertical-align: text-top;
-  }
+    .nav-link, .navbar-text {
+      padding: .75rem .5rem;
+    }
 
-  .nav-link {
-    color: $gray-600;
-    fill: $gray-600;
-    transition: color 0.5s ease, fill 0.25s ease;
-  }
+    .nav-link svg {
+      height: 1rem;
+      vertical-align: text-top;
+    }
 
-  .nav-link:hover {
-    color: $blue;
-    fill: $blue;
-  }
+    .nav-link {
+      color: $gray-600;
+      fill: $gray-600;
+      transition: color 0.5s ease, fill 0.25s ease;
+    }
 
-  .nav-link.active {
-    font-weight: 500;
-    color: $gray-800;
-    fill: $gray-800;
-    position: relative;
-  }
+    .nav-link:hover {
+      color: $blue;
+      fill: $blue;
+    }
 
-  /**
-   * Highlight bar underneath active link.
-   */
-  .nav-link.active:after {
-    content: '';
-    display: block;
-    /*margin-left: auto;
-    margin-right: auto;*/
-    height: 2px;
-    /*border-top-left-radius: 3px;
-    border-top-right-radius: 3px;*/
-    bottom: 0;
-    position: absolute;
-    background: $blue;
-    width: 50%;
-    left: 25%;
-  }
+    .nav-link.active, .navbar-text.active {
+      font-weight: 500;
+      color: $gray-800;
+      fill: $gray-800;
+      position: relative; /* necessary for using :after in position absolute */
+    }
 
-  /**
-   * .dropped is not standard but comes from /js/dropdown.js
-   * see _dropdown.scss for styling
-   */
-  .nav-item.dropdown.dropped > .nav-link.dropdown-toggle{
-    @include gradient-bg($dropdown-link-hover-bg);
+    /**
+     * Highlight bar underneath active link.
+     */
+    .nav-link.active:after, .navbar-text.active:after {
+      content: '';
+      display: block;
+      height: 2px;
+      bottom: 0;
+      position: absolute;
+      background: $blue;
+      width: 50%;
+      left: 25%;
+    }
+
+    /**
+     * .dropped is not standard but comes from /js/dropdown.js
+     * see _dropdown.scss for styling
+     */
+    .nav-item.dropdown.dropped > .nav-link.dropdown-toggle {
+      @include gradient-bg($dropdown-link-hover-bg);
+    }
+
   }
 }

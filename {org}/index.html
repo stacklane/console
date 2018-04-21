@@ -8,11 +8,7 @@
 
 {{$nav}}
 
-{{< nav-item}}
-{{$cls}}active{{/cls}}
-{{$path}}/{{org.uid}}/{{/path}}
-{{$label}}{{org.uid}}{{/label}}
-{{/ nav-item}}
+<li class="nav-item"><span class="navbar-text active">{{org.uid}}</span></li>
 
 {{/nav}}
 
@@ -22,7 +18,7 @@
     {{#Projects by 2 as grp}}
     <div class="card-deck small">
         {{#grp as project}}
-        <a class="card mb-4 card-link card-identifiable" href="/{{org.uid}}/{{project.uid}}/">
+        <a class="card mb-4 card-big-link card-identifiable" href="/{{org.uid}}/{{project.uid}}/">
             <div class="card-body">
                 <h6 class="card-title mb-0">{{project.uid}}</h6>
                 <p class="card-text">
