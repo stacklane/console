@@ -1,6 +1,8 @@
 <!--TEMPLATE mustache-->
 {{% partial /_partials/_nav/ as nav }}
 {{% partial /_layout }}
+{{% svg /_icons/ as ic }}
+
 {{% import {org} from '🔗' }}
 {{% import {Projects} from '📤' }}
 
@@ -10,13 +12,21 @@
 
 {{< nav-text-active}}{{$label}}{{org.uid}}{{/label}}{{/ nav-text-active}}
 
+{{< nav-spacer}}{{/ nav-spacer}}
+
+{{< nav-link}}
+{{$path}}projects/new{{/path}}
+{{$label}}New Project{{/label}}
+{{$icon}}{{>ic-add_circle}}{{/icon}}
+{{/ nav-link}}
+
 {{/nav}}
 
 {{$content}}
 
 <div class="mt-4">
     {{#Projects by 2 as grp}}
-    <div class="card-deck small">
+    <div class="card-deck">
         {{#grp as project}}
         <a class="card mb-4 card-big-link card-identifiable" href="/{{org.uid}}/{{project.uid}}/">
             <div class="card-body">
