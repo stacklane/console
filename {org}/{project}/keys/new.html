@@ -1,0 +1,133 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/_nav/ as nav }}
+{{% svg /_icons/ as ic }}
+{{% partial /_layout }}
+
+{{% import {org, project} from '🔗' }}
+
+{{< layout}}
+
+{{$nav}}
+
+{{< nav-link}}
+{{$path}}/{{org.uid}}/{{/path}}
+{{$label}}{{org.uid}}{{/label}}
+{{/ nav-link}}
+
+{{< nav-text}}{{$label}}/{{/label}}{{/ nav-text}}
+
+{{< nav-link}}
+{{$path}}/{{org.uid}}/{{project.uid}}/{{/path}}
+{{$label}}{{project.uid}}{{/label}}
+{{/ nav-link}}
+
+{{< nav-spacer}}{{/ nav-spacer}}
+
+{{< nav-link-active}}
+{{$label}}Keys{{/label}}
+{{$icon}}{{> ic-key}}{{/icon}}
+{{/ nav-link-active}}
+
+{{/nav}}
+
+{{$content}}
+
+<div class="blankslate text-left">
+
+    <h4>Create a Project Key</h4>
+
+    <p>
+        Keys are stored in a secure vault and values are only used for connecting
+        to services.  Once entered they can't be retrieved, however they may be
+        replaced.
+    </p>
+
+    <hr class="my-4">
+
+    <ul class="nav nav-pills mb-4" data-controller="tabs">
+        <li class="nav-item">
+            <a class="nav-link" id="api-tab" href="#api">Third Party API</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="user-tab" href="#user">Identity Provider</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade" id="api" aria-labelledby="api-tab">
+            <p class="text-muted">
+                Defines a token for connecting to a third party API.
+            </p>
+            <form method="post" action="newApi"
+                  data-controller="form"
+                  data-validate="true"
+                  data-ajax="true"
+                  data-turbolinks-clear-cache="true">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="name">Domain Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="abc.com" required>
+                        <small class="form-text text-muted">
+                            Third party domain name.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="token">Token</label>
+                        <input type="text" class="form-control" id="token" name="token" placeholder="" required>
+                        <small class="form-text text-muted">
+                            Authentication token obtained from the third party provider.
+                        </small>
+                    </div>
+                    <p class="mt-3 text-right">
+                        <button class="btn btn-primary" type="submit">Create</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">
+            <p class="text-muted">
+                Defines information for connecting to a user identity provider.
+            </p>
+            <form method="post" action="newUser"
+                  data-controller="form"
+                  data-validate="true"
+                  data-ajax="true"
+                  data-turbolinks-clear-cache="true">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="identityType">Identity Provider</label>
+                        <select class="form-control" id="identityType" required name="identityType">
+                            <option value="">Choose...</option>
+                            <option value="google">Google</option>
+                            <option value="github">GitHub</option>
+                        </select>
+                        <small class="form-text text-muted">
+                            Choose the third party identity provider you have obtained OAUTH keys from.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientId">Client ID</label>
+                        <input type="text" class="form-control" id="clientId" name="clientId" placeholder="" required>
+                        <small class="form-text text-muted">
+                            Client ID given by the identity provider.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="secret">Secret</label>
+                        <input type="text" class="form-control" id="secret" name="secret" placeholder="" required>
+                        <small class="form-text text-muted">
+                            Secret key given by the identity provider.
+                        </small>
+                    </div>
+                    <p class="mt-3 text-right">
+                        <button class="btn btn-primary" type="submit">Create</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+{{/content}}
+{{/layout}}

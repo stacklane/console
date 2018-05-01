@@ -4,7 +4,7 @@
 {{% svg /_icons/ as ic }}
 
 {{% import {org} from '🔗' }}
-{{% import {Projects} from '📤' }}
+{{% import {Project} from '📦' }}
 
 {{< layout}}
 
@@ -12,33 +12,31 @@
 
 {{< nav-text-active}}{{$label}}{{org.uid}}{{/label}}{{/ nav-text-active}}
 
-{{< nav-spacer}}{{/ nav-spacer}}
-
-{{< nav-link}}
-{{$path}}projects/new{{/path}}
-{{$label}}New Project{{/label}}
-{{$icon}}{{>ic-add_circle}}{{/icon}}
-{{/ nav-link}}
-
 {{/nav}}
 
 {{$content}}
 
 <div class="mt-4">
-    {{#Projects by 2 as grp}}
-    <div class="card-deck">
-        {{#grp as project}}
-        <a class="card mb-4 card-big-link card-identifiable" href="/{{org.uid}}/{{project.uid}}/">
-            <div class="card-body">
-                <h6 class="card-title mb-0">{{project.uid}}</h6>
-                <p class="card-text">
 
-                </p>
-            </div>
-        </a>
-        {{/grp}}
-    </div>
-    {{/Projects}}
+<div class="text-right mb-4">
+    <a class="btn btn-primary" href="projects/new">New Project</a>
+</div>
+
+{{#Project.all by 2 as grp}}
+<div class="card-deck">
+    {{#grp as project}}
+    <a class="card mb-4 card-big-link card-identifiable" href="/{{org.uid}}/{{project.uid}}/">
+        <div class="card-body">
+            <h6 class="card-title mb-0">{{project.uid}}</h6>
+            <p class="card-text">
+
+            </p>
+        </div>
+    </a>
+    {{/grp}}
+</div>
+{{/Project.all}}
+
 </div>
 
 {{/content}}

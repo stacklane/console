@@ -144,7 +144,9 @@
                 var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && this.element.getAttribute('data-turbolinks') != 'false';
                 if (enabled) {
                     var action = this.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
-                    var clearCache = this.element.getAttribute('data-turbolinks-clear-cache') == 'true';
+                    //var clearCache = this.element.getAttribute('data-turbolinks-clear-cache') == 'true';
+                    //if (clearCache) Turbolinks.clearCache();
+                    var clearCache = this.element.getAttribute('data-turbolinks-clear-cache') != 'false';
                     if (clearCache) Turbolinks.clearCache();
                     Turbolinks.visit(json.redirect, {action: (action == null ? 'replace' : action)});
                 } else {

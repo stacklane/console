@@ -32,6 +32,32 @@
 
 {{$content}}
 
+{{% import {ProjectKey} from '📦' }}
+
+<div class="mt-4">
+
+<div class="text-right mb-4">
+    <a class="btn btn-primary" href="new">New Project Key</a>
+</div>
+
+{{#ProjectKey.all by 2 as grp}}
+<div class="card-deck">
+    {{#grp as key}}
+    <a class="card mb-4 card-big-link card-identifiable" href="{{key.id}}/">
+        <div class="card-body">
+            <h6 class="card-title mb-0">
+                <span class="badge badge-secondary">{{key.type}}</span> {{key.name}}
+            </h6>
+            <p class="card-text">
+                {{key.description}}
+            </p>
+        </div>
+    </a>
+    {{/grp}}
+</div>
+{{/ProjectKey.all}}
+
+{{^ProjectKey.all}}
 <div class="blankslate">
 
     {{> ic-key}}
@@ -43,16 +69,14 @@
         Code running from within this Project will have access to
         these keys for third party authentication, but will never
         be able to expose them publicly.
+        To get started, <a href="new">create a project key</a>.
     </p>
 
-    <hr class="my-5">
-
-    <div class="text-left">
-
-
-    </div>
+</div>
+{{/ProjectKey.all}}
 
 </div>
+
 
 {{/content}}
 {{/layout}}

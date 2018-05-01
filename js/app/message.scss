@@ -18,8 +18,8 @@
 //}
 
 .message{
-  width: 300px;
-  overflow: hidden;
+  max-width: 300px;
+  //overflow: hidden;
 
   margin-top: .25rem;
   position: relative;
