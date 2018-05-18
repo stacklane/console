@@ -15,25 +15,30 @@
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
 
     <!--
-      Warning: keep these versions in sync with prefetch in auth/index.html
+      Warning: keep these versions in sync with prefetch in /auth/_prefetch.html
      -->
     <script defer src="https://cdn.jsdelivr.net/npm/turbolinks@5.1.1/dist/turbolinks.js" integrity="sha256-L06fzo/4G4oD7dGuNySdAWCxTFN2wkj0GrFTnWKdKBo=" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/stimulus@1.0.1/dist/stimulus.umd.js" integrity="sha256-ciNsRv7Hd2qLYBflmBAEREHKZS/XvgYvvoM8HKP9vfQ=" crossorigin="anonymous"></script>
 
+    <!--
+        HTTP/2 plus CDN should take care of loading these efficiently
+    -->
     <script defer data-turbolinks-track="reload" src="/js/app/init.js"></script>
     <script defer data-turbolinks-track="reload" src="/js/app/progress.js"></script>
     <script defer data-turbolinks-track="reload" src="/js/app/message.js"></script>
     <script defer data-turbolinks-track="reload" src="/js/app/dropdown.js"></script>
     <script defer data-turbolinks-track="reload" src="/js/app/form.js"></script>
     <script defer data-turbolinks-track="reload" src="/js/app/tabs.js"></script>
+    <script defer data-turbolinks-track="reload" src="/js/app/badge.js"></script>
 
     {{% import {Me} from '👤' }}
 </head>
 
-<body class="bg-light">
-<header class="container">
+<body>
+<header>
+    <div class="container">
     <nav class="navbar navbar-expand">
-        <!--div id="brand hide" class="box-shadow-2 bg-white"></div-->
+        <h1 class="navbar-brand mb-0">S</h1>
 
         <ul class="navbar-nav mr-auto">
             {{$nav}}{{/nav}}
@@ -47,7 +52,7 @@
                         <path d="M0 0h24v24H0z" fill="none"/>
                     </svg>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right shadow">
+                <div class="dropdown-menu dropdown-menu-right">
                     <h6 class="dropdown-header d-none d-sm-block">
                         {{🎨.logged-in-as Me.name}}
                     </h6>
@@ -59,6 +64,7 @@
             </div>
         </div>
     </nav>
+    </div>
 </header>
 
 <main role="main" class="container">

@@ -1,6 +1,4 @@
-@import "/bootstrap/functions";
-@import "/bootstrap/variables";
-@import "/bootstrap/mixins";
+@import "/style/variables";
 
 .w-10{
   width: 10% !important;
@@ -29,7 +27,7 @@
 #global-progress.progress .progress-bar{
   width: 0%; // Effectively the initial state on first display
   pointer-events: none;
-  box-shadow: $box-shadow-sm;
+  @include box-shadow($box-shadow-sm);
 
   /* suitable transition already in Bootstrap code
   -moz-transition: width 500ms ease-out,opacity 400ms linear;

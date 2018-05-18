@@ -1,11 +1,17 @@
 
 # Represents an instance-of a specific source/repository
 
-# Unique within the Org
-uid: uid
+account:
+  optional: true
+  type: Account
 
 # Should not contain a branch/tag/version
 source: string
+
+# TODO ideally keep in sync with manifest name of master branch.
+name:
+  type: string
+  optional: true
 
 # Provisioned live data namespace, which may be used in
 # multiple Versions.

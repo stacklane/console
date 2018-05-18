@@ -1,3 +1,5 @@
+@import "/style/variables";
+
 form.submitted .form-processing{
   display: inline-block;
 }
@@ -21,8 +23,18 @@ form.submitted .form-processing{
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #fff;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+/**
+ * Make indicator color same as the text color of the various button variations.
+ */
+@each $color, $value in $theme-colors {
+  .btn-#{$color} .form-processing div {
+    background-color: color-yiq($value);
+  }
+}
+.btn-link .form-processing div{
+  background-color: $link-color;
 }
 .form-processing div:nth-child(1) {
   left: 0px;

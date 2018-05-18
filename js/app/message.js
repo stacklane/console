@@ -7,7 +7,7 @@
 
     const AUTO_HIDE_MS = 5500;
     const MESSAGES_CLASSES = "messages messages-bottom-left";
-    const MESSAGE_CLASSES = "message shadow";
+    const MESSAGE_CLASSES = "message";
     const MESSAGES_ID = "messages";
     const EVT = "messages:post";
 

@@ -3,27 +3,21 @@
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
 
-{{% import {org, project} from '🔗' }}
+{{% import {project} from '🔗' }}
 
 {{< layout}}
 
 {{$nav}}
 
 {{< nav-link}}
-{{$path}}/{{org.uid}}/{{/path}}
-{{$label}}{{org.uid}}{{/label}}
-{{/ nav-link}}
-
-{{< nav-text}}{{$label}}/{{/label}}{{/ nav-text}}
-
-{{< nav-link}}
-{{$path}}/{{org.uid}}/{{project.uid}}/{{/path}}
-{{$label}}{{project.uid}}{{/label}}
+{{$path}}/projects/{{project.id}}/{{/path}}
+{{$label}}Project Name{{/label}}
 {{/ nav-link}}
 
 {{< nav-spacer}}{{/ nav-spacer}}
 
 {{< nav-link-active}}
+{{$path}}.{{/path}}
 {{$label}}Keys{{/label}}
 {{$icon}}{{> ic-key}}{{/icon}}
 {{/ nav-link-active}}

@@ -1,16 +1,11 @@
 <!--TEMPLATE mustache-->
 {{% partial /_partials/_nav/ as nav }}
 {{% partial /_layout }}
-{{% import {org} from '🔗' }}
 
 {{< layout}}
 
 {{$nav}}
 
-{{< nav-link}}
-{{$path}}/{{org.uid}}/{{/path}}
-{{$label}}{{org.uid}}{{/label}}
-{{/ nav-link}}
 
 {{/nav}}
 

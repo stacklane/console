@@ -1,7 +1,8 @@
 <!--TEMPLATE mustache-->
 {{% partial /_partials/nav as nav-item }}
 {{% partial /_layout }}
-{{% import {Org} from '📦' }}
+
+{{% import {MyProjects} from '📤' }}
 
 {{< layout}}
 
@@ -15,26 +16,28 @@
 
 <div class="mt-4">
 
-{{#Org.all by 2 as grp}}
+<div class="text-right mb-4">
+    <a class="btn btn-primary" href="/projects/new">New Project</a>
+</div>
+
+    <!--
+     TEMP
+     -->
+
+{{#MyProjects by 2 as grp}}
 <div class="card-deck">
-    {{#grp as org}}
-    <a class="card mb-4 card-big-link card-identifiable" href="/{{org.uid}}/">
+    {{#grp as item}}
+    <a class="card mb-4 card-big-link card-identifiable" href="/projects/{{item.project.id}}/">
         <div class="card-body">
-            <h6 class="card-title mb-0">{{org.uid}}</h6>
-            <p class="card-text"></p>
+            <h6 class="card-title mb-0">{{item.folder}} / {{item.project.id}}</h6>
+            <p class="card-text">
+
+            </p>
         </div>
     </a>
     {{/grp}}
 </div>
-{{/Org.all}}
-
-
-{{^Org.all}}
-
-    <a href="/setup/">Start Setup</a>
-
-{{/Org.all}}
-
+{{/MyProjects}}
 
 </div>
 

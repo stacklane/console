@@ -1,6 +1,4 @@
-@import "/bootstrap/functions";
-@import "/bootstrap/variables";
-@import "/bootstrap/mixins";
+@import "/style/variables";
 
 #messages{
   position: fixed;
@@ -9,7 +7,7 @@
 }
 
 #messages.messages-bottom-left{
-  bottom: 1.5rem;
+  bottom: 2rem;
   left: 2rem;
 }
 
@@ -30,6 +28,9 @@
   opacity: 0;
   transform: translate(0, 200%);
   will-change: transform, opacity;
+
+  @include border-radius($border-radius);
+  @include box-shadow($box-shadow);
 }
 
 /**
@@ -43,7 +44,7 @@
 }
 
 .message.message-show{
-  opacity: .9;
+  opacity: 1;
   transform: translate(0);
   transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1), opacity .25s;
 }

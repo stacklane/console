@@ -1,14 +1,19 @@
-@import "/bootstrap/functions";
-@import "/bootstrap/variables";
-@import "/bootstrap/mixins";
+@import "/style/variables";
+
+$toolbar-bg-color: #2b303b;
+$toolbar-highlight-bar-color: white;
+$toolbar-text-color: #788195;
 
 /**
  * No padding by default -- relies on nav-link/navbar-text to have padding,
  *  which creates "full toolbar height" buttons and links.
  */
 header {
-  background: white;
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
+  background-color: $toolbar-bg-color;
+  color: $toolbar-text-color;
+  fill: $toolbar-text-color;
+
+  @include box-shadow($box-shadow);
 
   position: -webkit-sticky;
   position: sticky;
@@ -28,7 +33,7 @@ header {
   .navbar-nav {
 
     .nav-link, .navbar-text {
-      padding: .75rem .5rem;
+      padding: 1rem .5rem;
     }
 
     .nav-link svg {
@@ -37,20 +42,20 @@ header {
     }
 
     .nav-link {
-      color: $gray-600;
-      fill: $gray-600;
+      color: $toolbar-text-color;
+      fill: $toolbar-text-color;
       transition: color 0.5s ease, fill 0.25s ease;
     }
 
     .nav-link:hover {
-      color: $blue;
-      fill: $blue;
+      color: #788195;
+      fill: #788195;
     }
 
     .nav-link.active, .navbar-text.active {
       font-weight: 500;
-      color: $gray-800;
-      fill: $gray-800;
+      color: $toolbar-text-color;
+      fill: $toolbar-text-color;
       position: relative; /* necessary for using :after in position absolute */
     }
 
@@ -63,7 +68,7 @@ header {
       height: 2px;
       bottom: 0;
       position: absolute;
-      background: $blue;
+      background: $toolbar-highlight-bar-color;
       width: 50%;
       left: 25%;
     }
@@ -73,7 +78,7 @@ header {
      * see _dropdown.scss for styling
      */
     .nav-item.dropdown.dropped > .nav-link.dropdown-toggle {
-      @include gradient-bg($dropdown-link-hover-bg);
+      background: darken($toolbar-bg-color, 50%);
     }
 
   }

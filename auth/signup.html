@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="normalize.scss">
     <link rel="stylesheet" href="providers.scss">
 
-    {{% import {AllProviders} from '📤' }}
+    {{% import {Providers} from '👤' }}
+
+    {{% partial /auth/_prefetch }}
+    {{> prefetch}}
 
     <style>
         body{
@@ -135,14 +138,14 @@
                 <h2>{{🎨.signup}}</h2>
 
                 <div class="provider-list">
-                    {{#AllProviders as provider}}
+                    {{#Providers.all as provider}}
                     <form method="post" class="provider-form" action="{{provider.authPath}}">
                         <button type="submit" class="provider-button large provider-{{provider.brand}}">
                             <div class="provider-icon"></div>
                             <div class="provider-text">{{🎨.signup-with provider.name}}</div>
                         </button>
                     </form>
-                    {{/AllProviders}}
+                    {{/Providers.all}}
                 </div>
             </div>
         </div>
@@ -152,7 +155,7 @@
                     <a href="https://stacklane.com" title="Stacklane">{{>logo}}</a>
                 </div>
 
-                <h2>Start building scalable, serverless web apps on our global platform for free!</h2>
+                <h2>Start building scalable, serverless web apps on our global platform today!</h2>
                 <p>
                     Let Stacklane handle the complexities of geographically replicated NoSQL data, global endpoints,
                     security, and user authentication.

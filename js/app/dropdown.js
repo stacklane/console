@@ -1,5 +1,5 @@
 /**
- * For the standard Bootstrap dropdown CSS structure and classes.
+ * For standard Bootstrap dropdown CSS structure.
  */
 (function () {
     'use strict';

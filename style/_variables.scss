@@ -1,0 +1,20 @@
+
+@import "/bootstrap/functions";
+@import "/bootstrap/variables";
+@import "/bootstrap/mixins";
+
+$border-radius: .25rem;
+$border-radius-lg: .3rem;
+$border-radius-sm: .2rem;
+
+$body-bg: rgb(245,245,245);
+$body-color: $gray-900;
+$link-color: #0099e5;
+$font-family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$badge-border-radius: $border-radius-sm;
+$card-border-color: white;
+$card-box-shadow: $box-shadow-sm;
+
+$enable-gradients: false;
+$enable-rounded: true;
+$enable-shadows: true;

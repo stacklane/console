@@ -1,0 +1,13 @@
+
+# Associate a User to a Project, with additional properties for organization per-User
+
+# Allows User to rename the Project / provide a custom name
+name:
+  type: string
+  optional: true
+
+# Allows User to place the Project in a one-level-deep folder
+folder:
+  type: string
+  optional: true
+
