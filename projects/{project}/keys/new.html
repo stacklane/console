@@ -4,15 +4,16 @@
 {{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
+{{% import {GetProjectName} from '📤' }}
 
 {{< layout}}
 
 {{$nav}}
 
-{{< nav-link}}
+{{< nav-link-nic}}
 {{$path}}/projects/{{project.id}}/{{/path}}
-{{$label}}Project Name{{/label}}
-{{/ nav-link}}
+{{$label}}{{GetProjectName project}}{{/label}}
+{{/ nav-link-nic}}
 
 {{< nav-spacer}}{{/ nav-spacer}}
 
@@ -26,28 +27,29 @@
 
 {{$content}}
 
-<div class="blankslate text-left">
+<div class="box is-capped is-spacious">
 
-    <h4>Create a Project Key</h4>
+    <div class="has-text-centered">
+        <h3 class="title is-3">Create a Project Key</h3>
 
-    <p>
-        Keys are stored in a secure vault and values are only used for connecting
-        to services.  Once entered they can't be retrieved, however they may be
-        replaced.
-    </p>
+        <p>
+            Keys are stored in a secure vault and values are only used for connecting
+            to services.  Once entered they can't be retrieved, however they may be
+            replaced.
+        </p>
+    </div>
 
-    <hr class="my-4">
+    <hr>
 
-    <ul class="nav nav-pills mb-4" data-controller="tabs">
-        <li class="nav-item">
-            <a class="nav-link" id="api-tab" href="#api">Third Party API</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="user-tab" href="#user">Identity Provider</a>
-        </li>
-    </ul>
+    <div class="tabs" data-controller="tabs">
+        <ul>
+            <li class="is-active"><a id="api-tab" href="#api">Third Party API</a></li>
+            <li><a id="user-tab" href="#user">Identity Provider</a></li>
+        </ul>
+    </div>
+
     <div class="tab-content">
-        <div class="tab-pane fade" id="api" aria-labelledby="api-tab">
+        <div class="tab-pane fade show is-active" id="api" aria-labelledby="api-tab">
             <p class="text-muted">
                 Defines a token for connecting to a third party API.
             </p>

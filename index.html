@@ -1,6 +1,7 @@
 <!--TEMPLATE mustache-->
 {{% partial /_partials/nav as nav-item }}
 {{% partial /_layout }}
+{{% svg /_icons/ as ic }}
 
 {{% import {MyProjects} from '📤' }}
 
@@ -8,39 +9,59 @@
 
 {{$nav}}
 
-
-
 {{/nav}}
 
 {{$content}}
 
-<div class="mt-4">
-
-<div class="text-right mb-4">
-    <a class="btn btn-primary" href="/projects/new">New Project</a>
+<!--
+  TODO these will have to be auto-generated, except for maybe star.
+  TODO icon for star
+  -->
+<div class="tabs" data-controller="tabs" data-tab-type="filter">
+    <ul>
+        <li class="is-active"><a href="#star">Star</a></li>
+        <li><a href="#default">Default</a></li>
+    </ul>
 </div>
-
-    <!--
-     TEMP
-     -->
-
-{{#MyProjects by 2 as grp}}
-<div class="card-deck">
-    {{#grp as item}}
-    <a class="card mb-4 card-big-link card-identifiable" href="/projects/{{item.project.id}}/">
-        <div class="card-body">
-            <h6 class="card-title mb-0">{{item.folder}} / {{item.project.id}}</h6>
-            <p class="card-text">
-
-            </p>
-        </div>
-    </a>
-    {{/grp}}
+<div class="tab-content">
+<div class="columns is-multiline">
+    {{#MyProjects as item}}
+    <div data-tab-filter="star;" class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd is-filterable">
+        <a class="card" href="/projects/{{item.project.id}}/">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                    <figure class="image is-32x32">
+                        <svg width="32" height="32" data-controller="identicon"
+                             data-value="{{item.project.id}}"></svg>
+                    </figure>
+                    </div>
+                    <div class="media-content">
+                        <h5 class="title is-5">{{item.name}}</h5>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {{/MyProjects}}
+    <div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+        <a class="card is-proposed" href="/projects/new">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-32x32">
+                            <span class="icon">{{> ic-add_circle}}</span>
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <h5 class="title is-5">Add Project</h5>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
-{{/MyProjects}}
-
 </div>
-
 
 {{/content}}
 {{/layout}}

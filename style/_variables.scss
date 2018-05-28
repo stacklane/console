@@ -1,4 +1,52 @@
 
+@import "/bulma/utilities/initial-variables";
+@import "/bulma/utilities/functions";
+@import "/bulma/utilities/derived-variables";
+
+/**
+ * Custom
+ */
+$border-radius: .25rem;
+$border-radius-lg: .3rem;
+$border-radius-sm: .2rem;
+
+$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
+$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+
+$zindex-sticky: 1000;
+
+
+/**
+ * Overrides
+ */
+$family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+$input-border-color: $grey-lighter;
+
+$body-background-color: rgb(245,245,245);
+$body-color: #212529; //$gray-900;
+$body-size: 1rem; // // Assumes the browser default, typically `16px`
+
+//$card-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+$card-shadow: $box-shadow-sm;
+$card-shadow-hover: $box-shadow;
+$card-color: $text !default;
+$card-background-color: $white !default;
+
+$tag-radius: $border-radius-sm;
+
+/**
+ * Use bootstrap breakpoints
+ */
+$tablet: 576px;
+$desktop: 768px /*+ 2 * $gap*/;
+$widescreen: 992px /*+ 2 * $gap*/;
+$fullhd: 1200px /*+ 2 * $gap*/;
+
+
+
+/*
 @import "/bootstrap/functions";
 @import "/bootstrap/variables";
 @import "/bootstrap/mixins";
@@ -18,3 +66,4 @@ $card-box-shadow: $box-shadow-sm;
 $enable-gradients: false;
 $enable-rounded: true;
 $enable-shadows: true;
+*/

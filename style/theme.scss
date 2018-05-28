@@ -1,80 +1,179 @@
 @import "/style/variables";
 
-/////////
+///////
 
+@import "/bulma/utilities/all";
 
-//@import "bootstrap/print";
-@import "/bootstrap/reboot";
-@import "/bootstrap/type";
-//@import "bootstrap/images";
-@import "/bootstrap/code";
-@import "/bootstrap/grid";
-@import "/bootstrap/tables";
-@import "/bootstrap/forms";
-@import "/bootstrap/buttons";
-//@import "bootstrap/transitions";
-@import "/bootstrap/dropdown";
-//@import "bootstrap/button-group";
-@import "/bootstrap/input-group";
-//@import "bootstrap/custom-forms";
-@import "/bootstrap/nav";
-@import "/bootstrap/navbar";
-@import "/bootstrap/card";
-//@import "bootstrap/breadcrumb";
-//@import "bootstrap/pagination";
-@import "/bootstrap/badge";
-//@import "/bootstrap/jumbotron";
-@import "/bootstrap/alert";
-@import "/bootstrap/progress";
-//@import "bootstrap/media";
-@import "/bootstrap/list-group";
-//import "bootstrap/close";
+@import "/bulma/base/_all";
 
-// JS @import "bootstrap/modal";
-// JS depends on popper: @import "bootstrap/tooltip";
-// JS depends on popper: @import "bootstrap/popover";
-//@import "bootstrap/carousel";
+@import "/bulma/elements/box";
+@import "/bulma/elements/button";
+@import "/bulma/elements/container";
+@import "/bulma/elements/form";
+@import "/bulma/elements/icon";
+@import "/bulma/elements/image";
+@import "/bulma/elements/notification";
+@import "/bulma/elements/tag";
+@import "/bulma/elements/title";
 
-@import "/bootstrap/utilities";
+@import "/bulma/components/card";
+@import "/bulma/components/dropdown";
+@import "/bulma/components/media";
+@import "/bulma/components/card";
+@import "/bulma/components/navbar";
+@import "/bulma/components/tabs";
 
-////////////////////////
+@import "/bulma/grid/columns";
 
-@import "blankslate";
-@import "toolbar";
+////////
+
 @import "/js/app/form";
 @import "/js/app/message";
 @import "/js/app/progress";
+@import "/js/app/tabs";
 
-h1 > .badge, h2 > .badge, h3 > .badge, h4 > .badge, h5 > .badge, h6 > .badge{
-  vertical-align: text-top;
+////////////
+
+/**
+ * header
+ */
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: $zindex-sticky;
+
+  .navbar{
+    box-shadow: $box-shadow;
+
+    /**
+     * Provide same svg 'fill' as text 'color'
+     * Meaning: we want svg's to have same color as the text.
+     */
+    @each $name, $pair in $colors {
+      $color-invert: nth($pair, 2);
+      &.is-#{$name} {
+        fill: $color-invert !important;
+      }
+    }
+
+    /**
+     * <span class='icon'>...</span>
+     * <span>text</span>
+     * ensures spacing between the two
+     */
+    a.navbar-item>.icon:not(:last-child) {
+      margin-left: -.25em;
+      margin-right: .25em;
+    }
+  }
 }
 
 /**
- * Card
+ * main
  */
-.card{
-  @include box-shadow($card-box-shadow);
+main{
+  padding-top: 1rem;
+}
+/**
+ * main > .is-capped -- is pulled up to be snug with <main>
+ */
+main > .is-capped:first-child{
+  margin-top: -1rem;
+  border-top: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 /**
- * Card Link
+ * .fade
+ * .fade.show
+ *
+ * Full opacity toggle with transition
  */
-.card.card-big-link{
+$transition-fade:  opacity .15s linear !default;
+.fade {
+  opacity: 0;
+  transition: $transition-fade;
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+/**
+ * .container
+ */
+.container{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/**
+ * .icon > .svg
+ */
+.icon > svg{
+  width: 100%;
+  height: 100%;
+}
+/**
+ * .icon > svg .has-text-X variations
+ *
+ * Adapted from bulma logic for .has-text-X
+ */
+@each $name, $shade in $shades {
+  .has-text-#{$name} .icon > svg, .has-text-#{$name}.icon > svg{
+    fill: $shade !important;
+  }
+}
+@each $name, $pair in $colors { //
+  $color: nth($pair, 1);
+
+  .has-text-#{$name} .icon > svg, .has-text-#{$name}.icon > svg{
+    fill: $color !important;
+  }
+}
+
+/**
+ * .card
+ */
+a.card{
+  display:block;
+}
+a.card{
   text-decoration: none !important;
-  @include box-shadow($box-shadow-sm);
-  transition: box-shadow .2s ease-in-out;
-  will-change: box-shadow;
+  transition: box-shadow .2s ease-in-out, opacity .2s ease-in-out;
+  will-change: box-shadow, opacity;
 }
-.card.card-big-link:hover{
-  box-shadow: $box-shadow;
-  @include box-shadow($box-shadow);
+a.card:hover{
+  box-shadow: $card-shadow-hover;
 }
-.card.card-big-link .card-text{
-  color: $body-color;
+
+/**
+ * .card.is-proposed
+ *
+ * A kind of virtual card -- a card that could be, usually for "add/new".
+ */
+.card.is-proposed{
+  opacity: .6;
+  border: 1px rgba(0,0,0,.2) dashed;
 }
-.card.card-big-link .card-body{
-  //padding-bottom: 1rem;
+.card.is-proposed:hover{
+  opacity: 1;
+  border: 1px transparent;
 }
-.card.card-big-link.card-identifiable{
-  border-top: 3px solid gray;
+
+/**
+ * .box.is-spacious
+ *
+ * Typically for a full page .box, usually with .is-capped
+ */
+.box.is-spacious{
+  /*position: relative;*/
+  padding: 32px;
+}
+@include tablet(){
+  .box.is-spacious {
+    padding: 80px 40px;
+  }
 }

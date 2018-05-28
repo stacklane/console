@@ -15,56 +15,66 @@
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
 
     <!--
-      Warning: keep these versions in sync with prefetch in /auth/_prefetch.html
+        Warning: keep these versions in sync with prefetch in /auth/_prefetch.html
      -->
     <script defer src="https://cdn.jsdelivr.net/npm/turbolinks@5.1.1/dist/turbolinks.js" integrity="sha256-L06fzo/4G4oD7dGuNySdAWCxTFN2wkj0GrFTnWKdKBo=" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/stimulus@1.0.1/dist/stimulus.umd.js" integrity="sha256-ciNsRv7Hd2qLYBflmBAEREHKZS/XvgYvvoM8HKP9vfQ=" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/jdenticon@2.1.0/dist/jdenticon.min.js"></script>
 
     <!--
-        HTTP/2 plus CDN should take care of loading these efficiently
+        HTTP/2 plus CDN should take care of loading these efficiently.
+        No need for turbolinks-track, because URLs will change as resources changes.
     -->
-    <script defer data-turbolinks-track="reload" src="/js/app/init.js"></script>
-    <script defer data-turbolinks-track="reload" src="/js/app/progress.js"></script>
-    <script defer data-turbolinks-track="reload" src="/js/app/message.js"></script>
-    <script defer data-turbolinks-track="reload" src="/js/app/dropdown.js"></script>
-    <script defer data-turbolinks-track="reload" src="/js/app/form.js"></script>
-    <script defer data-turbolinks-track="reload" src="/js/app/tabs.js"></script>
-    <script defer data-turbolinks-track="reload" src="/js/app/badge.js"></script>
+    <script defer src="/js/app/init.js"></script>
+    <script defer src="/js/app/progress.js"></script>
+    <script defer src="/js/app/message.js"></script>
+    <script defer src="/js/app/dropdown.js"></script>
+    <script defer src="/js/app/form.js"></script>
+    <script defer src="/js/app/tabs.js"></script>
+    <script defer src="/js/app/badge.js"></script>
+    <script defer src="/js/app/identicon.js"></script>
 
     {{% import {Me} from '👤' }}
 </head>
 
 <body>
 <header>
-    <div class="container">
-    <nav class="navbar navbar-expand">
-        <h1 class="navbar-brand mb-0">S</h1>
+    <nav class="navbar is-dark" label="dropdown navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">SL</a>
+            </div>
 
-        <ul class="navbar-nav mr-auto">
-            {{$nav}}{{/nav}}
-        </ul>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    {{$nav}}{{/nav}}
+                </div>
 
-        <div class="navbar-nav">
-            <div class="nav-item dropdown" data-controller="dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-action="dropdown#toggle">
-                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                    </svg>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <h6 class="dropdown-header d-none d-sm-block">
-                        {{🎨.logged-in-as Me.name}}
-                    </h6>
-                    <div class="dropdown-divider d-none d-sm-block"></div>
-                    <form method="post" data-controller="form" action="/__/auth/provider/logout">
-                        <a href="#" class="dropdown-item" data-action="form#submit">Sign Out</a>
-                    </form>
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <div class="navbar-link">
+                            <span class="icon">
+                            <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                                <path d="M0 0h24v24H0z" fill="none"/>
+                            </svg>
+                            </span>
+                        </div>
+
+                        <div class="navbar-dropdown is-boxed is-right">
+                            <span class="navbar-item">
+                                {{🎨.logged-in-as Me.name}}
+                            </span>
+                            <hr class="navbar-divider">
+                            <form method="post" data-controller="form" action="/__/auth/provider/logout">
+                                <a href="#" class="navbar-item" data-action="form#submit">Sign Out</a>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
-    </div>
 </header>
 
 <main role="main" class="container">

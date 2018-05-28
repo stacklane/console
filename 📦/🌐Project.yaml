@@ -8,10 +8,10 @@ account:
 # Should not contain a branch/tag/version
 source: string
 
-# TODO ideally keep in sync with manifest name of master branch.
-name:
-  type: string
-  optional: true
+# ideally would come from master.
+#name:
+#  type: string
+#  optional: true
 
 # Provisioned live data namespace, which may be used in
 # multiple Versions.

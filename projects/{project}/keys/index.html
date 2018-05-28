@@ -4,15 +4,16 @@
 {{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
+{{% import {GetProjectName} from '📤' }}
 
 {{< layout}}
 
 {{$nav}}
 
-{{< nav-link}}
+{{< nav-link-nic}}
 {{$path}}/projects/{{project.id}}/{{/path}}
-{{$label}}Project Name{{/label}}
-{{/ nav-link}}
+{{$label}}{{GetProjectName project}}{{/label}}
+{{/ nav-link-nic}}
 
 {{< nav-spacer}}{{/ nav-spacer}}
 
@@ -27,7 +28,6 @@
 
 {{% import {ProjectKey} from '📦' }}
 
-<div class="mt-4">
 
 <div class="text-right mb-4">
     <a class="btn btn-primary" href="new">New Project Key</a>
@@ -52,25 +52,26 @@
 {{/ProjectKey.all}}
 
 {{^ProjectKey.all}}
-<div class="blankslate">
+<div class="box is-capped is-spacious">
 
-    {{> ic-key}}
+    <div class="has-text-centered">
+        <span class="icon is-medium has-text-gray">
+        {{> ic-key}}
+        </span>
 
-    <h1>Welcome to Project Keys</h1>
+        <h2 class="title is-2">Welcome to Project Keys</h2>
 
-    <p>
-        This is a secure vault for third party API credentials.
-        Code running from within this Project will have access to
-        these keys for third party authentication, but will never
-        be able to expose them publicly.
-        To get started, <a href="new">create a project key</a>.
-    </p>
+        <p>
+            This is a secure vault for third party API credentials.
+            Code running from within this Project will have access to
+            these keys for third party authentication, but will never
+            be able to expose them publicly.
+            To get started, <a href="new">create a project key</a>.
+        </p>
+    </div>
 
 </div>
 {{/ProjectKey.all}}
-
-</div>
-
 
 {{/content}}
 {{/layout}}

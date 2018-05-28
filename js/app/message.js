@@ -1,14 +1,17 @@
 /**
  * To be used in conjunction with other on-page progress indicators.
  * Purposefully transient and auto-hide doesn't represent completion.
+ * It's at the document level, instead of the body, for
+ * better compatibility with having turbolinks swap out bodies
+ * (therefore persisting messages across multiple bodies).
  */
 (function (window) {
     'use strict';
 
     const AUTO_HIDE_MS = 5500;
-    const MESSAGES_CLASSES = "messages messages-bottom-left";
-    const MESSAGE_CLASSES = "message";
     const MESSAGES_ID = "messages";
+    const MESSAGES_CLASSES = "messages-bottom-left";
+    const MESSAGE_CLASSES = "notification";
     const EVT = "messages:post";
 
     // Initial page load
@@ -36,16 +39,16 @@
 
         if (message.info){
             txt = message.info;
-            cls = ''; // default / black / neutral
+            cls = 'is-info'; // default / neutral
         } else if (message.success){
             txt = message.success;
-            cls = 'message-success'; // something occurred / action was taken
+            cls = 'is-success'; // something occurred / action was taken
         } else if (message.error){
             txt = message.error;
-            cls = 'message-error';
+            cls = 'is-danger';
         } else if (message.warn) {
             txt = message.warn;
-            cls = 'message-warn';
+            cls = 'is-warning';
         }
 
         if (txt.length == 0) return;

@@ -1,7 +1,16 @@
-@import "/style/variables";
+//@import "/style/variables";
 
 .w-10{
   width: 10% !important;
+}
+.w-25{
+  width: 25% !important;
+}
+.w-50{
+  width: 50% !important;
+}
+.w-75{
+  width: 75% !important;
 }
 
 .turbolinks-progress-bar {
@@ -27,13 +36,13 @@
 #global-progress.progress .progress-bar{
   width: 0%; // Effectively the initial state on first display
   pointer-events: none;
-  @include box-shadow($box-shadow-sm);
 
-  /* suitable transition already in Bootstrap code
+  // TODO reinstate
+  //@include box-shadow($box-shadow-sm);
+
   -moz-transition: width 500ms ease-out,opacity 400ms linear;
   -ms-transition: width 500ms ease-out,opacity 400ms linear;
   -o-transition: width 500ms ease-out,opacity 400ms linear;
   -webkit-transition: width 500ms ease-out,opacity 400ms linear;
   transition: width 500ms ease-out,opacity 400ms linear;
-  */
 }

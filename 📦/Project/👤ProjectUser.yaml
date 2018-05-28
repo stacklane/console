@@ -11,3 +11,7 @@ folder:
   type: string
   optional: true
 
+# Regardless of folder, indicates this project is starred / a favorite
+star: boolean
+
+

@@ -17,16 +17,33 @@
         isAjax(){ return this.element.getAttribute('data-ajax') == 'true' ; }
         isValidate(){ return this.element.getAttribute('data-validate') == 'true'; }
 
-        //https://getbootstrap.com/docs/4.0/components/forms/#disabled-forms
         disable() {
-            var f = this.element.getElementsByTagName('fieldset');
-            for (var i = 0; i < f.length; i++) f[i].setAttribute('disabled', 'disabled');
+            this._disable(this.element.getElementsByTagName('input'));
+            this._disable(this.element.getElementsByClassName('button'));
+        }
+
+        _disable(f) {
+            for (var i = 0; i < f.length; i++) {
+                if (f[i].classList.contains('button')){
+                    f[i].classList.add('is-loading');
+                }
+                f[i].setAttribute('disabled', 'disabled');
+            }
         }
 
         enable(){
             this.element.classList.remove(SUBMITTED);
-            var f = this.element.getElementsByTagName('fieldset');
-            for (var i = 0; i < f.length; i++) f[i].removeAttribute('disabled');
+            this._enable(this.element.getElementsByTagName('input'));
+            this._enable(this.element.getElementsByClassName('button'));
+        }
+
+        _enable(f) {
+            for (var i = 0; i < f.length; i++) {
+                if (f[i].classList.contains('button')){
+                    f[i].classList.remove('is-loading');
+                }
+                f[i].removeAttribute('disabled');
+            }
         }
 
         connect(){
@@ -36,8 +53,6 @@
                 // Disable, because we are controlling it via JS here
                 this.element.setAttribute("novalidate", "novalidate");
             }
-
-            this._addProgress();
 
             var thiz = this;
 
@@ -86,16 +101,6 @@
                     }
                 }
             }, false);
-        }
-
-        _addProgress(){
-            var b = this.element.getElementsByTagName('button');
-            for (var i = 0; i < b.length; i++){
-                if (b[i].getAttribute('type') == 'submit'){
-                    b[i].innerHTML += '<div class="form-processing"><div></div><div></div><div></div><div></div><span class="sr-only">' + SR_PROCESSING + '</span></div></div>';
-                    break;
-                }
-            }
         }
 
         _notify(target){
