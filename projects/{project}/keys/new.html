@@ -30,6 +30,10 @@
 <div class="box is-capped is-spacious">
 
     <div class="has-text-centered">
+        <span class="icon is-medium has-text-grey">
+        {{> ic-key}}
+        </span>
+
         <h3 class="title is-3">Create a Project Key</h3>
 
         <p>
@@ -49,7 +53,7 @@
     </div>
 
     <div class="tab-content">
-        <div class="tab-pane fade show is-active" id="api" aria-labelledby="api-tab">
+        <div class="tab-pane is-active" id="api" aria-labelledby="api-tab">
             <p class="text-muted">
                 Defines a token for connecting to a third party API.
             </p>
@@ -79,7 +83,7 @@
                 </fieldset>
             </form>
         </div>
-        <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">
+        <div class="tab-pane" id="user" role="tabpanel" aria-labelledby="user-tab">
             <p class="text-muted">
                 Defines information for connecting to a user identity provider.
             </p>

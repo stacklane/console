@@ -17,4 +17,20 @@ let GetProjectName = (project)=>{
     }
 };
 
-export {GetProjectName}
+/**
+ * @param project - May be a model link or actual model.
+ */
+let GetProjectTags = (project)=>{
+    let p = project(()=>ProjectUser.me().get());
+
+    let out = [];
+
+    if (p.star) out.push(':star');
+
+    out.push(p.tag ? p.tag : ':none');
+
+    return out;
+};
+
+
+export {GetProjectName, GetProjectTags}

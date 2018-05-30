@@ -28,11 +28,6 @@
 
 {{% import {ProjectKey} from '📦' }}
 
-
-<div class="text-right mb-4">
-    <a class="btn btn-primary" href="new">New Project Key</a>
-</div>
-
 {{#ProjectKey.all by 2 as grp}}
 <div class="card-deck">
     {{#grp as key}}
@@ -55,11 +50,11 @@
 <div class="box is-capped is-spacious">
 
     <div class="has-text-centered">
-        <span class="icon is-medium has-text-gray">
+        <span class="icon is-medium has-text-grey">
         {{> ic-key}}
         </span>
 
-        <h2 class="title is-2">Welcome to Project Keys</h2>
+        <h3 class="title is-3">Welcome to Project Keys</h3>
 
         <p>
             This is a secure vault for third party API credentials.

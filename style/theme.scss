@@ -31,6 +31,7 @@
 @import "/js/app/message";
 @import "/js/app/progress";
 @import "/js/app/tabs";
+@import "/js/app/filter";
 
 ////////////
 
@@ -90,7 +91,7 @@ main > .is-capped:first-child{
  * .fade.show
  *
  * Full opacity toggle with transition
- */
+
 $transition-fade:  opacity .15s linear !default;
 .fade {
   opacity: 0;
@@ -99,12 +100,16 @@ $transition-fade:  opacity .15s linear !default;
   &.show {
     opacity: 1;
   }
-}
+}*/
 
 /**
  * .container
  */
 .container{
+  padding-left: 12px;
+  padding-right: 12px;
+}
+@include tablet(){
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -160,7 +165,6 @@ a.card:hover{
 }
 .card.is-proposed:hover{
   opacity: 1;
-  border: 1px transparent;
 }
 
 /**

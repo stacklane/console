@@ -13,20 +13,18 @@
 
 {{$content}}
 
-<!--
-  TODO these will have to be auto-generated, except for maybe star.
-  TODO icon for star
-  -->
-<div class="tabs" data-controller="tabs" data-tab-type="filter">
-    <ul>
-        <li class="is-active"><a href="#star">Star</a></li>
-        <li><a href="#default">Default</a></li>
-    </ul>
+<div class="tabs" data-controller="filter" data-filter-content="#projects" data-filter-watch="false">
+    <span class="is-filter-display" data-for=":star"><span class="icon has-text-warning">{{> ic-star}}</span></span>
+
 </div>
-<div class="tab-content">
-<div class="columns is-multiline">
+
+<div id="projects" class="columns is-multiline">
     {{#MyProjects as item}}
-    <div data-tab-filter="star;" class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd is-filterable">
+    <div class="column is-filterable is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+        {{#item.tags}}
+        <span class="is-filter-tag">{{this}}</span>
+        {{/item.tags}}
+
         <a class="card" href="/projects/{{item.project.id}}/">
             <div class="card-content">
                 <div class="media">
@@ -44,13 +42,14 @@
         </a>
     </div>
     {{/MyProjects}}
+
     <div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
         <a class="card is-proposed" href="/projects/new">
             <div class="card-content">
                 <div class="media">
                     <div class="media-left">
                         <figure class="image is-32x32">
-                            <span class="icon">{{> ic-add_circle}}</span>
+                            <span class="icon has-text-primary">{{> ic-add_circle}}</span>
                         </figure>
                     </div>
                     <div class="media-content">

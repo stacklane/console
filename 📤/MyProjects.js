@@ -1,11 +1,11 @@
 
 import {ProjectUser} from '📦';
-import {GetProjectName} from '📤';
+import {GetProjectName, GetProjectTags} from '📤';
 
 let MyProjects = ProjectUser.me().all().map((v)=>{
     return ({
-        'folder': v.folder /* may be null */ ,
         'project': v.project(),
+        'tags': GetProjectTags(v.project()),
         'name': GetProjectName(v.project()),
         'star': v.star
     });

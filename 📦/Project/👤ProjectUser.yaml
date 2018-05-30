@@ -6,12 +6,12 @@ name:
   type: string
   optional: true
 
-# Allows User to place the Project in a one-level-deep folder
-folder:
+# Allows User to place the Project in a one-level-deep folder/tag
+tag:
   type: string
   optional: true
 
-# Regardless of folder, indicates this project is starred / a favorite
+# Regardless of tag, indicates this project is starred / a favorite
 star: boolean
 
 
