@@ -11,3 +11,5 @@ if (star != null){
 if (tag != null){
     p.tag = tag;
 }
+
+({});

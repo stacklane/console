@@ -6,9 +6,9 @@
 /**
  * Custom
  */
-$border-radius: .25rem;
-$border-radius-lg: .3rem;
-$border-radius-sm: .2rem;
+//$border-radius: .25rem; use radius-X from bulma instead
+//$border-radius-lg: .3rem; use radius-X from bulma instead
+//$border-radius-sm: .2rem; use radius-X from bulma instead
 
 $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
 $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
@@ -33,8 +33,9 @@ $card-shadow: $box-shadow-sm;
 $card-shadow-hover: $box-shadow;
 $card-color: $text !default;
 $card-background-color: $white !default;
+$card-radius: $radius;
 
-$tag-radius: $border-radius-sm;
+$tag-radius: $radius-small;
 
 /**
  * Use bootstrap breakpoints
@@ -44,26 +45,3 @@ $desktop: 768px /*+ 2 * $gap*/;
 $widescreen: 992px /*+ 2 * $gap*/;
 $fullhd: 1200px /*+ 2 * $gap*/;
 
-
-
-/*
-@import "/bootstrap/functions";
-@import "/bootstrap/variables";
-@import "/bootstrap/mixins";
-
-$border-radius: .25rem;
-$border-radius-lg: .3rem;
-$border-radius-sm: .2rem;
-
-$body-bg: rgb(245,245,245);
-$body-color: $gray-900;
-$link-color: #0099e5;
-$font-family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-$badge-border-radius: $border-radius-sm;
-$card-border-color: white;
-$card-box-shadow: $box-shadow-sm;
-
-$enable-gradients: false;
-$enable-rounded: true;
-$enable-shadows: true;
-*/

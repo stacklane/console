@@ -28,6 +28,10 @@
         post: function(message) {
             var detail = (typeof(message) === 'object') ? message : {info: message};
             document.dispatchEvent(new CustomEvent(EVT, {detail: detail}));
+        },
+        error: function(message, thrown){
+            Messages.post({error: message});
+            console.error(message, thrown);
         }
     };
 

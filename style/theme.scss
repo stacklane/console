@@ -19,13 +19,14 @@
 @import "/bulma/components/card";
 @import "/bulma/components/dropdown";
 @import "/bulma/components/media";
-@import "/bulma/components/card";
 @import "/bulma/components/navbar";
 @import "/bulma/components/tabs";
 
 @import "/bulma/grid/columns";
 
 ////////
+
+@import "/style/ext/tooltip";
 
 @import "/js/app/form";
 @import "/js/app/message";
@@ -34,6 +35,66 @@
 @import "/js/app/filter";
 
 ////////////
+
+/**
+ * input.star
+ *
+ * <input class="star" type="checkbox" title="bookmark page">
+ * TODO disable this display for screen readers?
+ */
+/*
+input.star {
+  visibility:hidden;
+  font-size:1rem;
+  cursor:pointer;
+}
+input.star:before {
+  content: "\2605";
+  //position: absolute;
+  visibility:visible;
+}
+input.star:checked:before {
+  content: "\2606";
+  //position: absolute;
+}*/
+
+/**
+ * TODO consider screen readers, likely from a body class -- display is unnecessary in that case
+ */
+.toggler {
+  cursor: pointer;
+  display: inline-block;
+  //background-color: rgba(0,0,0, 0.2);
+  //border: none;
+ // border-radius: $radius-rounded;
+  position:relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+}
+.toggler:hover, .toggler:focus{
+  //background-color: rgba(0,0,0, 0.3);
+}
+.toggler:active{
+  //background-color: rgba(0,0,0, 0.4);
+}
+.toggler input:checked ~ .is-checked {
+  display: inline-block;
+}
+.toggler input:checked ~ .is-unchecked {
+  display: none;
+}
+.toggler input ~ .is-unchecked {
+  display: inline-block;
+}
+.toggler input ~ .is-checked {
+  display: none;
+}
+
+
 
 /**
  * header
@@ -140,18 +201,52 @@ $transition-fade:  opacity .15s linear !default;
 }
 
 /**
+ * .is-revealable / .is-revealer
+ */
+.is-revealer:hover .is-revealed{
+  visibility: visible;
+}
+.is-revealed{
+  visibility: hidden;
+}
+
+/**
  * .card
+ */
+.card{
+  border-radius: $card-radius;
+}
+
+/**
+ * a.card
  */
 a.card{
   display:block;
 }
-a.card{
-  text-decoration: none !important;
-  transition: box-shadow .2s ease-in-out, opacity .2s ease-in-out;
-  will-change: box-shadow, opacity;
+
+/**
+ * .card.is-hoverable
+ */
+$card-hoverable-transation: box-shadow .2s ease-in-out;
+.card.is-hoverable{
+  //display:block;
+  //text-decoration: none !important;
+  transition: $card-hoverable-transation;
+  will-change: box-shadow;
+
+  &:hover{
+    box-shadow: $card-shadow-hover;
+  }
 }
-a.card:hover{
-  box-shadow: $card-shadow-hover;
+
+/**
+ * .card-footer.is-small
+ */
+.card-footer.is-small{
+  border-top: 1px solid rgba(0,0,0,0.05);
+  margin-left: .5rem;
+  margin-right: .5rem;
+  padding: 0.1rem;
 }
 
 /**
@@ -159,12 +254,20 @@ a.card:hover{
  *
  * A kind of virtual card -- a card that could be, usually for "add/new".
  */
+$card-proposed-transition: opacity .2s ease-in-out;
 .card.is-proposed{
   opacity: .6;
   border: 1px rgba(0,0,0,.2) dashed;
+  transition: $card-proposed-transition;
+  will-change: opacity;
+
+  &:hover{
+    opacity: 1;
+  }
 }
-.card.is-proposed:hover{
-  opacity: 1;
+.card.is-proposed.is-hoverable{
+  transition: $card-hoverable-transation, $card-proposed-transition;
+  will-change: opacity, box-shadow;
 }
 
 /**

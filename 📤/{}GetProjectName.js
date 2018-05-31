@@ -25,9 +25,7 @@ let GetProjectTags = (project)=>{
 
     let out = [];
 
-    if (p.star) out.push(':star');
-
-    out.push(p.tag ? p.tag : ':none');
+    if (p.tag) out.push(p.tag);
 
     return out;
 };

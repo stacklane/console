@@ -1,16 +1,27 @@
 /**
- * TODO static/ever-present tabs
  * TODO remember last tab selection in a local/session storage, by current path and ID of content
  *      retain tab selection on page re-visits.
  */
 (function () {
     'use strict';
 
+    const ALL_TAG = '*';
+
+    // css
     const ACTIVE = "is-active";
+    const HIDDEN = "is-hidden";
     const FILTERABLE = "is-filterable";
     const FILTER_TAG = "is-filter-tag";
+    const STATIC = "is-static";
+    const FIRST = "is-first";
+    const LAST = "is-last"
+    const FILTER_DISPLAY = "is-filter-display";
+    const FOR ="data-for";
+
+    // data-filter-X
     const FILTER_CONTENT_ID = "data-filter-content";
     const WATCH = "data-filter-watch";
+    const TAG_VALUE = "data-filter-tag-value";
 
     App.register("filter", class extends Stimulus.Controller {
         _filterables(){
@@ -19,44 +30,93 @@
         _tabs(){
             return this.element.getElementsByTagName('a');
         }
-        _altDisplay(){
-            var altDisplays = {};
-            var alt = this.element.getElementsByClassName('is-filter-display');
-            for (var i = 0; i < alt.length; i++) altDisplays[alt[i].getAttribute('data-for')] = alt[i].innerHTML;
-            return altDisplays;
-        }
         _content(){
             return document.getElementById(this.element.getAttribute(FILTER_CONTENT_ID).substring(1));
         }
-        _filterableTags(){
-            var out = new Set();
-            var t = this._content().getElementsByClassName(FILTER_TAG);
-            for (var i = 0; i < t.length; i++) out.add(t[i].innerHTML);
+        _tagMap(){
+            var definitions = new Map();
+            var first = new Map();
+            var middle = new Map();
+            var last = new Map();
+            var staticAll = false;
+
+            // Evaluate pre-defined static + definitions:
+            {
+                var pre = this.element.getElementsByClassName(FILTER_DISPLAY);
+                for (var i = 0; i < pre.length; i++) {
+                    var pre = pre[i];
+                    var key = pre.getAttribute(FOR);
+                    var value = pre.innerHTML;
+                    var position = pre.classList.contains(FIRST) ? 'first' : (pre.classList.contains(LAST) ? 'last' : 'middle');
+                    if (pre.classList.contains(STATIC)) {
+                        var map = (position == 'first') ? first : (position == 'last' ? last : middle);
+                        if (map) map.set(key, value);
+                        if (key == ALL_TAG) staticAll = true;
+                    } else {
+                        definitions.set(key, {position: position, display: value});
+                    }
+                }
+            }
+
+            // Evaluate content:
+            {
+                var contentTags = this._content().getElementsByClassName(FILTER_TAG);
+
+                for (let i = 0; i < contentTags.length; i++) {
+                    var contentTag = contentTags[i];
+
+                    var key = contentTag.hasAttribute(TAG_VALUE) ? contentTag.getAttribute(TAG_VALUE) : contentTag.innerHTML;
+                    var position = 'middle';
+                    var value = key;
+                    if (definitions.has(key)){
+                        value = definitions.get(key).display;
+                        position = definitions.get(key).position;
+                    }
+
+                    if (!first.has(key) && !last.has(key) && !middle.has(key)) {
+                        var map = (position == 'first') ? first : (position == 'last' ? last : middle);
+                        if (map) map.set(key, value);
+                    }
+                }
+            }
+
+            // Handle special 'all' filter, only if not already statically displayed:
+            if (!staticAll && this._filterables().length > 0){
+                var key = ALL_TAG;
+                var value = key;
+                var position = 'middle';
+                if (definitions.has(key)){
+                    value = definitions.get(key).display;
+                    position = definitions.get(key).position;
+                }
+                var map = (position == 'first') ? first : (position == 'last' ? last : middle);
+                if (map) map.set(key, value);
+            }
+
+            // Add to final result, relying on insertion order
+            var out = new Map();
+            for (var [key, value] of first) out.set(key, value);
+            for (var [key, value] of middle) out.set(key, value);
+            for (var [key, value] of last) out.set(key, value);
             return out;
         }
         _build(){
-            var newTags = this._filterableTags();
 
             // If it's a preview, then it's already been built.
             var rebuild = !document.documentElement.hasAttribute("data-turbolinks-preview");
 
             if (rebuild) {
-                var html = "<ul>";
-                var alt = this._altDisplay();
-                newTags.forEach(function(v){
-                    var display = alt[v];
-                    if (!display) display = v;
-                    html += "<li><a data-turbolinks='false' href='#" + v + "'>" + display + "</a></li>";
+                var items = '';
+
+                this._tagMap().forEach(function(value, key){
+                    items += "<li><a data-turbolinks='false' href='#" + key + "'>" + value + "</a></li>";
                 }, this);
-                html+="</ul>";
 
-                this.element.innerHTML = html;
-
-                //this.selectableTags = newTags;
+                this.element.innerHTML = "<ul>" + items + "</ul>";
 
                 var tabs = this._tabs();
 
-                this.element.classList.toggle('is-invisible', tabs.length == 0);
+                this.element.classList.toggle(HIDDEN, tabs.length == 0);
 
                 if (tabs.length == 0){
                     this._hideAll();
@@ -78,6 +138,18 @@
                     e.preventDefault();
                 });
             }
+            var t = this._content().getElementsByClassName(FILTER_TAG);
+            for (var i = 0; i < t.length; i++) {
+                if (t[i].tagName == 'INPUT' &&
+                    t[i].getAttribute('type') == 'checkbox'){
+                    t[i].addEventListener('change', function(e){
+                        thiz._refresh();
+                    });
+                }
+            }
+        }
+        _refresh(){
+            this._select(this.element.getElementsByClassName(ACTIVE)[0].getElementsByTagName('a')[0]);
         }
         _resetSelected(){
             //this.selectedTags.clear();
@@ -99,14 +171,14 @@
         _hideAll(){
             var filterables = this._filterables();
             for (var i = 0; i < filterables.length; i++)
-                filterables[i].classList.toggle(ACTIVE, false);
+                filterables[i].classList.toggle(HIDDEN, true);
         }
         /**
          * Watch for changes to DOM and re-filter/re-build as needed.
          */
         _watch(){
             // childList and attributes must be used in conjunction with subtree
-            var config = {childList: true, /*attributes: true,*/ subtree: true};
+            var config = {childList: true, attributes: false, subtree: true};
             var thiz = this;
             var callback = function(mutationsList) {
                 var shouldRefresh = false;
@@ -115,11 +187,8 @@
                         if (thiz._hasFilterable(mutation.addedNodes) ||
                             thiz._hasFilterable(mutation.removedNodes)){
                             shouldRefresh = true; break;
+                        //} else if (mutation.type == 'attributes') {
                         }
-                        /* } else if (mutation.type == 'attributes') {
-                        if (mutation.attributeName == 'data-tab-filter') {
-                            shouldRefresh = true; break;
-                        }*/
                     }
                 }
                 if (shouldRefresh) thiz._build();
@@ -135,17 +204,21 @@
             var parent = tab.parentElement;
             parent.classList.toggle(ACTIVE, true);
             tab.setAttribute('aria-selected', 'true');
+
             var filterables = this._filterables();
             for (var i = 0; i < filterables.length; i++) {
-                var tags = filterables[i].getElementsByClassName(FILTER_TAG);
-                var visible = false;
-                for (var t = 0; t < tags.length; t++){
-                   if (tags[t].innerHTML == tagId){
-                       visible = true; break;
-                   }
-                }
-                filterables[i].classList.toggle(ACTIVE, visible);
+                filterables[i].classList.toggle(HIDDEN, !this._hasTag(filterables[i], tagId));
             }
+        }
+        _hasTag(filterable, tagId){
+            if (tagId == ALL_TAG) return true;
+            var tags = filterable.getElementsByClassName(FILTER_TAG);
+            for (var t = 0; t < tags.length; t++){
+                if (tags[t].innerHTML == tagId || tags[t].getAttribute(TAG_VALUE) == tagId){
+                    return (tags[t].tagName == 'INPUT') ? tags[t].checked : true;
+                }
+            }
+            return false;
         }
         disconnect(){
             if (this.observer) this.observer.disconnect();
@@ -157,7 +230,7 @@
 
             this._build();
 
-            if (this.element.hasAttribute(WATCH) == 'true') this._watch();
+            if (this.element.getAttribute(WATCH) == 'true') this._watch();
         }
     })
 })();

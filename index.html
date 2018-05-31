@@ -14,19 +14,23 @@
 {{$content}}
 
 <div class="tabs" data-controller="filter" data-filter-content="#projects" data-filter-watch="false">
-    <span class="is-filter-display" data-for=":star"><span class="icon has-text-warning">{{> ic-star}}</span></span>
-
+    <span class="is-filter-display is-first" data-for=":star"><span class="icon has-text-warning">{{> ic-star}}</span></span>
+    <span class="is-filter-display is-last" data-for="*">*</span>
 </div>
 
 <div id="projects" class="columns is-multiline">
     {{#MyProjects as item}}
-    <div class="column is-filterable is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+    <div class="column is-filterable is-hidden is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
         {{#item.tags}}
-        <span class="is-filter-tag">{{this}}</span>
+        <span class="is-filter-tag is-hidden">{{this}}</span>
         {{/item.tags}}
 
-        <a class="card" href="/projects/{{item.project.id}}/">
-            <div class="card-content">
+        <div class="card is-hoverable"
+             data-controller="project-user"
+             data-project-user-id="{{item.id}}"
+             data-project-user-project="{{item.project.id}}"
+                >
+            <a class="card-content is-block" href="/projects/{{item.project.id}}/">
                 <div class="media">
                     <div class="media-left">
                     <figure class="image is-32x32">
@@ -38,13 +42,23 @@
                         <h5 class="title is-5">{{item.name}}</h5>
                     </div>
                 </div>
-            </div>
-        </a>
+            </a>
+            <footer class="card-footer is-small">
+                <label class="toggler has-text-warning">
+                    <input data-target="project-user.star" data-action="change->project-user#changeStar"
+                           type="checkbox" class="is-filter-tag"
+                           data-filter-tag-value=":star"
+                           {{#item.star}}checked{{/item.star}}>
+                    <span class="icon is-checked">{{>ic-star}}</span>
+                    <span class="icon is-unchecked tooltip" data-tooltip="Favorite">{{>ic-star_border}}</span>
+                </label>
+            </footer>
+        </div>
     </div>
     {{/MyProjects}}
 
     <div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
-        <a class="card is-proposed" href="/projects/new">
+        <a class="card is-proposed is-hoverable" href="/projects/new">
             <div class="card-content">
                 <div class="media">
                     <div class="media-left">
