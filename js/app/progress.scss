@@ -1,23 +1,10 @@
-//@import "/style/variables";
-
-.w-10{
-  width: 10% !important;
-}
-.w-25{
-  width: 25% !important;
-}
-.w-50{
-  width: 50% !important;
-}
-.w-75{
-  width: 75% !important;
-}
+@import "/style/variables";
 
 .turbolinks-progress-bar {
   visibility: hidden;
 }
 
-#global-progress.progress{
+#global-progress{
   position: fixed;
   z-index: 999999;
   top: 0;
@@ -25,24 +12,54 @@
   height: 0px;
   pointer-events: none;
   transition: height 400ms ease-out;
-  background:transparent;
+  background: transparent;
   width:100%;
+  display: flex;
+
+  &.show{
+    height: 2px;
+  }
+
+  .progress-bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+
+    width: 0%; // Effectively the initial state on first display
+    pointer-events: none;
+
+    box-shadow: $shadow-sm;
+
+    transition: width 500ms ease-out,opacity 400ms linear;
+
+    &.w-10{
+      width: 10% !important;
+    }
+    &.w-25{
+      width: 25% !important;
+    }
+    &.w-50{
+      width: 50% !important;
+    }
+    &.w-75{
+      width: 75% !important;
+    }
+    &.w-100{
+      width: 100% !important;
+    }
+  }
+
+  /**
+   * Make .progress-bar color the invert of the background #global-progress is on
+   */
+  @each $name, $pair in $colors {
+    $color-invert: nth($pair, 2);
+    &.is-#{$name} .progress-bar{
+      background: $color-invert;
+    }
+  }
 }
 
-#global-progress.progress.show{
-  height: 2px;
-}
 
-#global-progress.progress .progress-bar{
-  width: 0%; // Effectively the initial state on first display
-  pointer-events: none;
-
-  // TODO reinstate
-  //@include box-shadow($box-shadow-sm);
-
-  -moz-transition: width 500ms ease-out,opacity 400ms linear;
-  -ms-transition: width 500ms ease-out,opacity 400ms linear;
-  -o-transition: width 500ms ease-out,opacity 400ms linear;
-  -webkit-transition: width 500ms ease-out,opacity 400ms linear;
-  transition: width 500ms ease-out,opacity 400ms linear;
-}

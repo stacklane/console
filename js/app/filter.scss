@@ -1,12 +1,12 @@
 
-//.is-filterable{
-//  display: none;
-//}
+.is-filterable{
+  transition: opacity 400ms ease-in;
+}
 
-// use is-hidden instead as needed
-//.is-filter-tag{
-//  display: none;
-//}
+.is-filterable.is-hiding{
+  pointer-events: none;
+  opacity: .25;
+}
 
 .is-filter-display{
   display: none;

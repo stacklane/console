@@ -21,6 +21,7 @@
 @import "/bulma/components/media";
 @import "/bulma/components/navbar";
 @import "/bulma/components/tabs";
+@import "/bulma/components/message";
 
 @import "/bulma/grid/columns";
 
@@ -106,7 +107,7 @@ header {
   z-index: $zindex-sticky;
 
   .navbar{
-    box-shadow: $box-shadow;
+    box-shadow: $shadow;
 
     /**
      * Provide same svg 'fill' as text 'color'
@@ -146,6 +147,7 @@ main > .is-capped:first-child{
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
+
 
 /**
  * .fade
@@ -218,24 +220,35 @@ $transition-fade:  opacity .15s linear !default;
 }
 
 /**
- * a.card
+ * a.card use is-block instead
  */
-a.card{
-  display:block;
+//a.card{
+ // display:block;
+//}
+
+/**
+ * .card-functions
+ */
+.card-content + .card-functions{
+  position: absolute;
+  /** == .card-content padding **/
+  right: 1.5rem;
+  top: 1.5rem;
 }
 
 /**
- * .card.is-hoverable
+ * .is-hoverable
  */
-$card-hoverable-transation: box-shadow .2s ease-in-out;
-.card.is-hoverable{
-  //display:block;
+$hoverable-transition: box-shadow .2s ease-in-out;
+$hoverable-shadow: $card-shadow-hover;
+.is-hoverable, a.box /* override */, a.card /* make consistent with a.box */{
+  //display:block; // Use is-block as needed instead
   //text-decoration: none !important;
-  transition: $card-hoverable-transation;
+  transition: $hoverable-transition;
   will-change: box-shadow;
 
-  &:hover{
-    box-shadow: $card-shadow-hover;
+  &:hover, &:focus, &:active{
+    box-shadow: $hoverable-shadow;
   }
 }
 
@@ -250,25 +263,29 @@ $card-hoverable-transation: box-shadow .2s ease-in-out;
 }
 
 /**
- * .card.is-proposed
+ * .is-proposed
  *
  * A kind of virtual card -- a card that could be, usually for "add/new".
  */
-$card-proposed-transition: opacity .2s ease-in-out;
-.card.is-proposed{
+$proposed-transition: opacity .2s ease-in-out;
+.is-proposed{
   opacity: .6;
   border: 1px rgba(0,0,0,.2) dashed;
-  transition: $card-proposed-transition;
+  transition: $proposed-transition;
   will-change: opacity;
 
   &:hover{
     opacity: 1;
   }
 }
-.card.is-proposed.is-hoverable{
-  transition: $card-hoverable-transation, $card-proposed-transition;
+.is-proposed.is-hoverable{
+  transition: $hoverable-transition, $proposed-transition;
   will-change: opacity, box-shadow;
 }
+
+/**
+ * a.box
+ */
 
 /**
  * .box.is-spacious
@@ -283,4 +300,48 @@ $card-proposed-transition: opacity .2s ease-in-out;
   .box.is-spacious {
     padding: 80px 40px;
   }
+}
+
+/**
+ * .box-card (a variation of thoughts from .box and .media)
+ *
+ * Designed specifically to have .box-card-content be a link,
+ * YET still let further actions within box-card-right/left be clicked.
+ */
+.box-card{
+  // .box
+  @include block;
+  background-color: $box-background-color;
+  border-radius: $box-radius;
+  box-shadow: $box-shadow;
+  color: $box-color;
+  display: block;
+  // leave padding to inner elements: padding: $box-padding;
+
+  // .media
+  align-items: flex-start;
+  display: flex;
+  text-align: left;
+}
+.box-card-left,
+.box-card-right {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: $box-padding;
+}
+.box-card-left {
+  margin-right: 1rem;
+  padding-right: 0rem;
+}
+.box-card-right {
+  margin-left: 1rem;
+  padding-left: 0rem;
+}
+.box-card-content {
+  padding: $box-padding;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  text-align: left;
 }

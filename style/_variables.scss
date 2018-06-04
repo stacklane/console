@@ -10,9 +10,9 @@
 //$border-radius-lg: .3rem; use radius-X from bulma instead
 //$border-radius-sm: .2rem; use radius-X from bulma instead
 
-$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
-$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
-$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+$shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
+$shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+$shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
 
 $zindex-sticky: 1000;
 
@@ -28,16 +28,18 @@ $body-background-color: rgb(245,245,245);
 $body-color: #212529; //$gray-900;
 $body-size: 1rem; // // Assumes the browser default, typically `16px`
 
-//$card-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
-$card-shadow: $box-shadow-sm;
-$card-shadow-hover: $box-shadow;
+$card-shadow: $shadow-sm;
+$card-shadow-hover: $shadow;
 $card-color: $text !default;
 $card-background-color: $white !default;
 $card-radius: $radius;
 
 $tag-radius: $radius-small;
 
-/**
+$box-radius: $radius;
+$box-shadow: $shadow-sm;
+
+/*
  * Use bootstrap breakpoints
  */
 $tablet: 576px;

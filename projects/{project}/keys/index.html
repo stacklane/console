@@ -10,17 +10,9 @@
 
 {{$nav}}
 
-{{< nav-link-nic}}
+{{< nav-link-prev}}
 {{$path}}/projects/{{project.id}}/{{/path}}
-{{$label}}{{GetProjectName project}}{{/label}}
-{{/ nav-link-nic}}
-
-{{< nav-spacer}}{{/ nav-spacer}}
-
-{{< nav-link-active}}
-{{$label}}Keys{{/label}}
-{{$icon}}{{> ic-key}}{{/icon}}
-{{/ nav-link-active}}
+{{/ nav-link-prev}}
 
 {{/nav}}
 
@@ -28,45 +20,61 @@
 
 {{% import {ProjectKey} from '📦' }}
 
-{{#ProjectKey.all by 2 as grp}}
-<div class="card-deck">
-    {{#grp as key}}
-    <span class="card mb-4">
-        <div class="card-body">
-            <h6 class="card-title mb-0">
-                <span data-controller="badge" class="badge">{{key.state}}</span>
-                <span class="badge badge-secondary">{{key.type}}</span> {{key.name}}
-            </h6>
-            <p class="card-text">
-                {{key.description}}
-            </p>
+<div class="box is-capped">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon is-medium has-text-grey">
+                {{> ic-key}}
+            </span>
         </div>
-    </span>
-    {{/grp}}
-</div>
-{{/ProjectKey.all}}
-
-{{^ProjectKey.all}}
-<div class="box is-capped is-spacious">
-
-    <div class="has-text-centered">
-        <span class="icon is-medium has-text-grey">
-        {{> ic-key}}
-        </span>
-
-        <h3 class="title is-3">Welcome to Project Keys</h3>
-
-        <p>
-            This is a secure vault for third party API credentials.
-            Code running from within this Project will have access to
-            these keys for third party authentication, but will never
-            be able to expose them publicly.
-            To get started, <a href="new">create a project key</a>.
-        </p>
+        <div class="media-content">
+            <div class="content">
+                <h5 class="title is-5">Project Keys</h5>
+                <p class="subtitle is-6">
+                    <!--Keys are stored in a secure vault and values are used for connecting to services.-->
+                    This is a secure vault for third party API credentials.
+                    Code running from within this Project will have access to
+                    these keys for third party authentication, but will never
+                    be able to expose them publicly.
+                </p>
+            </div>
+        </div>
     </div>
-
 </div>
-{{/ProjectKey.all}}
+
+<div class="columns">
+    {{#ProjectKey.all as key}}
+    <div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+        <div class="box">
+            <div class="media">
+                <div class="media-content">
+                    <h5 class="title is-5">{{key.name}}</h5>
+                </div>
+                <div class="media-right">
+                    <span data-controller="badge" class="badge">{{key.state}}</span>
+                    <span class="tag is-info">{{key.type}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/ProjectKey.all}}
+
+    <div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+        <a class="box is-proposed is-hoverable is-block" href="new">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-32x32">
+                        <span class="icon has-text-primary">{{> ic-add_circle}}</span>
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <h5 class="title is-5">Add Project Key</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
 
 {{/content}}
 {{/layout}}

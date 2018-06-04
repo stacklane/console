@@ -5,26 +5,60 @@
 
 {{% import {org, project} from '🔗' }}
 {{% import {GetProjectName} from '📤' }}
+{{% import {ProjectUser} from '📤' }}
 
 {{< layout}}
 
 {{$nav}}
 
-{{< nav-link-nic-active}}{{$label}}{{GetProjectName project}}{{/label}}{{/ nav-link-nic-active}}
-
-{{< nav-spacer}}{{/ nav-spacer}}
-
-{{< nav-link}}
-{{$path}}keys/{{/path}}
-{{$label}}Keys{{/label}}
-{{$icon}}{{>ic-key}}{{/icon}}
-{{/ nav-link}}
-
 {{/nav}}
 
 {{$content}}
 
-Project Home
+<div class="box is-capped"
+     data-controller="project"
+     data-project-id="{{project.id}}"
+    >
+    <div class="media">
+        <div class="media-left">
+            <figure class="image is-48x48">
+                <svg width="48" height="48" data-controller="identicon" data-value="{{project.id}}"></svg>
+            </figure>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">{{GetProjectName project}}</h5>
+            <p class="subtitle is-6">{{project.source}}</p>
+        </div>
+        <div class="media-right">
+            <label class="toggler has-text-warning">
+                <input data-target="project.star"
+                       data-action="change->project#changeStar"
+                       type="checkbox" class="is-filter-tag"
+                       {{#ProjectUser.star}}checked{{/ProjectUser.star}}>
+                <span class="is-checked tooltip" data-tooltip="Favorite"><span class="tag is-white"><span class="icon">{{>ic-star}}</span></span></span>
+                <span class="is-unchecked tooltip" data-tooltip="Favorite"><span class="tag is-white"><span class="icon">{{>ic-star_border}}</span></span></span>
+            </label>
+            <span class="tag is-white">
+                <span class="icon">{{>ic-folder}}</span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="columns">
+    <div class="column is-half">
+        <a class="box is-block" href="keys/">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon">{{>ic-key}}</span>
+                </div>
+                <div class="media-content">
+                    <h5 class="title is-5">Keys</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
 {{/content}}
 {{/layout}}

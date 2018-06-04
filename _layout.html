@@ -34,9 +34,10 @@
     <script defer src="/js/app/identicon.js"></script>
     <script defer src="/js/app/filter.js"></script>
 
-    <script defer src="/js/project-user.js"></script>
+    <script defer src="/js/project.js"></script>
 
     {{% import {Me} from '👤' }}
+    {{% svg /_icons/ as ic }}
 </head>
 
 <body>
@@ -44,7 +45,7 @@
     <nav class="navbar is-dark" label="dropdown navigation">
         <div class="container">
             <div class="navbar-brand">
-                <a href="/" class="navbar-item">SL</a>
+                <a href="/" class="navbar-item"><span class="icon has-text-white">{{>ic-dashboard}}</span></a>
             </div>
 
             <div class="navbar-menu">

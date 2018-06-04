@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    App.register("project-user", class extends Stimulus.Controller {
+    App.register("project", class extends Stimulus.Controller {
         static get targets() {
             return [ "star" ];
         }
@@ -11,7 +11,7 @@
             var data = new FormData();
             data.append('star', this.starTarget.checked ? 'true' : 'false');
 
-            fetch('/api/projects/' + this.data.get('project') + '/UpdateUser', {
+            fetch('/api/projects/' + this.data.get('id') + '/UpdateUser', {
                 method: 'POST',
                 credentials: 'same-origin', mode: 'same-origin',
                 body: data,

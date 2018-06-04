@@ -1,14 +1,16 @@
 /**
- * Uses Bootstrap structure.
+ * Global (window/document level) status bar to help indicate AJAX operation progress.
+ *
  * Requires w-X for the available widths.
  */
 (function (window) {
     'use strict';
 
+    const CLS = 'is-dark';
     const DELAY = 500;
     const progress = document.createElement('div');
     progress.id = 'global-progress';
-    progress.setAttribute('class', 'progress');
+    progress.setAttribute('class', CLS);
     progress.innerHTML = '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>';
     const bar = progress.getElementsByClassName('progress-bar')[0];
     document.documentElement.appendChild(progress); // documentElement allows Turbolinks to swap out the body.

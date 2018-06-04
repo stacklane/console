@@ -7,6 +7,8 @@
 
     const ALL_TAG = '*';
 
+    const FULL_HIDE_TIMEOUT_MS = 400;
+
     // css
     const ACTIVE = "is-active";
     const HIDDEN = "is-hidden";
@@ -17,6 +19,7 @@
     const LAST = "is-last"
     const FILTER_DISPLAY = "is-filter-display";
     const FOR ="data-for";
+    const HIDING = "is-hiding";
 
     // data-filter-X
     const FILTER_CONTENT_ID = "data-filter-content";
@@ -108,11 +111,21 @@
             if (rebuild) {
                 var items = '';
 
+                var ul = document.createElement('UL');
+
                 this._tagMap().forEach(function(value, key){
                     items += "<li><a data-turbolinks='false' href='#" + key + "'>" + value + "</a></li>";
                 }, this);
 
-                this.element.innerHTML = "<ul>" + items + "</ul>";
+                ul.innerHTML = items;
+
+                var existing = this.element.getElementsByTagName("ul");
+
+                if (existing.length > 0){
+                   this.element.removeChild(existing[0]);
+                }
+
+                this.element.appendChild(ul);
 
                 var tabs = this._tabs();
 
@@ -143,13 +156,13 @@
                 if (t[i].tagName == 'INPUT' &&
                     t[i].getAttribute('type') == 'checkbox'){
                     t[i].addEventListener('change', function(e){
-                        thiz._refresh();
+                        thiz._refreshCurrentWithTransition();
                     });
                 }
             }
         }
-        _refresh(){
-            this._select(this.element.getElementsByClassName(ACTIVE)[0].getElementsByTagName('a')[0]);
+        _refreshCurrentWithTransition(){
+            this._select(this.element.getElementsByClassName(ACTIVE)[0].getElementsByTagName('a')[0], true);
         }
         _resetSelected(){
             //this.selectedTags.clear();
@@ -181,22 +194,22 @@
             var config = {childList: true, attributes: false, subtree: true};
             var thiz = this;
             var callback = function(mutationsList) {
-                var shouldRefresh = false;
+                var shouldRebuild = false;
                 for(var mutation of mutationsList) {
                     if (mutation.type == 'childList') {
                         if (thiz._hasFilterable(mutation.addedNodes) ||
                             thiz._hasFilterable(mutation.removedNodes)){
-                            shouldRefresh = true; break;
+                            shouldRebuild = true; break;
                         //} else if (mutation.type == 'attributes') {
                         }
                     }
                 }
-                if (shouldRefresh) thiz._build();
+                if (shouldRebuild) thiz._build();
             };
             this.observer = new MutationObserver(callback);
             this.observer.observe(this.element.nextElementSibling, config);
         }
-        _select(tab){
+        _select(tab, transition){
             this._resetSelected();
             var tagId = tab.getAttribute('href').substring(1);
             //this.selectedTags = new Set();
@@ -206,8 +219,29 @@
             tab.setAttribute('aria-selected', 'true');
 
             var filterables = this._filterables();
+            var toHide = [];
             for (var i = 0; i < filterables.length; i++) {
-                filterables[i].classList.toggle(HIDDEN, !this._hasTag(filterables[i], tagId));
+                var hasTag = this._hasTag(filterables[i], tagId);
+                if (hasTag || !transition || FULL_HIDE_TIMEOUT_MS == 0) {
+                    // Immediate:
+                    filterables[i].classList.toggle(HIDDEN, !hasTag);
+                } else {
+                    // Removal transition:
+                    if (!filterables[i].classList.contains(HIDDEN)){
+                        filterables[i].classList.toggle(HIDING, true);
+                        toHide.push(filterables[i]);
+                    }
+                }
+            }
+            if (toHide.length > 0){
+                setTimeout(function () {
+                    for (var i = 0; i < toHide.length; i++){
+                        if (toHide[i].classList.contains(HIDING)) {
+                            toHide[i].classList.toggle(HIDDEN, true);
+                            toHide[i].classList.toggle(HIDING, false);
+                        }
+                    }
+                }, FULL_HIDE_TIMEOUT_MS);
             }
         }
         _hasTag(filterable, tagId){
