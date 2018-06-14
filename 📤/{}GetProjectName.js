@@ -30,5 +30,17 @@ let GetProjectTags = (project)=>{
     return out;
 };
 
+/**
+ * @param v - ProjectUser
+ */
+let GetProjectUserDetails = (v)=>{
+    return ({
+        id: v.id,
+        project: v.project(),
+        tags: GetProjectTags(v.project()),
+        name: GetProjectName(v.project()),
+        star: v.star
+    });
+}
 
-export {GetProjectName, GetProjectTags}
+export {GetProjectName, GetProjectTags, GetProjectUserDetails}

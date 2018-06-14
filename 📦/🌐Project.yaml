@@ -1,6 +1,9 @@
 
+#
 # Represents an instance-of a specific source/repository
+#
 
+# Associate an Account responsible for billing.
 account:
   optional: true
   type: Account
@@ -13,11 +16,10 @@ source: string
 #  type: string
 #  optional: true
 
-# Provisioned live data namespace, which may be used in
-# multiple Versions.
+# Provisioned live data namespace, which may be used in multiple Versions.
 data:
-  type: string
-  optional: true
+  type: namespace
+  init: true
 
 # Maps to Version.name
 # The Version that is currently considered live/production
