@@ -1,9 +1,14 @@
 
-# Branch / tag / version of a Project's source
+#
+# Represents an instance-of a specific source/repository
+#
 
-name: string
+source: source
 
-# Full domain + optional path
 mapping:
-  type: string
+  type: Mapping
   optional: true
+
+data:
+  type: namespace
+  init: true

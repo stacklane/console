@@ -64,7 +64,7 @@ input.star:checked:before {
  */
 .toggler {
   cursor: pointer;
-  display: inline-block;
+  display: flex; // seems to work better than inline-block for size expectations of inner icons
   //background-color: rgba(0,0,0, 0.2);
   //border: none;
  // border-radius: $radius-rounded;
@@ -225,11 +225,9 @@ input{
     min-width: 50%; // TBD
 
     &.is-editable {
-      background-image: url(/image/edit_gray.svg);
       background-size: .9rem;
-      background-position: center left;
-      background-repeat: no-repeat;
-      padding-left: 1.1rem;
+      background: url(/image/edit_gray.svg) no-repeat center left;
+      padding-left: 1.5rem;
     }
     &.is-editable:focus{
       //text-decoration:underline;

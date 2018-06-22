@@ -1,0 +1,5 @@
+
+domain:
+  type: domain
+  optional: false
+

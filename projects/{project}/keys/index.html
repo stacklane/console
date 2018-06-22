@@ -4,7 +4,6 @@
 {{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
-{{% import {GetProjectName} from '📤' }}
 
 {{< layout}}
 
@@ -28,16 +27,14 @@
             </span>
         </div>
         <div class="media-content">
-            <div class="content">
-                <h5 class="title is-5">Project Keys</h5>
-                <p class="subtitle is-6">
-                    <!--Keys are stored in a secure vault and values are used for connecting to services.-->
-                    A secure vault for third party API credentials.
-                    Code running from within this Project will have access to
-                    these keys for third party authentication, but will never
-                    be able to expose them publicly.
-                </p>
-            </div>
+            <h5 class="title is-5">Project Keys</h5>
+            <p class="subtitle is-6">
+                <!--Keys are stored in a secure vault and values are used for connecting to services.-->
+                A secure vault for third party API credentials.
+                Code running from within this Project will have access to
+                these keys for third party authentication, but will never
+                be able to expose them publicly.
+            </p>
         </div>
     </div>
 </div>

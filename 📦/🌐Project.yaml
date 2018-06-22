@@ -1,30 +1,8 @@
 
-#
-# Represents an instance-of a specific source/repository
-#
 
 # Associate an Account responsible for billing.
 account:
   optional: true
   type: Account
 
-# Should not contain a branch/tag/version
-source: string
-
-# ideally would come from master.
-#name:
-#  type: string
-#  optional: true
-
-# Provisioned live data namespace, which may be used in multiple Versions.
-data:
-  type: namespace
-  init: true
-
-# Maps to Version.name
-# The Version that is currently considered live/production
-# (even though there could be other mappings for test purposes)
-version:
-  type: string
-  optional: true
-
+primary: ProjectVersion

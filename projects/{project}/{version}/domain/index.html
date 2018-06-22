@@ -1,0 +1,159 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/_nav/ as nav }}
+{{% svg /_icons/ as ic }}
+{{% partial /_layout }}
+
+{{% import {project, version} from '🔗' }}
+
+{{< layout}}
+
+{{$nav}}
+
+{{< nav-link-prev}}
+{{$path}}/projects/{{project.id}}/{{/path}}
+{{/ nav-link-prev}}
+
+{{/nav}}
+
+{{$content}}
+
+<!--
+  Already Setup
+  -->
+
+{{#version.get.mapping}}
+
+<div class="box is-capped">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon is-medium has-text-grey">
+                {{> ic-domain}}
+            </span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">Domain Setup</h5>
+            <p class="subtitle is-6">
+                Verify domain ownership and configure domain settings.
+            </p>
+        </div>
+    </div>
+</div>
+
+{{#this.domain.verification.verified}}
+<div class="box">
+    <div class="message is-info">
+        <div class="message-body">
+            <b>{{this.domain.name}}</b> is verified.
+        </div>
+    </div>
+</div>
+{{/this.domain.verification.verified}}
+
+{{^this.domain.verification.verified}}
+<div class="box">
+    <div class="message is-info">
+        <div class="message-body">
+            Follow the steps below to create a DNS (Domain Name System) record
+            that proves to Stacklane that you own the domain.
+        </div>
+    </div>
+
+    <p class="title is-6 has-text-weight-normal">
+        <span class="tag is-rounded is-black"><b>1</b></span>
+        <b>Add</b> the TXT record below to the DNS configuration for <b>{{this.domain.name}}</b>
+    </p>
+
+    <p class="subtitle is-6 has-text-weight-normal">
+        (Adding this record won't affect your mail flow or any other feature in any way.)
+    </p>
+
+    <span class="tag is-info">{{this.domain.verification.record}}</span>
+
+    <hr>
+
+    <p class="title is-6 has-text-weight-normal">
+        <span class="tag is-rounded is-black"><b>2</b></span> Click <b>Verify</b> below
+    </p>
+
+    <p>
+        When Stacklane finds this DNS record, we'll make you a verified owner of the domain.
+        DNS changes may take some time. If we don't find the record immediately, return here at anytime to retry verification.
+        To stay verified, don't remove the DNS record, even after verification succeeds.
+    </p>
+
+    <hr>
+
+    <form method="post" action="verify"
+          data-controller="form"
+          data-validate="true"
+          data-ajax="true">
+        <div class="has-text-right">
+            <button class="button is-primary" type="submit">Verify Now</button>
+        </div>
+    </form>
+</div>
+{{/this.domain.verification.verified}}
+
+{{/version.get.mapping}}
+
+<!--
+  First Time
+  -->
+
+{{^version.get.mapping}}
+
+<div class="box is-capped is-spacious">
+
+    <div class="has-text-centered">
+        <span class="has-text-grey">
+            {{>ic-domain}}
+        </span>
+
+        <h3 class="title is-3">Domain Setup</h3>
+
+        <p>
+
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="message is-info">
+        <div class="message-body">
+            Before setting up a domain, ensure that it's purchased and that
+            you have access to its DNS configuration.
+        </div>
+    </div>
+
+    <div>
+        <form method="post" action="setup"
+              data-controller="form"
+              data-validate="true" data-ajax="true">
+
+            <div class="field">
+                <label class="label">Domain Name</label>
+                <div class="control">
+                    <input id="domain" name="domain" type="domain" required
+                           class="input"
+                           placeholder="example.com">
+                </div>
+                <p class="help">
+                    A root domain or sub-domain.  After submitting you'll
+                    need to setup a DNS record to validate ownership.
+                </p>
+            </div>
+
+            <hr>
+
+            <p class="has-text-right">
+                <button class="button is-primary" type="submit">Next</button>
+            </p>
+        </form>
+    </div>
+
+</div>
+
+{{/version.get.mapping}}
+
+{{/content}}
+{{/layout}}

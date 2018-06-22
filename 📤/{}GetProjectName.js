@@ -11,9 +11,9 @@ let GetProjectName = (project)=>{
     if (custom) return custom;
 
     try {
-        return Source.get(project.source).name;
+        return project.primary.get().source.name;
     } catch (e){
-        return project.source; // Unlikely or impossible
+        return 'N/A';
     }
 };
 

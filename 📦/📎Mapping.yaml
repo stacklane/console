@@ -1,0 +1,10 @@
+domain:
+  type: domain
+  optional: false
+
+path:
+  type: string
+  optional: true
+
+www:
+  type: boolean
