@@ -1,5 +1,7 @@
 @import "/style/variables";
 
+$global-progress-height: 3px;
+
 .turbolinks-progress-bar {
   visibility: hidden;
 }
@@ -17,7 +19,7 @@
   display: flex;
 
   &.show{
-    height: 2px;
+    height: $global-progress-height;
   }
 
   .progress-bar{
