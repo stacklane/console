@@ -1,3 +1,5 @@
+# Fields which (along with other data such as namespace/source) will be used to generate a mapping:
+
 domain:
   type: domain
   optional: false
@@ -8,3 +10,18 @@ path:
 
 www:
   type: boolean
+
+
+# Fields which are the result of a successful mapping, recorded for easy re-display:
+
+ip:
+  type: string
+  optional: true
+
+record:
+  type: string
+  optional: true
+
+name:
+  type: string
+  optional: true

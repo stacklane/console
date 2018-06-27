@@ -27,6 +27,8 @@
     opacity: 0;
     transform: translate(0, 200%);
     will-change: transform, opacity;
+
+    box-shadow: $shadow-sm;
   }
 
   .notification.is-info{
