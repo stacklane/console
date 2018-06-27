@@ -42,7 +42,7 @@
 <div class="columns">
     {{#ProjectKey.all as key}}
     <div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
-        <div class="box">
+        <a class="box is-block" href="{{key.id}}/">
             <div class="media">
                 <div class="media-content">
                     <h5 class="title is-5">{{key.name}}</h5>
@@ -52,7 +52,7 @@
                     <span class="tag is-info">{{key.type}}</span>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     {{/ProjectKey.all}}
 
@@ -69,7 +69,6 @@
         </a>
     </div>
 </div>
-
 
 {{/content}}
 {{/layout}}
