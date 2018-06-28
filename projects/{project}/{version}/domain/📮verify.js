@@ -1,7 +1,7 @@
 
 import {domain} from 'form';
 import {Domain, Mapping as MappingBuilder} from '🔌';
-import {version} from '🔗';
+import {project, version} from '🔗';
 import {Me} from '👤'
 import {Mapping} from '📦';
 
@@ -14,6 +14,7 @@ if (Domain.verify(versionLive.mapping.domain)){
             .source(versionLive.source)
             .namespace(versionLive.data)
             .www(versionLive.mapping.www)
+            .keys(project)
             .register();
 
         versionLive.mapping.ip = result.address;
