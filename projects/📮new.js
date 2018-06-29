@@ -1,8 +1,8 @@
 
-import {url} from "form";
-import {Source} from "🔌";
-import {Me} from '👤'
-import {Project, ProjectUser, ProjectVersion} from '📦';
+import {url} from 'form';
+import {Source} from '🔌';
+import {Me} from '👤';
+import {Project, ProjectUser, ProjectInstance} from '📦';
 
 // Format: https://github.com/org/repo.git
 
@@ -13,9 +13,9 @@ if (!Source.isValidURLFormat(url)){
 let project = new Project();
 
 project(()=>{
-    let v = new ProjectVersion().source(url);
+    let instance = new ProjectInstance().source(url);
 
-    project.primary = v;
+    project.name = instance.source.name;
 
     new ProjectUser().user(Me).star(true).role('Owner');
 });

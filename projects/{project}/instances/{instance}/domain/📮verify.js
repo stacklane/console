@@ -1,25 +1,25 @@
 
 import {domain} from 'form';
 import {Domain, Mapping as MappingBuilder} from '🔌';
-import {project, version} from '🔗';
+import {project, instance} from '🔗';
 import {Me} from '👤'
 import {Mapping} from '📦';
 
-let versionLive = version.get();
+let instanceLive = instance.get();
 
-if (Domain.verify(versionLive.mapping.domain)){
+if (Domain.verify(instanceLive.mapping.domain)){
     try {
         let result = MappingBuilder
-            .domain(versionLive.mapping.domain)
-            .source(versionLive.source)
-            .namespace(versionLive.data)
-            .www(versionLive.mapping.www)
+            .domain(instanceLive.mapping.domain)
+            .source(instanceLive.source)
+            .namespace(instanceLive.data)
+            .www(instanceLive.mapping.www)
             .keys(project)
             .register();
 
-        versionLive.mapping.ip = result.address;
-        versionLive.mapping.record = result.recordType;
-        versionLive.mapping.name = result.name;
+        instanceLive.mapping.ip = result.address;
+        instanceLive.mapping.record = result.recordType;
+        instanceLive.mapping.name = result.name;
 
         ({redirect: '.', success: `Domain successfully verified and registered`});
     } catch (e){

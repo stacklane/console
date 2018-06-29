@@ -5,4 +5,7 @@ account:
   optional: true
   type: Account
 
-primary: ProjectVersion
+# Name to use if not overridden by ProjectUser.name
+name: string
+
+#primary: ProjectInstance

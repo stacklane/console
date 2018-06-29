@@ -22,6 +22,7 @@
 @import "/bulma/components/navbar";
 @import "/bulma/components/tabs";
 @import "/bulma/components/message";
+@import "/bulma/components/level";
 
 @import "/bulma/grid/columns";
 
@@ -184,8 +185,13 @@ $transition-fade:  opacity .15s linear !default;
   width: 100%;
   height: 100%;
 }
-.media-left > .icon, .media-right > .icon{
-  display:block; // matches the display of .image in this case
+.media-left > .icon {
+  /**
+   * Typical case is a *single* icon in media-left (only element),
+   * and block is working much better than inline-block in that case at
+   * not adding some unexpected spacing. flex might also work.
+   */
+  display: block;
 }
 
 /**
@@ -224,6 +230,7 @@ input{
     display: inline-block;
     min-width: 50%; // TBD
 
+    /* don't like how this looks:
     &.is-editable {
       background-size: .9rem;
       background: url(/image/edit_gray.svg) no-repeat center left;
@@ -231,7 +238,7 @@ input{
     }
     &.is-editable:focus{
       //text-decoration:underline;
-    }
+    }*/
   }
 }
 

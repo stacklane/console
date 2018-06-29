@@ -11,11 +11,23 @@ let GetProjectName = (project)=>{
     if (custom) return custom;
 
     try {
-        return project.primary.get().source.name;
+        return project.name;
     } catch (e){
-        return 'N/A';
+        return 'NA'; // case not expected
     }
 };
+
+/**
+ * @param project - May be a model link or actual model.
+
+let GetProjectFolder = (project)=>{
+    let tag = project(()=>ProjectUser.me().get().tag);
+
+    if (tag) return tag;
+
+    return '';
+};
+ */
 
 /**
  * @param project - May be a model link or actual model.

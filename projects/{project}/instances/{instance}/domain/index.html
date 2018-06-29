@@ -3,7 +3,7 @@
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
 
-{{% import {project, version} from '🔗' }}
+{{% import {project, instance} from '🔗' }}
 
 {{< layout}}
 
@@ -21,7 +21,7 @@
   Already Setup
   -->
 
-{{#version.get.mapping}}
+{{#instance.get.mapping}}
 
 <div class="box is-capped">
     <div class="media">
@@ -99,13 +99,13 @@
 </div>
 {{/this.domain.verification.verified}}
 
-{{/version.get.mapping}}
+{{/instance.get.mapping}}
 
 <!--
   First Time
   -->
 
-{{^version.get.mapping}}
+{{^instance.get.mapping}}
 
 <div class="box is-capped is-spacious">
 
@@ -158,7 +158,7 @@
 
 </div>
 
-{{/version.get.mapping}}
+{{/instance.get.mapping}}
 
 {{/content}}
 {{/layout}}

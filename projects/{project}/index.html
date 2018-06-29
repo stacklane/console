@@ -4,6 +4,7 @@
 {{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
+{{% import {ProjectInstance} from '📦'}}
 {{% import {GetProjectName, ProjectUser} from '📤' }}
 
 {{< layout}}
@@ -20,19 +21,26 @@
     >
     <div class="media">
         <div class="media-left">
-            <figure class="image is-48x48">
-                <svg width="48" height="48" data-controller="identicon" data-value="{{project.id}}"></svg>
-            </figure>
+            <span class="icon is-large">
+                <svg width="32" height="32" data-controller="identicon" data-value="{{project.id}}"></svg>
+            </span>
         </div>
         <div class="media-content">
-            <h5 class="title is-5">
+            <h5 class="is-size-5 has-text-weight-semibold"> <!-- was title is-5 -->
                 <input data-action="change->project#changeTitle" type="text" data-target="project.title"
-                       class="is-display is-editable" value="{{GetProjectName project}}" placeholder="Use Default"
+                       class="is-display" value="{{GetProjectName project}}" placeholder="Use Default"
                    autocomplete="off" autocorrect="off"
                    autocapitalize="off" spellcheck="false" data-gramm="false"
                 >
             </h5>
-            <p class="subtitle is-6">{{project.primary.get.source.value}}</p>
+            <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="level-item tooltip" data-tooltip="Manage Project Keys" href="keys/">
+                        <span class="icon is-small has-text-grey">{{>ic-key}}</span>
+                        &nbsp;Keys
+                    </a>
+                </div>
+            </nav>
         </div>
         <div class="media-right">
             <label class="toggler has-text-warning">
@@ -43,41 +51,35 @@
                 <span class="is-checked tooltip" data-tooltip="Favorite"><span class="tag is-white"><span class="icon">{{>ic-star}}</span></span></span>
                 <span class="is-unchecked tooltip" data-tooltip="Favorite"><span class="tag is-white"><span class="icon">{{>ic-star_border}}</span></span></span>
             </label>
-            <!-- TODO
-            <span class="tag is-white">
-                <span class="icon">{{>ic-folder}}</span>
-            </span>
-            -->
         </div>
     </div>
 </div>
 
-<div class="columns">
-    <div class="column is-half">
-        <a class="box is-block" href="keys/">
-            <div class="media">
-                <div class="media-left">
-                    <span class="icon">{{>ic-key}}</span>
+{{#ProjectInstance.all as instance}}
+<div class="box">
+    <div class="media">
+        <!--div class="media-left">
+
+        </div-->
+        <div class="media-content">
+            <h5 class="is-size-5">
+                {{instance.source.value}}
+            </h5>
+            <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="level-item tooltip" data-tooltip="Manage Domain Mapping" href="instances/{{instance.id}}/domain/">
+                        <span class="icon is-small has-text-grey">{{>ic-domain}}</span>
+                        &nbsp;Domain
+                    </a>
                 </div>
-                <div class="media-content">
-                    <h5 class="title is-5">Keys</h5>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="column is-half">
-        <a class="box is-block" href="{{project.primary.get.id}}/domain/">
-            <div class="media">
-                <div class="media-left">
-                    <span class="icon">{{>ic-domain}}</span>
-                </div>
-                <div class="media-content">
-                    <h5 class="title is-5">Domain</h5>
-                </div>
-            </div>
-        </a>
+            </nav>
+        </div>
+        <div class="media-right">
+
+        </div>
     </div>
 </div>
+{{/ProjectInstance.all}}
 
 {{/content}}
 {{/layout}}
