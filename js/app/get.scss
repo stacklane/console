@@ -1,0 +1,24 @@
+
+@import "/style/variables";
+@import "/bulma/utilities/mixins";
+
+$get-loader-size: 2em;
+
+div[data-controller="get"].is-loading{
+  color: transparent !important;
+  pointer-events: none;
+
+  &::after {
+    @include loader;
+
+    width: $get-loader-size;
+    height: $get-loader-size;
+    left: calc(50% - (#{$get-loader-size} / 2));
+
+    position: absolute !important;
+
+    border-bottom-color: rgba(0,0,0,0.5);
+    border-left-color: rgba(0,0,0,0.5);
+  }
+}
+

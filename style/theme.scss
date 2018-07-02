@@ -35,6 +35,7 @@
 @import "/js/app/progress";
 @import "/js/app/tabs";
 @import "/js/app/filter";
+@import "/js/app/get";
 
 ////////////
 
@@ -142,7 +143,7 @@ main{
 /**
  * main > .is-capped -- is pulled up to be snug with <main>
  */
-main > .is-capped:first-child{
+main > .is-capped /*:first-child*/{
   margin-top: -1rem;
   border-top: none;
   border-top-left-radius: 0px;
@@ -210,6 +211,9 @@ $transition-fade:  opacity .15s linear !default;
   .has-text-#{$name} .icon > svg, .has-text-#{$name}.icon > svg{
     fill: $color !important;
   }
+}
+a:hover .has-text-link.icon > svg{
+  fill: $link-hover !important;
 }
 
 /**

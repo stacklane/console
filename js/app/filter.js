@@ -25,6 +25,7 @@
     const FILTER_CONTENT_ID = "data-filter-content";
     const WATCH = "data-filter-watch";
     const TAG_VALUE = "data-filter-tag-value";
+    const EMPTY_CONTENT_ID = "data-filter-empty"; // this section should start with is-hidden
 
     App.register("filter", class extends Stimulus.Controller {
         _filterables(){
@@ -109,6 +110,18 @@
             var rebuild = !document.documentElement.hasAttribute("data-turbolinks-preview");
 
             if (rebuild) {
+                var empty = this.element.getAttribute(EMPTY_CONTENT_ID);
+                if (empty && this._filterables().length == 0){
+                    /**
+                     * Case of zero filterables and a specific 'empty' section.
+                     */
+                    this.element.classList.toggle(HIDDEN, true);
+                    this._content().classList.toggle(HIDDEN, true);
+                    var emptyElement = document.getElementById(empty.substring(1));
+                    emptyElement.classList.toggle(HIDDEN, false);
+                    return;
+                }
+
                 var items = '';
 
                 var ul = document.createElement('UL');

@@ -27,7 +27,6 @@
         <div class="media-content">
             <h5 class="title is-5">Project Keys</h5>
             <p class="subtitle is-6">
-                <!--Keys are stored in a secure vault and values are used for connecting to services.-->
                 A secure vault for third party API credentials.
                 Code running from within this Project will have access to
                 these keys for third party authentication, but will never
@@ -37,9 +36,7 @@
     </div>
 </div>
 
-<div data-controller="get" data-href="list">
-    <a class="button is-loading">Loading</a>
-</div>
+<div data-controller="get" data-href="list" class="is-loading">Loading Project Keys</div>
 
 {{/content}}
 {{/layout}}

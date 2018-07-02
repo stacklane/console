@@ -3,6 +3,8 @@
  *
  * Primarily designed to improve perceived load times by breaking up certain pages
  * with potentially slower loading sections into smaller chunks.
+ *
+ * Use: <div data-controller="get" data-href="list" class="is-loading">Loading</div>
  */
 (function () {
     'use strict';
@@ -11,6 +13,7 @@
      * A bit like Turbolinks behavior.
      */
     const PREVIEW_CACHE = {};
+    const IS_LOADING_CLS = "is-loading";
 
     App.register("get", class extends Stimulus.Controller {
         connect(){
@@ -19,7 +22,7 @@
         _update(){
             var e = this.element;
 
-            if (e.classList.contains('is-loaded')) return; // prevent double loading from stimulus, which seems to be a problem with both connect and initialize.
+            if (!e.classList.contains(IS_LOADING_CLS)) return; // prevent double loading from stimulus, which seems to be a problem with both connect and initialize.
 
             var href = e.getAttribute('data-href');
 
@@ -42,7 +45,7 @@
                 } else {
                     response.text().then(function (html) {
                         e.innerHTML = html;
-                        e.classList.add('is-loaded');
+                        e.classList.remove(IS_LOADING_CLS);
                         PREVIEW_CACHE[cacheKey] = html;
                     }).catch(function (e) {
                         Messages.post({error: 'Unexpected response'});
