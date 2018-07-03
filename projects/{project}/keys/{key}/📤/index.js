@@ -1,8 +1,8 @@
 
 import {key} from '🔗';
 
-let IsUserType = key.type == 'user';
-let IsEnabled = key.state == 'enabled';
+let KeyIsUserType = key.type == 'user';
+let KeyIsEnabled = key.state == 'enabled';
 
-export {IsUserType, IsEnabled};
+export {KeyIsUserType, KeyIsEnabled};
 

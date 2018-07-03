@@ -4,7 +4,7 @@
 {{% partial /_layout }}
 
 {{% import {project,key} from '🔗' }}
-{{% import {IsUserType,IsEnabled} from '📤' }}
+{{% import {KeyIsUserType,KeyIsEnabled} from '📤' }}
 
 {{< layout}}
 
@@ -35,7 +35,7 @@
     </div>
 </div>
 
-{{#IsUserType}}
+{{#KeyIsUserType}}
 <div class="box">
     <div class="message is-info">
         <div class="message-body">
@@ -46,9 +46,9 @@
         </div>
     </div>
 </div>
-{{/IsUserType}}
+{{/KeyIsUserType}}
 
-{{^IsUserType}}
+{{^KeyIsUserType}}
 <div class="box">
     <div class="message is-info">
         <div class="message-body">
@@ -56,7 +56,7 @@
         </div>
     </div>
 </div>
-{{/IsUserType}}
+{{/KeyIsUserType}}
 
 {{/content}}
 {{/layout}}
