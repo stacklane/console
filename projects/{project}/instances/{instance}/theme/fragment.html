@@ -11,16 +11,35 @@
 
     {{#ThemeProperties as prop}}
 
-    <div class="field">
+    {{#prop.color}}
+    <div class="field" data-controller="reflect-input-color">
         <label class="label">{{prop.title}}</label>
-        <div class="control">
-            <input name="{{prop.name}}" type="{{prop.html5}}" class="input" value="{{prop.value}}" placeholder="{{prop.placeholder}}">
+        <div class="control has-icons-left">
+            <input name="{{prop.name}}" type="text" class="input" value="{{prop.value}}" placeholder="{{prop.placeholder}}"
+                   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <span class="icon is-small is-left">
+                <canvas></canvas>
+            </span>
         </div>
         <!--
         <p class="help">
         </p>
         -->
     </div>
+    {{/prop.color}}
+
+    {{#prop.string}}
+    <div class="field">
+        <label class="label">{{prop.title}}</label>
+        <div class="control">
+            <input name="{{prop.name}}" type="text" class="input" value="{{prop.value}}" placeholder="{{prop.placeholder}}">
+        </div>
+        <!--
+        <p class="help">
+        </p>
+        -->
+    </div>
+    {{/prop.string}}
 
     {{/ThemeProperties}}
 

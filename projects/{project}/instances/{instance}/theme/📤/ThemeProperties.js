@@ -18,7 +18,9 @@ let props = instance.get().source.theme().properties().map((p)=>{
         html5: html5,
         type: p.type,
         placeholder: p.stringValue,
-        value: overrides[p.name]
+        value: overrides[p.name],
+        color: p.type == 'color',
+        string: p.type == 'string'
     });
 });
 
