@@ -1,0 +1,45 @@
+<!--TEMPLATE mustache-->
+
+{{% import {instance} from '🔗' }}
+{{% import {ThemeProperties} from '📤' }}
+
+{{^instance.get.source.theme.empty}}
+
+<form method="post" action="update"
+      data-controller="form"
+      data-validate="true" data-ajax="true">
+
+    {{#ThemeProperties as prop}}
+
+    <div class="field">
+        <label class="label">{{prop.title}}</label>
+        <div class="control">
+            <input name="{{prop.name}}" type="{{prop.html5}}" class="input" value="{{prop.value}}" placeholder="{{prop.placeholder}}">
+        </div>
+        <!--
+        <p class="help">
+        </p>
+        -->
+    </div>
+
+    {{/ThemeProperties}}
+
+    <hr>
+
+    <p class="has-text-right">
+        <button class="button is-primary" type="submit">Update</button>
+    </p>
+</form>
+
+{{/instance.get.source.theme.empty}}
+
+
+{{#instance.get.source.theme.empty}}
+<div class="box">
+    <div class="message is-info">
+        <div class="message-body">
+            This project's source code does not define available theme properties (/🎨.scss).
+        </div>
+    </div>
+</div>
+{{/instance.get.source.theme.empty}}
