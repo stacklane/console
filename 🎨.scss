@@ -13,7 +13,8 @@ $logged-in-as: 'Logged in as {0}';
 $action-next: 'Next';
 $submitting: 'Submitting';
 
-
-// test
-$color: rgb(200,100,200);
-$setting: false;
+/**
+ * Stripe
+ */
+$stripe-plan-id: '';
+$stripe-pk: '';

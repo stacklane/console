@@ -29,6 +29,7 @@
 ////////
 
 @import "/style/ext/tooltip";
+@import "/style/ext/pricing";
 
 @import "/js/app/form";
 @import "/js/app/message";
@@ -36,8 +37,11 @@
 @import "/js/app/tabs";
 @import "/js/app/filter";
 @import "/js/app/get";
+@import "/js/app/stripe-card";
 
 ////////////
+
+
 
 /**
  * input.star
@@ -293,6 +297,10 @@ $hoverable-shadow: $card-shadow-hover;
 
   &:hover, &:focus, &:active{
     box-shadow: $hoverable-shadow;
+  }
+
+  &[disabled]{
+    pointer-events: none !important; // Disables hovering and clicking.
   }
 }
 

@@ -6,14 +6,14 @@
 <div class="columns">
 
 {{#ProjectKey.all as key}}
-<div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+<div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-third-fullhd">
     <a class="box is-block" href="{{key.id}}/">
         <div class="media">
             <div class="media-content">
                 <h5 class="title is-5">{{key.name}}</h5>
             </div>
             <div class="media-right">
-                <span data-controller="badge" class="badge">{{key.state}}</span>
+                <span data-controller="badge" class="tag">{{key.state}}</span>
                 <span class="tag is-info">{{key.type}}</span>
             </div>
         </div>
@@ -21,7 +21,7 @@
 </div>
 {{/ProjectKey.all}}
 
-<div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+<div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-third-fullhd">
     <a class="box is-proposed is-hoverable is-block" href="new">
         <div class="media">
             <div class="media-left">

@@ -1,6 +1,5 @@
 /**
  * Expects an 'input' and 'canvas' within the controller.
- * The canvas will take on size of its parent.
  * We use canvas instead of CSS to avoid CSP issues.
  */
 (function (window) {
@@ -9,8 +8,10 @@
     App.register("reflect-input-color", class extends Stimulus.Controller {
         connect(){
             var canvas = this.element.getElementsByTagName("canvas")[0];
-            canvas.width=canvas.parentElement.clientWidth;
-            canvas.height=canvas.parentElement.clientHeight;
+
+            // use fixed size
+           // canvas.width=canvas.parentElement.clientWidth;
+           // canvas.height=canvas.parentElement.clientHeight;
 
             this.update();
 

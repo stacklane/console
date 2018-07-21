@@ -10,8 +10,8 @@
  */
 (function () {
     'use strict';
-    const SUBMITTED = "submitted";
-    const SR_PROCESSING = "Processing";
+    const SUBMITTED = "is-submitted";
+    const IS_TARGET = "is-target";
 
     App.register("form", class extends Stimulus.Controller {
         isAjax(){ return this.element.getAttribute('data-ajax') == 'true' ; }
@@ -20,13 +20,12 @@
         disable() {
             this._disable(this.element.getElementsByTagName('input'));
             this._disable(this.element.getElementsByClassName('button'));
+            this._disable(this.element.getElementsByTagName('a'));
         }
 
         _disable(f) {
             for (var i = 0; i < f.length; i++) {
-                if (f[i].classList.contains('button')){
-                    f[i].classList.add('is-loading');
-                }
+                if (f[i].classList.contains('button')) f[i].classList.add('is-loading');
                 f[i].setAttribute('disabled', 'disabled');
             }
         }
@@ -35,14 +34,74 @@
             this.element.classList.remove(SUBMITTED);
             this._enable(this.element.getElementsByTagName('input'));
             this._enable(this.element.getElementsByClassName('button'));
+            this._enable(this.element.getElementsByTagName('a'));
         }
 
         _enable(f) {
             for (var i = 0; i < f.length; i++) {
-                if (f[i].classList.contains('button')){
-                    f[i].classList.remove('is-loading');
-                }
+                if (f[i].classList.contains('button')) f[i].classList.remove('is-loading');
                 f[i].removeAttribute('disabled');
+                f[i].classList.toggle(IS_TARGET, false);
+            }
+        }
+
+        _submit(event){
+            if (event.currentTarget){
+                if (event.currentTarget && event.currentTarget.getAttribute('disabled')) return; // Ideally not needed because of proper pointer-events use.
+                event.currentTarget.classList.toggle(IS_TARGET, true);
+            }
+
+            if (this.element.classList.contains(SUBMITTED)) return;
+
+            var thiz = this;
+            var submitting = true;
+            var stripeController;
+
+            thiz._resetValidation();
+
+            if (thiz.isAjax()) {
+                event.preventDefault();
+                //event.stopPropagation();
+            }
+
+            if (thiz.isValidate()) {
+                if (thiz.element.reportValidity() === false){
+                    // We're using a combo of browser validity, with some Bootstrap classes.
+                    // Browser validity (via reportValidity) is to show the messages in a native way,
+                    // AND for use of setCustomValidity
+                    event.preventDefault();
+                    //event.stopPropagation();
+                    submitting = false;
+                }
+                // See: https://getbootstrap.com/docs/4.1/components/forms/#custom-styles
+                thiz.element.classList.add('was-validated');
+
+                // Stripe validation / tokenization TODO generalize instead of explicit dependency to stripe-card
+                if (submitting) {
+                    var fields = thiz.element.getElementsByClassName('field');
+                    for (var i = 0; i < fields.length; i++) {
+                        if (fields[i].getAttribute('data-controller') == 'stripe-card') {
+                            stripeController = thiz.application.getControllerForElementAndIdentifier(fields[i], 'stripe-card');
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (submitting){
+                var formData = new FormData(thiz.element); // Must be constructed before disabling form.
+
+                thiz.element.classList.add(SUBMITTED);
+                thiz.disable();
+                //thiz._notify(event.currentTarget);
+
+                var ajaxSubmit = function() { if (thiz.isAjax()) thiz._submitAjax(formData); };
+
+                if (stripeController){
+                    stripeController.tokenize(ajaxSubmit, function(){thiz._stayAfterSubmit()}, formData);
+                } else {
+                    ajaxSubmit();
+                }
             }
         }
 
@@ -71,45 +130,18 @@
             }
 
             this.element.addEventListener('submit', function(event){
-                var submitting = true;
-
-                thiz._resetValidation();
-
-                if (thiz.isValidate()) {
-                    if (thiz.element.reportValidity() === false){
-                        // We're using a combo of browser validity, with some Bootstrap classes.
-                        // Browser validity (via reportValidity) is to show the messages in a native way,
-                        // AND for use of setCustomValidity
-                        event.preventDefault();
-                        event.stopPropagation();
-                        submitting = false;
-                    }
-                    // See: https://getbootstrap.com/docs/4.1/components/forms/#custom-styles
-                    thiz.element.classList.add('was-validated');
-                }
-
-                if (submitting){
-                    var formData = new FormData(thiz.element); // Must be constructed before disabling form.
-                    thiz.element.classList.add(SUBMITTED);
-                    thiz.disable();
-                    thiz._notify(event.currentTarget);
-
-                    if (thiz.isAjax()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        thiz._submitAjax(formData);
-                    }
-                }
+                thiz._submit(event);
             }, false);
         }
 
+        /*
         _notify(target){
             if (typeof this.element.getAttribute('data-message-info') === 'string'){
                 var detail = {info: this.element.getAttribute('data-message-info'),
                             track: this.element.getAttribute('data-message-info-track') == 'true'};
                 Messages.post(detail);
             }
-        }
+        }*/
 
         _resetValidation(){
             var inputs = this.element.getElementsByTagName('input');
@@ -159,10 +191,14 @@
                 }
                 Progress.step(); // From here waiting on 'turbolinks:request-end', which Progress already handles.
             } else {
-                this.enable();
-                this.element.reportValidity();
-                Progress.end();
+                this._stayAfterSubmit();
             }
+        }
+
+        _stayAfterSubmit(){
+            this.enable();
+            this.element.reportValidity();
+            Progress.end();
         }
 
         _submitAjax(formData){
@@ -200,7 +236,6 @@
                 Messages.post({error:'Submission Error: ' + ex.message});
                 console.error('Form submit failed', ex);
             });
-
         }
 
         /**
@@ -209,7 +244,7 @@
         submit(event){
             event.preventDefault();
             event.stopPropagation();
-            this.element.submit();
+            this._submit(event);
         }
     })
 })();

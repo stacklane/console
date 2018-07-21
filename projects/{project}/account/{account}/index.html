@@ -1,0 +1,21 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/_nav/ as nav }}
+{{% svg /_icons/ as ic }}
+{{% partial /_layout }}
+
+{{% import {project} from '🔗' }}
+
+{{< layout}}
+
+{{$nav}}
+{{< nav-link-prev}}
+{{$path}}/projects/{{project.id}}/{{/path}}
+{{/ nav-link-prev}}
+{{/nav}}
+
+{{$content}}
+
+Account
+
+{{/content}}
+{{/layout}}

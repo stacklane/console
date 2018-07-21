@@ -1,10 +1,36 @@
 @import "/style/variables";
 
-.was-validated {
+form.was-validated {
   .input:invalid, .textarea:invalid{
     border-color: $danger;
   }
   .input:valid, .textarea:valid{
     border-color: $success;
+  }
+}
+
+form.is-submitted{
+  pointer-events: none;
+}
+
+@import "/bulma/utilities/mixins";
+$form-link-loader-size: 1em;
+
+form.is-submitted a.is-target.has-loader{
+  color: transparent !important;
+  pointer-events: none;
+  position: relative;
+
+  &::after {
+    @include loader;
+
+    width: $form-link-loader-size;
+    height: $form-link-loader-size;
+    left: calc(50% - (#{$form-link-loader-size} / 2));
+
+    position: absolute !important;
+
+    border-bottom-color: rgba(0,0,0,0.5);
+    border-left-color: rgba(0,0,0,0.5);
   }
 }

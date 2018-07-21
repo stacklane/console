@@ -1,9 +1,9 @@
 /**
- * For standard Bootstrap badge CSS structure:
+ * For standard Bulma CSS structure:
  *
- * https://getbootstrap.com/docs/4.0/components/badge/
+ * https://bulma.io/documentation/elements/tag/
  *
- * <span data-controller="badge" class="badge">..</span>
+ * <span data-controller="badge" class="tag">..</span>
  *
  * (optional) data-value="success/primary/etc" -- otherwise innerText
  * (optional) data-success="somevalue" -- IF the value is X, THEN 'success', etc.

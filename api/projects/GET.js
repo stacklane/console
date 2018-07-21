@@ -1,3 +1,0 @@
-import {MyProjects} from '📤';
-
-MyProjects;

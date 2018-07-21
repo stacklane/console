@@ -1,3 +1,6 @@
 
 # Billing container / info
 
+
+stripeCustomerId: string
+stripeSubscriptionId: string
