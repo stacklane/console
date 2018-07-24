@@ -1,13 +1,16 @@
 
 import {domain} from 'form';
 import {Domain} from '🔌';
-import {instance} from '🔗';
+import {instance, project} from '🔗';
 import {Me} from '👤'
 import {Mapping} from '📦';
+import {ProjectHasAccount} from '📤';
 
 if (!Domain.isValid(domain)) throw ({field:'domain', error: 'Invalid domain name: ' + domain});
 
 let instanceLive = instance.get();
+
+if (!ProjectHasAccount) throw ({error: 'A billing account must be setup before configure a domain.'});
 
 let domainValue = Domain.of(domain);
 domainValue.newVerification('stacklane-domain-verification');

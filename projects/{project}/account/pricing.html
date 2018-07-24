@@ -4,6 +4,14 @@
 
 <div class="pricing-table">
     <div class="pricing-plan">
-        <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">$</span>{{PlanInfo.amount}}</span>/{{PlanInfo.interval}}</div>
+        <div class="plan-price">
+            <span class="plan-price-amount"
+                  data-controller="currency"
+                  data-currency-code="{{PlanInfo.currency}}"
+                  data-currency-symbol-class="plan-price-currency">
+                {{PlanInfo.amount}}
+            </span>
+            / {{PlanInfo.interval}}
+        </div>
     </div>
 </div>

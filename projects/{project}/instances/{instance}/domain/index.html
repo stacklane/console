@@ -4,6 +4,7 @@
 {{% partial /_layout }}
 
 {{% import {project, instance} from '🔗' }}
+{{% import {ProjectHasAccount} from '📤' }}
 
 {{< layout}}
 
@@ -130,6 +131,15 @@
         </div>
     </div>
 
+    {{^ProjectHasAccount}}
+    <div class="message is-danger">
+        <div class="message-body">
+            To configure a domain, first setup a <a href="/projects/{{project.id}}/account/start">billing account</a>.
+        </div>
+    </div>
+    {{/ProjectHasAccount}}
+
+    {{#ProjectHasAccount}}
     <div>
         <form method="post" action="setup"
               data-controller="form"
@@ -155,6 +165,7 @@
             </p>
         </form>
     </div>
+    {{/ProjectHasAccount}}
 
 </div>
 
