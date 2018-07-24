@@ -7,6 +7,9 @@ $get-loader-size: 2em;
 div[data-controller="get"].is-loading{
   color: transparent !important;
   pointer-events: none;
+  position: relative; // for :after loader
+  top: 0;
+  min-height: $get-loader-size;
 
   &::after {
     @include loader;

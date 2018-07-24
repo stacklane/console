@@ -1,0 +1,28 @@
+<!--TEMPLATE mustache-->
+
+{{% import {PastInvoices} from '📤' }}
+
+<div class="card">
+    <div class="card-content">
+        <p class="title is-5">
+            Past Invoices
+        </p>
+
+        {{#PastInvoices.has}}
+        <table class="table">
+            {{#PastInvoices.items}}
+            <tr>
+                <td>
+                    <span data-controller="date-seconds" data-date-seconds-value="{{this.date}}"></span>
+                </td>
+                <td>{{this.amount}}</td>
+            </tr>
+            {{/PastInvoices.items}}
+        </table>
+        {{/PastInvoices.has}}
+
+        {{^PastInvoices.has}}
+        None
+        {{/PastInvoices.has}}
+    </div>
+</div>

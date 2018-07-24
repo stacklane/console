@@ -3,4 +3,5 @@
 
 
 stripeCustomerId: string
-stripeSubscriptionId: string
+stripeSubId: string
+stripeSubItemId: string

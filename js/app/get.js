@@ -4,7 +4,7 @@
  * Primarily designed to improve perceived load times by breaking up certain pages
  * with potentially slower loading sections into smaller chunks.
  *
- * Use: <div data-controller="get" data-href="list" class="is-loading">Loading</div>
+ * Use: <div data-controller="get" data-get-href="list" class="is-loading">Loading</div>
  */
 (function () {
     'use strict';
@@ -24,7 +24,9 @@
 
             if (!e.classList.contains(IS_LOADING_CLS)) return; // prevent double loading from stimulus, which seems to be a problem with both connect and initialize.
 
-            var href = e.getAttribute('data-href');
+            var href = this.data.get('href');
+
+            if (!href) href = e.getAttribute('data-href');
 
             var cacheKey = window.location.href + href;
 

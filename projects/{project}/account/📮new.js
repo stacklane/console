@@ -18,13 +18,15 @@ let customer = customers.create({
 try {
     let subscription = subscriptions.create({
         "items[0][plan]": Theme.stripe_plan_id(),
-        /* how? "items[0][metadata][project]": project.id,*/
         customer: customer.id
     });
 
+    let subscriptionItem = subscription.items.data[0];
+
     let account = new Account()
         .stripeCustomerId(customer.id)
-        .stripeSubscriptionId(subscription.id);
+        .stripeSubId(subscription.id)
+        .stripeSubItemId(subscriptionItem.id);
 
     account(() => {
         new AccountUser().user(Me).role('Owner');
