@@ -13,7 +13,9 @@ upcoming.lines.data.forEach((l)=>{
 });
 
 let out = {
-    nextPaymentAttempt: upcoming.next_payment_attempt
+    nextPaymentAttempt: upcoming.next_payment_attempt,
+    currency: upcoming.currency,
+    amountDue: upcoming.amount_due / 100
 };
 
 export {out as UpcomingInvoice, lines as UpcomingInvoiceLines};

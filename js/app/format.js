@@ -1,44 +1,50 @@
 /**
- * Various formatting/conversion/display utilities
+ * Various formatting/conversion/display utilities.
+ *
+ * Value may be an attribute, or within the element's body.
  */
 (function () {
     'use strict';
+
+    const HIDE = function(ctrl){
+        ctrl.element.classList.toggle('is-hidden', true);
+    };
+
+    const VAL = function(ctrl){
+        var val = ctrl.data.get('value');
+        if (!val || val.length == 0) val = ctrl.element.innerText.trim();
+
+        if (!val || val.length == 0) {
+            HIDE(ctrl);
+            return undefined;
+        }
+
+        ctrl.element.classList.toggle('is-hidden', false);
+
+        return val;
+    };
+
     /**
      * <span data-controller="date-seconds" data-date-seconds-value="..">..</span>
      */
     App.register("date-seconds", class extends Stimulus.Controller {
-        connect(){this._update();}
-        _update(){
-            var e = this.element;
-            var value = this.data.get('value');
-
-            if (!value) {
-                e.classList.toggle('is-hidden', true);
-                return;
-            }
-
-            e.classList.toggle('is-hidden', false);
-
-            e.innerText = new Date(parseInt(value) * 1000).toLocaleDateString();
+        connect(){
+            var val = VAL(this);
+            if (!val) return;
+            this.element.innerText = new Date(parseInt(val) * 1000).toLocaleDateString();
         }
-    })
+    });
 
     const DEFAULT_CURRENCY = "USD";
     App.register("currency", class extends Stimulus.Controller {
         connect() {
-            var e = this.element;
-            var val = this.data.get('value');
-            if (!val || val.length == 0) val = e.innerText.trim();
-
-            if (!val || val.length == 0) {
-                e.classList.toggle('is-hidden', true);
-                return;
-            }
+            var val = VAL(this);
+            if (!val) return;
 
             var currency = this.data.get('code');
             if (!currency) currency = DEFAULT_CURRENCY;
 
-            e.classList.toggle('is-hidden', false);
+            var e = this.element;
 
             try {
                 var str = parseFloat(val).toLocaleString(
@@ -51,9 +57,9 @@
                     e.innerText = str;
                 }
             } catch (e) {
-                e.classList.toggle('is-hidden', true);
+                HIDE(this);
                 console.error(e);
             }
         }
-    })
+    });
 })();
