@@ -29,7 +29,7 @@ try {
         .stripeSubItemId(subscriptionItem.id);
 
     account(() => {
-        new AccountUser().user(Me).role('Owner');
+        new AccountUser().user(Me);
     });
 
     project.get().account = account;

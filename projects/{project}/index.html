@@ -1,5 +1,6 @@
 <!--TEMPLATE mustache-->
 {{% partial /_partials/_nav/ as nav }}
+{{% partial /_partials/_util/ as util }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
 
@@ -29,8 +30,7 @@
             <h5 class="is-size-5 has-text-weight-semibold"> <!-- was title is-5 -->
                 <input data-action="change->project#changeTitle" type="text" data-target="project.title"
                        class="is-display" value="{{GetProjectName project}}" placeholder="Use Default"
-                   autocomplete="off" autocorrect="off"
-                   autocapitalize="off" spellcheck="false" data-gramm="false"
+                     {{>util-disable-spell}}
                 >
             </h5>
             <nav class="level is-mobile">
@@ -60,15 +60,20 @@
 </div>
 
 {{#ProjectInstance.all as instance}}
-<div class="box">
+<div class="box is-hiding-ready" data-controller="project-instance" data-project-instance-id="{{instance.id}}">
     <div class="media">
         <!--div class="media-left">
 
         </div-->
         <div class="media-content">
-            <h5 class="is-size-5">
-                {{instance.source.value}}
-            </h5>
+            <div class="content">
+                <div class="tags has-addons">
+                    <span class="tag is-light">{{instance.source.short}}</span>
+                    {{#instance.source.branch}}
+                    <span class="tag is-primary">{{instance.source.branch}}</span>
+                    {{/instance.source.branch}}
+                </div>
+            </div>
             <nav class="level is-mobile">
                 <div class="level-left">
                     <a class="level-item" href="instances/{{instance.id}}/domain/">
@@ -79,11 +84,33 @@
                         <span class="icon is-small has-text-link">{{>ic-palette}}</span>
                         <span class="has-text-weight-bold">&nbsp;Theme</span>
                     </a>
+                    <a class="level-item" href="instances/{{instance.id}}/test/">
+                        <span class="icon is-small has-text-link">{{>ic-web}}</span>
+                        <span class="has-text-weight-bold">&nbsp;Test</span>
+                    </a>
                 </div>
             </nav>
         </div>
         <div class="media-right">
+            <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="tooltip level-item" href="instances/{{instance.id}}/copy/" data-tooltip="Copy">
+                        <span class="icon is-small has-text-link">{{>ic-copy}}</span>
+                    </a>
 
+                    {{^instance.mapping}}
+                    <a class="tooltip level-item" data-action="project-instance#delete" data-tooltip="Delete">
+                        <span class="icon is-small has-text-link">{{>ic-delete_forever}}</span>
+                    </a>
+                    {{/instance.mapping}}
+
+                    {{#instance.source.external}}
+                    <a class="tooltip level-item" href="{{instance.source.external}}" target="_blank" data-tooltip="Code @ {{instance.source.type}}">
+                        <span class="icon is-small has-text-link">{{>ic-code}}</span>
+                    </a>
+                    {{/instance.source.external}}
+                </div>
+            </nav>
         </div>
     </div>
 </div>

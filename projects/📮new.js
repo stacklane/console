@@ -13,11 +13,11 @@ if (!Source.isValidURLFormat(url)){
 let project = new Project();
 
 project(()=>{
+    new ProjectUser().user(Me).star(true);
+
     let instance = new ProjectInstance().source(url);
 
     project.name = instance.source.name;
-
-    new ProjectUser().user(Me).star(true).role('Owner');
 });
 
 ({redirect: `/projects/${project.id}/`, success: `New project created`});

@@ -1,11 +1,6 @@
 
 .is-filterable{
-  transition: opacity 400ms ease-in;
-}
 
-.is-filterable.is-hiding{
-  pointer-events: none;
-  opacity: .25;
 }
 
 .is-filter-display{

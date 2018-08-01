@@ -19,18 +19,6 @@ let GetProjectName = (project)=>{
 
 /**
  * @param project - May be a model link or actual model.
-
-let GetProjectFolder = (project)=>{
-    let tag = project(()=>ProjectUser.me().get().tag);
-
-    if (tag) return tag;
-
-    return '';
-};
- */
-
-/**
- * @param project - May be a model link or actual model.
  */
 let GetProjectTags = (project)=>{
     let p = project(()=>ProjectUser.me().get());

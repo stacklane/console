@@ -1,1 +1,15 @@
 auth: required
+
+default:
+  stripe.com: all
+
+AccountOwner:
+  📦.Account: all
+  📦.AccountUser: all
+  📦.Mapping: all
+
+ProjectOwner:
+  📦.Project: all
+  📦.ProjectUser: all
+  📦.ProjectInstance: all
+  📦.ProjectKey: all

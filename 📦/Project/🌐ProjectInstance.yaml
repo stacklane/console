@@ -3,11 +3,13 @@
 # Represents an instance-of a specific source/repository
 #
 
-black:
-  type: string
-  optional: true
+#black:
+#  type: string
+#  optional: true
 
-source: source
+source:
+  type: source
+  optional: false
 
 mapping:
   type: Mapping
@@ -16,6 +18,7 @@ mapping:
 data:
   type: namespace
   init: true
+  optional: false
 
 theme:
   type: map

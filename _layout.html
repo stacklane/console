@@ -22,6 +22,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/jdenticon@2.1.0/dist/jdenticon.min.js"></script>
     <script defer src="https://js.stripe.com/v3/"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/prismjs@1.8.1/themes/prism.min.css,npm/prismjs@1.8.1/plugins/line-highlight/prism-line-highlight.min.css">
+    <script defer async src="https://cdn.jsdelivr.net/combine/npm/prismjs@1.15.0,npm/prismjs@1.15.0/plugins/line-highlight/prism-line-highlight.min.js,npm/prismjs@1.15.0/components/prism-yaml.min.js"></script>
+
     <!--
         HTTP/2 plus CDN should take care of loading these efficiently.
         No need for turbolinks-track, because URLs will change as resources changes.
@@ -40,6 +43,8 @@
     <script defer src="/js/app/stripe-card.js"></script>
 
     <script defer src="/js/project.js"></script>
+    <script defer src="/js/project-instance.js"></script>
+    <script defer src="/js/builder.js"></script>
 
     {{% import {Me} from '👤' }}
     {{% svg /_icons/ as ic }}

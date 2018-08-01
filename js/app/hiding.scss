@@ -1,0 +1,8 @@
+.is-hiding-ready{
+  transition: opacity 400ms ease-in;
+}
+
+.is-hiding {
+  pointer-events: none;
+  opacity: .25;
+}

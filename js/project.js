@@ -8,7 +8,7 @@
 
         }
         changeTitle(event){
-            event.preventDefault()
+            event.preventDefault();
             var data = new FormData();
             data.append('title', this.titleTarget.value);
             var thiz = this;
@@ -23,7 +23,7 @@
             this._changeOneField(data, 'favorite setting');
         }
         _changeOneField(data, settingName, responseHandler) {
-            fetch('/api/projects/' + this.data.get('id') + '/UpdateUser', {
+            fetch('/api/projects/' + this.data.get('id') + '/user', {
                 method: 'POST',
                 credentials: 'same-origin', mode: 'same-origin',
                 body: data,

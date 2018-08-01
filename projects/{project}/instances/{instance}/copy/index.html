@@ -1,0 +1,83 @@
+<!--TEMPLATE mustache-->
+
+{{% partial /_partials/_nav/ as nav }}
+{{% partial /_partials/_util/ as util }}
+{{% svg /_icons/ as ic }}
+{{% partial /_layout }}
+
+{{% import {project, instance} from '🔗' }}
+
+{{< layout}}
+
+{{$nav}}
+
+{{< nav-link-prev}}
+{{$path}}/projects/{{project.id}}/{{/path}}
+{{/ nav-link-prev}}
+
+{{/nav}}
+
+{{$content}}
+
+<div class="box is-capped is-spacious">
+
+    <div class="has-text-centered">
+         <span class="icon is-large has-text-grey">
+             {{>ic-copy}}
+         </span>
+
+        <h3 class="title is-3">Copy Instance</h3>
+
+        <p>
+
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="message is-info">
+        <div class="message-body">
+            Only the source and any optional theme settings will be copied.
+        </div>
+    </div>
+
+    <div>
+        <form method="post" action="copy"
+              data-controller="form"
+              data-validate="true" data-ajax="true">
+
+            <div class="field">
+                <label class="label">Source</label>
+                <div class="control">
+                    <input class="input" type="text" value="{{instance.get.source.main}}" readonly>
+                </div>
+                <p class="help">
+                    The copy will use the same source has the original.
+                </p>
+            </div>
+
+            {{#instance.get.source.branch}}
+            <div class="field">
+                <label class="label">Branch</label>
+                <div class="control">
+                    <input class="input" type="text" name="branch" placeholder="{{instance.get.source.branch}}" {{>util-disable-spell}}>
+                </div>
+                <p class="help">
+                    Leave the source's branch the same, or set a different branch.
+                </p>
+            </div>
+            {{/instance.get.source.branch}}
+
+            <hr>
+
+            <p class="has-text-right">
+                <button class="button is-primary" type="submit">Create Copy</button>
+            </p>
+        </form>
+    </div>
+
+</div>
+
+
+{{/content}}
+{{/layout}}

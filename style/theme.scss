@@ -32,6 +32,7 @@
 @import "/style/ext/tooltip";
 @import "/style/ext/pricing";
 
+@import "/js/app/hiding";
 @import "/js/app/form";
 @import "/js/app/message";
 @import "/js/app/progress";
@@ -41,6 +42,46 @@
 @import "/js/app/stripe-card";
 
 ////////////
+
+@import "/style/prism";
+
+/**
+ * Prism
+
+
+.line-highlight{
+  margin-top: .5em; // unclear why adjustment needed -- bootstrap compat? orig value is 1em;
+}
+
+// prism overrides the bootstrap margin, so put it back
+pre[class*=language-]{
+  margin-bottom: 1rem;
+}
+*/
+
+
+/**
+ * Playground status -- spinners on all but danger + success
+ */
+#status li:last-child:after{
+  content: ' ';
+  height: .9em;
+  width: .9em;
+  display:inline-block;
+  animation: rotate-spinner 0.8s infinite linear;
+  border: 2px solid rgba(0,0,0,.5);
+  border-right-color: transparent;
+  border-radius: 50%;
+  margin: 0px 0px 0px .5em;
+}
+#status li.list-group-item-success:last-child:after,
+#status li.list-group-item-danger:last-child:after{
+  content: normal;
+}
+@keyframes rotate-spinner {
+  0%    { transform: rotate(0deg); }
+  100%  { transform: rotate(360deg); }
+}
 
 
 
