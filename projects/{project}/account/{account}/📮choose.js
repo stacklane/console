@@ -16,8 +16,6 @@ account(()=>{
     AccountUser.me().get();
 });
 
-let currentCount = Project.account(account).count();
-
 subscription_items(account.get().stripeSubItemId).update({
     quantity: AccountProjectCount + 1
 });

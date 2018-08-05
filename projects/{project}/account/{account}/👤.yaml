@@ -1,0 +1,5 @@
+
+# Need scripts here to be able to list projects for purpose of multiple Project's per Account.
+
+default:
+  📦.Project: list,read

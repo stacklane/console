@@ -71,6 +71,17 @@
                     // AND for use of setCustomValidity
                     event.preventDefault();
                     //event.stopPropagation();
+
+                    /* TODO why doesn't this work? because it's set after reportValidity?
+                    var inputs = thiz.element.getElementsByTagName('input');
+                    for (var i = 0; i < inputs.length; i++) {
+                        var input = inputs[i];
+                        var patternMsg = input.getAttribute('data-pattern-msg');
+                        if (patternMsg && input.validity && input.validity.patternMismatch){
+                            input.setCustomValidity(patternMsg);
+                        }
+                    }*/
+
                     submitting = false;
                 }
                 // See: https://getbootstrap.com/docs/4.1/components/forms/#custom-styles
@@ -122,8 +133,8 @@
                     // For initial form input, everything would be valid.
                     // In that case, wait until they submit the form to check validity.
                     // In other words, this logic is for after the first time a form has been submitted.
-                    if (input.validity.customError) {
-                        input.setCustomValidity(''); // For server side
+                    if (input.validity && input.validity.customError) {
+                        input.setCustomValidity('');
                         //input.checkValidity(); // Reset pseudo classes TODO is this necessary?
                     }
                 });

@@ -4,4 +4,6 @@ import {Project} from '📦';
 
 let currentCount = Project.account(account).count();
 
-export {currentCount as AccountProjectCount};
+let projects = Project.account(account);
+
+export {currentCount as AccountProjectCount, projects as ProjectsForAccount};

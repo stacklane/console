@@ -9,13 +9,13 @@
         </p>
 
         {{#PastInvoices.has}}
-        <table class="table">
+        <table class="table is-striped is-bordered is-fullwidth">
             {{#PastInvoices.items}}
             <tr>
                 <td>
                     <span data-controller="date-seconds" data-date-seconds-value="{{this.date}}"></span>
                 </td>
-                <td>{{this.amount}}</td>
+                <td><span data-controller="currency" data-currency-code="{{this.currency}}" data-currency-value="{{this.amount}}"></span></td>
             </tr>
             {{/PastInvoices.items}}
         </table>

@@ -60,7 +60,9 @@
             <div class="field">
                 <label class="label">Branch</label>
                 <div class="control">
-                    <input class="input" type="text" name="branch" placeholder="{{instance.get.source.branch}}" {{>util-disable-spell}}>
+                    <input class="input" type="text" name="branch"
+                           pattern="[a-zA-Z0-9\.]{1,25}" data-pattern-msg="Invalid branch"
+                           placeholder="{{instance.get.source.branch}}" {{>util-disable-spell}}>
                 </div>
                 <p class="help">
                     Leave the source's branch the same, or set a different branch.

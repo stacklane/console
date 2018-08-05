@@ -35,9 +35,41 @@
 <div data-controller="get" data-href="fragment" class="is-loading">Loading</div>
 -->
 
-<div data-controller="get" data-href="upcoming" class="is-loading">Loading</div>
+{{% import {ProjectsForAccount, GetProjectName} from '📤' }}
 
+<div class="columns">
+
+<div class="column">
+<div class="card">
+    <div class="card-content">
+        <p class="title is-5">
+            Associated Projects
+        </p>
+
+        <p class="subtitle is-6">
+            The following Projects are associated with this Account.
+        </p>
+
+        <table class="table is-striped is-bordered is-fullwidth">
+            {{#ProjectsForAccount}}
+            <tr>
+                <td>{{GetProjectName this}}</td>
+            </tr>
+            {{/ProjectsForAccount}}
+        </table>
+    </div>
+</div>
+</div>
+
+<div class="column">
+<div data-controller="get" data-href="upcoming" class="is-loading">Loading</div>
+</div>
+
+<div class="column">
 <div data-controller="get" data-href="past" class="is-loading">Loading</div>
+</div>
+
+</div>
 
 {{/content}}
 {{/layout}}
