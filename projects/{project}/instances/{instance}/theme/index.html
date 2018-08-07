@@ -2,6 +2,7 @@
 {{% partial /_partials/_nav/ as nav }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
+{{% partial /projects/{project}/instances/{instance}/_instance-nav }}
 
 {{% import {project, instance} from '🔗' }}
 
@@ -12,6 +13,8 @@
 {{< nav-link-prev}}
 {{$path}}/projects/{{project.id}}/{{/path}}
 {{/ nav-link-prev}}
+
+{{> instance-nav}}
 
 {{/nav}}
 

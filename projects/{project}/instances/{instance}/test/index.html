@@ -2,7 +2,9 @@
 {{% partial /_partials/_nav/ as nav }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
+{{% partial /projects/{project}/instances/{instance}/_instance-nav }}
 
+{{% import {SessionId} from '👤' }}
 {{% import {project, instance} from '🔗' }}
 
 {{< layout}}
@@ -13,15 +15,51 @@
 {{$path}}/projects/{{project.id}}/{{/path}}
 {{/ nav-link-prev}}
 
+{{> instance-nav}}
+
 {{/nav}}
 
 {{$content}}
 
-<div class="box" data-controller="builder" data-builder-href="build">
+<div class="box is-capped">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon is-medium has-text-grey">
+                {{> ic-web}}
+            </span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">Testing</h5>
+            <p class="subtitle is-6">
+                Create a temporary test environment and shareable link.
+            </p>
+        </div>
+    </div>
+</div>
 
-    <button class="button is-primary" data-action="builder#start">Go</button>
+<div data-controller="builder" data-builder-href="build?sid={{SessionId}}">
+
+    <div class="box is-hidden" data-target="builder.done">
+        <div class="columns">
+            <div class="column is-one-quarter">
+                <a class="button is-primary is-fullwidth" data-target="builder.launch">Launch</a>
+            </div>
+            <div class="column">
+                <input class="input" type="text" data-target="builder.link" value="" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <a href="#" class="button is-primary is-fullwidth" data-target="builder.create" data-action="builder#start">Create Test Instance</a>
+
+        <table class="table is-fullwidth is-size-7" data-target="builder.status">
+
+        </table>
+    </div>
 
 </div>
+
 
 {{/content}}
 {{/layout}}

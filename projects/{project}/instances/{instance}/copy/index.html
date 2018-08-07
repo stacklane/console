@@ -4,6 +4,7 @@
 {{% partial /_partials/_util/ as util }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
+{{% partial /projects/{project}/instances/{instance}/_instance-nav }}
 
 {{% import {project, instance} from '🔗' }}
 
@@ -14,6 +15,8 @@
 {{< nav-link-prev}}
 {{$path}}/projects/{{project.id}}/{{/path}}
 {{/ nav-link-prev}}
+
+{{> instance-nav}}
 
 {{/nav}}
 
@@ -61,7 +64,7 @@
                 <label class="label">Branch</label>
                 <div class="control">
                     <input class="input" type="text" name="branch"
-                           pattern="[a-zA-Z0-9\.]{1,25}" data-pattern-msg="Invalid branch"
+                           pattern="[a-zA-Z0-9\._\-]{1,25}" data-pattern-msg="Invalid branch"
                            placeholder="{{instance.get.source.branch}}" {{>util-disable-spell}}>
                 </div>
                 <p class="help">

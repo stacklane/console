@@ -14,9 +14,9 @@
         if (level == null) level = 'debug';
         switch (level){
             case 'error': return 'danger';
-            case 'warn': return 'warning';
+            case 'warn': return 'grey'; // yellow/warning is currently hard to see
             case 'info': return 'info';
-            case 'debug': return 'light';
+            case 'debug': return 'grey';
             default: return level;
         }
     };
@@ -63,32 +63,37 @@
 
     App.register("builder", class extends Stimulus.Controller {
         static get targets() {
-            return [  ];
+            return ["link", "launch", "done", "create", "status"];
         }
         connect(){
 
         }
-        clearStatus(){
-            //$get('status').innerHTML = '';
-            console.log('clear');
+        reset(){
+            this.createTarget.classList.toggle('is-hidden', false);
+            this.statusTarget.innerHTML = '';
         }
         addStatus(html, cls){
-            /*
-            var node = document.createElement("li");
-            node.setAttribute("class", cls);
-            node.innerHTML = html;
-            $get('status').appendChild(node);
+            var td = document.createElement("td");
+            td.setAttribute("class", cls);
+            td.innerHTML = html;
+            var tr = document.createElement('tr');
+            tr.appendChild(td);
+            this.statusTarget.appendChild(tr);
 
-            // TODO  needs to be the code element for highlighElement to work
+            // TODO needs to be the code element for highlightElement to work
             //if (html.indexOf("language-") > -1) Prism.highlightElement(node); // rerun
-            if (html.indexOf("language-") > -1) Prism.highlightAll();
-             */
-            console.log(html);
-        }
-        start(){
-            this.clearStatus();
 
-            this.addStatus('Initializing', 'list-group-item list-group-item-warning pt-1 pb-1');
+            if (html.indexOf("language-") > -1) Prism.highlightAll();
+        }
+        start(evt){
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            this.createTarget.classList.toggle('is-loading', true);
+
+            this.reset();
+
+            this.addStatus('Initializing', 'has-text-warning');
 
             var init = new EventSource(this.data.get('href'));
             var graceful = false;
@@ -97,47 +102,49 @@
 
             init.onerror = function(e){
                 if (!graceful) {
-                    thiz.addStatus('Connection failed: ' + e.message, "list-group-item pt-1 pb-1 list-group-item-danger");
+                    thiz.addStatus('Connection failed: ' + e.message, "has-text-danger");
+                    thiz.createTarget.classList.toggle('is-loading', false);
                 }
             };
 
             init.onmessage = function(e){
                 if (e.data.startsWith("{")){
                     var obj = JSON.parse(e.data);
-                    thiz.addStatus(createProblemHtml(obj.value), "list-group-item pt-1 pb-1 list-group-item-" + logLevelToClass(obj.level));
+                    thiz.addStatus(createProblemHtml(obj.value), "has-text-" + logLevelToClass(obj.level));
                 } else {
-                    thiz.addStatus(e.data, "list-group-item pt-1 pb-1 list-group-item-warning");
+                    thiz.addStatus(e.data, "has-text-warning");
                 }
             }
 
             init.addEventListener('completed', function(e) {
-                thiz.addStatus("Done", "list-group-item pt-1 pb-1 list-group-item-success");
+                thiz.addStatus("Done", "has-text-success");
 
                 var obj = JSON.parse(e.data);
 
-                console.log('launch: ' + obj.url);
-                /*
-                $get("launch-link").setAttribute('href', obj.url);
-                $get("launch-link").setAttribute('target', obj.frame);
-                $get("launch-link").classList.remove('disabled', 'btn-secondary');
-                $get("launch-link").classList.add('btn-primary');
-                */
+                thiz.linkTarget.value = obj.url;
+                thiz.launchTarget.setAttribute('href', obj.url);
+                thiz.launchTarget.setAttribute('target', obj.frame);
+                thiz.doneTarget.classList.toggle('is-hidden', false);
+                thiz.createTarget.classList.toggle('is-hidden', true);
 
                 init.close();
             });
 
             init.addEventListener('exception', function(e) {
-                thiz.addStatus(e.data, "list-group-item pt-1 pb-1 list-group-item-danger");
+                thiz.addStatus(e.data, "has-text-danger");
+                thiz.createTarget.classList.toggle('is-loading', false);
                 init.close();
             });
 
             init.addEventListener('close', function(e) {
                 graceful = true;
+                thiz.createTarget.classList.toggle('is-loading', false);
                 init.close();
             });
 
             init.addEventListener('timeout', function(e) {
-                thiz.addStatus('Timeout', "list-group-item pt-1 pb-1 list-group-item-danger");
+                thiz.addStatus('Timeout', "has-text-danger");
+                thiz.createTarget.classList.toggle('is-loading', false);
             });
         }
     });

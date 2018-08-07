@@ -1,20 +1,23 @@
 
-import {PlaySite} from "🔌";
-import {instance} from '🔗';
-import * as Params from "&";
+import {Build, Mapping} from "🔌";
+import {instance, project} from '🔗';
 
 let buffered = [];
 let bufferedIndex = 0;
 let finished = null;
-let url = instance.get().source.value;
+
+let instanceLive = instance.get();
+let mapping = Mapping.test()
+    .source(instanceLive.source)
+    .namespace(instanceLive.data)
+    .theme(instanceLive.theme)
+    .keys(project);
 
 /**
- * Initiate the (potentially long running) builder and callbacks.
+ * Initiate the long running builder and callbacks.
  */
 
-new PlaySite(url)
-//.branch(Params.branch)
-.build()
+Build.mapping(mapping)
 .status((log)=>{
     buffered.push({
         level: log.level,
@@ -60,7 +63,7 @@ new PlaySite(url)
             level: "info",
             value: "Completed",
             url: finished.url,
-            frame: finished.frameName
+            frame: finished.frame
         });
 
         return next;

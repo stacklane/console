@@ -1,0 +1,14 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/_nav/ as nav }}
+{{% import {project, instance} from '🔗' }}
+
+{{< nav-text}}
+{{$label}}
+<div class="tags has-addons">
+    <span class="tag is-light">{{instance.source.short}}</span>
+    {{#instance.source.branch}}
+    <span class="tag is-primary">{{instance.source.branch}}</span>
+    {{/instance.source.branch}}
+</div>
+{{/label}}
+{{/ nav-text}}

@@ -61,8 +61,12 @@ pre[class*=language-]{
 
 
 /**
- * Playground status -- spinners on all but danger + success
+ * Playground/testing status -- spinners on all but danger + success
  */
+//#status{
+ // list-style: none;
+//}
+/*
 #status li:last-child:after{
   content: ' ';
   height: .9em;
@@ -74,15 +78,15 @@ pre[class*=language-]{
   border-radius: 50%;
   margin: 0px 0px 0px .5em;
 }
-#status li.list-group-item-success:last-child:after,
-#status li.list-group-item-danger:last-child:after{
+#status li.has-text-success:last-child:after,
+#status li.has-text-danger:last-child:after{
   content: normal;
 }
 @keyframes rotate-spinner {
   0%    { transform: rotate(0deg); }
   100%  { transform: rotate(360deg); }
 }
-
+*/
 
 
 /**
