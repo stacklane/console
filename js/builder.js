@@ -93,7 +93,7 @@
 
             this.reset();
 
-            this.addStatus('Initializing', 'has-text-warning');
+            this.addStatus('Initializing', 'has-text-grey');
 
             var init = new EventSource(this.data.get('href'));
             var graceful = false;
@@ -112,7 +112,7 @@
                     var obj = JSON.parse(e.data);
                     thiz.addStatus(createProblemHtml(obj.value), "has-text-" + logLevelToClass(obj.level));
                 } else {
-                    thiz.addStatus(e.data, "has-text-warning");
+                    thiz.addStatus(e.data, "has-text-grey");
                 }
             }
 

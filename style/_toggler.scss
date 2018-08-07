@@ -1,0 +1,35 @@
+/**
+ * TODO consider screen readers, likely from a body class -- display is unnecessary in that case
+ */
+.toggler {
+  cursor: pointer;
+  display: flex; // seems to work better than inline-block for size expectations of inner icons
+  //background-color: rgba(0,0,0, 0.2);
+  //border: none;
+  // border-radius: $radius-rounded;
+  position:relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+}
+.toggler:hover, .toggler:focus{
+  //background-color: rgba(0,0,0, 0.3);
+}
+.toggler:active{
+  //background-color: rgba(0,0,0, 0.4);
+}
+.toggler input:checked ~ .is-checked {
+  display: inline-block;
+}
+.toggler input:checked ~ .is-unchecked {
+  display: none;
+}
+.toggler input ~ .is-unchecked {
+  display: inline-block;
+}
+.toggler input ~ .is-checked {
+  display: none;
+}
