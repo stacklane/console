@@ -5,7 +5,7 @@
 {{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
-{{% import {ProjectInstance} from '📦'}}
+{{% import {Project} from '📦'}}
 {{% import {GetProjectName, ProjectUser} from '📤' }}
 
 {{< layout}}
@@ -27,64 +27,41 @@
             </span>
         </div>
         <div class="media-content">
-            <h5 class="is-size-5 has-text-weight-semibold"> <!-- was title is-5 -->
+            <h5 class="is-size-5 title has-text-weight-semibold"> <!-- was title is-5 -->
                 <input data-action="change->project#changeTitle" type="text" data-target="project.title"
                        class="is-display" value="{{GetProjectName project}}" placeholder="Use Default"
                      {{>util-disable-spell}}
                 >
             </h5>
+            {{#project.source.external}}
+            <h6 class="subtitle">
+                <a href="{{project.source.external}}" target="_blank" >
+                    <!--span class="icon is-small has-text-link">{{>ic-code}}</span-->
+                    <!-- data-tooltip=" @ {{project.source.type}}" -->
+                    <div class="tags has-addons">
+                        <span class="tag is-light">{{project.source.short}}</span>
+                        {{#project.source.branch}}
+                        <span class="tag is-primary">{{project.source.branch}}</span>
+                        {{/project.source.branch}}
+                    </div>
+                </a>
+            </h6>
+            {{/project.source.external}}
             <nav class="level is-mobile">
                 <div class="level-left">
                     <a class="level-item" href="keys/">
                         <span class="icon is-small has-text-link">{{>ic-key}}</span>
                         <span class="has-text-weight-bold">&nbsp;Keys</span>
                     </a>
-                    <a class="level-item" href="account/start" data-turbolinks="false"> <!-- Disable Turbolinks because of redirection permutations -->
-                        <span class="icon is-small has-text-link">{{>ic-credit_card}}</span>
-                        <span class="has-text-weight-bold">&nbsp;Billing</span>
-                    </a>
-                </div>
-            </nav>
-        </div>
-        <div class="media-right">
-            <label class="toggler has-text-warning">
-                <input data-target="project.star"
-                       data-action="change->project#changeStar"
-                       type="checkbox" class="is-filter-tag"
-                       {{#ProjectUser.star}}checked{{/ProjectUser.star}}>
-                <span class="is-checked tooltip" data-tooltip="Favorite"><span class="tag is-white"><span class="icon">{{>ic-star}}</span></span></span>
-                <span class="is-unchecked tooltip" data-tooltip="Favorite"><span class="tag is-white"><span class="icon">{{>ic-star_border}}</span></span></span>
-            </label>
-        </div>
-    </div>
-</div>
-
-{{#ProjectInstance.all as instance}}
-<div class="box is-hiding-ready" data-controller="project-instance" data-project-instance-id="{{instance.id}}">
-    <div class="media">
-        <!--div class="media-left">
-
-        </div-->
-        <div class="media-content">
-            <div class="content">
-                <div class="tags has-addons">
-                    <span class="tag is-light">{{instance.source.short}}</span>
-                    {{#instance.source.branch}}
-                    <span class="tag is-primary">{{instance.source.branch}}</span>
-                    {{/instance.source.branch}}
-                </div>
-            </div>
-            <nav class="level is-mobile">
-                <div class="level-left">
-                    <a class="level-item" href="instances/{{instance.id}}/domain/">
+                    <a class="level-item" href="domain/">
                         <span class="icon is-small has-text-link">{{>ic-domain}}</span>
                         <span class="has-text-weight-bold">&nbsp;Domain</span>
                     </a>
-                    <a class="level-item" href="instances/{{instance.id}}/theme/">
+                    <a class="level-item" href="theme/">
                         <span class="icon is-small has-text-link">{{>ic-palette}}</span>
                         <span class="has-text-weight-bold">&nbsp;Theme</span>
                     </a>
-                    <a class="level-item" href="instances/{{instance.id}}/test/">
+                    <a class="level-item" href="test/">
                         <span class="icon is-small has-text-link">{{>ic-web}}</span>
                         <span class="has-text-weight-bold">&nbsp;Test</span>
                     </a>
@@ -94,40 +71,33 @@
         <div class="media-right">
             <nav class="level is-mobile">
                 <div class="level-left">
-                    <a class="tooltip level-item" href="instances/{{instance.id}}/copy/" data-tooltip="Copy">
+                    <a class="tooltip level-item" href="account/start" data-turbolinks="false" data-tooltip="Billing"> <!-- Disable Turbolinks because of redirection permutations -->
+                        <span class="icon is-small has-text-link">{{>ic-credit_card}}</span>
+                    </a>
+
+                    <a class="tooltip level-item" href="copy/" data-tooltip="Copy">
                         <span class="icon is-small has-text-link">{{>ic-copy}}</span>
                     </a>
 
-                    {{^instance.mapping}}
+                    {{^project.get.mapping}}
                     <a class="tooltip level-item" data-action="project-instance#delete" data-tooltip="Delete">
                         <span class="icon is-small has-text-link">{{>ic-delete_forever}}</span>
                     </a>
-                    {{/instance.mapping}}
+                    {{/project.get.mapping}}
 
-                    {{#instance.source.external}}
-                    <a class="tooltip level-item" href="{{instance.source.external}}" target="_blank" data-tooltip="Code @ {{instance.source.type}}">
-                        <span class="icon is-small has-text-link">{{>ic-code}}</span>
-                    </a>
-                    {{/instance.source.external}}
+                    <label class="toggler has-text-warning level-item">
+                        <input data-target="project.star"
+                               data-action="change->project#changeStar"
+                               type="checkbox" class="is-filter-tag"
+                               {{#ProjectUser.star}}checked{{/ProjectUser.star}}>
+                        <span class="is-checked tooltip icon is-small" data-tooltip="Favorite">{{>ic-star}}</span>
+                        <span class="is-unchecked tooltip icon is-small" data-tooltip="Favorite">{{>ic-star_border}}</span>
+                    </label>
                 </div>
             </nav>
         </div>
     </div>
 </div>
-{{/ProjectInstance.all}}
-
-{{^ProjectInstance.all}}
-<a class="box is-proposed is-hoverable is-block" href="instances/new">
-    <div class="media">
-        <div class="media-left">
-            <span class="icon has-text-primary">{{> ic-add_circle}}</span>
-        </div>
-        <div class="media-content">
-            <h5 class="title is-5">Add Project Instance</h5>
-        </div>
-    </div>
-</a>
-{{/ProjectInstance.all}}
 
 {{/content}}
 {{/layout}}

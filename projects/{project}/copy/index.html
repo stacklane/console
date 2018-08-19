@@ -4,17 +4,13 @@
 {{% partial /_partials/_util/ as util }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
-{{% partial /projects/{project}/instances/{instance}/_instance-nav }}
+{{% partial /projects/{project}/_instance-nav }}
 
-{{% import {project, instance} from '🔗' }}
+{{% import {project} from '🔗' }}
 
 {{< layout}}
 
 {{$nav}}
-
-{{< nav-link-prev}}
-{{$path}}/projects/{{project.id}}/{{/path}}
-{{/ nav-link-prev}}
 
 {{> instance-nav}}
 
@@ -40,7 +36,7 @@
 
     <div class="message is-info">
         <div class="message-body">
-            Only the source and any optional theme settings will be copied.
+            Only the source, keys, and any optional theme settings will be copied.
         </div>
     </div>
 
@@ -52,26 +48,26 @@
             <div class="field">
                 <label class="label">Source</label>
                 <div class="control">
-                    <input class="input" type="text" value="{{instance.get.source.main}}" readonly>
+                    <input class="input" type="text" value="{{project.get.source.main}}" readonly>
                 </div>
                 <p class="help">
                     The copy will use the same source has the original.
                 </p>
             </div>
 
-            {{#instance.get.source.branch}}
+            {{#project.get.source.branch}}
             <div class="field">
                 <label class="label">Branch</label>
                 <div class="control">
                     <input class="input" type="text" name="branch"
                            pattern="[a-zA-Z0-9\._\-]{1,25}" data-pattern-msg="Invalid branch"
-                           placeholder="{{instance.get.source.branch}}" {{>util-disable-spell}}>
+                           placeholder="{{project.get.source.branch}}" {{>util-disable-spell}}>
                 </div>
                 <p class="help">
                     Leave the source's branch the same, or set a different branch.
                 </p>
             </div>
-            {{/instance.get.source.branch}}
+            {{/project.get.source.branch}}
 
             <hr>
 

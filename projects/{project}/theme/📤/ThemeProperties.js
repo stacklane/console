@@ -1,5 +1,5 @@
 
-import {instance} from '🔗';
+import {project as instance} from '🔗';
 
 let overrides = instance.get().theme;
 

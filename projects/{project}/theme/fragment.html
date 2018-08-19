@@ -1,9 +1,9 @@
 <!--TEMPLATE mustache-->
 
-{{% import {instance} from '🔗' }}
+{{% import {project} from '🔗' }}
 {{% import {ThemeProperties} from '📤' }}
 
-{{^instance.get.source.theme.empty}}
+{{^project.get.source.theme.empty}}
 
 <form method="post" action="update"
       data-controller="form"
@@ -54,10 +54,10 @@
     </p>
 </form>
 
-{{/instance.get.source.theme.empty}}
+{{/project.get.source.theme.empty}}
 
 
-{{#instance.get.source.theme.empty}}
+{{#project.get.source.theme.empty}}
 <div class="box">
     <div class="message is-info">
         <div class="message-body">
@@ -65,4 +65,4 @@
         </div>
     </div>
 </div>
-{{/instance.get.source.theme.empty}}
+{{/project.get.source.theme.empty}}

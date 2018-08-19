@@ -22,13 +22,13 @@
   //background-color: rgba(0,0,0, 0.4);
 }
 .toggler input:checked ~ .is-checked {
-  display: inline-block;
+  display: /*inline-block*/ inline-flex; /* use inline-flex for better compat with use inside of a level-item */
 }
 .toggler input:checked ~ .is-unchecked {
   display: none;
 }
 .toggler input ~ .is-unchecked {
-  display: inline-block;
+  display: /*inline-block*/ inline-flex; /* use inline-flex for better compat with use inside of a level-item */
 }
 .toggler input ~ .is-checked {
   display: none;

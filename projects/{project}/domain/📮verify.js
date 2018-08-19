@@ -1,11 +1,11 @@
 
 import {domain} from 'form';
 import {Domain, Mapping as MappingBuilder} from '🔌';
-import {project, instance} from '🔗';
+import {project} from '🔗';
 import {Me} from '👤'
 import {Mapping} from '📦';
 
-let instanceLive = instance.get();
+let instanceLive = project.get();
 
 if (Domain.verify(instanceLive.mapping.domain)){
     try {

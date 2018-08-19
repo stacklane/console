@@ -1,11 +1,25 @@
 
+# Name (shared) to use if not overridden by ProjectUser#name:
+name: string
 
-# Associate an Account responsible for billing.
+# Associate an Account responsible for billing:
 account:
   optional: true
   type: Account
 
-# Name to use if not overridden by ProjectUser.name
-name: string
+source:
+  type: source
+  optional: false
 
-#primary: ProjectInstance
+mapping:
+  type: Mapping
+  optional: true
+
+data:
+  type: namespace
+  init: true
+  optional: false
+
+theme:
+  type: map
+  optional: true

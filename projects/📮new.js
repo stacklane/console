@@ -10,14 +10,12 @@ if (!Source.isValidURLFormat(url)){
     throw ({field:'url', error: 'Invalid source URL: ' + url});
 }
 
-let project = new Project();
+let project = new Project().source(url);
+
+project.name = project.source.name;
 
 project(()=>{
     new ProjectUser().user(Me).star(true);
-
-    let instance = new ProjectInstance().source(url);
-
-    project.name = instance.source.name;
 });
 
 ({redirect: `/projects/${project.id}/`, success: `New project created`});

@@ -1,7 +1,6 @@
 
 # Billing container / info
 
-
 stripeCustomerId: string
 stripeSubId: string
 stripeSubItemId: string

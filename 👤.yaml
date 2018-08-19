@@ -11,6 +11,5 @@ AccountOwner:
 ProjectOwner:
   📦.Project: all
   📦.ProjectUser: all
-  📦.ProjectInstance: all
   📦.ProjectKey: all
 

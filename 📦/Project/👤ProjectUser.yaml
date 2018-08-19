@@ -6,6 +6,11 @@ name:
   type: string
   optional: true
 
+# Allow User to organize Project's in a nested fashion (for their own view)
+parent:
+  type: Project
+  optional: true
+
 # Allows User to place the Project in a one-level-deep folder/tag
 tag:
   type: string

@@ -2,17 +2,13 @@
 {{% partial /_partials/_nav/ as nav }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
-{{% partial /projects/{project}/instances/{instance}/_instance-nav }}
+{{% partial /projects/{project}/_instance-nav }}
 
-{{% import {project, instance} from '🔗' }}
+{{% import {project} from '🔗' }}
 
 {{< layout}}
 
 {{$nav}}
-
-{{< nav-link-prev}}
-{{$path}}/projects/{{project.id}}/{{/path}}
-{{/ nav-link-prev}}
 
 {{> instance-nav}}
 

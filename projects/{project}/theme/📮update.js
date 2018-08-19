@@ -1,9 +1,9 @@
 
 import {ThemeProperties} from '📤';
-import {instance, project} from '🔗';
+import {project} from '🔗';
 import {Form} from 'form{}';
 
-let current = instance.get().theme;
+let current = project.get().theme;
 
 ThemeProperties.forEach((p)=>{
     if (p.type == 'boolean'){
@@ -13,7 +13,12 @@ ThemeProperties.forEach((p)=>{
             current[p.name] = submittedValue;
         }
     } else {
-        current[p.name] = Form[p.name];
+        let value = Form[p.name];
+        if (value) {
+            current[p.name] = value;
+        } else {
+            current[p.name] = null;
+        }
     }
 });
 

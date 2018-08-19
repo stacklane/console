@@ -1,14 +1,14 @@
 
 import {domain} from 'form';
 import {Domain} from '🔌';
-import {instance, project} from '🔗';
+import {project} from '🔗';
 import {Me} from '👤'
 import {Mapping} from '📦';
 import {ProjectHasAccount} from '📤';
 
 if (!Domain.isValid(domain)) throw ({field:'domain', error: 'Invalid domain name: ' + domain});
 
-let instanceLive = instance.get();
+let instanceLive = project.get();
 
 if (!ProjectHasAccount) throw ({error: 'A billing account must be setup before configure a domain.'});
 
