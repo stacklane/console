@@ -13,7 +13,7 @@ if (live.account.linked()){
     try {
 
         // Check if at least one to choose from:
-        AccountUser.all().get();
+        AccountUser.me().all().get();
         `/projects/${project.id}/account/choose`;
 
     } catch ($ModelNotFound) {

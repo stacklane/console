@@ -1,5 +1,6 @@
 
-# Need scripts here to be able to list projects for purpose of multiple Project's per Account.
+# Need scripts here to be able to list projects for purpose of
+# multiple Project's per Account (potentially owned by different users)
 
 default:
-  📦.Project: list,read
+  📦.Project: access,list,read

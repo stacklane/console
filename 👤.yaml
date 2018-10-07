@@ -3,6 +3,8 @@ auth: required
 default:
   stripe.com: all
   📦.Mapping: all
+  📦.ProjectUser: access
+  📦.AccountUser: access
 
 AccountOwner:
   📦.Account: all

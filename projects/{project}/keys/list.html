@@ -15,6 +15,7 @@
             <div class="media-right">
                 <span data-controller="badge" class="tag">{{key.state}}</span>
                 <span class="tag is-info">{{key.type}}</span>
+                {{#key.context}}<span class="tag is-info">{{key.context}}</span>{{/key.context}}
             </div>
         </div>
     </a>

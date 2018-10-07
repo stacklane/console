@@ -42,5 +42,40 @@
                 Messages.error('Unable to update ' + settingName + ' [' + ex.message + ']', ex);
             });
         }
+        delete(event){
+            event.preventDefault();
+
+            if (!confirm('Delete this Project?')) return;
+
+            var thiz = this;
+
+            thiz.element.classList.toggle('is-hiding', true);
+
+            fetch('/api/projects/' + this.data.get('id') + '/user', {
+                method: 'DELETE',
+                credentials: 'same-origin', mode: 'same-origin',
+                //body: data,
+                headers:{ Accept: 'application/json' }
+            }).then(function (response) {
+                if (response.status != 200) {
+                    thiz.element.classList.toggle('is-hiding', false);
+                    Messages.error('Unable to delete [' + response.status + ']', response);
+                } else {
+                    response.json().then(function(j){
+                        thiz.element.remove();
+
+                        /**
+                         * TODO extract because this is general approach for ajax
+                         */
+                        Messages.post(j);
+                        if (j.redirect) Turbolinks.visit(j.redirect, {action: 'replace'});
+                        Turbolinks.clearCache();
+                    });
+                }
+            }).catch(function (ex) {
+                thiz.element.classList.toggle('is-hiding', false);
+                Messages.error('Unable to delete' + ' [' + ex.message + ']', ex);
+            });
+        }
     });
 })();

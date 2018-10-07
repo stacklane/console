@@ -18,12 +18,30 @@ let projectCopy = new Project()
 projectCopy.name = projectCopy.source.name;
 
 projectCopy(()=>{
-    new ProjectUser().user(Me).parent(current);
+    let pu = new ProjectUser().user(Me);
+    let currentParent = current(()=>ProjectUser.me().get()).parent;
+    if (!currentParent.linked()){
+        /**
+         * Nest
+         */
+        pu.parent = current;
+    } else {
+        /**
+         * We don't currently allow more than one layer of nesting, so if you try to copy
+         * an already nested project, it simply ends up under the same parent.
+         */
+        pu.parent = currentParent;
+    }
 });
 
+/**
+ * Copy ProjectKey's to the new parent / new Project copy.
+ */
 ProjectKey.all().modify((key)=>{
     projectCopy(()=>key.copy());
 });
 
-// Back to 'parent':
+/**
+ * Back to 'parent'.
+ */
 ({redirect: `/projects/${current.id}/`, success: 'Copy created.'});

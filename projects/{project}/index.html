@@ -6,7 +6,7 @@
 
 {{% import {project} from '🔗' }}
 {{% import {Project} from '📦'}}
-{{% import {GetProjectName, ProjectUser} from '📤' }}
+{{% import {GetProjectName, IsProjectStarred, GetChildProjects} from '📤' }}
 
 {{< layout}}
 
@@ -80,7 +80,7 @@
                     </a>
 
                     {{^project.get.mapping}}
-                    <a class="tooltip level-item" data-action="project-instance#delete" data-tooltip="Delete">
+                    <a class="tooltip level-item" data-action="project#delete" data-tooltip="Delete">
                         <span class="icon is-small has-text-link">{{>ic-delete_forever}}</span>
                     </a>
                     {{/project.get.mapping}}
@@ -89,7 +89,7 @@
                         <input data-target="project.star"
                                data-action="change->project#changeStar"
                                type="checkbox" class="is-filter-tag"
-                               {{#ProjectUser.star}}checked{{/ProjectUser.star}}>
+                               {{#IsProjectStarred project}}checked{{/IsProjectStarred}}>
                         <span class="is-checked tooltip icon is-small" data-tooltip="Favorite">{{>ic-star}}</span>
                         <span class="is-unchecked tooltip icon is-small" data-tooltip="Favorite">{{>ic-star_border}}</span>
                     </label>
@@ -98,6 +98,12 @@
         </div>
     </div>
 </div>
+
+{{#GetChildProjects project as child}}
+
+<span>{{GetProjectName child.project}}</span>
+
+{{/GetChildProjects}}
 
 {{/content}}
 {{/layout}}

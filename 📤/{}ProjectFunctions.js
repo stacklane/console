@@ -1,6 +1,7 @@
 
 import {Source} from '🔌';
 import {ProjectUser} from '📦';
+import {Me} from '👤';
 
 /**
  * @param project - May be a model link or actual model.
@@ -41,6 +42,30 @@ let GetProjectUserDetails = (v)=>{
         name: GetProjectName(v.project()),
         star: v.star
     });
-}
+};
 
-export {GetProjectName, GetProjectTags, GetProjectUserDetails}
+let IsProjectStarred = (project)=>{
+    return project(()=>ProjectUser.me().get()).star;
+};
+
+let GetChildProjects = (project)=>{
+    return ProjectUser.user(Me);
+};
+
+//let IsProjectNested = (project)=>{
+//    return project(()=>ProjectUser.me().get()).parent.linked();
+//};
+
+let GetProjectHome = (project)=>{
+    let pu = project(()=>ProjectUser.me().get());
+    if (pu.parent.linked()){
+        return `/projects/${pu.parent.id}/`;
+    } else {
+        return `/projects/${project.id}/`;
+    }
+};
+
+export {
+    GetProjectName, GetProjectTags, GetProjectUserDetails,
+    IsProjectStarred, /*IsProjectNested,*/ GetChildProjects, GetProjectHome
+};
