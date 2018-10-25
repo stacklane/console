@@ -56,10 +56,11 @@
             var thiz = this;
             var submitting = true;
             var stripeController;
+            var isLink = event.currentTarget.tagName == 'A';
 
             thiz._resetValidation();
 
-            if (thiz.isAjax()) {
+            if (thiz.isAjax() || isLink) {
                 event.preventDefault();
                 //event.stopPropagation();
             }
@@ -100,18 +101,26 @@
             }
 
             if (submitting){
-                var formData = new FormData(thiz.element); // Must be constructed before disabling form.
-
-                thiz.element.classList.add(SUBMITTED);
-                thiz.disable();
-                //thiz._notify(event.currentTarget);
-
-                var ajaxSubmit = function() { if (thiz.isAjax()) thiz._submitAjax(formData); };
-
-                if (stripeController){
-                    stripeController.tokenize(ajaxSubmit, function(){thiz._stayAfterSubmit()}, formData);
+                if (isLink && !thiz.isAjax()){
+                    thiz.element.submit();
                 } else {
-                    ajaxSubmit();
+                    var formData = new FormData(thiz.element); // Must be constructed before disabling form.
+
+                    thiz.element.classList.add(SUBMITTED);
+                    thiz.disable();
+                    //thiz._notify(event.currentTarget);
+
+                    var ajaxSubmit = function () {
+                        if (thiz.isAjax()) thiz._submitAjax(formData);
+                    };
+
+                    if (stripeController) {
+                        stripeController.tokenize(ajaxSubmit, function () {
+                            thiz._stayAfterSubmit()
+                        }, formData);
+                    } else {
+                        ajaxSubmit();
+                    }
                 }
             }
         }
