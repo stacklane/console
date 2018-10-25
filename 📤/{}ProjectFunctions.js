@@ -49,7 +49,7 @@ let IsProjectStarred = (project)=>{
 };
 
 let GetChildProjects = (project)=>{
-    return ProjectUser.user(Me);
+    return ProjectUser.user(Me).parent(project).ancestor();
 };
 
 //let IsProjectNested = (project)=>{

@@ -17,7 +17,7 @@ ThemeProperties.forEach((p)=>{
         if (value) {
             current[p.name] = value;
         } else {
-            current[p.name] = null;
+            delete current[p.name];
         }
     }
 });
