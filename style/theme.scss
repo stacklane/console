@@ -157,31 +157,6 @@ main{
 
 
 /**
- * main > .is-capped -- is pulled up to be snug with <main>
- */
-//main > .is-capped /*:first-child*/{
- // margin-top: -1rem;
- // border-top: none;
- // border-top-left-radius: 0px;
- // border-top-right-radius: 0px;
-//}
-
-
-/**
- * For SVG burger
-
-@include mobile {
-  .navbar-burger {
-    display: flex;
-    align-items: center;
-    height: auto;
-    width: auto;
-    margin-left: 0;
-  }
-}*/
-
-
-/**
  * .fade
  * .fade.show
  *
