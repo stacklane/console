@@ -1,0 +1,13 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/_nav/ as nav }}
+
+{{% import {project} from '🔗' }}
+{{% import {GetProjectName, IsProjectStarred, GetChildProjects} from '📤' }}
+
+{{< nav-text}}
+{{$label}}
+<span class="icon"><svg width="24" height="24" data-controller="identicon" data-value="{{project.id}}"></svg></span>
+<span>&nbsp;</span>
+<span class="tooltip is-tooltip-bottom is-nav-title" data-tooltip="{{project.source.short}}{{#project.source.branch}}#{{project.source.branch}}{{/project.source.branch}}">{{GetProjectName project}}</span>
+{{/label}}
+{{/ nav-text}}

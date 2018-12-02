@@ -1,0 +1,41 @@
+<!--TEMPLATE mustache-->
+{{% import {project} from '🔗' }}
+{{% import {GetProjectName, GetProjectHome} from '📤' }}
+{{% svg /_icons/ as ic }}
+
+<li>
+    <a href="/projects/{{project.id}}/test/">
+        <span class="icon is-small is-icon-ui">{{>ic-web}}</span>
+        <span>Test</span>
+    </a>
+</li>
+<li>
+    <a href="/projects/{{project.id}}/keys/">
+        <span class="icon is-small is-icon-ui">{{>ic-key}}</span>
+        <span>Keys</span>
+    </a>
+</li>
+<li>
+    <a href="/projects/{{project.id}}/theme/">
+        <span class="icon is-small is-icon-ui">{{>ic-palette}}</span>
+        <span>Theme</span>
+    </a>
+</li>
+<li>
+    <a href="/projects/{{project.id}}/domain/">
+        <span class="icon is-small is-icon-ui">{{>ic-domain}}</span>
+        <span>Domain</span>
+    </a>
+</li>
+<li>
+    <a href="/projects/{{project.id}}/account/start" data-turbolinks="false"> <!-- Disable Turbolinks because of redirection permutations -->
+        <span class="icon is-small is-icon-ui">{{>ic-credit_card}}</span>
+        <span>Billing</span>
+    </a>
+</li>
+<li>
+    <a href="/projects/{{project.id}}/settings/">
+        <span class="icon is-small is-icon-ui">{{>ic-settings}}</span>
+        <span>Settings</span>
+    </a>
+</li>

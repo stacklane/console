@@ -6,13 +6,13 @@
 /**
  * Custom
  */
-//$border-radius: .25rem; use radius-X from bulma instead
-//$border-radius-lg: .3rem; use radius-X from bulma instead
-//$border-radius-sm: .2rem; use radius-X from bulma instead
 
-$shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
-$shadow:                  0 .5rem 1rem rgba($black, .15) !default;
-$shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+$shadow-sm: 0 .125rem .25rem rgba($black, .075) !default;
+$shadow: 0 .5rem 1rem rgba($black, .15) !default;
+$shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
+
+$shadow-for-bg: 0 7px 14px 0 rgba(59,65,94, 0.1), 0 3px 6px 0 rgba(0, 0, 0, .07) !default;
+$shadow-for-bg-hover: $shadow;
 
 $zindex-sticky: 1000;
 
@@ -20,16 +20,23 @@ $zindex-sticky: 1000;
 /**
  * Overrides
  */
+$navbar-breakpoint: 0px;
+
 $family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
 $input-border-color: $grey-lighter;
 
-$body-background-color: rgb(245,245,245);
-$body-color: #212529; //$gray-900;
-$body-size: 1rem; // // Assumes the browser default, typically `16px`
+$body-background-color: #e3e8ee;
+$body-color: #4e566d; //#212529; //$gray-900;
+$body-size: 15px; //14px; //1rem; // // Assumes the browser default, typically `16px`
+$body-line-height: normal;
+$body-weight: $weight-normal;
 
-$card-shadow: $shadow-sm;
-$card-shadow-hover: $shadow;
+$link: #586ada;
+$link-hover: #2b2d50;
+
+$card-shadow: $shadow-for-bg;
+$card-shadow-hover: $shadow-for-bg-hover;
 $card-color: $text !default;
 $card-background-color: $white !default;
 $card-radius: $radius;
@@ -37,7 +44,7 @@ $card-radius: $radius;
 $tag-radius: $radius-small;
 
 $box-radius: $radius;
-$box-shadow: $shadow-sm;
+$box-shadow: $shadow-for-bg;
 
 /*
  * Use bootstrap breakpoints

@@ -38,6 +38,10 @@
             tab.setAttribute('aria-selected', 'true');
             var pane = document.getElementById(paneId);
             pane.classList.toggle(ACTIVE, true);
+
+            if (this.data.get('remember')){
+                localStorage.setItem('tabs-remember-' + this.data.get('remember'), tab.id);
+            }
         }
         connect(){
             if (!this.element.nextElementSibling.classList.contains('tab-content')){
@@ -70,6 +74,15 @@
                     e.stopPropagation();
                     e.preventDefault();
                 });
+            }
+
+            if (this.data.get('remember')){
+                var value = localStorage.getItem('tabs-remember-' + this.data.get('remember'));
+                var tab = document.getElementById(value);
+                if (tab){ // Tab may have been renamed or deleted
+                    this._select(tab);
+                    return;
+                } // Otherwise fall through
             }
 
             if (activeIndex == -1) {

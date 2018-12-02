@@ -3,12 +3,12 @@
 {{% import {project} from '🔗' }}
 {{% import {GetProjectName, GetProjectHome} from '📤' }}
 
-{{< nav-link-prev}}
+{{< nav-link-prev-touch}}
 {{$path}}{{GetProjectHome project}}{{/path}}
-{{/ nav-link-prev}}
+{{/ nav-link-prev-touch}}
 
-{{< nav-text}}
+{{< nav-text-touch}}
 {{$label}}
 <span class="tooltip is-tooltip-bottom" data-tooltip="{{project.source.short}}{{#project.source.branch}}#{{project.source.branch}}{{/project.source.branch}}">{{GetProjectName project}}</span>
 {{/label}}
-{{/ nav-text}}
+{{/ nav-text-touch}}

@@ -48,6 +48,28 @@
 
 ////////////
 
+$max-ui-width: 1200px;
+
+$main-padding-top: .5rem;
+$main-padding-side: .75rem;
+
+$nav-text-color: #2b2d50;
+$nav-active-color: $link;
+
+$icon-active-color: $link; // rgb(105,114,2229);
+$icon-active-color-accent: rgb(146,186,248);
+
+a{
+  font-weight: 500;
+}
+
+header, main{
+  max-width: $max-ui-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 /**
  * header
  */
@@ -56,20 +78,58 @@ header {
   position: sticky;
   top: 0;
   z-index: $zindex-sticky;
+  color: $nav-text-color;
 
   .navbar{
-    box-shadow: $shadow;
+    .is-nav-title{
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    &.is-transparent{
+      background: transparent;
+      background: $body-background-color; // same, so that the header doesn't appear transparent when scrolling with 'sticky'
+    }
+
+    padding-top: 0px;
+    padding-left: $main-padding-side - .5rem;
+    padding-right: $main-padding-side - .5rem;
+
+    @include desktop {
+      padding-top: $main-padding-top;
+      padding-left: ($main-padding-side * 2) - .5rem;
+      padding-right: ($main-padding-side * 2) - .5rem;
+    }
+
+    .navbar-item.is-special{
+      box-shadow: $shadow-for-bg;
+      background: white;
+      height: 32px;
+      width: 32px;
+      margin-top: .5rem;
+      border-radius: $radius-rounded;
+
+      &:hover{
+        background: $grey-lighter;
+        box-shadow: $shadow-for-bg-hover;
+      }
+    }
+
+    .navbar-brand .is-special{
+      margin-left: 1px; // Needs more on the left
+    }
 
     /**
      * Provide same svg 'fill' as text 'color'
      * Meaning: we want svg's to have same color as the text.
-     */
+
     @each $name, $pair in $colors {
       $color-invert: nth($pair, 2);
       &.is-#{$name} {
         fill: $color-invert !important;
       }
     }
+     */
 
     /**
      * <span class='icon'>...</span>
@@ -87,17 +147,38 @@ header {
  * main
  */
 main{
-  padding-top: 1rem;
+  padding: $main-padding-top $main-padding-side $main-padding-side;
 }
+@include desktop {
+  main {
+    padding: $main-padding-top ($main-padding-side * 2) ($main-padding-side * 2);
+  }
+}
+
+
 /**
  * main > .is-capped -- is pulled up to be snug with <main>
  */
-main > .is-capped /*:first-child*/{
-  margin-top: -1rem;
-  border-top: none;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
+//main > .is-capped /*:first-child*/{
+ // margin-top: -1rem;
+ // border-top: none;
+ // border-top-left-radius: 0px;
+ // border-top-right-radius: 0px;
+//}
+
+
+/**
+ * For SVG burger
+
+@include mobile {
+  .navbar-burger {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: auto;
+    margin-left: 0;
+  }
+}*/
 
 
 /**
@@ -145,6 +226,36 @@ $transition-fade:  opacity .15s linear !default;
 }
 
 /**
+ * Icons
+ */
+.icon.is-icon-ui {
+  svg {
+    fill: rgb(67,71,109);
+
+    .icon-accent {
+      fill: rgb(172,183,195);
+      opacity: 1; // Material two tone defaults opacity to .3
+    }
+  }
+}
+a:hover{
+  .is-icon-ui{
+    svg{
+      .icon-accent{
+        fill: rgb(139,152,168);
+      }
+    }
+  }
+}
+.is-active .icon svg{
+  fill: $icon-active-color;
+
+  .icon-accent {
+    fill: $icon-active-color-accent;
+  }
+}
+
+/**
  * .icon > svg .has-text-X variations
  *
  * Adapted from bulma logic for .has-text-X
@@ -164,6 +275,7 @@ $transition-fade:  opacity .15s linear !default;
 a:hover .has-text-link.icon > svg{
   fill: $link-hover !important;
 }
+
 
 /**
  * Make an input look like surrounding text
@@ -287,13 +399,17 @@ $proposed-transition: opacity .2s ease-in-out;
 /**
  * .box.is-spacious
  *
- * Typically for a full page .box, usually with .is-capped
+ * Typically for a full page ".box"
  */
 .box.is-spacious{
-  /*position: relative;*/
-  padding: 32px;
+  padding: 30px;
 }
 @include tablet(){
+  .box.is-spacious {
+    padding: 60px 30px;
+  }
+}
+@include desktop(){
   .box.is-spacious {
     padding: 80px 40px;
   }
@@ -341,4 +457,90 @@ $proposed-transition: opacity .2s ease-in-out;
   flex-grow: 1;
   flex-shrink: 1;
   text-align: left;
+}
+
+/**
+ * Secondary Nav
+ *
+ * A ".column" which gets its padding/spacing from contained LI's.
+ * If there are no LI's, then the sidebar takes up no space.
+ */
+#sidebar{
+  padding:0;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  li{
+    padding: $column-gap 0px;
+  }
+
+  a{
+    font-size: 14px;
+    font-weight: 400;
+    color: $nav-text-color;
+
+    margin-right: 6px; // On mobile these are horizontal, so give them space between
+
+    /* similar to level-item, lets icon+text line up nicely */
+    align-items: center;
+    display: flex;
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .icon{
+      margin-right: 2px;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &.is-active{
+      font-weight: 700;
+      color: $nav-active-color;
+    }
+  }
+}
+
+@include tablet(){
+  #sidebar{
+    padding: $column-gap 0 0;
+    flex: none; // == is-narrow-tablet -- disable flex
+
+    ul{
+      display: block;
+      justify-content: normal;
+      align-items: normal;
+    }
+
+    li{
+      padding: 4px ($column-gap * 2) 4px $column-gap;
+    }
+
+    a{
+      margin: 0px;
+
+      .icon{
+        margin-right: 6px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+@include desktop(){
+  #sidebar{
+    li{
+      min-width: 200px;
+    }
+    a{
+      .icon{
+        margin-right: 12px;
+      }
+    }
+  }
 }

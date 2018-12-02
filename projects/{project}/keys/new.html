@@ -35,10 +35,10 @@
 </div>
 
 <div class="box">
-    <div class="tabs" data-controller="tabs">
+    <div class="tabs {{#🎨.tabs-boxed}}is-boxed{{/🎨.tabs-boxed}}" data-controller="tabs">
         <ul>
-            <li class="is-active"><a id="api-tab" href="#api">Third Party API</a></li>
-            <li><a id="user-tab" href="#user">Identity Provider</a></li>
+            <li class="is-active"><a id="api-tab" href="#api"><span class="icon">{{>ic-extension}}</span>&nbsp;<span>Third Party API</span></a></li>
+            <li><a id="user-tab" href="#user"><span class="icon">{{>ic-verified_user}}</span>&nbsp;<span>Identity Provider</span></a></li>
         </ul>
     </div>
 
@@ -74,6 +74,7 @@
                 </div>
             </form>
         </div>
+
         <div class="tab-pane" id="user" role="tabpanel" aria-labelledby="user-tab">
             <div class="message is-info">
                 <div class="message-body">

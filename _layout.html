@@ -51,44 +51,33 @@
 
 <body>
 <header>
-    <nav class="navbar is-dark" label="dropdown navigation">
-        <div class="container">
-            <!--
-              Persistent on mobile size.
-             -->
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+        <!--<div class="container">-->
+
             <div class="navbar-brand">
-                <a href="/" class="navbar-item"><span class="icon has-text-white">{{>ic-dashboard}}</span></a>
-                {{$nav}}{{/nav}}
+                <a href="/" class="navbar-item is-special"><span class="icon is-icon-ui">{{>ic-dashboard}}</span></a>
             </div>
 
-            <!--
-              Hides on mobile size.
-              -->
             <div class="navbar-menu">
                 <div class="navbar-start">
-
+                    {{$nav}}{{/nav}}
                 </div>
 
                 <div class="navbar-end">
                     <!-- TODO status: use stimulus to update color class + data-tooltip based on actual status check -->
                     <a href="https://stacklane.com/status/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Fully Operational"><span class="icon is-small has-text-success">{{>ic-adjust}}</span></a>
 
-                    <a href="https://stacklane.com/docs/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Documentation"><span class="icon has-text-white">{{>ic-books}}</span></a>
+                    <a href="https://stacklane.com/docs/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Documentation"><span class="icon is-icon-ui">{{>ic-books}}</span></a>
 
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <div class="navbar-link">
-                            <span class="icon">
-                            <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                                <path d="M0 0h24v24H0z" fill="none"/>
-                            </svg>
-                            </span>
-                        </div>
+                    <div class="navbar-item has-dropdown"> <!--has-dropdown is-hoverable-->
+                        <a class="navbar-link is-arrowless">
+                            <span class="icon is-icon-ui">{{>ic-account_circle}}</span>
+                        </a>
 
                         <div class="navbar-dropdown is-boxed is-right">
-                            <span class="navbar-item">
-                                {{🎨.logged-in-as Me.name}}
-                            </span>
+                                <span class="navbar-item">
+                                    {{🎨.logged-in-as Me.name}}
+                                </span>
                             <hr class="navbar-divider">
                             <form method="post" data-controller="form" action="/__/auth/provider/logout">
                                 <a href="#" class="navbar-item" data-action="form#submit">Sign Out</a>
@@ -97,13 +86,26 @@
                     </div>
                 </div>
             </div>
-        </div>
+       <!-- </div> -->
     </nav>
 </header>
 
-<main role="main" class="container">
-{{$content}}Content{{/content}}
+<main role="main" class="">
+
+<div class="columns">
+    <div id="sidebar" class="column">
+        <ul>
+        {{$side}}{{/side}}
+        </ul>
+    </div>
+
+    <div class="column">
+        {{$content}}Content{{/content}}
+    </div>
+</div>
+
 </main>
+
 
 </body>
 </html>
