@@ -6,13 +6,18 @@
 {{% import {project} from '🔗' }}
 {{% import {AccountUser} from '📦' }}
 
+{{% partial /projects/{project}/_project-side }}
+{{% partial /projects/{project}/_project-nav }}
+
 {{< layout}}
 
 {{$nav}}
-{{< nav-link-prev}}
-{{$path}}/projects/{{project.id}}/{{/path}}
-{{/ nav-link-prev}}
+{{> project-nav}}
 {{/nav}}
+
+{{$side}}
+{{> project-side}}
+{{/side}}
 
 {{$content}}
 

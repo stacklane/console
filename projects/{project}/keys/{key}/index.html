@@ -6,15 +6,18 @@
 {{% import {project,key} from '🔗' }}
 {{% import {KeyIsUserType,KeyIsEnabled} from '📤' }}
 
+{{% partial /projects/{project}/_project-side }}
+{{% partial /projects/{project}/_project-nav }}
+
 {{< layout}}
 
 {{$nav}}
-
-{{< nav-link-prev}}
-{{$path}}/projects/{{project.id}}/keys/{{/path}}
-{{/ nav-link-prev}}
-
+{{> project-nav}}
 {{/nav}}
+
+{{$side}}
+{{> project-side}}
+{{/side}}
 
 {{$content}}
 
