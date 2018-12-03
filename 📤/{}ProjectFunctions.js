@@ -56,6 +56,7 @@ let GetChildProjects = (project)=>{
 //    return project(()=>ProjectUser.me().get()).parent.linked();
 //};
 
+/*
 let GetProjectHome = (project)=>{
     let pu = project(()=>ProjectUser.me().get());
     if (pu.parent.linked()){
@@ -63,9 +64,9 @@ let GetProjectHome = (project)=>{
     } else {
         return `/projects/${project.id}/`;
     }
-};
+};*/
 
 export {
     GetProjectName, GetProjectTags, GetProjectUserDetails,
-    IsProjectStarred, /*IsProjectNested,*/ GetChildProjects, GetProjectHome
+    IsProjectStarred, GetChildProjects   /*IsProjectNested,*/  /*, GetProjectHome*/
 };
