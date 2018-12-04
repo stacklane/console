@@ -1,0 +1,36 @@
+<!--TEMPLATE mustache-->
+{{% import {project} from '🔗' }}
+{{% svg /_icons/ as ic }}
+{{% import {HasCategories, HasStyle, HasMessages, HasOptions} from '📤'}}
+
+{{#HasCategories}}
+<nav data-controller="nav">
+<ul>
+<li></li> <!-- spacer -->
+{{#HasStyle}}
+<li>
+    <a href="/projects/{{project.id}}/properties/style/">
+        <span class="icon is-small is-icon-ui">{{>ic-palette}}</span>
+        <span>Style</span>
+    </a>
+</li>
+{{/HasStyle}}
+{{#HasMessages}}
+<li>
+    <a href="/projects/{{project.id}}/properties/messages/">
+        <span class="icon is-small is-icon-ui">{{>ic-message}}</span>
+        <span>Messages</span>
+    </a>
+</li>
+{{/HasMessages}}
+{{#HasOptions}}
+<li>
+    <a href="/projects/{{project.id}}/properties/options/">
+        <span class="icon is-small is-icon-ui">{{>ic-toggle_on}}</span>
+        <span>Options</span>
+    </a>
+</li>
+{{/HasOptions}}
+</ul>
+</nav>
+{{/HasCategories}}

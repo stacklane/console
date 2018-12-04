@@ -1,15 +1,15 @@
 <!--TEMPLATE mustache-->
 
 {{% import {project} from '🔗' }}
-{{% import {ThemeProperties} from '📤' }}
+{{% import {SelectedProperties, HasSelectedProperties} from '📤' }}
 
-{{^project.get.source.theme.empty}}
-
+{{#HasSelectedProperties}}
+<div class="box">
 <form method="post" action="update"
       data-controller="form"
       data-validate="true" data-ajax="true">
 
-    {{#ThemeProperties as prop}}
+    {{#SelectedProperties as prop}}
 
     <div class="field" >
         <label class="label">{{prop.title}}</label>
@@ -45,7 +45,7 @@
         -->
     </div>
 
-    {{/ThemeProperties}}
+    {{/SelectedProperties}}
 
     <hr>
 
@@ -53,16 +53,15 @@
         <button class="button is-primary" type="submit">Update</button>
     </p>
 </form>
+</div>
+{{/HasSelectedProperties}}
 
-{{/project.get.source.theme.empty}}
-
-
-{{#project.get.source.theme.empty}}
+{{^HasSelectedProperties}}
 <div class="box">
     <div class="message is-info">
         <div class="message-body">
-            This project's source code does not define available theme properties (/🎨.scss).
+            No properties found for this category.
         </div>
     </div>
 </div>
-{{/project.get.source.theme.empty}}
+{{/HasSelectedProperties}}

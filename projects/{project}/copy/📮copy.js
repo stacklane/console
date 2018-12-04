@@ -13,7 +13,7 @@ if (!branch) newBranch = current.source.branch;
 
 let projectCopy = new Project()
     .source(current.source.withBranch(newBranch))
-    .theme(current.theme);
+    .properties(current.properties);
 
 projectCopy.name = projectCopy.source.name;
 

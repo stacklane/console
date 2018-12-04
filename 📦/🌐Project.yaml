@@ -20,6 +20,6 @@ data:
   init: true
   optional: false
 
-theme:
+properties:
   type: map
   optional: true

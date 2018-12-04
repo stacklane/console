@@ -14,7 +14,7 @@ if (Domain.verify(instanceLive.mapping.domain)){
             .source(instanceLive.source)
             .namespace(instanceLive.data)
             .www(instanceLive.mapping.www)
-            .theme(instanceLive.theme)
+            .theme(instanceLive.properties)
             .keys(project)
             .register();
 

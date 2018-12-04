@@ -1,5 +1,10 @@
+/*********************
+ * @category messages
+ *********************/
 
-
+/**
+ * @title Title
+ */
 $name: 'Stacklane Console';
 
 $login-with: 'Log In With {0}';
@@ -13,10 +18,25 @@ $logged-in-as: 'Logged in as {0}';
 $action-next: 'Next';
 $submitting: 'Submitting';
 
+/*********************
+ * @category options
+ *********************/
+
+/**
+ * @title Boxed Tabs
+ */
 $tabs-boxed: true;
 
 /**
  * Stripe
  */
+
+/**
+ * @title Stripe Plan ID
+ */
 $stripe-plan-id: '';
+
+/**
+ * @title Stripe Public Key
+ */
 $stripe-pk: '';

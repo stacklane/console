@@ -41,6 +41,7 @@
     <script defer src="/js/app/filter.js"></script>
     <script defer src="/js/app/reflect-input-color.js"></script>
     <script defer src="/js/app/stripe-card.js"></script>
+    <script defer src="/js/app/nav.js"></script>
 
     <script defer src="/js/project.js"></script>
     <script defer src="/js/builder.js"></script>
@@ -52,55 +53,51 @@
 <body>
 <header>
     <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-        <!--<div class="container">-->
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item is-special"><span class="icon is-icon-ui">{{>ic-dashboard}}</span></a>
+        </div>
 
-            <div class="navbar-brand">
-                <a href="/" class="navbar-item is-special"><span class="icon is-icon-ui">{{>ic-dashboard}}</span></a>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                {{$nav}}{{/nav}}
             </div>
 
-            <div class="navbar-menu">
-                <div class="navbar-start">
-                    {{$nav}}{{/nav}}
-                </div>
+            <div class="navbar-end">
+                <!-- TODO status: use stimulus to update color class + data-tooltip based on actual status check -->
+                <a href="https://stacklane.com/status/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Fully Operational"><span class="icon is-small has-text-success">{{>ic-adjust}}</span></a>
 
-                <div class="navbar-end">
-                    <!-- TODO status: use stimulus to update color class + data-tooltip based on actual status check -->
-                    <a href="https://stacklane.com/status/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Fully Operational"><span class="icon is-small has-text-success">{{>ic-adjust}}</span></a>
+                <a href="https://stacklane.com/docs/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Documentation"><span class="icon is-icon-ui">{{>ic-books}}</span></a>
 
-                    <a href="https://stacklane.com/docs/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Documentation"><span class="icon is-icon-ui">{{>ic-books}}</span></a>
+                <div class="navbar-item has-dropdown"> <!--has-dropdown is-hoverable-->
+                    <a class="navbar-link is-arrowless">
+                        <span class="icon is-icon-ui">{{>ic-account_circle}}</span>
+                    </a>
 
-                    <div class="navbar-item has-dropdown"> <!--has-dropdown is-hoverable-->
-                        <a class="navbar-link is-arrowless">
-                            <span class="icon is-icon-ui">{{>ic-account_circle}}</span>
-                        </a>
-
-                        <div class="navbar-dropdown is-boxed is-right">
-                                <span class="navbar-item">
-                                    {{🎨.logged-in-as Me.name}}
-                                </span>
-                            <hr class="navbar-divider">
-                            <form method="post" data-controller="form" action="/__/auth/provider/logout">
-                                <a href="#" class="navbar-item" data-action="form#submit">Sign Out</a>
-                            </form>
-                        </div>
+                    <div class="navbar-dropdown is-boxed is-right">
+                            <span class="navbar-item">
+                                {{🎨.logged-in-as Me.name}}
+                            </span>
+                        <hr class="navbar-divider">
+                        <form method="post" data-controller="form" action="/__/auth/provider/logout">
+                            <a href="#" class="navbar-item" data-action="form#submit">Sign Out</a>
+                        </form>
                     </div>
                 </div>
             </div>
-       <!-- </div> -->
+        </div>
     </nav>
 </header>
 <main role="main">
 <div class="columns">
     <div id="sidebar" class="column">
-        <ul>
+        <div id="sidebar-sticky">
         {{$side}}{{/side}}
-        </ul>
-    </div>
-
-    <div class="column">
-        {{$content}}Content{{/content}}
-    </div>
-</div>
-</main>
-</body>
-</html>
+        </div>
+     </div>
+     <div class="column">
+         {{$content}}Content{{/content}}
+     </div>
+ </div>
+ </main>
+ </body>
+ </html>

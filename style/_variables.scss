@@ -11,11 +11,11 @@ $shadow-sm: 0 .125rem .25rem rgba($black, .075) !default;
 $shadow: 0 .5rem 1rem rgba($black, .15) !default;
 $shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
 
+$shadow-for-bg-small: 0 2px 5px 0 rgba(59,65,94, 0.1), 0 1px 1px 0 rgba(0, 0, 0, .07) !default;
 $shadow-for-bg: 0 7px 14px 0 rgba(59,65,94, 0.1), 0 3px 6px 0 rgba(0, 0, 0, .07) !default;
-$shadow-for-bg-hover: $shadow;
+$shadow-for-bg-large: 0 15px 35px 0 rgba(59,65,94, 0.1), 0 5px 15px 0 rgba(0, 0, 0, .07) !default;
 
 $zindex-sticky: 1000;
-
 
 /**
  * Overrides
@@ -36,7 +36,7 @@ $link: #586ada;
 $link-hover: #2b2d50;
 
 $card-shadow: $shadow-for-bg;
-$card-shadow-hover: $shadow-for-bg-hover;
+$card-shadow-hover: $shadow-for-bg-large;
 $card-color: $text !default;
 $card-background-color: $white !default;
 $card-radius: $radius;

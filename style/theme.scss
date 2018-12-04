@@ -56,17 +56,19 @@ $main-padding-side: .75rem;
 $nav-text-color: #2b2d50;
 $nav-active-color: $link;
 
-$icon-active-color: $link; // rgb(105,114,2229);
+$icon-active-color: $link;
 $icon-active-color-accent: rgb(146,186,248);
 
 a{
   font-weight: 500;
 }
 
-header, main{
-  max-width: $max-ui-width;
-  margin-left: auto;
-  margin-right: auto;
+@include desktop() {
+  header, main {
+    max-width: $max-ui-width;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 
@@ -102,7 +104,7 @@ header {
     }
 
     .navbar-item.is-special{
-      box-shadow: $shadow-for-bg;
+      box-shadow: $shadow-for-bg-small;
       background: white;
       height: 32px;
       width: 32px;
@@ -110,8 +112,8 @@ header {
       border-radius: $radius-rounded;
 
       &:hover{
-        background: $grey-lighter;
-        box-shadow: $shadow-for-bg-hover;
+        background: white;
+        box-shadow: $shadow-for-bg;
       }
     }
 
@@ -481,6 +483,12 @@ $proposed-transition: opacity .2s ease-in-out;
 }
 
 @include tablet(){
+  #sidebar-sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: $navbar-height + $navbar-padding-vertical;
+  }
+
   #sidebar{
     padding: $column-gap 0 0;
     flex: none; // == is-narrow-tablet -- disable flex

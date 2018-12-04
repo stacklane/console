@@ -4,6 +4,10 @@
 
 $get-loader-size: 2em;
 
+div[data-controller="get"].is-loading-quiet{
+  display:none;
+}
+
 div[data-controller="get"].is-loading{
   color: transparent !important;
   pointer-events: none;

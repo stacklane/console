@@ -3,6 +3,16 @@ import {Source} from '🔌';
 import {ProjectUser} from '📦';
 import {Me} from '👤';
 
+/*
+let GetProjectHome = (project)=>{
+    let pu = project(()=>ProjectUser.me().get());
+    if (pu.parent.linked()){
+        return `/projects/${pu.parent.id}/`;
+    } else {
+        return `/projects/${project.id}/`;
+    }
+};*/
+
 /**
  * @param project - May be a model link or actual model.
  */
@@ -56,15 +66,6 @@ let GetChildProjects = (project)=>{
 //    return project(()=>ProjectUser.me().get()).parent.linked();
 //};
 
-/*
-let GetProjectHome = (project)=>{
-    let pu = project(()=>ProjectUser.me().get());
-    if (pu.parent.linked()){
-        return `/projects/${pu.parent.id}/`;
-    } else {
-        return `/projects/${project.id}/`;
-    }
-};*/
 
 export {
     GetProjectName, GetProjectTags, GetProjectUserDetails,

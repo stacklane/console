@@ -1,11 +1,11 @@
 
-import {ThemeProperties} from '📤';
+import {SelectedProperties} from '📤';
 import {project} from '🔗';
 import {Form} from 'form{}';
 
-let current = project.get().theme;
+let current = project.get().properties;
 
-ThemeProperties.forEach((p)=>{
+SelectedProperties.forEach((p)=>{
     if (p.type == 'boolean'){
         let currentValue = p.checked;
         let submittedValue = (Form[p.name] == 'on');
@@ -22,4 +22,4 @@ ThemeProperties.forEach((p)=>{
     }
 });
 
-({redirect: `/projects/${project.id}/`, success: `Theme settings updated.`});
+({redirect: `/projects/${project.id}/`, success: `Properties updated.`});
