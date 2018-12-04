@@ -3,6 +3,8 @@
 {{% partial /_layout }}
 {{% svg /_icons/ as ic }}
 
+{{% json /projects/_examples as examples}}
+
 {{< layout}}
 
 {{$nav}}
@@ -30,12 +32,45 @@
 
     <div class="tabs {{#🎨.tabs-boxed}}is-boxed{{/🎨.tabs-boxed}}" data-controller="tabs" data-tabs-remember="repoType">
         <ul>
+            <li><a id="example-tab" href="#example"><span class="icon">{{>ic-library_add}}</span>&nbsp;<span>Examples</span></a></li>
             <li><a id="bitbucket-tab" href="#bitbucket"><span class="icon">{{>ic-logo_bitbucket}}</span>&nbsp;<span>Bitbucket</span></a></li>
             <li><a id="github-tab" href="#github"><span class="icon">{{>ic-logo_github}}</span>&nbsp;<span>GitHub</span></a></li>
         </ul>
     </div>
 
     <div class="tab-content">
+        <div class="tab-pane" id="example" aria-labelledby="example-tab">
+            <div class="message is-info">
+                <div class="message-body">
+                    Quickly get started with one of our open source examples.
+                </div>
+            </div>
+
+            <div class="columns">
+                {{#examples as example}}
+                <div class="column is-half">
+                    <form method="post" action="new" data-controller="form" data-ajax="true">
+                        <input type="hidden" name="url" value="{{src}}">
+                        <div class="box media">
+                            <div class="media-left">
+                                <button class="button is-primary" type="submit">Use</button>
+                            </div>
+                            <div class="media-content">
+                                <div>
+                                    <p>
+                                        <strong>{{title}}</strong> <small></small>
+                                        <br>
+                                        {{desc}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{/examples}}
+            </div>
+        </div>
+
         <div class="tab-pane" id="bitbucket" aria-labelledby="bitbucket-tab">
             <div class="message is-info">
                 <div class="message-body">

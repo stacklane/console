@@ -393,6 +393,13 @@ $proposed-transition: opacity .2s ease-in-out;
 }
 
 /**
+ * Nested .box (non-root)
+ */
+.box .box{
+  box-shadow: $shadow-for-bg-small; // looks better than $shadow-X
+}
+
+/**
  * .box-card (a variation of thoughts from .box and .media)
  *
  * Designed specifically to have .box-card-content be a link,
@@ -405,7 +412,7 @@ $proposed-transition: opacity .2s ease-in-out;
   border-radius: $box-radius;
   box-shadow: $box-shadow;
   color: $box-color;
-  display: block;
+  //display: block;
   // leave padding to inner elements: padding: $box-padding;
 
   // .media

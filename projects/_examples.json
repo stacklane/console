@@ -1,0 +1,7 @@
+[
+  {
+    "title":"Image Example",
+    "desc":"Image storage, display, and upload, including a StimulusJS widget.",
+    "src":"https://github.com/stacklane-examples/image-upload.git"
+  }
+]

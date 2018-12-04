@@ -6,6 +6,8 @@
  * Auto-adds: 'role', 'aria-selected', 'aria-controls', 'data-turbolinks'
  *
  * http://accessibility.athena-ict.com/aria/examples/tabpanel2.shtml
+ *
+ * Use data-tabs-remember="[KEY]" if the last selected tab should be remembered + re-selected.
  */
 (function () {
     'use strict';
