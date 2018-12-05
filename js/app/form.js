@@ -170,6 +170,8 @@
 
         /**
          * {field:'x', error:'y'}
+         * or newer
+         * {field:'x', value:'y'}
          */
         _fieldMsg(msg){
             var inputs = this.element.getElementsByTagName('input');
@@ -177,6 +179,8 @@
                 if (msg.field == inputs[i].getAttribute('name')) {
                     if (typeof msg.error === 'string') {
                         inputs[i].setCustomValidity(msg.error);
+                    } else if (typeof msg.value === 'string') {
+                        inputs[i].setCustomValidity(msg.value);
                     } else {
                         inputs[i].setCustomValidity(msg.field);
                     }
@@ -198,17 +202,30 @@
             }
 
             if (json.redirect) {
+                var path;
+                if (typeof json.redirect === 'string'){
+                    path = json.redirect;
+                } else {
+                    path = json.redirect.path;
+                    if (json.redirect.messages) {
+                        for (var i = 0; i < json.redirect.messages.length; i++)
+                            this._handleMsg(json.redirect.messages[i]);
+                    }
+                }
+
                 var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && this.element.getAttribute('data-turbolinks') != 'false';
+
                 if (enabled) {
                     var action = this.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
-                    //var clearCache = this.element.getAttribute('data-turbolinks-clear-cache') == 'true';
-                    //if (clearCache) Turbolinks.clearCache();
+
                     var clearCache = this.element.getAttribute('data-turbolinks-clear-cache') != 'false';
                     if (clearCache) Turbolinks.clearCache();
-                    Turbolinks.visit(json.redirect, {action: (action == null ? 'replace' : action)});
+
+                    Turbolinks.visit(path, {action: (action == null ? 'replace' : action)});
                 } else {
-                    window.location.href = json.redirect;
+                    window.location.href = path;
                 }
+
                 Progress.step(); // From here waiting on 'turbolinks:request-end', which Progress already handles.
             } else {
                 this._stayAfterSubmit();

@@ -20,7 +20,7 @@
             <span class="icon is-medium">{{>ic-git_pull_request}}</span>
         </span>
 
-        <h3 class="title is-3">Create a New Project</h3>
+        <h3 class="title is-3">New Project</h3>
 
         <p>
             Projects are associated directly with a single GIT repository and
@@ -88,14 +88,14 @@
                 <div class="message-body">
                     First create and initialize a public repository at <a target="_blank" href="https://github.com">github.com</a>.
                     This is where your source code and version history will live.
-                    If you don't already have a GitHub.com account, they're completely free.
                 </div>
             </div>
 
             <div>
                 <form method="post" action="new"
                       data-controller="form"
-                      data-validate="true" data-ajax="true">
+                      data-validate="true"
+                      data-ajax="true">
 
                     <div class="field">
                         <label class="label">GitHub Repository URL</label>
@@ -106,15 +106,13 @@
                         </div>
                         <p class="help">
                             This is the URL to your GIT repository which ends in <code>.git</code>.
-                            We'll use GitHub's information for the name of your Stacklane Project, however
-                            you can always change it later.
                         </p>
                     </div>
 
                     <hr>
 
                     <p class="has-text-right">
-                        <button class="button is-primary" type="submit">Create Project</button>
+                        <button class="button is-primary" type="submit">Next</button>
                     </p>
                 </form>
             </div>

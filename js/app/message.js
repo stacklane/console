@@ -43,15 +43,30 @@
 
         if (message.info){
             txt = message.info;
-            cls = 'is-info'; // default / neutral
+            cls = 'is-info';
         } else if (message.success){
             txt = message.success;
-            cls = 'is-success'; // something occurred / action was taken
+            cls = 'is-success';
         } else if (message.error){
             txt = message.error;
             cls = 'is-danger';
         } else if (message.warn) {
             txt = message.warn;
+            cls = 'is-warning';
+        /**
+         * Message/Redirect API based
+         */
+        } else if (message.type == 'info'){
+            txt = message.value;
+            cls = 'is-info';
+        } else if (message.type == 'success'){
+            txt = message.value;
+            cls = 'is-success';
+        } else if (message.type == 'error'){
+            txt = message.value;
+            cls = 'is-error';
+        } else if (message.type == 'warning') {
+            txt = message.value;
             cls = 'is-warning';
         }
 
