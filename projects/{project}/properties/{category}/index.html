@@ -3,7 +3,7 @@
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
 
-{{% import {project} from '🔗' }}
+{{% import {project,category} from '🔗' }}
 
 {{% partial /projects/{project}/_project-side }}
 {{% partial /projects/{project}/_project-nav }}
@@ -24,13 +24,19 @@
     <div class="media">
         <div class="media-left">
             <span class="icon is-medium has-text-grey">
-                {{> ic-palette}}
+                {{#category.style}}{{> ic-palette}}{{/category.style}}
+                {{#category.messages}}{{> ic-message}}{{/category.messages}}
+                {{#category.options}}{{> ic-toggle_on}}{{/category.options}}
             </span>
         </div>
         <div class="media-content">
-            <h5 class="title is-5">Theme Settings</h5>
+            <h5 class="title is-5">
+                {{#category.style}}Style{{/category.style}}
+                {{#category.messages}}Messages{{/category.messages}}
+                {{#category.options}}Options{{/category.options}}
+            </h5>
             <p class="subtitle is-6">
-                Override default theme settings for this instance.
+                Override default properties for this instance.
             </p>
         </div>
     </div>

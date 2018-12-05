@@ -46,9 +46,9 @@
 
             // Evaluate pre-defined static + definitions:
             {
-                var pre = this.element.getElementsByClassName(FILTER_DISPLAY);
-                for (var i = 0; i < pre.length; i++) {
-                    var pre = pre[i];
+                var displays = this.element.getElementsByClassName(FILTER_DISPLAY);
+                for (var i = 0; i < displays.length; i++) {
+                    var pre = displays[i];
                     var key = pre.getAttribute(FOR);
                     var value = pre.innerHTML;
                     var position = pre.classList.contains(FIRST) ? 'first' : (pre.classList.contains(LAST) ? 'last' : 'middle');

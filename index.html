@@ -7,12 +7,28 @@
 
 {{< layout}}
 
-{{$content}}
+{{$nav}}
+<span class="navbar-item is-nav-title">Projects</span>
+{{/nav}}
 
-<div class="tabs is-hidden" data-controller="filter" data-filter-content="#projects" data-filter-empty="#empty" data-filter-watch="false">
-    <span class="is-filter-display is-first" data-for=":star"><span class="icon has-text-warning">{{> ic-star}}</span></span>
-    <span class="is-filter-display is-last" data-for="*">✱</span>
+{{$side}}
+<div class="is-hidden"
+     data-controller="filter"
+     data-filter-content="#projects"
+     data-filter-empty="#empty"
+     data-filter-watch="false">
+    <span class="is-filter-display is-first" data-for=":star">
+        <span class="icon">{{> ic-star}}</span>
+        <span>Favorites</span>
+    </span>
+    <span class="is-filter-display is-last" data-for="*">
+        <span class="icon">{{> ic-select_all}}</span>
+        <span>All Projects</span>
+    </span>
 </div>
+{{/side}}
+
+{{$content}}
 
 <div id="projects" class="columns is-multiline">
     {{#MyProjects as item}}

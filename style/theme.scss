@@ -448,6 +448,8 @@ $proposed-transition: opacity .2s ease-in-out;
  *
  * A ".column" which gets its padding/spacing from contained LI's.
  * If there are no LI's, then the sidebar takes up no space.
+ *
+ * .is-active can be on the LI or the A
  */
 #sidebar{
   padding:0;
@@ -460,6 +462,13 @@ $proposed-transition: opacity .2s ease-in-out;
 
   li{
     padding: $column-gap 0px;
+
+    &.is-active {
+      a{
+        font-weight: 700;
+        color: $nav-active-color;
+      }
+    }
   }
 
   a{
