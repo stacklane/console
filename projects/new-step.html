@@ -1,0 +1,38 @@
+<!--TEMPLATE mustache-->
+{{% partial /_partials/_nav/ as nav }}
+{{% partial /_layout }}
+{{% svg /_icons/ as ic }}
+
+{{% json /projects/_examples as examples}}
+
+{{< layout}}
+
+{{$nav}}
+<span class="navbar-item is-nav-title">New Project</span>
+{{/nav}}
+
+{{$content}}
+
+{{#Messages.data.url}}
+
+<!--
+  TODO Better message like 'Checking Repository'
+  Right now I believe there is no message, only a spinner.
+  -->
+<div class="is-loading" data-controller="get" data-get-href="/projects/new-step-fragment?url={{Messages.data.url}}">
+
+</div>
+
+{{/Messages.data.url}}
+
+{{^Messages.data.url}}
+<div class="message is-danger">
+    <div class="message-body">
+        Please <a href="/projects/new">start over</a>.
+    </div>
+</div>
+{{/Messages.data.url}}
+
+
+{{/content}}
+{{/layout}}

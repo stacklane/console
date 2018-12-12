@@ -23,8 +23,8 @@
         <h3 class="title is-3">New Project</h3>
 
         <p>
-            Projects are associated directly with a single GIT repository and
-            contain live deployments, domain mappings, and data.
+            Projects are associated with a public or private GIT repository.
+            They contain live deployments, test instances, keys, and data.
         </p>
     </div>
 
@@ -74,20 +74,55 @@
         <div class="tab-pane" id="bitbucket" aria-labelledby="bitbucket-tab">
             <div class="message is-info">
                 <div class="message-body">
-                    TODO
+                    Stacklane supports both public and private repositories.
+
+                    For public HTTPS repositories, initialize a public repository at
+                    <a target="_blank" href="https://bitbucket.org">bitbucket.org</a>
+                    with the required manifest file (🎛.yaml).
+
+                    For private SSH repositories, initialize a private repository and use its SSH URL.
+                    After creating the project you'll be able to generate an SSH key to provide Bitbucket.
                 </div>
             </div>
 
             <div>
+                <form method="post" action="new"
+                      data-controller="form"
+                      data-validate="true"
+                      data-ajax="true">
 
+                    <div class="field">
+                        <label class="label">Bitbucket Repository URL</label>
+                        <div class="control">
+                            <input id="bitbucket-url" name="url" type="text" required
+                                   class="input" placeholder="https://bitbucket.org/your/stacklane-repo.git">
+                        </div>
+                        <p class="help">
+                            The HTTPS or SSH URL to the public or private repository.
+                            Both URL types end with <code>.git</code>.
+                        </p>
+                    </div>
+
+                    <hr>
+
+                    <p class="has-text-right">
+                        <button class="button is-primary" type="submit">Next</button>
+                    </p>
+                </form>
             </div>
         </div>
 
         <div class="tab-pane" id="github" aria-labelledby="github-tab">
             <div class="message is-info">
                 <div class="message-body">
-                    First create and initialize a public repository at <a target="_blank" href="https://github.com">github.com</a>.
-                    This is where your source code and version history will live.
+                    Stacklane supports both public and private repositories.
+
+                    For public HTTPS repositories, initialize a public repository at
+                    <a target="_blank" href="https://github.com">github.com</a>
+                    with the required manifest file (🎛.yaml).
+
+                    For private SSH repositories, initialize a private repository and use its SSH URL.
+                    After creating the project you'll be able to generate an SSH key to provide GitHub.
                 </div>
             </div>
 
@@ -100,12 +135,12 @@
                     <div class="field">
                         <label class="label">GitHub Repository URL</label>
                         <div class="control">
-                            <input id="github-url" name="url" type="url" required
-                                   class="input"
-                                   placeholder="https://github.com/your/stacklane-repo.git">
+                            <input id="github-url" name="url" type="text" required
+                                   class="input" placeholder="https://github.com/your/stacklane-repo.git">
                         </div>
                         <p class="help">
-                            This is the URL to your GIT repository which ends in <code>.git</code>.
+                            The HTTPS or SSH URL to the public or private repository.
+                            Both URL types end with <code>.git</code>.
                         </p>
                     </div>
 
