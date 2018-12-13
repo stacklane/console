@@ -6,7 +6,7 @@
 
 {{% import {project} from '🔗' }}
 {{% import {Project} from '📦'}}
-{{% import {GetProjectName, IsProjectStarred, GetChildProjects} from '📤' }}
+{{% import {GetProjectName, IsProjectStarred} from '📤' }}
 
 {{% partial /projects/{project}/_project-side }}
 {{% partial /projects/{project}/_project-nav }}
@@ -28,17 +28,19 @@
      data-project-id="{{project.id}}"
     >
     <div class="media">
+
         <div class="media-left">
             <span class="icon is-large">
                 <svg width="32" height="32" data-controller="identicon" data-value="{{project.id}}"></svg>
             </span>
         </div>
+
         <div class="media-content">
             <h5 class="is-size-5 title has-text-weight-semibold"> <!-- was title is-5 -->
                 <input data-action="change->project#changeTitle" type="text" data-target="project.title"
                        class="is-display" value="{{GetProjectName project}}" placeholder="Use Default"
                      {{>util-disable-spell}}
-                >
+                    >
             </h5>
             {{#project.source.external}}
             <h6 class="subtitle">
@@ -55,6 +57,7 @@
             </h6>
             {{/project.source.external}}
         </div>
+
         <div class="media-right">
             <nav class="level is-mobile">
                 <div class="level-left">
@@ -83,11 +86,9 @@
     </div>
 </div>
 
-{{#GetChildProjects project as child}}
-
-<span>{{GetProjectName child.project}}</span>
-
-{{/GetChildProjects}}
+<!--
+  TODO children
+  -->
 
 {{/content}}
 {{/layout}}

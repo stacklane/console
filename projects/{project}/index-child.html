@@ -1,0 +1,14 @@
+<!--TEMPLATE mustache-->
+
+<!--
+  For async only
+  -->
+
+{{% import {project} from '🔗' }}
+{{% import {GetChildProjects, GetProjectName} from '📤' }}
+
+{{#GetChildProjects project as child}}
+
+<span>{{GetProjectName child.project}}</span>
+
+{{/GetChildProjects}}
