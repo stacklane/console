@@ -64,7 +64,7 @@
             cls = 'is-success';
         } else if (message.type == 'error'){
             txt = message.value;
-            cls = 'is-error';
+            cls = 'is-danger';
         } else if (message.type == 'warning') {
             txt = message.value;
             cls = 'is-warning';

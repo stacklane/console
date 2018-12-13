@@ -42,6 +42,9 @@
         <ul>
             <li class="is-active"><a id="api-tab" href="#api"><span class="icon">{{>ic-extension}}</span>&nbsp;<span>Third Party API</span></a></li>
             <li><a id="user-tab" href="#user"><span class="icon">{{>ic-verified_user}}</span>&nbsp;<span>Identity Provider</span></a></li>
+            {{#project.source.ssh}}
+            <li><a id="ssh-tab" href="#ssh"><span class="icon">{{>ic-lock}}</span>&nbsp;<span>SSH Key</span></a></li>
+            {{/project.source.ssh}}
         </ul>
     </div>
 
@@ -128,6 +131,27 @@
                 </div>
             </form>
         </div>
+
+        {{#project.source.ssh}}
+        <div class="tab-pane" id="ssh" aria-labelledby="ssh-tab">
+            <div class="message is-info">
+                <div class="message-body">
+                    Generates an SSH key for accessing private GIT repositories.
+                    After clicking 'Generate', you'll need to copy the generated public key.
+                    Add this public key to the {{project.source.type}} UI.
+                </div>
+            </div>
+
+            <form method="post" action="newSSH"
+                  data-controller="form"
+                  data-validate="true"
+                  data-ajax="true">
+                <div class="has-text-right">
+                    <button class="button is-primary" type="submit">Generate</button>
+                </div>
+            </form>
+        </div>
+        {{/project.source.ssh}}
     </div>
 </div>
 

@@ -4,7 +4,7 @@
 {{% partial /_layout }}
 
 {{% import {project,key} from '🔗' }}
-{{% import {KeyIsUserType,KeyIsEnabled} from '📤' }}
+{{% import {KeyIsUserType,KeyIsApiType,KeyIsSSHType,KeySSHPublic,KeyIsEnabled} from '📤' }}
 
 {{% partial /projects/{project}/_project-side }}
 {{% partial /projects/{project}/_project-nav }}
@@ -52,7 +52,7 @@
 </div>
 {{/KeyIsUserType}}
 
-{{^KeyIsUserType}}
+{{#KeyIsApiType}}
 <div class="box">
     <div class="message is-info">
         <div class="message-body">
@@ -60,17 +60,45 @@
         </div>
     </div>
 </div>
-{{/KeyIsUserType}}
+{{/KeyIsApiType}}
+
+{{#KeyIsSSHType}}
+<div class="box">
+    <div class="message is-info">
+        <div class="message-body">
+            Defines an SSH key for connecting to a private GIT repository.
+        </div>
+    </div>
+</div>
+{{/KeyIsSSHType}}
 
 <div class="box">
-    <div class="table">
+    {{#KeySSHPublic}}
+    <div class="message is-warning">
+        <div class="message-body">
+            This public key will only be visible for a short time.
+            Copy the entire public key and add it to the {{project.source.type}} UI.
+            <br>
+            <br>
+            <div class="field">
+                <div class="control">
+                    <input type="text" class="input" value="{{KeySSHPublic}}" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/KeySSHPublic}}
+
+    <table class="table">
         {{#key.get.data.names as name}}
+        {{#key.get.data.mask name}}
         <tr>
-            <td>{{name}}</td>
+            <td><b>{{name}}</b></td>
             <td>{{key.get.data.mask name}}</td>
         </tr>
+        {{/key.get.data.mask}}
         {{/key.get.data.names}}
-    </div>
+    </table>
 </div>
 
 
