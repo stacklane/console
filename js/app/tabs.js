@@ -54,6 +54,7 @@
 
             var tabs = this._tabs();
             var activeIndex = -1;
+            var hashIndex = -1;
 
             var panes = this._panes();
             for (var i = 0; i < panes.length; i++) panes[i].setAttribute('role', 'tabpanel');
@@ -66,7 +67,11 @@
                 tab.setAttribute('role', 'tab');
                 tab.setAttribute('data-turbolinks', 'false');
 
-                if (tab.parentElement.classList.contains(ACTIVE)) activeIndex = i;
+                if (tab.getAttribute('href') == window.location.hash){
+                    hashIndex = i; // Check for URL fragment
+                } else if (tab.parentElement.classList.contains(ACTIVE)){
+                    activeIndex = i; // Check for default is-active class
+                }
 
                 var paneId = tab.getAttribute('href').substring(1);
                 tab.setAttribute('aria-controls', paneId);
@@ -78,15 +83,19 @@
                 });
             }
 
-            if (this.data.get('remember')){
+            if (hashIndex != -1) {
+                this._select(tabs[hashIndex]); // Takes priority
+                return;
+            } else if (this.data.get('remember')){
                 var value = localStorage.getItem('tabs-remember-' + this.data.get('remember'));
                 var tab = document.getElementById(value);
                 if (tab){ // Tab may have been renamed or deleted
                     this._select(tab);
                     return;
-                } // Otherwise fall through
+                } // Otherwise fall through to other selection
             }
 
+            // Default to first tab:
             if (activeIndex == -1) {
                 this._select(tabs[0]);
             }

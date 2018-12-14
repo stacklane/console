@@ -4,28 +4,46 @@
 
 $get-loader-size: 2em;
 
-div[data-controller="get"].is-loading-quiet{
-  display:none;
-}
+div[data-controller="get"]{
+  /**
+   * Typically you're retrieving one or more 'Bulma block' elements which will not be children.
+   *
+   * When loading is complete, and there are children present (not empty), then give
+   * it the proper block padding for adjacent blocks.
+   */
+  &:not(.is-loading):not(:empty) {
+    @extend %block;
+  }
 
-div[data-controller="get"].is-loading{
-  color: transparent !important;
-  pointer-events: none;
-  position: relative; // for :after loader
-  top: 0;
-  min-height: $get-loader-size;
+  /**
+   * Standard loading indicator
+   */
+  &.is-loading{
+    color: transparent !important;
+    pointer-events: none;
+    position: relative; // for :after loader
+    top: 0;
+    min-height: $get-loader-size;
 
-  &::after {
-    @include loader;
+    &::after {
+      @include loader;
 
-    width: $get-loader-size;
-    height: $get-loader-size;
-    left: calc(50% - (#{$get-loader-size} / 2));
+      width: $get-loader-size;
+      height: $get-loader-size;
+      left: calc(50% - (#{$get-loader-size} / 2));
 
-    position: absolute !important;
+      position: absolute !important;
 
-    border-bottom-color: rgba(0,0,0,0.5);
-    border-left-color: rgba(0,0,0,0.5);
+      border-bottom-color: rgba(0,0,0,0.5);
+      border-left-color: rgba(0,0,0,0.5);
+    }
+  }
+
+  /**
+   * No indication of loading
+   */
+  &.is-loading.is-quiet{
+    display:none;
   }
 }
 

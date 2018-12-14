@@ -23,12 +23,13 @@
 
 {{$content}}
 
+<div data-controller="get" data-get-href="/projects/{{project.id}}/index-check" class="is-loading is-quiet"></div>
+
 <div class="box"
      data-controller="project"
      data-project-id="{{project.id}}"
     >
     <div class="media">
-
         <div class="media-left">
             <span class="icon is-large">
                 <svg width="32" height="32" data-controller="identicon" data-value="{{project.id}}"></svg>

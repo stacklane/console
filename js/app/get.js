@@ -16,56 +16,51 @@
      */
     const PREVIEW_CACHE = {};
     const IS_LOADING_CLS = "is-loading";
-    const IS_LOADING_QUIET_CLS = "is-loading-quiet";
+
+    const LOAD_SWAP = function(existing, newHTML){
+        existing.classList.remove(IS_LOADING_CLS);
+        newHTML = newHTML.trim(); // ensure no children, so we can detect empty
+        existing.innerHTML = newHTML;
+    };
 
     App.register("get", class extends Stimulus.Controller {
+        resetCache(){
+            var cacheKey = "get-" + (href.indexOf('/') == 0 ? href /*abs*/ : window.location.href + href /*rel*/);
+            sessionStorage.removeItem(cacheKey);
+            delete PREVIEW_CACHE[cacheKey];
+        }
         connect(){
             this._update();
         }
         _update(){
             var e = this.element;
 
-            if (!e.classList.contains(IS_LOADING_CLS) &&
-                !e.classList.contains(IS_LOADING_QUIET_CLS)
-            ) return; // prevent double loading from stimulus, which seems to be a problem with both connect and initialize.
+            // prevent double loading from stimulus, which seems to be a problem with both connect and initialize
+            if (!e.classList.contains(IS_LOADING_CLS)) return;
 
             var isStatic = this.data.get('static') == 'true';
             var href = this.data.get('href');
             var cacheKey = "get-" + (href.indexOf('/') == 0 ? href /*abs*/ : window.location.href + href /*rel*/);
 
             if (isStatic && sessionStorage.getItem(cacheKey)){
-                e.innerHTML = sessionStorage.getItem(cacheKey);
-                e.classList.remove(IS_LOADING_CLS);
-                e.classList.remove(IS_LOADING_QUIET_CLS);
-                return;
+                LOAD_SWAP(e, sessionStorage.getItem(cacheKey));
+                return; // exit, we do not want to refresh
             } else if (!isStatic && PREVIEW_CACHE[cacheKey]){
-                e.innerHTML = PREVIEW_CACHE[cacheKey];
-                e.classList.remove(IS_LOADING_CLS);
-                e.classList.remove(IS_LOADING_QUIET_CLS);
-                // continue below
+                LOAD_SWAP(e, PREVIEW_CACHE[cacheKey]);
+                // fall through to refresh contents below
             }
 
             fetch(href, {
-                method: 'GET',
-                credentials: 'same-origin',
-                mode: 'same-origin',
-                headers: {
-                    Accept: 'text/html'
-                }
+                method: 'GET', credentials: 'same-origin', mode: 'same-origin', headers: { Accept: 'text/html' }
             }).then(function (response) {
                 if (response.status == 403) { // Standard for permissions access issue
                     Messages.post({error: 'Not accessible with current permissions'});
                 } else {
                     response.text().then(function (html) {
-                        e.innerHTML = html;
-                        e.classList.remove(IS_LOADING_CLS);
-                        e.classList.remove(IS_LOADING_QUIET_CLS);
-                        if (isStatic){
-                            sessionStorage.setItem(cacheKey, html);
-                        } else {
-                            PREVIEW_CACHE[cacheKey] = html;
-                        }
-                    }).catch(function (e) {
+                        LOAD_SWAP(e, html);
+                        if (isStatic) sessionStorage.setItem(cacheKey, html);
+                        else PREVIEW_CACHE[cacheKey] = html;
+                    }).catch(function (ex) {
                         Messages.post({error: 'Unexpected response'});
                     });
                 }
