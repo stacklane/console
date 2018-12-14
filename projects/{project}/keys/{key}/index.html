@@ -89,6 +89,7 @@
     </div>
     {{/KeySSHPublic}}
 
+    {{^KeySSHPublic}}
     <table class="table">
         {{#key.get.data.names as name}}
         {{#key.get.data.mask name}}
@@ -99,6 +100,7 @@
         {{/key.get.data.mask}}
         {{/key.get.data.names}}
     </table>
+    {{/KeySSHPublic}}
 </div>
 
 

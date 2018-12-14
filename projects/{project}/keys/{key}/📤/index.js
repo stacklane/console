@@ -9,7 +9,8 @@ let KeyIsEnabled = key.state == 'enabled';
 let KeySSHPublic = '';
 
 if (KeyIsSSHType){
-    KeySSHPublic = key.get().data().show('public'); // only for a short time, then null
+    KeySSHPublic = key.get().data().show('public');
+    if (!KeySSHPublic) KeySSHPublic = '';
 }
 
 export {KeyIsUserType, KeyIsApiType, KeyIsSSHType, KeySSHPublic, KeyIsEnabled};
