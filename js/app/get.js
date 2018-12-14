@@ -6,7 +6,7 @@
  *
  * Use: <div data-controller="get" data-get-href="list" class="is-loading">Loading</div>
  *
- * For longer terms bits, such as navigation, use data-get-static="true".
+ * For longer term bits, such as navigation, use data-get-static="true".
  */
 (function () {
     'use strict';
@@ -24,13 +24,13 @@
     };
 
     App.register("get", class extends Stimulus.Controller {
+        connect(){
+            this._update();
+        }
         resetCache(){
             var cacheKey = "get-" + (href.indexOf('/') == 0 ? href /*abs*/ : window.location.href + href /*rel*/);
             sessionStorage.removeItem(cacheKey);
             delete PREVIEW_CACHE[cacheKey];
-        }
-        connect(){
-            this._update();
         }
         _update(){
             var e = this.element;

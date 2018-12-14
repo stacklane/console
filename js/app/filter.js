@@ -105,21 +105,32 @@
             return out;
         }
         _build(){
-
             // If it's a preview, then it's already been built.
             var rebuild = !document.documentElement.hasAttribute("data-turbolinks-preview");
 
             if (rebuild) {
                 var empty = this.element.getAttribute(EMPTY_CONTENT_ID);
+
                 if (empty && this._filterables().length == 0){
                     /**
-                     * Case of zero filterables and a specific 'empty' section.
+                     * Zero filterables, AND, a specific 'empty' section.
                      */
                     this.element.classList.toggle(HIDDEN, true);
                     this._content().classList.toggle(HIDDEN, true);
                     var emptyElement = document.getElementById(empty.substring(1));
                     emptyElement.classList.toggle(HIDDEN, false);
-                    return;
+                    return; // exit
+                } else {
+                    /**
+                     * One or more filterables, OR, no specific 'empty' section.
+                     */
+                    this.element.classList.toggle(HIDDEN, false);
+                    this._content().classList.toggle(HIDDEN, false);
+                    if (empty) {
+                        var emptyElement = document.getElementById(empty.substring(1));
+                        emptyElement.classList.toggle(HIDDEN, true);
+                    }
+                    // continue
                 }
 
                 var items = '';
