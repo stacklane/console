@@ -31,6 +31,7 @@
     -->
     <script defer src="/js/app/init.js"></script>
     <script defer src="/js/app/format.js"></script>
+    <script defer src="/js/app/dropdown.js"></script>
     <script defer src="/js/app/get.js"></script>
     <script defer src="/js/app/progress.js"></script>
     <script defer src="/js/app/message.js"></script>
@@ -68,15 +69,13 @@
 
                 <a href="https://stacklane.com/docs/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Documentation"><span class="icon is-icon-ui">{{>ic-books}}</span></a>
 
-                <div class="navbar-item has-dropdown"> <!--has-dropdown is-hoverable-->
+                <div class="navbar-item has-dropdown" data-controller="dropdown">
                     <a class="navbar-link is-arrowless">
                         <span class="icon is-icon-ui">{{>ic-account_circle}}</span>
                     </a>
 
                     <div class="navbar-dropdown is-boxed is-right">
-                            <span class="navbar-item">
-                                {{🎨.logged-in-as Me.name}}
-                            </span>
+                        <span class="navbar-item">{{🎨.logged-in-as Me.name}}</span>
                         <hr class="navbar-divider">
                         <form method="post" data-controller="form" action="/__/auth/provider/logout">
                             <a href="#" class="navbar-item" data-action="form#submit">Sign Out</a>
