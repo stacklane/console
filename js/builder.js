@@ -63,13 +63,22 @@
 
     App.register("builder", class extends Stimulus.Controller {
         static get targets() {
-            return ["link", "launch", "done", "create", "status"];
+            return ["done", "create", "status", "instanceTemplate"];
         }
         connect(){
-
+            if (localStorage.getItem("builder-last")){
+                var obj = JSON.parse(localStorage.getItem("builder-last"));
+                if (obj.expires > Date.now()){
+                    this._makeTestInstanceBlock(obj.url, obj.frame, obj.expires, obj.created);
+                }
+            }
         }
         reset(){
             this.createTarget.classList.toggle('is-hidden', false);
+            this.createTarget.classList.toggle('is-proposed', true);
+            this.createTarget.classList.toggle('is-hoverable', true);
+
+            this.statusTarget.classList.toggle('is-hidden', true);
             this.statusTarget.innerHTML = '';
         }
         addStatus(html, cls){
@@ -85,13 +94,52 @@
 
             if (html.indexOf("language-") > -1) Prism.highlightAll();
         }
+        _makeTestInstanceBlock(url, frame, expires, created){
+            var template = this.instanceTemplateTarget;
+
+            var clone = document.importNode(template.content, true);
+
+            var launch = clone.querySelector(".builder-launch");
+            var linkText = clone.querySelector(".builder-link-text");
+            var linkCopy = clone.querySelector(".builder-link-copy");
+            var linkExpires = clone.querySelector(".builder-link-expires");
+
+            launch.target = frame;
+            linkText.value = url;
+            linkExpires.innerText = new Date(expires).toLocaleDateString();
+
+            linkCopy.addEventListener('click', function(){
+                linkText.select();
+                try {
+                    if (document.execCommand('copy'))
+                        Messages.post({success:'Link copied to clipboard'});
+                    else
+                        Messages.post({error:'Oops, unable to copy'});
+                } catch(err) {
+                    Messages.post({error:'Oops, unable to copy'});
+                }
+            });
+
+            this.element.appendChild(clone);
+        }
         start(evt){
             evt.preventDefault();
             evt.stopPropagation();
 
-            this.createTarget.classList.toggle('is-loading', true);
+            if (this.building){
+                Messages.post({error: 'Another test instance is building'});
+                return;
+            }
 
             this.reset();
+
+            this.building = true;
+
+            this.createTarget.classList.toggle('is-loading', true);
+            this.createTarget.classList.toggle('is-proposed', false);
+            this.createTarget.classList.toggle('is-hoverable', false);
+
+            this.statusTarget.classList.toggle('is-hidden', false);
 
             this.addStatus('Initializing', 'has-text-grey');
 
@@ -121,30 +169,45 @@
 
                 var obj = JSON.parse(e.data);
 
-                thiz.linkTarget.value = obj.url;
-                thiz.launchTarget.setAttribute('href', obj.url);
-                thiz.launchTarget.setAttribute('target', obj.frame);
-                thiz.doneTarget.classList.toggle('is-hidden', false);
-                thiz.createTarget.classList.toggle('is-hidden', true);
+                var expires = Date.now() + (86400000 * 6);
+                var created = Date.now();
+
+                thiz._makeTestInstanceBlock(obj.url, obj.frame, expires, created);
+
+                thiz.reset();
 
                 init.close();
+
+                Messages.post({success: 'New test instance is ready'});
+
+                thiz.building = false;
+
+                localStorage.setItem('builder-last', JSON.stringify({
+                    url: obj.url,
+                    frame: obj.frame,
+                    created: created,
+                    expires: expires
+                }));
             });
 
             init.addEventListener('exception', function(e) {
                 thiz.addStatus(e.data, "has-text-danger");
                 thiz.createTarget.classList.toggle('is-loading', false);
                 init.close();
+                thiz.building = false;
             });
 
             init.addEventListener('close', function(e) {
                 graceful = true;
                 thiz.createTarget.classList.toggle('is-loading', false);
                 init.close();
+                thiz.building = false;
             });
 
             init.addEventListener('timeout', function(e) {
                 thiz.addStatus('Timeout', "has-text-danger");
                 thiz.createTarget.classList.toggle('is-loading', false);
+                thiz.building = false;
             });
         }
     });

@@ -14,7 +14,7 @@
 
             for (var i = 0; i < a.length; i++){
                 /**
-                 * Show current selection (and de-select any others)
+                 * Show current selection (and de-select any others).
                  */
                 var link = a[i];
                 if (link.getAttribute('href').charAt(0) != '/') continue; // abs local links only
@@ -22,7 +22,7 @@
                 link.classList.toggle('is-active', selected);
 
                 /**
-                 * Immediately respond to next selection, even ahead of upcoming page nav, for more responsiveness
+                 * Immediately respond to next selection, even ahead of upcoming page nav, for more responsiveness.
                  */
                 link.addEventListener('click', function (evt) {
                     evt.currentTarget.classList.toggle('is-active', true);
