@@ -105,6 +105,7 @@
             var linkExpires = clone.querySelector(".builder-link-expires");
 
             launch.target = frame;
+            launch.href = url;
             linkText.value = url;
             linkExpires.innerText = new Date(expires).toLocaleDateString();
 
