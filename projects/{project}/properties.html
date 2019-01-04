@@ -1,7 +1,10 @@
 <!--TEMPLATE mustache-->
 {{% import {project} from '🔗' }}
 {{% svg /_icons/ as ic }}
-{{% import {HasCategories, HasStyle, HasMessages, HasOptions} from '📤'}}
+{{% import {ShowCategories, CategoryCacheControlSeconds, HasCategories, HasStyle, HasMessages, HasOptions} from '📤'}}
+
+{{% Render-If ShowCategories }}
+{{% Cache-Control-Seconds CategoryCacheControlSeconds }}
 
 {{#HasCategories}}
 <nav data-controller="nav">

@@ -6,7 +6,15 @@
  *
  * Use: <div data-controller="get" data-get-href="list" class="is-loading">Loading</div>
  *
- * For longer term bits, such as navigation, use data-get-static="true".
+ * For longer term bits, such as navigation, use:
+ *
+ * {{ Cache-Control-Seconds x }}
+ *
+ * and take advantage of browser caching.
+ *
+ * NEAT:
+ *
+ * https://hacks.mozilla.org/2016/03/referrer-and-cache-control-apis-for-fetch/
  */
 (function () {
     'use strict';
@@ -27,25 +35,22 @@
         connect(){
             this._update();
         }
-        resetCache(){
-            var cacheKey = "get-" + (href.indexOf('/') == 0 ? href /*abs*/ : window.location.href + href /*rel*/);
-            sessionStorage.removeItem(cacheKey);
-            delete PREVIEW_CACHE[cacheKey];
-        }
+        // Shouldn't be needed with proper use of Cache-Control-Seconds header
+        //resetCache(){
+        //    var cacheKey = "get-" + (href.indexOf('/') == 0 ? href /*abs*/ : window.location.href + href /*rel*/);
+        //    sessionStorage.removeItem(cacheKey);
+        //    delete PREVIEW_CACHE[cacheKey];
+        //}
         _update(){
             var e = this.element;
 
             // prevent double loading from stimulus, which seems to be a problem with both connect and initialize
             if (!e.classList.contains(IS_LOADING_CLS)) return;
 
-            var isStatic = this.data.get('static') == 'true';
             var href = this.data.get('href');
             var cacheKey = "get-" + (href.indexOf('/') == 0 ? href /*abs*/ : window.location.href + href /*rel*/);
 
-            if (isStatic && sessionStorage.getItem(cacheKey)){
-                LOAD_SWAP(e, sessionStorage.getItem(cacheKey));
-                return; // exit, we do not want to refresh
-            } else if (!isStatic && PREVIEW_CACHE[cacheKey]){
+            if (PREVIEW_CACHE[cacheKey]){
                 LOAD_SWAP(e, PREVIEW_CACHE[cacheKey]);
                 // fall through to refresh contents below
             }
@@ -58,8 +63,7 @@
                 } else {
                     response.text().then(function (html) {
                         LOAD_SWAP(e, html);
-                        if (isStatic) sessionStorage.setItem(cacheKey, html);
-                        else PREVIEW_CACHE[cacheKey] = html;
+                        PREVIEW_CACHE[cacheKey] = html;
                     }).catch(function (ex) {
                         Messages.post({error: 'Unexpected response'});
                     });
