@@ -2,21 +2,20 @@ import {project} from '🔗';
 
 let categories = project.get().source.properties().categories();
 
-let ShowCategories = project.get().exists();
+let CategoryInfo = {
+    show: project.get().source.exists(),
+    has: categories.length > 0,
+    style: false,
+    messages: false,
+    options: false,
+    cacheControl: 0
+};
 
-let HasCategories = false;
-let HasStyle = false;
-let HasMessages = false;
-let HasOptions = false;
-
-let CategoryCacheControlSeconds = 0;
-
-if (ShowCategories){
-    HasCategories = categories.length > 0;
-    HasStyles = categories.filter((c)=>c.name=='style').length == 1;
-    HasMessages = categories.filter((c)=>c.name=='messages').length == 1;
-    HasOptions = categories.filter((c)=>c.name=='options').length == 1;
-    CategoryCacheControlSeconds = 600;
+if (CategoryInfo.has){
+    CategoryInfo.style = categories.filter((c)=>c.name=='style').length == 1;
+    CategoryInfo.messages = categories.filter((c)=>c.name=='messages').length == 1;
+    CategoryInfo.options = categories.filter((c)=>c.name=='options').length == 1;
+    CategoryInfo.cacheControl = 600;
 }
 
-export {ShowCategories, CategoryCacheControlSeconds, HasCategories, HasStyle, HasMessages, HasOptions};
+export {CategoryInfo};

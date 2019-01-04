@@ -1,38 +1,38 @@
 <!--TEMPLATE mustache-->
 {{% import {project} from '🔗' }}
 {{% svg /_icons/ as ic }}
-{{% import {ShowCategories, CategoryCacheControlSeconds, HasCategories, HasStyle, HasMessages, HasOptions} from '📤'}}
+{{% import {CategoryInfo} from '📤'}}
 
-{{% Render-If ShowCategories }}
-{{% Cache-Control-Seconds CategoryCacheControlSeconds }}
+{{% Render-If CategoryInfo.show }}
+{{% Cache-Control-Seconds CategoryInfo.cacheControl }}
 
-{{#HasCategories}}
+{{#CategoryInfo.has}}
 <nav data-controller="nav">
 <ul>
-{{#HasStyle}}
+{{#CategoryInfo.style}}
 <li>
     <a href="/projects/{{project.id}}/properties/style/">
         <span class="icon is-small is-icon-ui">{{>ic-palette}}</span>
         <span>Style</span>
     </a>
 </li>
-{{/HasStyle}}
-{{#HasMessages}}
+{{/CategoryInfo.style}}
+{{#CategoryInfo.messages}}
 <li>
     <a href="/projects/{{project.id}}/properties/messages/">
         <span class="icon is-small is-icon-ui">{{>ic-message}}</span>
         <span>Messages</span>
     </a>
 </li>
-{{/HasMessages}}
-{{#HasOptions}}
+{{/CategoryInfo.messages}}
+{{#CategoryInfo.options}}
 <li>
     <a href="/projects/{{project.id}}/properties/options/">
         <span class="icon is-small is-icon-ui">{{>ic-toggle_on}}</span>
         <span>Options</span>
     </a>
 </li>
-{{/HasOptions}}
+{{/CategoryInfo.options}}
 </ul>
 </nav>
-{{/HasCategories}}
+{{/CategoryInfo.has}}
