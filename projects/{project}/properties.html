@@ -1,10 +1,10 @@
 <!--TEMPLATE mustache-->
 {{% import {project} from '🔗' }}
 {{% svg /_icons/ as ic }}
-{{% import {CategoryInfo} from '📤'}}
+{{% import {CategoryInfo, ProjectExists, ProjectExistsCacheControlSeconds} from '📤' }}
 
-{{% Render-If CategoryInfo.show }}
-{{% Cache-Control-Seconds CategoryInfo.cacheControl }}
+{{% Render-If ProjectExists }}
+{{% Cache-Control-Seconds ProjectExistsCacheControlSeconds }}
 
 {{#CategoryInfo.has}}
 <nav data-controller="nav">

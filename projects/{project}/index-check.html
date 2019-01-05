@@ -2,6 +2,11 @@
 
 {{% import {project} from '🔗' }}
 
+{{% import {ProjectNotExists, ProjectExistsCacheControlSeconds} from '📤' }}
+
+{{% Render-If ProjectNotExists }}
+{{% Cache-Control-Seconds ProjectExistsCacheControlSeconds }}
+
 {{#project.source.ssh}}
     {{^project.source.exists}}
         <div class="message is-warning">
