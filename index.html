@@ -3,7 +3,7 @@
 {{% partial /_layout }}
 {{% svg /_icons/ as ic }}
 
-{{% import {MyProjects} from '📤' }}
+{{% import {MyProjects, GetProjectIcon} from '📤' }}
 
 {{< layout}}
 
@@ -60,7 +60,7 @@
             <div class="media">
                 <div class="media-left">
                     <span class="icon is-block">
-                        <svg width="32" height="32" data-controller="identicon" data-value="{{item.project.id}}"></svg>
+                        {{& GetProjectIcon item.project }}
                     </span>
                 </div>
                 <div class="media-content">

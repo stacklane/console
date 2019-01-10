@@ -13,7 +13,19 @@
             <div class="message-body">
                 We could not connect to this private repository
                 and verify that it has a manifest file.
+
+                {{#project.source.hasKey}}
+                An SSH key has already been <a href="keys/">generated</a>.
+                Make sure it is setup in {{project.source.type}}.
+
+                {{project.source.showKeyProblem}}
+
+                {{/project.source.hasKey}}
+
+                {{^project.source.hasKey}}
                 <a href="keys/new#ssh">Generate</a> an SSH key and set it up in {{project.source.type}}.
+                {{/project.source.hasKey}}
+
             </div>
         </div>
     {{/project.source.exists}}

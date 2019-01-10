@@ -19,14 +19,8 @@
 
     <div class="has-text-centered">
         <span class="has-text-grey">
-            <span class="icon is-medium">
-                {{#NewProjectInfo.icon}}
-                    {{NewProjectInfo.icon}}
-                {{/NewProjectInfo.icon}}
-
-                {{^NewProjectInfo.icon}}
-                    <svg width="32" height="32" data-controller="identicon" data-value="{{NewProjectInfo.name}}"></svg>
-                {{/NewProjectInfo.icon}}
+            <span class="icon is-large">
+                {{% show NewProjectInfo.icon }}
             </span>
         </span>
 
@@ -60,7 +54,7 @@
             <label class="label">Source</label>
             <div class="control">
                 <input id="url" name="url" type="text" required
-                       class="input" value="{{NewProjectInfo.value}}" readonly>
+                       class="input is-static" value="{{NewProjectInfo.value}}" readonly>
             </div>
         </div>
 

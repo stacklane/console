@@ -2,6 +2,9 @@
 # Name (shared) to use if not overridden by ProjectUser#name:
 name: string
 
+# Icon
+icon: svg-icon
+
 # Associate an Account responsible for billing:
 account:
   optional: true
@@ -23,3 +26,4 @@ data:
 properties:
   type: map
   optional: true
+

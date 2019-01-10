@@ -31,6 +31,13 @@ let GetProjectName = (project)=>{
 /**
  * @param project - May be a model link or actual model.
  */
+let GetProjectIcon = (project)=>{
+    return project.icon;
+};
+
+/**
+ * @param project - May be a model link or actual model.
+ */
 let GetProjectTags = (project)=>{
     let p = project(()=>ProjectUser.me().get());
 
@@ -68,6 +75,6 @@ let GetChildProjects = (project)=>{
 
 
 export {
-    GetProjectName, GetProjectTags, GetProjectUserDetails,
+    GetProjectName, GetProjectIcon, GetProjectTags, GetProjectUserDetails,
     IsProjectStarred, GetChildProjects   /*IsProjectNested,*/  /*, GetProjectHome*/
 };
