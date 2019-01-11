@@ -1,11 +1,11 @@
 
-import {name, token} from "form";
-
+import {sshRepo} from "form";
 import {project} from '🔗';
-
 import {ProjectKey} from '📦';
 
-let pk = ProjectKey.newSSH('stacklane').name(project.source.main);
+let pk = ProjectKey
+    .newSSH('stacklane')
+    .name(project.source.withRepository(sshRepo).main);
 
 ({
     redirect: Redirect
