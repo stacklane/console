@@ -1,9 +1,8 @@
-
 import {project} from '🔗';
 import {ProjectUser} from '📦';
 
 if (project.get().mapping){
-    throw ({error: 'Projects with domain mappings may not be deleted.'});
+    throw Messages.error('Projects with domain mappings may not be deleted.');
 }
 
 if (ProjectUser.me().isSharing()){
@@ -14,7 +13,7 @@ if (ProjectUser.me().isSharing()){
      */
     ProjectUser.me().get().remove();
 
-    ({success: 'Project was left shared with other users.', redirect:'/' /* Back to dashboard */});
+    ({redirect: Redirect.home().success('Project was left shared with other users')});
 
 } else {
 
@@ -23,8 +22,8 @@ if (ProjectUser.me().isSharing()){
      */
 
     project.get().remove(); // Delete first, while 'me' still has access to it.
-    ProjectUser.me().get().remove(); // This will cascade async, but we want to delete it sync, so explicit remove().
+    ProjectUser.me().get().remove(); // This would cascade async, but we want to delete it sync, so explicit remove().
 
-    ({success: 'Deleted Project', redirect:'/' /* Back to dashboard */});
+    ({redirect: Redirect.home().success('Deleted Project')});
 
 }

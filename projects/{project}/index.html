@@ -38,10 +38,7 @@
 
         <div class="media-content">
             <h5 class="is-size-5 title has-text-weight-semibold"> <!-- was title is-5 -->
-                <input data-action="change->project#changeTitle" type="text" data-target="project.title"
-                       class="is-display" value="{{GetProjectName project}}" placeholder="Use Default"
-                     {{>util-disable-spell}}
-                    >
+                {{GetProjectName project}}
             </h5>
             {{#project.source.external}}
             <h6 class="subtitle">
@@ -66,12 +63,6 @@
                     <a class="tooltip level-item" href="copy/" data-tooltip="Copy">
                         <span class="icon is-small has-text-link">{{>ic-copy}}</span>
                     </a>
-
-                    {{^project.get.mapping}}
-                    <a class="tooltip level-item" data-action="project#delete" data-tooltip="Delete">
-                        <span class="icon is-small has-text-link">{{>ic-delete_forever}}</span>
-                    </a>
-                    {{/project.get.mapping}}
 
                     <label class="toggler has-text-warning level-item">
                         <input data-target="project.star"
