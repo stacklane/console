@@ -17,7 +17,7 @@ let props = instance.get().source.properties()
         color: p.type == 'color',
         string: p.type == 'string',
         boolean: p.type == 'boolean',
-        checked: (p.type == 'boolean' && (overrides[p.name] == 'true' || p.stringValue == 'true'))
+        checked: (p.type == 'boolean' && (overrides[p.name] == 'true' || (overrides[p.name] == null && p.stringValue == 'true')))
     });
 });
 
