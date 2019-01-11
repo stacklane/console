@@ -147,10 +147,10 @@
                   data-validate="true"
                   data-ajax="true">
                 <div class="field has-addons has-addons-right">
-                    <label class="label" for="sshRepo">Source</label>
                     <p class="control">
-                        <input id="url" name="url" type="text" required class="input is-static"
-                               value="{{project.source.ownerPrefix}}" readonly>
+                        <a class="button is-static">
+                            {{project.source.ownerPrefix}}
+                        </a>
                     </p>
                     <!--
                       This must be mutable, so that SSH keys may be generated for
