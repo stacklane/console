@@ -47,9 +47,7 @@
                     <!-- data-tooltip=" @ {{project.source.type}}" -->
                     <div class="tags has-addons">
                         <span class="tag is-light">{{project.source.short}}</span>
-                        {{#project.source.branch}}
-                        <span class="tag is-primary">{{project.source.branch}}</span>
-                        {{/project.source.branch}}
+                        <span class="tag is-primary">{{project.source.reference}}</span>
                     </div>
                 </a>
             </h6>
@@ -61,7 +59,7 @@
                 <div class="level-left">
 
                     <a class="tooltip level-item" href="copy/" data-tooltip="Copy">
-                        <span class="icon is-small has-text-link">{{>ic-copy}}</span>
+                        <span class="icon has-text-link">{{>ic-copy}}</span>
                     </a>
 
                     <label class="toggler has-text-warning level-item">
@@ -69,8 +67,8 @@
                                data-action="change->project#changeStar"
                                type="checkbox" class="is-filter-tag"
                                {{#IsProjectStarred project}}checked{{/IsProjectStarred}}>
-                        <span class="is-checked tooltip icon is-small" data-tooltip="Favorite">{{>ic-star}}</span>
-                        <span class="is-unchecked tooltip icon is-small" data-tooltip="Favorite">{{>ic-star_border}}</span>
+                        <span class="is-checked tooltip icon " data-tooltip="Favorite">{{>ic-star}}</span>
+                        <span class="is-unchecked tooltip icon " data-tooltip="Favorite">{{>ic-star_border}}</span>
                     </label>
                 </div>
             </nav>

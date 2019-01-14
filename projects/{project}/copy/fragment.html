@@ -1,0 +1,57 @@
+<!--TEMPLATE mustache-->
+
+{{% svg /_icons/ as ic }}
+{{% import {project} from '🔗' }}
+{{% import {ProjectExists} from '📤' }}
+
+{{^ProjectExists}}
+<div class="message is-warning">
+    <div class="message-body">
+        Unable to copy this project.
+        Ensure the source exists and that you have access to it.
+    </div>
+</div>
+{{/ProjectExists}}
+
+{{#ProjectExists}}
+<form method="post" action="copy"
+      data-controller="form"
+      data-validate="true" data-ajax="true">
+
+    <div class="field">
+        <label class="label">Source</label>
+        <div class="control">
+            <input class="input is-static" type="text" value="{{project.get.source.main}}" readonly>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="ref">Branch / Tag</label>
+        <div class="control">
+            <div class="select">
+                <select id="ref" name="ref" required>
+                    <option value="">Choose...</option>
+                    {{#project.get.source.references as ref}}
+                    <option value="{{ref.value}}">{{ref.name}}</option>
+                    {{/project.get.source.references}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="name">Project Name</label>
+        <div class="control">
+            <input id="name" name="newName" type="text" required
+                   class="input" value="{{project.name}} Copy">
+        </div>
+    </div>
+
+    <hr>
+
+    <p class="has-text-right">
+        <button class="button is-primary" type="submit">Create Copy</button>
+    </p>
+</form>
+{{/ProjectExists}}
+

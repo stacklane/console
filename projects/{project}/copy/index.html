@@ -38,47 +38,17 @@
 
     <hr>
 
+    <!--
     <div class="message is-info">
         <div class="message-body">
             Only the source, keys, and any optional theme settings will be copied.
         </div>
     </div>
+    -->
 
-    <div>
-        <form method="post" action="copy"
-              data-controller="form"
-              data-validate="true" data-ajax="true">
-
-            <div class="field">
-                <label class="label">Source</label>
-                <div class="control">
-                    <input class="input" type="text" value="{{project.get.source.main}}" readonly>
-                </div>
-                <p class="help">
-                    The copy will use the same source has the original.
-                </p>
-            </div>
-
-            {{#project.get.source.branch}}
-            <div class="field">
-                <label class="label">Branch</label>
-                <div class="control">
-                    <input class="input" type="text" name="branch"
-                           pattern="[a-zA-Z0-9\._\-]{1,25}" data-pattern-msg="Invalid branch"
-                           placeholder="{{project.get.source.branch}}" {{>util-disable-spell}}>
-                </div>
-                <p class="help">
-                    Leave the source's branch the same, or set a different branch.
-                </p>
-            </div>
-            {{/project.get.source.branch}}
-
-            <hr>
-
-            <p class="has-text-right">
-                <button class="button is-primary" type="submit">Create Copy</button>
-            </p>
-        </form>
+    <div class="is-loading"
+         data-controller="get"
+         data-get-href="fragment">
     </div>
 
 </div>
