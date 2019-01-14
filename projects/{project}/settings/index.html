@@ -58,9 +58,15 @@
 
     <h5 class="subtitle is-5">Project Icon</h5>
 
-    <div class="icon is-medium">
+    <div class="icon is-large">
         {{{ project.get.icon }}}
     </div>
+    <br>
+    <form method="post" action="iconRandom"
+          data-controller="form"
+          data-validate="true" data-ajax="true">
+        <button class="button is-small" type="submit">Refresh</button>
+    </form>
 
     <hr>
 

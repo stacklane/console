@@ -10,6 +10,6 @@ if (project.get().name == newName){
 
     project.get().name = newName;
 
-    ({redirect: Redirect.index().success('Project renamed')});
+    ({redirect: Redirect.index().success('Project renamed. Allow 1-2 minutes to see it updated.')});
 
 }
