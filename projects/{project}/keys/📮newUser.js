@@ -1,5 +1,5 @@
 
-import {identityType, clientId, secret} from "form";
+import {identityType, clientId, secret, context} from "form";
 import {ProjectKey} from '📦';
 
 if (identityType != 'github' && identityType != 'google'){
@@ -7,6 +7,8 @@ if (identityType != 'github' && identityType != 'google'){
 }
 
 let pk = new ProjectKey().type('user').name(identityType);
+
+if (context == 'test') pk.context('test');
 
 pk.data().put('clientId', clientId)
 pk.data().put('secret', secret);

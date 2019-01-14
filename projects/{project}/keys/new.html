@@ -61,6 +61,17 @@
                   data-validate="true"
                   data-ajax="true">
                 <div class="field">
+                    <label class="label" for="apiScopeType">Scope</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="apiScopeType" name="context">
+                                <option value="">Always Applies</option>
+                                <option value="test">Testing Only</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
                     <label class="label">Domain Name</label>
                     <div class="control">
                         <input type="text" class="input" id="name" name="name" placeholder="abc.com" required>
@@ -97,14 +108,25 @@
                   data-ajax="true">
 
                 <div class="field">
+                    <label class="label" for="userScopeType">Scope</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="userScopeType" name="context">
+                                <option value="">Always Applies</option>
+                                <option value="test">Testing Only</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
                     <label class="label" for="identityType">Identity Provider</label>
                     <div class="control">
                         <div class="select">
-                        <select id="identityType" required name="identityType">
-                            <option value="">Choose...</option>
-                            <option value="google">Google</option>
-                            <option value="github">GitHub</option>
-                        </select>
+                            <select id="identityType" name="identityType" required>
+                                <option value="">Choose...</option>
+                                <option value="google">Google</option>
+                                <option value="github">GitHub</option>
+                            </select>
                         </div>
                     </div>
                     <p class="help">
