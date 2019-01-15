@@ -22,6 +22,7 @@
 @import "/bulma/components/media";
 @import "/bulma/components/navbar";
 @import "/bulma/components/tabs";
+@import "/bulma/components/modal";
 @import "/bulma/components/message";
 @import "/bulma/components/level";
 
@@ -64,7 +65,7 @@ a{
 }
 
 @include desktop() {
-  header, main {
+  body > header, main {
     max-width: $max-ui-width;
     margin-left: auto;
     margin-right: auto;
@@ -75,7 +76,7 @@ a{
 /**
  * header
  */
-header {
+body > header {
   position: -webkit-sticky;
   position: sticky;
   top: 0;

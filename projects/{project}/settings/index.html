@@ -86,26 +86,33 @@
             Once you delete a project, there is no going back. Please be certain.
         </div>
         <div class="media-right">
-            <!--
-
-                TODO must confirm with a modal dialog.
-                how?
-                is that part of form-controller?
-                like... pre-submit does it?
-
-                could go look at modal on image uploader..
-
-                data-form-confirm-title="Delete this project?"
-                data-form-confirm-message=This action can not be undone."
-
-             -->
-            <form method="post" action="delete"
-                  data-controller="form"
-                  data-form-validate="true" data-form-ajax="true">
-                <button class="button is-danger" type="submit">Delete</button>
-            </form>
+            <a href="#" class="button is-danger" data-controller="modal" data-action="modal#show" data-modal-id="deleteDialog">
+                Delete
+            </a>
         </div>
     </div>
+</div>
+
+<div class="modal" id="deleteDialog">
+    <form method="post" action="delete"
+          data-controller="form"
+          data-form-validate="true"
+          data-form-ajax="true">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"><b>Delete Project?</b></p>
+                <a class="delete is-modal-hide" aria-label="close"></a>
+            </header>
+            <section class="modal-card-body">
+                Delete this project?  This action cannot be undone.
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-danger" type="submit">Delete</button>
+                <button class="button is-modal-hide">Cancel</button>
+            </footer>
+        </div>
+    </form>
 </div>
 
 {{/content}}
