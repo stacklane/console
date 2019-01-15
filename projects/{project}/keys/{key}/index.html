@@ -39,11 +39,11 @@
         <div class="media-right">
             <nav class="level is-mobile">
                 <div class="level-left">
-                    <!--
-                      TODO so maybe this is one button a form.. like 'Delete' in settings..
-                           I guess start by getting that right.
-                       -->
-                    <a class="tooltip level-item" href="copy/" data-tooltip="Delete">
+                    <a class="tooltip level-item" href="#"
+                        data-controller="modal"
+                        data-action="modal#show"
+                        data-modal-id="deleteDialog"
+                        data-tooltip="Delete">
                         <span class="icon has-text-link">{{>ic-delete_forever}}</span>
                     </a>
                 </div>
@@ -116,6 +116,27 @@
     {{/KeySSHPublic}}
 </div>
 
+<div class="modal" id="deleteDialog">
+    <form method="post" action="delete"
+          data-controller="form"
+          data-form-validate="true"
+          data-form-ajax="true">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"><b>Delete Key?</b></p>
+                <a class="delete is-modal-hide" aria-label="close"></a>
+            </header>
+            <section class="modal-card-body">
+                Delete this key?  This action cannot be undone.
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-danger" type="submit">Delete</button>
+                <button class="button is-modal-hide">Cancel</button>
+            </footer>
+        </div>
+    </form>
+</div>
 
 {{/content}}
 {{/layout}}
