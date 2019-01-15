@@ -1,8 +1,8 @@
 /**
  * Utility goes on a <form>
  *
- * - data-validate -- Use JS/boostrap validation
- * - data-ajax -- Submit using ajax
+ * - data-form-validate -- Use JS/bootstrap validation
+ * - data-form-ajax -- Submit using ajax
  *
  * If needed, fetch polyfill https://github.com/github/fetch
  *
@@ -14,8 +14,8 @@
     const IS_TARGET = "is-target";
 
     App.register("form", class extends Stimulus.Controller {
-        isAjax(){ return this.element.getAttribute('data-ajax') == 'true' ; }
-        isValidate(){ return this.element.getAttribute('data-validate') == 'true'; }
+        isAjax(){ return this.element.getAttribute('data-form-ajax') == 'true' ; }
+        isValidate(){ return this.element.getAttribute('data-form-validate') == 'true'; }
 
         disable() {
             this._disable(this.element.getElementsByTagName('input'));
@@ -216,9 +216,9 @@
                 var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && this.element.getAttribute('data-turbolinks') != 'false';
 
                 if (enabled) {
-                    var action = this.element.getAttribute('data-turbolinks-action'); // default to 'replace' for post->redirect
+                    var action = this.element.getAttribute('data-form-turbolinks-action'); // default to 'replace' for post->redirect
 
-                    var clearCache = this.element.getAttribute('data-turbolinks-clear-cache') != 'false';
+                    var clearCache = this.element.getAttribute('data-form-turbolinks-clear-cache') != 'false';
                     if (clearCache) Turbolinks.clearCache();
 
                     Turbolinks.visit(path, {action: (action == null ? 'replace' : action)});

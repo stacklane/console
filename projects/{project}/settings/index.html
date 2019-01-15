@@ -43,7 +43,7 @@
 
     <form method="post" action="rename"
           data-controller="form"
-          data-validate="true" data-ajax="true">
+          data-form-validate="true" data-form-ajax="true">
         <div class="field has-addons has-addons-right">
             <p class="control is-expanded">
                 <input class="input" type="text" name="newName" value="{{project.get.name}}" required>
@@ -64,7 +64,7 @@
     <br>
     <form method="post" action="iconRandom"
           data-controller="form"
-          data-validate="true" data-ajax="true">
+          data-form-validate="true" data-form-ajax="true">
         <button class="button is-small" type="submit">Refresh</button>
     </form>
 
@@ -87,11 +87,21 @@
         </div>
         <div class="media-right">
             <!--
-              TODO must confirm with a modal dialog.
+
+                TODO must confirm with a modal dialog.
+                how?
+                is that part of form-controller?
+                like... pre-submit does it?
+
+                could go look at modal on image uploader..
+
+                data-form-confirm-title="Delete this project?"
+                data-form-confirm-message=This action can not be undone."
+
              -->
             <form method="post" action="delete"
                   data-controller="form"
-                  data-validate="true" data-ajax="true">
+                  data-form-validate="true" data-form-ajax="true">
                 <button class="button is-danger" type="submit">Delete</button>
             </form>
         </div>
