@@ -272,16 +272,6 @@ input{
     border: 0px;
     display: inline-block;
     min-width: 50%; // TBD
-
-    /* don't like how this looks:
-    &.is-editable {
-      background-size: .9rem;
-      background: url(/image/edit_gray.svg) no-repeat center left;
-      padding-left: 1.5rem;
-    }
-    &.is-editable:focus{
-      //text-decoration:underline;
-    }*/
   }
 }
 
