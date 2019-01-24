@@ -4,7 +4,7 @@ import {ProjectKey} from '📦';
 
 let pk = new ProjectKey().type('api').name(name);
 
-if (context == 'test') pk.context('test');
+if (context == 'test' || context == 'live') pk.context(context);
 
 pk.data().put('token', token);
 

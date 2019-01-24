@@ -8,7 +8,7 @@ if (identityType != 'github' && identityType != 'google'){
 
 let pk = new ProjectKey().type('user').name(identityType);
 
-if (context == 'test') pk.context('test');
+if (context == 'test' || context == 'live') pk.context(context);
 
 pk.data().put('clientId', clientId)
 pk.data().put('secret', secret);
