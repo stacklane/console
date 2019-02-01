@@ -10,7 +10,6 @@ try {
     let instanceLive = project.get();
     let mapping = Mapping.test()
         .source(instanceLive.source)
-        .namespace(instanceLive.data)
         .theme(instanceLive.properties)
         .keys(project);
 
