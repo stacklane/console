@@ -12,6 +12,7 @@ if (!newName || newName.length == 0) throw Messages.fieldError('newName', 'New p
 let current = project.get();
 
 let projectCopy = new Project()
+    .region(current.region)
     .icon(Identicon.random())
     .source(current.source.withReferenceValue(ref))
     .properties(current.properties);

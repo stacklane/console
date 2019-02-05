@@ -1,5 +1,5 @@
 
-import {url, name} from 'form';
+import {url, name, dataRegion} from 'form';
 import {Source} from '🔌';
 import {Me} from '👤';
 import {Project, ProjectUser, ProjectInstance} from '📦';
@@ -7,10 +7,14 @@ import {NewProjectGetInfo} from '📤';
 
 if (!Source.isValidURLFormat(url)) throw Messages.fieldError('url', 'Invalid source URL: ' + url);
 
-let project = new Project().source(url);
+if (dataRegion != 'us' && dataRegion != 'eu') throw Messages.fieldError('dataRegion', 'Invalid data region: ' + dataRegion);
 
-project.name = name ? name : project.source.name;
-project.icon = NewProjectGetInfo(url).icon;
+let project = new Project()
+    .source(url)
+    .region(dataRegion)
+    .icon(NewProjectGetInfo(url).icon);
+
+project.name(name ? name : project.source.name);
 
 project(()=>{
     new ProjectUser().user(Me).star(true);

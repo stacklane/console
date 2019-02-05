@@ -18,6 +18,18 @@ $logged-in-as: 'Logged in as {0}';
 $action-next: 'Next';
 $submitting: 'Submitting';
 
+$feature-hosting-location: 'Hosting Locations';
+$feature-hosting-location-about: 'Code is securely replicated across a minimum of 3 geographically isolated regions, \
+  automatically routing traffic to the closest available region worldwide.';
+
+$feature-cdn: 'Content Delivery Network';
+$feature-cdn-about: 'The content delivery network (CDN) is standard, and ensures that large assests such as images are \
+  stored and delivered closets to visitors, in over 80 locations worldwide.';
+
+$feature-data-location: 'Data Storage Area';
+$feature-data-location-about: 'The general geographical area where data is stored and encrypted-at-rest. \
+  Data is replicated across multiple regions in this geographic area, and further replicated across multiple zones in a region. \
+  Data storage can withstand the loss of entire regions and maintain availability without losing data.';
 
 
 /*********************

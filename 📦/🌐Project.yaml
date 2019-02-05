@@ -27,3 +27,5 @@ properties:
   type: map
   optional: true
 
+region:
+  type: string

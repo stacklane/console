@@ -1,17 +1,36 @@
 <!--TEMPLATE mustache-->
 
 {{% import {PlanInfo} from '📤' }}
+{{% import {project} from '🔗' }}
 
-<div class="pricing-table">
-    <div class="pricing-plan">
-        <div class="plan-price">
-            <span class="plan-price-amount"
+<div class="simple-list">
+    <div class="simple-list-header">
+        <div class="simple-list-price">
+            <span class="simple-list-price-amount"
                   data-controller="currency"
                   data-currency-code="{{PlanInfo.currency}}"
-                  data-currency-symbol-class="plan-price-currency">
+                  data-currency-symbol-class="simple-list-price-currency">
                 {{PlanInfo.amount}}
             </span>
             / {{PlanInfo.interval}}
         </div>
+    </div>
+    <div class="simple-list-item">
+        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-hosting-location-about}}">
+            {{🎨.feature-hosting-location}}
+        </span>
+        <span class="has-text-weight-bold">3</span>
+    </div>
+    <div class="simple-list-item">
+        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-cdn-about}}">
+            {{🎨.feature-cdn}}
+        </span>
+        <span class="has-text-weight-bold">Enabled</span>
+    </div>
+    <div class="simple-list-item">
+        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-data-location-about}}">
+            {{🎨.feature-data-location}}
+        </span>
+        <span class="has-text-weight-bold is-uppercase">{{project.region}}</span>
     </div>
 </div>

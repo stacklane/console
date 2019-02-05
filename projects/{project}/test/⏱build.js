@@ -9,6 +9,7 @@ let finished = null;
 try {
     let instanceLive = project.get();
     let mapping = Mapping.test()
+        .region('eu')
         .source(instanceLive.source)
         .theme(instanceLive.properties)
         .keys(project);

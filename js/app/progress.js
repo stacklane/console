@@ -6,12 +6,12 @@
 (function (window) {
     'use strict';
 
-    const CLS = 'is-dark';
+    //const CLS = '';
     const DELAY = 500;
     const progress = document.createElement('div');
     progress.id = 'global-progress';
-    progress.setAttribute('class', CLS);
-    progress.innerHTML = '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>';
+    //progress.setAttribute('class', CLS);
+    progress.innerHTML = '<div class="progress-bar has-background-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>';
     const bar = progress.getElementsByClassName('progress-bar')[0];
     document.documentElement.appendChild(progress); // documentElement allows Turbolinks to swap out the body.
 

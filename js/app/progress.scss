@@ -55,13 +55,13 @@ $global-progress-height: 3px;
 
   /**
    * Make .progress-bar color the invert of the background #global-progress is on
-   */
+
   @each $name, $pair in $colors {
     $color-invert: nth($pair, 2);
     &.is-#{$name} .progress-bar{
       background: $color-invert;
     }
-  }
+  }*/
 }
 
 

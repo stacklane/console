@@ -31,7 +31,7 @@
 ////////
 
 @import "/style/ext/tooltip";
-@import "/style/ext/pricing";
+//@import "/style/ext/pricing";
 
 @import "/js/app/hiding";
 @import "/js/app/form";
@@ -46,6 +46,7 @@
 
 @import "/style/prism";
 @import "/style/toggler";
+@import "/style/simple-list";
 
 ////////////
 
@@ -60,8 +61,22 @@ $nav-active-color: $link;
 $icon-active-color: $link;
 $icon-active-color-accent: rgb(146,186,248);
 
+.icon.is-micro{
+  width: .75rem;
+  height: .75rem;
+}
+
 a{
   font-weight: 500;
+}
+
+/**
+ * Why needed to display drop down arrow?  This code already exists in _form.scss
+ */
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: $link;
+  right: 1.125em;
+  z-index: 4;
 }
 
 @include desktop() {
@@ -71,6 +86,8 @@ a{
     margin-right: auto;
   }
 }
+
+
 
 
 /**

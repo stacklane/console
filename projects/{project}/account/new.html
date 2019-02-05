@@ -38,38 +38,41 @@
 
 <div class="box">
 
-<div data-controller="get" data-get-href="pricing" class="is-loading">Loading</div>
-
-<hr>
-
 <form method="post" action="new"
       data-controller="form"
       data-form-validate="true"
       data-form-ajax="true">
+    <div class="columns">
+    <div class="column is-three-fifths">
+        <div class="field" >
+            <label class="label">Cardholder Name</label>
+            <div class="control">
+                <div class="card-element"></div>
+                <input type="text" class="input" name="cardholderName" id="cardholderName" required minlength="3">
+            </div>
+        </div>
 
-    <div class="field" >
-        <label class="label">Cardholder Name</label>
-        <div class="control">
-            <div class="card-element"></div>
-            <input type="text" class="input" name="cardholderName" id="cardholderName" required minlength="3">
+        <div class="field" data-controller="stripe-card" data-stripe-card-pk="{{🎨.stripe-pk}}"
+             data-stripe-card-name="cardholderName" data-stripe-card-token="stripeToken">
+            <label class="label">Credit Card</label>
+            <div class="control">
+                <div class="card-element"></div>
+            </div>
+            <p class="help card-errors"></p>
         </div>
     </div>
-
-    <div class="field" data-controller="stripe-card" data-stripe-card-pk="{{🎨.stripe-pk}}"
-         data-stripe-card-name="cardholderName" data-stripe-card-token="stripeToken">
-        <label class="label">Credit Card</label>
-        <div class="control">
-            <div class="card-element"></div>
-        </div>
-        <p class="help card-errors"></p>
+    <div class="column">
+        <div data-controller="get" data-get-href="pricing" class="is-loading">Loading</div>
     </div>
+</div>
 
-    <hr>
+<hr>
 
-    <p class="has-text-right">
-         <!-- must be type='button' for Safari CORS + stripe tokenization? -->
-        <button type="submit" class="button is-primary">Upgrade</button>
-    </p>
+<p class="has-text-right">
+    <!-- must be type='button' for Safari CORS + stripe tokenization? -->
+    <button type="submit" class="button is-primary">Upgrade</button>
+</p>
+
 </form>
 
 </div>
