@@ -12,6 +12,7 @@ if (Domain.verify(instanceLive.mapping.domain)){
         let result = MappingBuilder
             .domain(instanceLive.mapping.domain)
             .source(instanceLive.source)
+            .region(instanceLive.region)
             .namespace(instanceLive.data)
             .www(instanceLive.mapping.www)
             .theme(instanceLive.properties)
