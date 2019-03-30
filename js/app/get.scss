@@ -1,6 +1,5 @@
 
 @import "/style/variables";
-@import "/bulma/utilities/mixins";
 
 $get-loader-size: 2em;
 
@@ -12,7 +11,8 @@ div[data-controller="get"]{
    * it the proper block padding for adjacent blocks.
    */
   &:not(.is-loading):not(:empty) {
-    @extend %block;
+    //@extend %block;
+    margin-bottom: 1.5rem;
   }
 
   /**
@@ -26,7 +26,16 @@ div[data-controller="get"]{
     min-height: $get-loader-size;
 
     &::after {
-      @include loader;
+      animation: get-loader-spin 500ms infinite linear;
+      border: 2px solid $grey-lighter;
+      border-radius: $radius-rounded;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      content: "";
+      display: block;
+      height: 1em;
+      position: relative;
+      width: 1em;
 
       width: $get-loader-size;
       height: $get-loader-size;
@@ -46,4 +55,15 @@ div[data-controller="get"]{
     display:none;
   }
 }
+
+@keyframes get-loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 
