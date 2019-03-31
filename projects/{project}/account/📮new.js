@@ -1,6 +1,6 @@
 
 import {customers, subscriptions} from 'stripe.com';
-import {stripeToken} from 'form';
+import {stripeToken, promo} from 'form';
 import * as Theme from '🎨';
 import {Me} from '👤';
 import {Account, AccountUser} from '📦';
@@ -18,7 +18,8 @@ let customer = customers.create({
 try {
     let subscription = subscriptions.create({
         "items[0][plan]": Theme.stripe_plan_id(),
-        customer: customer.id
+        customer: customer.id,
+        coupon: promo
     });
 
     let subscriptionItem = subscription.items.data[0];

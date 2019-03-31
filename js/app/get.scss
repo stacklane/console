@@ -27,15 +27,9 @@ div[data-controller="get"]{
 
     &::after {
       animation: get-loader-spin 500ms infinite linear;
-      border: 2px solid $grey-lighter;
       border-radius: $radius-rounded;
-      border-right-color: transparent;
-      border-top-color: transparent;
       content: "";
       display: block;
-      height: 1em;
-      position: relative;
-      width: 1em;
 
       width: $get-loader-size;
       height: $get-loader-size;
@@ -43,8 +37,9 @@ div[data-controller="get"]{
 
       position: absolute !important;
 
-      border-bottom-color: rgba(0,0,0,0.5);
-      border-left-color: rgba(0,0,0,0.5);
+      border: 2px solid transparent;
+      border-bottom-color: rgba(0, 0, 0, 0.5);
+      border-left-color: rgba(0, 0, 0, 0.5);
     }
   }
 

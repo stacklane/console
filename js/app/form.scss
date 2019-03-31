@@ -1,5 +1,7 @@
 @import "/style/variables";
 
+$form-link-loader-size: 1em;
+
 form.was-validated {
   .input:invalid, .textarea:invalid{
     border-color: $danger;
@@ -13,8 +15,13 @@ form.is-submitted{
   pointer-events: none;
 }
 
-@import "/bulma/utilities/mixins";
-$form-link-loader-size: 1em;
+form[data-controller=form] .is-form-ctrl{
+  display:none;
+}
+
+form[data-controller=form].has-form-ctrl .is-form-ctrl{
+  display:block;
+}
 
 form.is-submitted a.is-target.has-loader{
   color: transparent !important;
@@ -22,7 +29,10 @@ form.is-submitted a.is-target.has-loader{
   position: relative;
 
   &::after {
-    @include loader;
+    animation: get-loader-spin 500ms infinite linear;
+    border-radius: $radius-rounded;
+    content: "";
+    display: block;
 
     width: $form-link-loader-size;
     height: $form-link-loader-size;
@@ -30,7 +40,18 @@ form.is-submitted a.is-target.has-loader{
 
     position: absolute !important;
 
-    border-bottom-color: rgba(0,0,0,0.5);
-    border-left-color: rgba(0,0,0,0.5);
+    border: 2px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.5);
+    border-left-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes form-loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
   }
 }

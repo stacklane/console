@@ -41,13 +41,14 @@
 <form method="post" action="new"
       data-controller="form"
       data-form-validate="true"
-      data-form-ajax="true">
+      data-form-ajax="true"
+      data-form-ctrl="KeyN">
     <div class="columns">
     <div class="column is-three-fifths">
         <div class="field" >
             <label class="label">Cardholder Name</label>
             <div class="control">
-                <div class="card-element"></div>
+                {{! ?? <!--div class="card-element"></div--> }}
                 <input type="text" class="input" name="cardholderName" id="cardholderName" required minlength="3">
             </div>
         </div>
@@ -59,6 +60,13 @@
                 <div class="card-element"></div>
             </div>
             <p class="help card-errors"></p>
+        </div>
+
+        <div class="field is-form-ctrl">
+            <label class="label" for="promo">Promo Code</label>
+            <div class="control">
+                <input type="text" class="input" name="promo" id="promo">
+            </div>
         </div>
     </div>
     <div class="column">

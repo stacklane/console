@@ -135,6 +135,15 @@
 
             var thiz = this;
 
+            if (this.data.get('ctrl')){
+                document.body.addEventListener('keydown', function(e){
+                    if (thiz.data.get('ctrl') == e.code && e.ctrlKey) {
+                        e.preventDefault(); e.stopPropagation();
+                        thiz.element.classList.toggle('has-form-ctrl');
+                    }
+                });
+            }
+
             var inputs = this.element.getElementsByTagName('input');
             for (var i = 0; i < inputs.length; i++){
                 var input = inputs[i];
