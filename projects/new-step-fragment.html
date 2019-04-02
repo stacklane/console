@@ -3,6 +3,7 @@
 {{% import {NewProjectInfo} from '📤'}}
 
 {{% svg /_icons/ as ic }}
+{{% partial /_partials/_util/disable-spell }}
 
 <div class="box is-spacious">
 
@@ -66,7 +67,7 @@
                     <label class="label">Project Name</label>
                     <div class="control">
                         <input id="name" name="name" type="text" required
-                               class="input" value="{{NewProjectInfo.name}}">
+                               class="input" value="{{NewProjectInfo.name}}" {{>disable-spell}}>
                     </div>
                 </div>
             </div>

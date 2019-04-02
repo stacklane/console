@@ -3,6 +3,7 @@
 {{% svg /_icons/ as ic }}
 {{% import {project} from '🔗' }}
 {{% import {ProjectExists} from '📤' }}
+{{% partial /_partials/_util/disable-spell }}
 
 {{^ProjectExists}}
 <div class="message is-warning">
@@ -43,7 +44,7 @@
         <label class="label" for="name">Project Name</label>
         <div class="control">
             <input id="name" name="newName" type="text" required
-                   class="input" value="{{project.name}} Copy">
+                   class="input" value="{{project.name}} Copy"  {{>disable-spell}}>
         </div>
     </div>
 

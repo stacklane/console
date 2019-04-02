@@ -2,6 +2,7 @@
 {{% partial /_partials/_nav/ as nav }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
+{{% partial /_partials/_util/disable-spell }}
 
 {{% import {project} from '🔗' }}
 {{% import {ProjectHasAccount} from '📤' }}
@@ -153,7 +154,7 @@
                 <div class="control">
                     <input id="domain" name="domain" type="domain" required
                            class="input"
-                           placeholder="example.com">
+                           placeholder="example.com" {{>disable-spell}}>
                 </div>
                 <p class="help">
                     A root domain or sub-domain.  After submitting you'll

@@ -4,6 +4,7 @@
 {{% partial /_partials/_util/ as util }}
 {{% svg /_icons/ as ic }}
 {{% partial /_layout }}
+{{% partial /_partials/_util/disable-spell }}
 
 {{% import {project} from '🔗' }}
 
@@ -46,7 +47,7 @@
           data-form-validate="true" data-form-ajax="true">
         <div class="field has-addons has-addons-right">
             <p class="control is-expanded">
-                <input class="input" type="text" name="newName" value="{{project.get.name}}" required>
+                <input class="input" type="text" name="newName" value="{{project.get.name}}" required {{>disable-spell}}>
             </p>
             <p class="control">
                 <button class="button" type="submit">Rename</button>
