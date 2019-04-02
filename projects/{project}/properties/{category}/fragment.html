@@ -2,6 +2,7 @@
 
 {{% import {project} from '🔗' }}
 {{% import {SelectedProperties, HasSelectedProperties} from '📤' }}
+{{% partial /_partials/_util/disable-spell }}
 
 {{#HasSelectedProperties}}
 <div class="box">
@@ -17,7 +18,7 @@
         {{#prop.color}}
         <div class="control has-icons-left" data-controller="reflect-input-color">
             <input name="{{prop.name}}" type="text" class="input" value="{{prop.value}}" placeholder="{{prop.placeholder}}"
-                   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                   {{>disable-spell}}>
             <span class="icon is-small is-left">
                 <canvas width="16" height="16"></canvas>
             </span>
