@@ -73,7 +73,7 @@
             </div>
 
             <div class="navbar-end">
-                <!-- TODO status: use stimulus to update color class + data-tooltip based on actual status check -->
+                {{! <!-- TODO status: use stimulus to update color class + data-tooltip based on actual status check --> }}
                 <a href="https://stacklane.com/status/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Fully Operational"><span class="icon is-small has-text-success">{{>ic-adjust}}</span></a>
 
                 <a href="https://stacklane.com/docs/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Documentation"><span class="icon is-icon-ui">{{>ic-books}}</span></a>
@@ -84,7 +84,12 @@
                     </a>
 
                     <div class="navbar-dropdown is-boxed is-right">
-                        <span class="navbar-item">{{🎨.logged-in-as Me.name}}</span>
+                        {{! Important to show email, as same person may have many logins under different emails }}
+                        <span class="navbar-item">
+                            {{🎨.logged-in-as Me.name}}
+                            <br>
+                            {{Me.email}}
+                        </span>
                         <hr class="navbar-divider">
                         <form method="post" data-controller="form" action="/__/auth/provider/logout">
                             <a href="#" class="navbar-item" data-action="form#submit">Sign Out</a>
