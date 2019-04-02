@@ -15,10 +15,12 @@
         }
         update(){
             var input = this.element.getElementsByTagName("input")[0];
-            var color = input.value && input.value.length ? input.value : input.placeholder;
+            var color = input.value && input.value.length ? input.value : input.getAttribute('placeholder');
             if (color && color.length) {
                 var canvas = this.element.getElementsByTagName("canvas")[0];
-                canvas.getContext("2d").fillRect(0, 0, canvas.width, canvas.height);
+                var ctx = canvas.getContext("2d");
+                ctx.fillStyle = input.value;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
         }
     });
