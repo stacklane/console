@@ -1,7 +1,7 @@
 
 import {url, name, dataRegion} from 'form';
 import {Source} from '🔌';
-import {Me} from '👤';
+import {Me, Role} from '👤';
 import {Project, ProjectUser, ProjectInstance} from '📦';
 import {NewProjectGetInfo} from '📤';
 
@@ -17,7 +17,7 @@ let project = new Project()
 project.name(name ? name : project.source.name);
 
 project(()=>{
-    new ProjectUser().user(Me).star(true);
+    new ProjectUser().role(Role.ProjectOwner).user(Me).star(true);
 });
 
 ({redirect: Redirect.dir('projects').dir(project.id).success('New Project created')});

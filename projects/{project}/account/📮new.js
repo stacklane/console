@@ -2,7 +2,7 @@
 import {customers, subscriptions} from 'stripe.com';
 import {stripeToken, promo} from 'form';
 import * as Theme from '🎨';
-import {Me} from '👤';
+import {Me, Role} from '👤';
 import {Account, AccountUser} from '📦';
 import {project} from '🔗';
 
@@ -30,7 +30,7 @@ try {
         .stripeSubItemId(subscriptionItem.id);
 
     account(() => {
-        new AccountUser().user(Me);
+        new AccountUser().role(Role.AccountOwner).user(Me);
     });
 
     project.get().account = account;
