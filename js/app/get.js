@@ -29,6 +29,13 @@
         existing.classList.remove(IS_LOADING_CLS);
         newHTML = newHTML.trim(); // ensure no children, so we can detect empty
         existing.innerHTML = newHTML;
+        if (existing.children.length) {
+            /** Becomes a .block if it has children **/
+            existing.classList.add('block');
+        } else if (newHTML.length == 0) {
+            /** Completely removed if empty -- works best for CSS **/
+            existing.parentElement.removeChild(existing);
+        }
     };
 
     App.register("get", class extends Stimulus.Controller {

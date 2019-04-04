@@ -5,17 +5,6 @@ $get-loader-size: 2em;
 
 div[data-controller="get"]{
   /**
-   * Typically you're retrieving one or more 'Bulma block' elements which will not be children.
-   *
-   * When loading is complete, and there are children present (not empty), then give
-   * it the proper block padding for adjacent blocks.
-   */
-  &:not(.is-loading):not(:empty) {
-    //@extend %block;
-    margin-bottom: 1.5rem;
-  }
-
-  /**
    * Standard loading indicator
    */
   &.is-loading{
