@@ -1,7 +1,7 @@
 
 import {customers, subscriptions} from 'stripe.com';
 import {stripeToken, promo} from 'form';
-import * as Theme from '🎨';
+import * as Properties from '🎨';
 import {Me, Role} from '👤';
 import {Account, AccountUser} from '📦';
 import {project} from '🔗';
@@ -16,8 +16,10 @@ let customer = customers.create({
 });
 
 try {
+    let planId = Properties['stripe-plan-id'];
+
     let subscription = subscriptions.create({
-        "items[0][plan]": Theme.stripe_plan_id(),
+        "items[0][plan]": planId(),
         customer: customer.id,
         coupon: promo
     });
