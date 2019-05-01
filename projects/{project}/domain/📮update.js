@@ -9,7 +9,7 @@ let mappedDomain = m.name;
 
 if (m && m.domain.verification && m.domain.verification.verified && Mapping.exists(mappedDomain)){
     try {
-        if (Mapping.domain(mappedDomain).update()){
+        if (Mapping.domain(mappedDomain).theme(p.properties).update()){
             ({success: `Allow 5-10 minutes for changes to propagate`});
         } else {
             ({error: `Domain update failed`});
