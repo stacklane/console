@@ -23,4 +23,5 @@ SelectedProperties.forEach((p)=>{
     }
 });
 
-({redirect: `/projects/${project.id}/`, success: `Properties updated.`});
+
+({redirect: Redirect.dir('projects').dir(project.id).success('Updates applied at next deployment')});
