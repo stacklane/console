@@ -28,6 +28,8 @@
 
 {{#project.get.mapping}}
 
+{{#this.domain.verification.verified}}
+
 <div class="box">
     <div class="media">
         <div class="media-left">
@@ -38,13 +40,12 @@
         <div class="media-content">
             <h5 class="title is-5">{{this.domain.name}}</h5>
             <p class="subtitle is-6">
-                Verify domain ownership and configure domain settings.
+                Review deployment details.
             </p>
         </div>
     </div>
 </div>
 
-{{#this.domain.verification.verified}}
 <div class="box">
     <div class="message is-info">
         <div class="message-body">
@@ -58,16 +59,62 @@
     </div>
 
     <hr>
+
+    <p class="has-text-right">
+        <a href="#" class="button is-primary" data-controller="modal" data-action="modal#show" data-modal-id="updateDialog">
+            Schedule Update
+        </a>
+    </p>
+</div>
+
+<div class="modal" id="updateDialog">
     <form method="post" action="update"
-          data-controller="form" data-form-validate="true" data-form-ajax="true">
-        <p class="has-text-right">
-            <button class="button is-primary" type="submit">Schedule Update</button>
-        </p>
+          data-controller="form"
+          data-form-validate="true"
+          data-form-ajax="true">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"><b>Update Deployment</b></p>
+                <a class="delete is-modal-hide" aria-label="close"></a>
+            </header>
+            <section class="modal-card-body">
+                This will schedule an update of the existing deployment.
+                The update will take 5-10 minutes to propagate.
+                During this time the source repository will be checked for any updates,
+                and any changes to properties will be applied.
+                Keep in mind that even after updating there may be
+                <span class="tag">Cache-Control</span> headers in effect
+                which will also need to expire out.
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-primary" type="submit">Update</button>
+                <button class="button is-modal-hide">Cancel</button>
+            </footer>
+        </div>
     </form>
 </div>
+
 {{/this.domain.verification.verified}}
 
 {{^this.domain.verification.verified}}
+
+<div class="box">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon is-medium has-text-grey">
+                {{> ic-domain}}
+            </span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">{{this.domain.name}}</h5>
+            <p class="subtitle is-6">
+                Verify domain ownership.
+            </p>
+        </div>
+    </div>
+</div>
+
 <div class="box">
     <div class="message is-info">
         <div class="message-body">
@@ -96,20 +143,29 @@
     <p>
         When Stacklane finds this DNS record, we'll make you a verified owner of the domain.
         DNS changes may take some time. If we don't find the record immediately, return here at anytime to retry verification.
-        To stay verified, don't remove the DNS record, even after verification succeeds.
+        To remain verified, do not remove the DNS record, even after verification succeeds.
     </p>
 
     <hr>
 
-    <form method="post" action="verify"
-          data-controller="form"
-          data-form-validate="true"
-          data-form-ajax="true">
-        <div class="has-text-right">
+    <div class="has-text-right has-multiple-form-buttons">
+        <form method="post" action="verifyCancel"
+              data-controller="form"
+              data-form-validate="true"
+              data-form-ajax="true">
+            <button class="button" type="submit">Cancel</button>
+        </form>
+
+        <form method="post" action="verify"
+              data-controller="form"
+              data-form-validate="true"
+              data-form-ajax="true">
+
             <button class="button is-primary" type="submit">Verify Now</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+
 {{/this.domain.verification.verified}}
 
 {{/project.get.mapping}}

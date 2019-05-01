@@ -66,6 +66,10 @@ $icon-active-color-accent: rgb(146,186,248);
   height: .75rem;
 }
 
+.has-multiple-form-buttons form{
+  display: inline;
+}
+
 a{
   font-weight: 500;
 }
