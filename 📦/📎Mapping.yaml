@@ -11,17 +11,16 @@ path:
 www:
   type: boolean
 
-
-# Fields which are the result of a successful mapping, recorded for easy re-display:
+# Fields which are the result of a successful mapping:
 
 ip:
   type: string
   optional: true
 
-record:
+record: # A or CNAME
   type: string
   optional: true
 
 name:
-  type: string
+  type: domain
   optional: true

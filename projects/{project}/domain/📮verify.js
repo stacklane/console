@@ -21,11 +21,11 @@ if (Domain.verify(instanceLive.mapping.domain)){
 
         instanceLive.mapping.ip = result.address;
         instanceLive.mapping.record = result.recordType;
-        instanceLive.mapping.name = result.name;
+        instanceLive.mapping.name = result.domain;
 
         ({redirect: '.', success: `Domain successfully verified and registered`});
     } catch (e){
-        ({error: `Domain verified, but registration failed`});
+        ({error: `Domain verified, but registration failed: ${e.message}`});
     }
 } else {
     ({error: `Domain not verified`});

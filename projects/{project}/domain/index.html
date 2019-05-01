@@ -22,9 +22,9 @@
 
 {{$content}}
 
-<!--
+{{!
   Already Setup
-  -->
+}}
 
 {{#project.get.mapping}}
 
@@ -56,6 +56,14 @@
             {{this.name}} {{this.record}} {{this.ip}}
         </div>
     </div>
+
+    <hr>
+    <form method="post" action="update"
+          data-controller="form" data-form-validate="true" data-form-ajax="true">
+        <p class="has-text-right">
+            <button class="button is-primary" type="submit">Update</button>
+        </p>
+    </form>
 </div>
 {{/this.domain.verification.verified}}
 
@@ -106,9 +114,9 @@
 
 {{/project.get.mapping}}
 
-<!--
+{{!
   First Time
-  -->
+}}
 
 {{^project.get.mapping}}
 
