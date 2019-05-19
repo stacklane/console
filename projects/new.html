@@ -50,7 +50,7 @@
                 {{#examples as example}}
                 <div class="column is-half">
                     <form method="post" action="new" data-controller="form" data-form-ajax="true">
-                        <input type="hidden" name="url" value="{{src}}">
+                        <input type="hidden" name="url" value="{{example.src}}">
                         <div class="box media">
                             <div class="media-left">
                                 <button class="button is-primary is-small" type="submit">
@@ -60,9 +60,9 @@
                             <div class="media-content">
                                 <div>
                                     <p>
-                                        <strong>{{title}}</strong> <small></small>
+                                        <strong>{{example.title}}</strong> <small></small>
                                         <br>
-                                        {{desc}}
+                                        {{example.desc}}
                                     </p>
                                 </div>
                             </div>
