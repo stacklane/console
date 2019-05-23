@@ -3,23 +3,24 @@ import {project} from '🔗';
 import {AccountUser} from '📦';
 
 let live = project.get();
+let redirectBase = Redirect.dir('projects').dir(project.id).dir('account');
 
 if (live.account.linked()){
 
     // Go to existing account:
-    `/projects/${live.id}/account/` + live.account.get().id + '/';
+    redirectBase.dir(live.account.id);
 
 } else {
     try {
 
         // Check if at least one to choose from:
         AccountUser.me().all().get();
-        `/projects/${project.id}/account/choose`;
+        redirectBase.name('choose');
 
     } catch ($ModelNotFound) {
 
         // Nothing to choose from:
-        `/projects/${project.id}/account/new`;
+        redirectBase.name('new');
 
     }
 }
