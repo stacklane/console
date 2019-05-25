@@ -2,11 +2,11 @@
   {
     "title":"Tasks",
     "desc":"Add, rename, complete, and prioritize tasks.",
-    "src":"https://github.com/stacklane-examples/tasks.git"
+    "src":"https://github.com/stacklane-blueprints/tasks.git"
   },
   {
     "title":"Images",
     "desc":"Image storage, display, and upload progress.",
-    "src":"https://github.com/stacklane-examples/images.git"
+    "src":"https://github.com/stacklane-blueprints/images.git"
   }
 ]
