@@ -66,8 +66,11 @@
             return ["done", "create", "status", "instanceTemplate"];
         }
         connect(){
-            if (localStorage.getItem("builder-last")){
-                var obj = JSON.parse(localStorage.getItem("builder-last"));
+            this.projectId = this.data.get('project')
+            this.lastTestStorageKey = "builder-last-" + this.projectId;
+
+            if (localStorage.getItem(this.lastTestStorageKey)){
+                var obj = JSON.parse(localStorage.getItem(this.lastTestStorageKey));
                 if (obj.expires > Date.now()){
                     this._makeTestInstanceBlock(obj.url, obj.frame, obj.expires, obj.created);
                 }
@@ -183,7 +186,8 @@
 
                 thiz.building = false;
 
-                localStorage.setItem('builder-last', JSON.stringify({
+                localStorage.setItem(thiz.lastTestStorageKey, JSON.stringify({
+                    project: thiz.projectId,
                     url: obj.url,
                     frame: obj.frame,
                     created: created,
