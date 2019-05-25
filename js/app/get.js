@@ -73,6 +73,7 @@
                         PREVIEW_CACHE[cacheKey] = html;
                     }).catch(function (ex) {
                         Messages.post({error: 'Unexpected response'});
+                        console.error('Unexpected response', ex);
                     });
                 }
             }).catch(function (ex) {
