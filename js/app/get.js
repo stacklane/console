@@ -34,7 +34,14 @@
             existing.classList.add('block');
         } else if (newHTML.length == 0) {
             /** Completely removed if empty -- works best for CSS **/
-            existing.parentElement.removeChild(existing);
+            // Tracking down a bug:
+            if (existing == null){
+                console.warn("'existing' was null");
+            } else if (existing.parentElement == null){
+                console.warn("'existing.parentElement' was null");
+            } else {
+                existing.parentElement.removeChild(existing);
+            }
         }
     };
 
