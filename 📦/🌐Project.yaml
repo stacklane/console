@@ -28,4 +28,7 @@ properties:
   optional: true
 
 region:
-  type: string
+  type: options
+  values:
+    - us
+    - eu
