@@ -21,7 +21,7 @@ try {
         .status((log)=>{
             buffered.push({
                 level: log.level,
-                value: log.value
+                value: log.value + ''
             });
         })
         .then((site)=>{
@@ -64,8 +64,8 @@ try {
             $event: {type: "completed", last: true},
             level: "info",
             value: "Completed",
-            url: finished.url,
-            frame: finished.frame
+            url: finished.url + '',
+            frame: finished.frame + ''
         });
 
         return next;
