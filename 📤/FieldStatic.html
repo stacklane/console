@@ -1,0 +1,11 @@
+<!--TEMPLATE mustache-->
+{{#readable}}
+<div class="field">
+  <label class="label" for="{{path}}">{{label}}</label>
+  <div class="control">
+    <input id="{{path}}" name="{{path}}" value="{{value}}" class="input is-static" readonly>
+  </div>
+  {{#about}}<p class="help">{{about}}</p>{{/about}}
+  {{#invalid}}<p class="help is-danger">{{message.value}}</p>{{/invalid}}
+</div>
+{{/readable}}

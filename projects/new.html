@@ -4,6 +4,7 @@
 {{% svg /_icons/ as ic }}
 
 {{% json /projects/_examples as examples}}
+{{% import {NewProjectForm} from '📤' }}
 
 {{< layout}}
 
@@ -38,6 +39,7 @@
         </ul>
     </div>
 
+    {{#NewProjectForm.Begin.view.source as field}}
     <div class="tab-content">
         <div class="tab-pane" id="example" aria-labelledby="example-tab">
             <div class="message is-info">
@@ -50,7 +52,7 @@
                 {{#examples as example}}
                 <div class="column is-half">
                     <form method="post" action="new" data-controller="form" data-form-ajax="true">
-                        <input type="hidden" name="url" value="{{example.src}}">
+                        <input type="hidden" name="{{field.path}}" value="{{example.src}}">
                         <div class="box media">
                             <div class="media-left">
                                 <button class="button is-primary is-small" type="submit">
@@ -96,7 +98,7 @@
                     <div class="field">
                         <label class="label">Bitbucket Repository URL</label>
                         <div class="control">
-                            <input id="bitbucket-url" name="url" type="text" required
+                            <input id="bitbucket-url" name="{{field.path}}" type="text" required
                                    class="input" placeholder="https://bitbucket.org/your/stacklane-repo.git">
                         </div>
                         <p class="help">
@@ -137,7 +139,7 @@
                     <div class="field">
                         <label class="label">GitHub Repository URL</label>
                         <div class="control">
-                            <input id="github-url" name="url" type="text" required
+                            <input id="github-url" name="{{field.path}}" type="text" required
                                    class="input" placeholder="https://github.com/your/stacklane-repo.git">
                         </div>
                         <p class="help">
@@ -155,7 +157,7 @@
             </div>
         </div>
     </div>
-
+    {{/NewProjectForm.Begin.view.source}}
 </div>
 
 {{/content}}

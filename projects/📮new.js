@@ -1,11 +1,13 @@
 
-import {url} from 'form';
-import {Source} from '🔌';
-import {Me} from '👤';
-import {Project, ProjectUser, ProjectInstance} from '📦';
+import {NewProjectForm} from '📤';
 
-if (!Source.isValidURLFormat(url)) throw Messages.fieldError('url', 'Invalid source URL: ' + url);
+try {
 
-Messages.data('url', url);
+    ({redirect: Redirect.dir('projects').name('new-step').form(NewProjectForm.Begin.read())});
 
-({redirect: Redirect.dir('projects').name('new-step')});
+} catch ($ModelInvalid){
+
+    ({redirect: Redirect.dir('projects').name('new').error("Invalid project source")});
+
+}
+

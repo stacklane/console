@@ -4,6 +4,7 @@
 {{% svg /_icons/ as ic }}
 
 {{% json /projects/_examples as examples}}
+{{% import {NewProjectForm} from '📤' }}
 
 {{< layout}}
 
@@ -13,26 +14,26 @@
 
 {{$content}}
 
-{{#Messages.data.url}}
+{{#NewProjectForm.Begin.valid}}
 
-<!--
+{{!
   TODO Better message like 'Checking Repository'
   Right now there is no message, only a spinner.
-  -->
-<div class="is-loading" data-controller="get" data-get-href="/projects/new-step-fragment?url={{Messages.data.url}}">
+}}
+<div class="is-loading" data-controller="get"
+     data-get-href="/projects/new-step-fragment?_form={{NewProjectForm.Begin.view.id}}">
 
 </div>
 
-{{/Messages.data.url}}
+{{/NewProjectForm.Begin.valid}}
 
-{{^Messages.data.url}}
+{{^NewProjectForm.Begin.valid}}
 <div class="message is-danger">
     <div class="message-body">
         Please <a href="/projects/new">start over</a>.
     </div>
 </div>
-{{/Messages.data.url}}
-
+{{/NewProjectForm.Begin.valid}}
 
 {{/content}}
 {{/layout}}

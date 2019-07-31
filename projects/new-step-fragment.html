@@ -1,10 +1,11 @@
 <!--TEMPLATE mustache-->
 
-{{% import {NewProjectInfo} from '📤'}}
+{{% import {Field, FieldSelect, FieldStatic, NewProjectInfo, NewProjectForm} from '📤'}}
 
 {{% svg /_icons/ as ic }}
 {{% partial /_partials/_util/disable-spell }}
 
+<!--suppress XmlDuplicatedId -->
 <div class="box is-spacious">
 
     {{^NewProjectInfo.visible}}
@@ -39,7 +40,8 @@
 
     <hr>
 
-    <form method="post" action="new-step"
+    {{#NewProjectInfo.form}}
+    <form method="post" action="new-step?_form={{id}}"
           data-controller="form"
           data-form-validate="true"
           data-form-ajax="true">
@@ -56,21 +58,8 @@
 
         <div class="columns">
             <div class="column is-three-fifths">
-                <div class="field">
-                    <label class="label">Source</label>
-                    <div class="control">
-                        <input id="url" name="url" type="text" required
-                               class="input is-static" value="{{NewProjectInfo.value}}" readonly>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Project Name</label>
-                    <div class="control">
-                        <input id="name" name="name" type="text" required
-                               class="input" value="{{NewProjectInfo.name}}" {{>disable-spell}}>
-                    </div>
-                </div>
+                {{{ FieldStatic source }}}
+                {{{ Field name }}}
             </div>
             <div class="column">
                 <div class="simple-list">
@@ -107,10 +96,7 @@
                             {{🎨.feature-data-location}}
                         </span>
                         <div class="select is-small">
-                            <select name="dataRegion" value="us" required>
-                                <option value="us">United States</option>
-                                <option value="eu">European Union</option>
-                            </select>
+                            {{{FieldSelect region}}}
                         </div>
                     </div>
                 </div>
@@ -123,6 +109,7 @@
             <button class="button is-primary" type="submit">Create</button>
         </p>
     </form>
+    {{/NewProjectInfo.form}}
 
     {{/NewProjectInfo.visible}}
 </div>

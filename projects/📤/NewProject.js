@@ -1,9 +1,8 @@
 
-import {url} from '&';
-import {Source} from '🔌';
-import {Identicon} from 'util';
-import {NewProjectGetInfo} from '📤';
+import {NewProjectGetInfo, NewProjectForm} from '📤';
 
-let info = NewProjectGetInfo(url);
+let info = NewProjectGetInfo(NewProjectForm.Begin.view().source.value.value);
+
+info.form = NewProjectForm.End.view({name: info.name});
 
 export {info as NewProjectInfo};

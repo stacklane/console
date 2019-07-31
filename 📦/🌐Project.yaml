@@ -1,6 +1,8 @@
 
 # Name (shared) to use if not overridden by ProjectUser#name:
-name: string
+name:
+  type: string
+  min: 2
 
 # Icon
 icon: svg-icon
@@ -12,7 +14,6 @@ account:
 
 source:
   type: source
-  optional: false
 
 mapping:
   type: Mapping
@@ -21,7 +22,6 @@ mapping:
 data:
   type: namespace
   init: true
-  optional: false
 
 properties:
   type: map
@@ -30,5 +30,5 @@ properties:
 region:
   type: options
   values:
-    - us
-    - eu
+    us: United States
+    eu: European Union

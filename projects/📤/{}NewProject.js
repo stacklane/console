@@ -13,7 +13,8 @@ let get = (url)=>{
         exists: false,
         name: '',
         defaultName: source.name,
-        icon: Identicon.of(source.name)
+        icon: Identicon.of(source.name),
+        form: null
     };
 
     if (source.ssh){

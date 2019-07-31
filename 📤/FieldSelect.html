@@ -1,0 +1,12 @@
+<!--TEMPLATE mustache-->
+{{#updatable}}
+{{#selectOne as select}}
+<select id="{{path}}" name="{{path}}" {{#required}}required{{/required}}>
+  {{#select.options as option}}
+  <option value="{{option.value}}" {{#option.selected}}selected{{/option.selected}}>
+  {{option.label}}
+  </option>
+  {{/select.options}}
+</select>
+{{/selectOne}}
+{{/updatable}}
