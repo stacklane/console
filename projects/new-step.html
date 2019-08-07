@@ -14,26 +14,28 @@
 
 {{$content}}
 
-{{#NewProjectForm.Begin.valid}}
+{{#NewProjectForm.Begin.view}}
 
-{{!
-  TODO Better message like 'Checking Repository'
-  Right now there is no message, only a spinner.
-}}
-<div class="is-loading" data-controller="get"
-     data-get-href="/projects/new-step-fragment?_form={{NewProjectForm.Begin.view.id}}">
-
-</div>
-
-{{/NewProjectForm.Begin.valid}}
-
-{{^NewProjectForm.Begin.valid}}
-<div class="message is-danger">
-    <div class="message-body">
-        Please <a href="/projects/new">start over</a>.
+    {{#ready}}
+    {{!
+      TODO Better message like 'Checking Repository'
+      Right now there is no message, only a spinner.
+    }}
+    <div class="is-loading" data-controller="get"
+         data-get-href="/projects/new-step-fragment?_form={{id}}">
     </div>
-</div>
-{{/NewProjectForm.Begin.valid}}
+    {{/ready}}
+
+    {{^ready}}
+    <div class="message is-danger">
+        <div class="message-body">
+            Please <a href="/projects/new">start over</a>.
+        </div>
+    </div>
+    {{/ready}}
+
+{{/NewProjectForm.Begin.view}}
+
 
 {{/content}}
 {{/layout}}
