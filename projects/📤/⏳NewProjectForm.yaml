@@ -1,7 +1,7 @@
 📦.Project:
   Begin:
     - source
-  End:
+  +End:
     - name:
         label: Project Name
     - region
