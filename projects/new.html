@@ -39,7 +39,8 @@
         </ul>
     </div>
 
-    {{#NewProjectForm.Begin.view.source as field}}
+    {{#NewProjectForm.Begin.view}}
+    {{#source as field}}
     <div class="tab-content">
         <div class="tab-pane" id="example" aria-labelledby="example-tab">
             <div class="message is-info">
@@ -51,7 +52,7 @@
             <div class="columns">
                 {{#examples as example}}
                 <div class="column is-half">
-                    <form method="post" action="new" data-controller="form" data-form-ajax="true">
+                    <form method="post" action="new?_form={{id}}" data-controller="form" data-form-ajax="true">
                         <input type="hidden" name="{{field.path}}" value="{{example.src}}">
                         <div class="box media">
                             <div class="media-left">
@@ -90,7 +91,7 @@
             </div>
 
             <div>
-                <form method="post" action="new"
+                <form method="post" action="new?_form={{id}}"
                       data-controller="form"
                       data-form-validate="true"
                       data-form-ajax="true">
@@ -131,7 +132,7 @@
             </div>
 
             <div>
-                <form method="post" action="new"
+                <form method="post" action="new?_form={{id}}"
                       data-controller="form"
                       data-form-validate="true"
                       data-form-ajax="true">
@@ -157,7 +158,8 @@
             </div>
         </div>
     </div>
-    {{/NewProjectForm.Begin.view.source}}
+    {{/source}}
+    {{/NewProjectForm.Begin.view}}
 </div>
 
 {{/content}}
