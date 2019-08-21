@@ -41,10 +41,9 @@
     <div class="tabs {{#🎨.tabs-boxed}}is-boxed{{/🎨.tabs-boxed}}" data-controller="tabs">
         <ul>
             <li class="is-active"><a id="api-tab" href="#api"><span class="icon">{{>ic-extension}}</span>&nbsp;<span>Third Party API</span></a></li>
-            <li><a id="user-tab" href="#user"><span class="icon">{{>ic-verified_user}}</span>&nbsp;<span>Identity Provider</span></a></li>
-            {{#project.source.ssh}}
-            <li><a id="ssh-tab" href="#ssh"><span class="icon">{{>ic-lock}}</span>&nbsp;<span>SSH Key</span></a></li>
-            {{/project.source.ssh}}
+            <li><a id="email-tab" href="#email"><span class="icon">{{>ic-email}}</span>&nbsp;<span>Email</span></a></li>
+            <li><a id="user-tab" href="#user"><span class="icon">{{>ic-verified_user}}</span>&nbsp;<span>Users</span></a></li>
+            {{#project.source.ssh}}<li><a id="ssh-tab" href="#ssh"><span class="icon">{{>ic-lock}}</span>&nbsp;<span>SSH Key</span></a></li>{{/project.source.ssh}}
             <li><a id="dev-tab" href="#dev"><span class="icon">{{>ic-dev_mode}}</span> <span>Dev Token</span></a></li>
         </ul>
     </div>
@@ -78,7 +77,7 @@
                     <div class="control">
                         <input type="text" class="input" id="name" name="name" placeholder="abc.com" required>
                     </div>
-                    <p class="help"> Third party domain name.</p>
+                    <p class="help">Third party domain name.</p>
                 </div>
                 <div class="field">
                     <label class="label" for="token">Token</label>
@@ -86,6 +85,74 @@
                         <input type="text" class="input" id="token" name="token" placeholder="" required>
                     </div>
                     <p class="help">Authentication token obtained from the third party provider.</p>
+                </div>
+                <hr>
+                <div class="has-text-right">
+                    <button class="button is-primary" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-pane is-active" id="email" aria-labelledby="email-tab">
+            <div class="message is-info">
+                <div class="message-body">
+                    Defines connection information for a third party email service.
+                </div>
+            </div>
+
+            <form method="post" action="newEmail"
+                  data-controller="form"
+                  data-form-validate="true"
+                  data-form-ajax="true">
+                <div class="field">
+                    <label class="label" for="emailScopeType">Scope</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="emailScopeType" name="emailScopeType">
+                                <option value="">Always Applies</option>
+                                <option value="test">Testing Only</option>
+                                <option value="live">Live Only</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="emailProviderType">Provider</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="emailProviderType" name="emailProviderType" required>
+                                <option value="">Choose...</option>
+                                <option value="gmail">Google Gmail</option>
+                                <option value="mailgun">Mailgun</option>
+                                <option value="ses-us-east-1">Amazon SES (us-east-1)</option>
+                                <option value="ses-us-east-1">Amazon SES (us-west-1)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="help">
+                        Choose the third party email provider which you have separately setup credentials for.
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label" for="emailUsername">Username</label>
+                    <div class="control">
+                        <input type="text" class="input" id="emailUsername" name="emailUsername" placeholder="" required>
+                    </div>
+                    <p class="help">SMTP username as given by the provider.</p>
+                </div>
+                <div class="field">
+                    <label class="label" for="emailPassword">Password</label>
+                    <div class="control">
+                        <input type="text" class="input" id="emailPassword" name="emailPassword" placeholder="" required>
+                    </div>
+                    <p class="help">SMTP password as given by the provider.</p>
+                </div>
+                <div class="field">
+                    <label class="label" for="emailFrom">From Address</label>
+                    <div class="control">
+                        <input type="email" class="input" id="emailFrom" name="emailFrom" placeholder="name@company.com" required>
+                    </div>
+                    <p class="help">Email sent will have this from email address.</p>
                 </div>
                 <hr>
                 <div class="has-text-right">
@@ -217,7 +284,6 @@
         </div>
     </div>
 </div>
-
 
 {{/content}}
 {{/layout}}
