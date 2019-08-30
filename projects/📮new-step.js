@@ -6,7 +6,7 @@ import {NewProjectForm, NewProjectGetInfo} from '📤';
 
 try {
 
-    let end = NewProjectForm.End.read();
+    let end = NewProjectForm.End.validate();
 
     let project = new Project().icon(NewProjectGetInfo(end.source.value.value).icon);
 

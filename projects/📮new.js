@@ -3,7 +3,7 @@ import {NewProjectForm} from '📤';
 
 try {
 
-    ({redirect: Redirect.dir('projects').name('new-step').form(NewProjectForm.Begin.read())});
+    ({redirect: Redirect.dir('projects').name('new-step').form(NewProjectForm.Begin.validate())});
 
 } catch ($ModelInvalid){
 
