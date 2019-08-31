@@ -36,13 +36,6 @@ let GetProjectNameModel = (project)=>{
 /**
  * @param project - Model link
  */
-let GetProjectIcon = (project)=>{
-    return project.icon;
-};
-
-/**
- * @param project - Model link
- */
 let GetProjectTags = (project)=>{
     let p = project(()=>ProjectUser.me().get());
 
@@ -70,6 +63,9 @@ let IsProjectStarred = (project)=>{
     return project(()=>ProjectUser.me().get()).star;
 };
 
+/**
+ * @param project - Model link
+ */
 let GetChildProjects = (project)=>{
     return ProjectUser.user(Me).parent(project).ancestor();
 };
@@ -79,6 +75,6 @@ let GetChildProjects = (project)=>{
 //};
 
 export {
-    GetProjectName, GetProjectNameModel, GetProjectIcon, GetProjectTags, GetProjectUserDetails,
+    GetProjectName, GetProjectNameModel, GetProjectTags, GetProjectUserDetails,
     IsProjectStarred, GetChildProjects   /*IsProjectNested,*/  /*, GetProjectHome*/
 };

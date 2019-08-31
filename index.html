@@ -4,7 +4,7 @@
 {{% svg /_icons/ as ic }}
 {{% svg /_brand/ as brand }}
 
-{{% import {MyProjects, GetProjectIcon} from '📤' }}
+{{% import {MyProjects} from '📤' }}
 
 {{< layout}}
 
@@ -61,7 +61,7 @@
             <div class="media">
                 <div class="media-left">
                     <span class="icon is-block">
-                        {{& GetProjectIcon item.project }}
+                        {{& item.project.icon }}
                     </span>
                 </div>
                 <div class="media-content">

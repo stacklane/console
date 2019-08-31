@@ -6,7 +6,7 @@
 
 {{% import {project} from '🔗' }}
 {{% import {Project} from '📦'}}
-{{% import {GetProjectName, GetProjectIcon, IsProjectStarred} from '📤' }}
+{{% import {GetProjectName, IsProjectStarred} from '📤' }}
 
 {{% partial /projects/{project}/_project-side }}
 {{% partial /projects/{project}/_project-nav }}
@@ -32,7 +32,7 @@
     <div class="media">
         <div class="media-left">
             <span class="icon is-large">
-                {{& GetProjectIcon project }}
+                {{& project.icon }}
             </span>
         </div>
 
