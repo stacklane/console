@@ -3,18 +3,8 @@ import {Source} from '🔌';
 import {ProjectUser} from '📦';
 import {Me} from '👤';
 
-/*
-let GetProjectHome = (project)=>{
-    let pu = project(()=>ProjectUser.me().get());
-    if (pu.parent.linked()){
-        return `/projects/${pu.parent.id}/`;
-    } else {
-        return `/projects/${project.id}/`;
-    }
-};*/
-
 /**
- * @param project - May be a model link or actual model.
+ * @param project - Model Link
  */
 let GetProjectName = (project)=>{
     let custom = project(()=>ProjectUser.me().get().name);
@@ -29,14 +19,29 @@ let GetProjectName = (project)=>{
 };
 
 /**
- * @param project - May be a model link or actual model.
+ * @param project - Model
+ */
+let GetProjectNameModel = (project)=>{
+    let custom = project(()=>ProjectUser.me().get().name);
+
+    if (custom) return custom;
+
+    try {
+        return project.name;
+    } catch (e){
+        return 'NA'; // case not expected
+    }
+};
+
+/**
+ * @param project - Model link
  */
 let GetProjectIcon = (project)=>{
     return project.icon;
 };
 
 /**
- * @param project - May be a model link or actual model.
+ * @param project - Model link
  */
 let GetProjectTags = (project)=>{
     let p = project(()=>ProjectUser.me().get());
@@ -73,8 +78,7 @@ let GetChildProjects = (project)=>{
 //    return project(()=>ProjectUser.me().get()).parent.linked();
 //};
 
-
 export {
-    GetProjectName, GetProjectIcon, GetProjectTags, GetProjectUserDetails,
+    GetProjectName, GetProjectNameModel, GetProjectIcon, GetProjectTags, GetProjectUserDetails,
     IsProjectStarred, GetChildProjects   /*IsProjectNested,*/  /*, GetProjectHome*/
 };
