@@ -34,9 +34,9 @@ let GetProjectNameModel = (project)=>{
 };
 
 /**
- * @param project - Model link
+ * @param project - Model
  */
-let GetProjectTags = (project)=>{
+let GetProjectTagsModel = (project)=>{
     let p = project(()=>ProjectUser.me().get());
 
     let out = [];
@@ -53,8 +53,8 @@ let GetProjectUserDetails = (v)=>{
     return ({
         id: v.id,
         project: v.project(),
-        tags: GetProjectTags(v.project()),
-        name: GetProjectName(v.project()),
+        tags: GetProjectTagsModel(v.project()),
+        name: GetProjectNameModel(v.project()),
         star: v.star
     });
 };
@@ -75,6 +75,6 @@ let GetChildProjects = (project)=>{
 //};
 
 export {
-    GetProjectName, GetProjectNameModel, GetProjectTags, GetProjectUserDetails,
+    GetProjectName, GetProjectNameModel, /*GetProjectTags,*/ GetProjectUserDetails,
     IsProjectStarred, GetChildProjects   /*IsProjectNested,*/  /*, GetProjectHome*/
 };
