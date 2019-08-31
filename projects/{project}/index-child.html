@@ -5,10 +5,10 @@
   -->
 
 {{% import {project} from '🔗' }}
-{{% import {GetChildProjects, GetProjectName} from '📤' }}
+{{% import {GetChildProjects, GetProjectNameModel} from '📤' }}
 
 {{#GetChildProjects project as child}}
 
-<span>{{GetProjectName child.project}}</span>
+<span>{{GetProjectNameModel child.project}}</span>
 
 {{/GetChildProjects}}
