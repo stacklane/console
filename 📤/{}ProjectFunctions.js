@@ -63,18 +63,6 @@ let IsProjectStarred = (project)=>{
     return project(()=>ProjectUser.me().get()).star;
 };
 
-/**
- * @param project - Model link
- */
-let GetChildProjects = (project)=>{
-    return ProjectUser.user(Me).parent(project).ancestor();
-};
-
-//let IsProjectNested = (project)=>{
-//    return project(()=>ProjectUser.me().get()).parent.linked();
-//};
-
 export {
-    GetProjectName, GetProjectNameModel, /*GetProjectTags,*/ GetProjectUserDetails,
-    IsProjectStarred, GetChildProjects   /*IsProjectNested,*/  /*, GetProjectHome*/
+    GetProjectName, GetProjectNameModel, IsProjectStarred, GetProjectUserDetails
 };
