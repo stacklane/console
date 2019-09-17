@@ -1,0 +1,9 @@
+<!--TEMPLATE mustache-->
+{{% import {project} from '🔗' }}
+{{% import {IsSimpleModeVersion} from '📤' }}
+
+{{% partial /projects/{project}/_nav/ as project-nav }}
+
+{{#IsSimpleModeVersion}}
+{{> project-nav-top }}
+{{/IsSimpleModeVersion}}

@@ -3,7 +3,7 @@
  *
  * Requires w-X for the available widths.
  */
-(function (window) {
+((window)=>{
     'use strict';
 
     //const CLS = '';

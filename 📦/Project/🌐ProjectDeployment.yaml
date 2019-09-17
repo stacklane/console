@@ -1,0 +1,23 @@
+
+#
+# Combination of "content" with "location"
+#
+# May also eventually contain redirect instructions, "maintenance mode" toggles, etc.
+#
+# Basically this is *anything* that shows up at the #domain + #path.
+#
+# ProjectDeployment's would not often be created -- instead:
+#
+# 1. In Project#simple mode, we would be re-deploying that "simple" ProjectVersion
+# 2. Otherwise, we would be setting new ProjectVersions onto this ProjectDeployment and "redeploying"
+#   with the new ProjectVersion.
+#
+# ----------------------
+
+
+version: ProjectVersion # In the future ProjectDeployment's may be used to represent other 'instructions' == OPTIONAL
+
+domain: Domain
+
+path?: string # Undefined == "/" root
+

@@ -8,7 +8,7 @@
  * (optional) data-value="success/primary/etc" -- otherwise innerText
  * (optional) data-success="somevalue" -- IF the value is X, THEN 'success', etc.
  */
-(function () {
+(()=>{
     'use strict';
     const TYPES = ['success', 'primary', 'dark', 'success', 'danger', 'info', 'warning'];
     const COMMON = {'enabled':'success', 'active':'success'};

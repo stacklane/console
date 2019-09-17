@@ -1,0 +1,38 @@
+<!--TEMPLATE mustache-->
+
+{{% import {VersionSource} from '📤' }}
+
+<div class="message is-info">
+    <div class="message-body">
+        Generates an SSH key for accessing private GIT repositories.
+        After clicking 'Generate', you'll need to copy the generated public key.
+        Add this public key to the {{VersionSource.type}} UI.
+    </div>
+</div>
+
+<form method="post" action="new/ssh"
+      data-controller="form"
+      data-form-validate="true"
+      data-form-ajax="true">
+    <div class="field has-addons has-addons-right">
+        <p class="control">
+            <a class="button is-static">
+                {{VersionSource.ownerPrefix}}
+            </a>
+        </p>
+        {{!
+          This must be mutable, so that SSH keys may be generated for
+          private repositories that are referenced/imported by the main project.
+
+          The assumption at the moment is that those imported private repos share the same owner.
+          }}
+        <p class="control is-expanded">
+            <input class="input" type="text" id="sshRepo" name="sshRepo"
+                   value="{{VersionSource.repositoryFile}}" required>
+        </p>
+    </div>
+    <br>
+    <div class="has-text-right">
+        <button class="button is-primary" type="submit">Generate</button>
+    </div>
+</form>

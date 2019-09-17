@@ -14,7 +14,7 @@ let get = (url)=>{
         name: '',
         defaultName: source.name,
         icon: Identicon.of(source.name),
-        form: null
+        newProjectViewValues: {name: 'New Project'}
     };
 
     if (source.ssh){

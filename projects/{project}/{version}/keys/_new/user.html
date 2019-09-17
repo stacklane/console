@@ -1,0 +1,62 @@
+<!--TEMPLATE mustache-->
+
+<div class="message is-info">
+    <div class="message-body">
+        Defines information for connecting to a user identity provider.
+        Setup your OAUTH app with <span class="tag is-white">domain</span>/__/auth/handler
+        as an authorized redirect URI or callback URL.
+        To allow the test environment specify <span class="tag is-white">auth.execute.website</span> as the domain.
+    </div>
+</div>
+
+<form method="post" action="new/user"
+      data-controller="form"
+      data-form-validate="true"
+      data-form-ajax="true">
+
+    <div class="field">
+        <label class="label" for="userScopeType">Scope</label>
+        <div class="control">
+            <div class="select">
+                <select id="userScopeType" name="context">
+                    <option value="">Always Applies</option>
+                    <option value="test">Testing Only</option>
+                    <option value="live">Live Only</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="identityType">Identity Provider</label>
+        <div class="control">
+            <div class="select">
+                <select id="identityType" name="identityType" required>
+                    <option value="">Choose...</option>
+                    <option value="google">Google</option>
+                    <option value="github">GitHub</option>
+                </select>
+            </div>
+        </div>
+        <p class="help">
+            Choose the third party identity provider you have obtained OAUTH keys from.
+        </p>
+    </div>
+    <div class="field">
+        <label class="label" for="clientId">Client ID</label>
+        <input type="text" class="input" id="clientId" name="clientId" placeholder="" required>
+        <p class="help">
+            Client ID given by the identity provider.
+        </p>
+    </div>
+    <div class="field">
+        <label class="label" for="secret">Secret</label>
+        <input type="text" class="input" id="secret" name="secret" placeholder="" required>
+        <p class="help">
+            Secret key given by the identity provider.
+        </p>
+    </div>
+    <hr>
+    <div class="has-text-right">
+        <button class="button is-primary" type="submit">Create</button>
+    </div>
+</form>

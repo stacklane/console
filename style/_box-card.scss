@@ -1,0 +1,45 @@
+/**
+ * .box-card (a variation of thoughts from .box and .media and .level)
+ *
+ * Designed specifically to have .box-card-content be a link,
+ * YET still let further actions within box-card-right/left be clicked.
+ */
+
+.box-card{
+  // .box
+  @extend %block;
+
+  background-color: $box-background-color;
+  border-radius: $box-radius;
+  box-shadow: $box-shadow;
+  color: $box-color;
+  //display: block;
+  // leave padding to inner elements: padding: $box-padding;
+
+  // .media
+  align-items: center /* .level */;  //flex-start;
+  display: flex;
+  text-align: left;
+}
+.box-card-left,
+.box-card-right {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: $box-padding;
+}
+.box-card-left {
+  margin-right: 1rem;
+  padding-right: 0rem;
+}
+.box-card-right {
+  margin-left: 1rem;
+  padding-left: 0rem;
+}
+.box-card-content {
+  padding: $box-padding;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  text-align: left;
+}

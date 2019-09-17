@@ -1,24 +1,17 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/_nav/ as nav }}
-{{% svg /_icons/ as ic }}
-{{% partial /_layout }}
+{{% partial /_nav/ as main-nav }}
 {{% partial /_partials/_util/disable-spell }}
+{{% partial /projects/{project}/_nav/ as nav }}
+
+{{% svg /_icons/ as ic }}
 
 {{% import {project} from '🔗' }}
 {{% import {ProjectHasAccount} from '📤' }}
 
-{{% partial /projects/{project}/_project-side }}
-{{% partial /projects/{project}/_project-nav }}
+{{< main-nav-layout}}
 
-{{< layout}}
-
-{{$nav}}
-{{> project-nav}}
-{{/nav}}
-
-{{$side}}
-{{> project-side}}
-{{/side}}
+{{$nav}}{{> nav-top}}{{/nav}}
+{{$side}}{{> nav-side}}{{/side}}
 
 {{$content}}
 
@@ -240,4 +233,4 @@
 {{/project.get.mapping}}
 
 {{/content}}
-{{/layout}}
+{{/main-nav-layout}}

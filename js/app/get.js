@@ -16,7 +16,7 @@
  *
  * https://hacks.mozilla.org/2016/03/referrer-and-cache-control-apis-for-fetch/
  */
-(function () {
+(()=>{
     'use strict';
 
     /**

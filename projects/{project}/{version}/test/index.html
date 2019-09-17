@@ -1,0 +1,80 @@
+<!--TEMPLATE mustache-->
+{{% partial /_nav/ as main-nav }}
+{{% partial /projects/{project}/{version}/_nav/ as nav }}
+
+{{% svg /_icons/ as ic }}
+
+{{% import {SessionId} from '👤' }}
+{{% import {version} from '🔗' }}
+
+{{< main-nav-layout}}
+
+{{$nav}}{{> nav-top}}{{/nav}}
+{{$side}}{{> nav-side}}{{/side}}
+
+{{$content}}
+
+<div class="box">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon is-medium has-text-grey">
+                {{> ic-web}}
+            </span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">Test Instances</h5>
+            <p class="subtitle is-6">
+                Create a temporary test instance and shareable link.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div data-controller="builder" data-builder-key-id="{{version.id}}" data-builder-href="build?sid={{SessionId}}">
+
+    <a class="box is-proposed is-hoverable is-block" href="#" data-target="builder.create" data-action="builder#start">
+        <div class="media">
+            <div class="media-left">
+                <span class="icon has-text-primary">{{> ic-add_circle}}</span>
+            </div>
+            <div class="media-content">
+                <h5 class="title is-5">Add Test Instance</h5>
+            </div>
+        </div>
+
+        <table class="box is-hidden is-size-7" data-target="builder.status"></table>
+    </a>
+
+    <template data-target="builder.instanceTemplate">
+        <div class="box">
+            <div class="columns is-vcentered">
+                <div class="column is-three-fifths">
+                    <div class="field has-addons has-addons-right">
+                        <p class="control">
+                            <a class="button is-primary is-fullwidth builder-launch">Launch</a>
+                        </p>
+                        <p class="control is-expanded">
+                            <input class="input builder-link-text" type="text" value="" readonly>
+                        </p>
+                        <p class="control">
+                            <a data-tooltip="Copy Link"
+                               class="button is-light builder-link-copy tooltip is-tooltip-bottom" href="#">
+                                <span class="icon">{{>ic-clipboard}}</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="tags has-addons">
+                        <span class="tag is-dark">Expires</span>
+                        <span class="tag is-info builder-link-expires"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</div>
+
+{{/content}}
+{{/main-nav-layout}}

@@ -1,0 +1,43 @@
+<!--TEMPLATE mustache-->
+
+<div class="message is-info">
+    <div class="message-body">
+        Defines a token for connecting to a third party API.
+    </div>
+</div>
+
+<form method="post" action="new/api"
+      data-controller="form"
+      data-form-validate="true"
+      data-form-ajax="true">
+    <div class="field">
+        <label class="label" for="apiScopeType">Scope</label>
+        <div class="control">
+            <div class="select">
+                <select id="apiScopeType" name="context">
+                    <option value="">Always Applies</option>
+                    <option value="test">Testing Only</option>
+                    <option value="live">Live Only</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Domain Name</label>
+        <div class="control">
+            <input type="text" class="input" id="name" name="name" placeholder="abc.com" required>
+        </div>
+        <p class="help">Third party domain name.</p>
+    </div>
+    <div class="field">
+        <label class="label" for="token">Token</label>
+        <div class="control">
+            <input type="text" class="input" id="token" name="token" placeholder="" required>
+        </div>
+        <p class="help">Authentication token obtained from the third party provider.</p>
+    </div>
+    <hr>
+    <div class="has-text-right">
+        <button class="button is-primary" type="submit">Create</button>
+    </div>
+</form>

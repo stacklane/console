@@ -1,22 +1,15 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/_nav/ as nav }}
+{{% partial /_nav/ as main-nav }}
+{{% partial /projects/{project}/_nav/ as nav }}
+
 {{% svg /_icons/ as ic }}
-{{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
 
-{{% partial /projects/{project}/_project-side }}
-{{% partial /projects/{project}/_project-nav }}
+{{< main-nav-layout}}
 
-{{< layout}}
-
-{{$nav}}
-{{> project-nav}}
-{{/nav}}
-
-{{$side}}
-{{> project-side}}
-{{/side}}
+{{$nav}}{{> nav-top}}{{/nav}}
+{{$side}}{{> nav-side}}{{/side}}
 
 {{$content}}
 
@@ -86,4 +79,4 @@
 </div>
 
 {{/content}}
-{{/layout}}
+{{/main-nav-layout}}

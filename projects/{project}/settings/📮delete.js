@@ -21,7 +21,7 @@ if (ProjectUser.me().isSharing()){
      * Deleting unshared Project.
      */
 
-    project.get().remove(); // Delete first, while 'me' still has access to it.
+   // can't do this right now:  project.get().remove(); // Delete first, while 'me' still has access to it.
     ProjectUser.me().get().remove(); // This would cascade async, but we want to delete it sync, so explicit remove().
 
     ({redirect: Redirect.home().success('Deleted Project')});

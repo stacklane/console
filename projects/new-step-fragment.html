@@ -40,7 +40,7 @@
 
     <hr>
 
-    {{#NewProjectInfo.form}}
+    {{#NewProjectForm.view}}
     <form method="post" action="new-step?_form={{id}}"
           data-controller="form"
           data-form-validate="true"
@@ -57,49 +57,14 @@
         {{/NewProjectInfo.ssh}}
 
         <div class="columns">
-            <div class="column is-three-fifths">
+            <div class="column is-half">
+                {{#App.view}}
                 {{{ FieldStatic source }}}
+                {{/App.view}}
+
+                {{#Project.view NewProjectInfo.newProjectViewValues}}
                 {{{ Field name }}}
-            </div>
-            <div class="column">
-                <div class="simple-list">
-                    <div class="simple-list-item">
-                        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-hosting-location-about}}">
-                            {{🎨.feature-hosting-location}}
-                        </span>
-                        <span class="has-text-weight-bold">3</span>
-                    </div>
-
-                    <div class="simple-list-item">
-                        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-users-about}}">
-                            {{🎨.feature-users}}
-                        </span>
-                        <span class="has-text-weight-bold">Unlimited</span>
-                    </div>
-
-                    <div class="simple-list-item">
-                        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-cdn-about}}">
-                            {{🎨.feature-cdn}}
-                        </span>
-                        <span class="has-text-weight-bold">Enabled</span>
-                    </div>
-
-                    <div class="simple-list-item">
-                        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-data-size-about}}">
-                            {{🎨.feature-data-size}}
-                        </span>
-                        <span class="has-text-weight-bold">20GB</span>
-                    </div>
-
-                    <div class="simple-list-item">
-                        <span class="simple-list-label tooltip is-tooltip-multiline" data-tooltip="{{🎨.feature-data-location-about}}">
-                            {{🎨.feature-data-location}}
-                        </span>
-                        <div class="select is-small">
-                            {{{FieldSelect region}}}
-                        </div>
-                    </div>
-                </div>
+                {{/Project.view}}
             </div>
         </div>
 
@@ -109,7 +74,7 @@
             <button class="button is-primary" type="submit">Create</button>
         </p>
     </form>
-    {{/NewProjectInfo.form}}
+    {{/NewProjectForm.view}}
 
     {{/NewProjectInfo.visible}}
 </div>

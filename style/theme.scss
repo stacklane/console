@@ -17,7 +17,7 @@
 @import "/bulma/elements/title";
 @import "/bulma/elements/table";
 
-@import "/bulma/components/card";
+//@import "/bulma/components/card";
 @import "/bulma/components/dropdown";
 @import "/bulma/components/media";
 @import "/bulma/components/navbar";
@@ -25,12 +25,14 @@
 @import "/bulma/components/modal";
 @import "/bulma/components/message";
 @import "/bulma/components/level";
+//@import "/bulma/grid/tiles";
 
 @import "/bulma/grid/columns";
 
 ////////
 
 @import "/style/ext/tooltip";
+//@import "/style/ext/divider";
 //@import "/style/ext/pricing";
 
 @import "/js/app/hiding";
@@ -44,12 +46,6 @@
 
 ////////////
 
-@import "/style/prism";
-@import "/style/toggler";
-@import "/style/simple-list";
-
-////////////
-
 $max-ui-width: 1200px;
 
 $main-padding-top: .5rem;
@@ -60,6 +56,21 @@ $nav-active-color: $link;
 
 $icon-active-color: $link;
 $icon-active-color-accent: rgb(146,186,248);
+
+////////////
+
+@import "/style/prism";
+@import "/style/toggler";
+@import "/style/simple-list";
+@import "/style/box-card";
+@import "/style/sidebar";
+
+////////////
+
+.has-flex-centered{
+  display:flex;
+  justify-content: center;
+}
 
 .icon.is-micro{
   width: .75rem;
@@ -90,9 +101,6 @@ a{
     margin-right: auto;
   }
 }
-
-
-
 
 /**
  * header
@@ -134,8 +142,9 @@ body > header {
       border-radius: $radius-rounded;
 
       &:hover{
-        background: white;
+        background: white !important;
         box-shadow: $shadow-for-bg;
+        transition: box-shadow .2s ease-in-out;
       }
     }
 
@@ -411,148 +420,5 @@ $proposed-transition: opacity .2s ease-in-out;
   box-shadow: $shadow-for-bg-small; // looks better than $shadow-X
 }
 
-/**
- * .box-card (a variation of thoughts from .box and .media)
- *
- * Designed specifically to have .box-card-content be a link,
- * YET still let further actions within box-card-right/left be clicked.
- */
-.box-card{
-  // .box
-  @extend %block;
 
-  background-color: $box-background-color;
-  border-radius: $box-radius;
-  box-shadow: $box-shadow;
-  color: $box-color;
-  //display: block;
-  // leave padding to inner elements: padding: $box-padding;
 
-  // .media
-  align-items: flex-start;
-  display: flex;
-  text-align: left;
-}
-.box-card-left,
-.box-card-right {
-  flex-basis: auto;
-  flex-grow: 0;
-  flex-shrink: 0;
-  padding: $box-padding;
-}
-.box-card-left {
-  margin-right: 1rem;
-  padding-right: 0rem;
-}
-.box-card-right {
-  margin-left: 1rem;
-  padding-left: 0rem;
-}
-.box-card-content {
-  padding: $box-padding;
-  flex-basis: auto;
-  flex-grow: 1;
-  flex-shrink: 1;
-  text-align: left;
-}
-
-/**
- * Secondary Nav
- *
- * A ".column" which gets its padding/spacing from contained LI's.
- * If there are no LI's, then the sidebar takes up no space.
- *
- * .is-active can be on the LI or the A
- */
-#sidebar{
-  padding:0;
-
-  ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  li{
-    padding: $column-gap 0px;
-
-    &.is-active {
-      a{
-        font-weight: 700;
-        color: $nav-active-color;
-      }
-    }
-  }
-
-  a{
-    font-size: 14px;
-    font-weight: 400;
-    color: $nav-text-color;
-
-    margin-right: 6px; // On mobile these are horizontal, so give them space between
-
-    /* similar to level-item, lets icon+text line up nicely */
-    align-items: center;
-    display: flex;
-    flex-basis: auto;
-    flex-grow: 0;
-    flex-shrink: 0;
-
-    .icon{
-      margin-right: 2px;
-      width: 1rem;
-      height: 1rem;
-    }
-
-    &.is-active{
-      font-weight: 700;
-      color: $nav-active-color;
-    }
-  }
-}
-
-@include tablet(){
-  #sidebar-sticky{
-    position: -webkit-sticky;
-    position: sticky;
-    top: $navbar-height + $navbar-padding-vertical;
-  }
-
-  #sidebar{
-    padding: $column-gap 0 0;
-    flex: none; // == is-narrow-tablet -- disable flex
-
-    ul{
-      display: block;
-      justify-content: normal;
-      align-items: normal;
-    }
-
-    li{
-      padding: 4px ($column-gap * 2) 4px $column-gap;
-    }
-
-    a{
-      margin: 0px;
-
-      .icon{
-        margin-right: 6px;
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-}
-
-@include desktop(){
-  #sidebar{
-    li{
-      min-width: 200px;
-    }
-    a{
-      .icon{
-        margin-right: 12px;
-      }
-    }
-  }
-}

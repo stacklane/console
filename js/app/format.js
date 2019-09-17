@@ -3,7 +3,7 @@
  *
  * Value may be an attribute, or within the element's body.
  */
-(function () {
+(()=>{
     'use strict';
 
     const HIDE = function(ctrl){

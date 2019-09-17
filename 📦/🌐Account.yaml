@@ -1,5 +1,8 @@
 
-# Billing container / info
+
+# Billing target
+
+org?: Org
 
 stripeCustomerId: string
 stripeSubId: string

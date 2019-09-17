@@ -1,0 +1,20 @@
+
+#
+# Describes the "content" of a "deployment"
+#
+# The "content" also includes: ProjectKey + ProjectInstanceKey
+#
+# AKA "Project Instance" or "Project Variation"
+#
+# For all intents and purpose this also represents an
+# instance-of "source"
+#
+# ----------------
+
+# If present, contains the 'source of the source' (and which may no longer match).
+# The App itself may also have a later version available than this AppVersion.
+app?: AppVersion
+
+source: source
+
+properties?: map

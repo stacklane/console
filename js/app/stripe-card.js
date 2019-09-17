@@ -1,7 +1,7 @@
 /**
  * Designed for use as a .field, and in conjunction with form.js
  */
-(function () {
+(()=>{
     'use strict';
 
     App.register("stripe-card", class extends Stimulus.Controller {

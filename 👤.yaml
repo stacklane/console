@@ -6,16 +6,34 @@ auth: required
 
 default:
   stripe.com: all
-  📦.Mapping: all
+  📦.Mapping: all # deprecated
   📦.ProjectUser: access, list
   📦.AccountUser: access
+  📦.AppUser: access
+  📦.DomainUser: access
+  📦.OrgUser: access
 
 AccountOwner:
   📦.Account: all
   📦.AccountUser: all
 
+AppOwner:
+  📦.App: all
+  📦.AppUser: all
+  📦.AppVersion: all
+
+OrgOwner:
+  📦.Org: all
+  📦.OrgUser: all
+
+DomainOwner:
+  📦.Domain: all
+  📦.DomainUser: all
+
 ProjectOwner:
   📦.Project: all
   📦.ProjectUser: all
-  📦.ProjectKey: all
-
+  📦.ProjectKey: all # deprecated
+  📦.ProjectVersion: all
+  📦.ProjectVersionKey: all
+  📦.ProjectDeployment: all

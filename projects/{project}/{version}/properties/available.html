@@ -1,0 +1,78 @@
+<!--TEMPLATE mustache-->
+{{% import {project, version} from '🔗' }}
+{{% svg /_icons/ as ic }}
+{{% import {CategoryInfo, VersionSourceExists} from '📤' }}
+
+{{^VersionSourceExists}}
+
+<div class="message is-warning">
+    <div class="message-body">
+        The Project does not exist.
+    </div>
+</div>
+
+{{/VersionSourceExists}}
+
+{{#VersionSourceExists}}
+
+{{^CategoryInfo.has}}
+
+<div class="message is-info">
+    <div class="message-body">
+        No
+        <a href="https://stacklane.com/docs/settings/properties" target="_blank">customizable properties</a>
+        were defined in the source code.
+    </div>
+</div>
+
+{{/CategoryInfo.has}}
+
+{{#CategoryInfo.has}}
+
+{{#CategoryInfo.style}}
+
+<a class="box is-hoverable is-block" href="style/">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon has-text-primary">{{>ic-palette}}</span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">Style</h5>
+        </div>
+    </div>
+</a>
+
+{{/CategoryInfo.style}}
+
+{{#CategoryInfo.messages}}
+
+<a class="box is-hoverable is-block" href="messages/">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon has-text-primary">{{>ic-message}}</span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">Messages</h5>
+        </div>
+    </div>
+</a>
+
+{{/CategoryInfo.messages}}
+
+{{#CategoryInfo.options}}
+<a class="box is-hoverable is-block" href="options/">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon has-text-primary">{{>ic-toggle_on}}</span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">Options</h5>
+        </div>
+    </div>
+</a>
+{{/CategoryInfo.options}}
+
+{{/CategoryInfo.has}}
+
+{{/VersionSourceExists}}
+

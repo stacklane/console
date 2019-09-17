@@ -1,80 +1,55 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/_nav/ as nav }}
+{{% partial /_nav/ as main-nav }}
 {{% partial /_partials/_util/ as util }}
+
 {{% svg /_icons/ as ic }}
-{{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
-{{% import {Project} from '📦'}}
-{{% import {GetProjectName, IsProjectStarred} from '📤' }}
+{{% import {Project} from '📦' }}
+{{% import {IsProjectStarred, ProjectModeSimple} from '📤' }}
 
-{{% partial /projects/{project}/_project-side }}
-{{% partial /projects/{project}/_project-nav }}
+{{% partial /projects/{project}/_nav/ as nav }}
 
-{{< layout}}
+{{< main-nav-layout}}
 
-{{$nav}}
-{{> project-nav}}
-{{/nav}}
-
-{{$side}}
-{{> project-side}}
-{{/side}}
+{{$nav}}{{> nav-top}}{{/nav}}
+{{$side}}{{> nav-side}}{{/side}}
 
 {{$content}}
 
-<div data-controller="get" data-get-href="/projects/{{project.id}}/index-check" class="is-loading is-quiet"></div>
+{{#ProjectModeSimple}}
+<div data-controller="get"
+     data-get-href="/projects/{{project.id}}/{{project.simple.id}}/exists-message"
+     class="is-loading is-quiet"></div>
+{{/ProjectModeSimple}}
 
 <div class="box"
      data-controller="project"
      data-project-id="{{project.id}}"
     >
-    <div class="media">
-        <div class="media-left">
-            <span class="icon is-large">
-                {{& project.icon }}
-            </span>
+    <div class="level is-mobile">
+        <div class="level-left">
+            <div class="level-item">
+                <span class="icon is-large">{{& project.icon }}</span>
+            </div>
+            <div class="level-item">
+                <h5 class="is-size-5 title has-text-weight-semibold">
+                    {{project.name}}
+                </h5>
+            </div>
         </div>
-
-        <div class="media-content">
-            <h5 class="is-size-5 title has-text-weight-semibold"> <!-- was title is-5 -->
-                {{GetProjectName project}}
-            </h5>
-            {{#project.source.external}}
-            <h6 class="subtitle">
-                <a href="{{project.source.external}}" target="_blank" >
-                    <!--span class="icon is-small has-text-link">{{>ic-code}}</span-->
-                    <!-- data-tooltip=" @ {{project.source.type}}" -->
-                    <div class="tags has-addons">
-                        <span class="tag is-light">{{project.source.short}}</span>
-                        <span class="tag is-primary">{{project.source.reference}}</span>
-                    </div>
-                </a>
-            </h6>
-            {{/project.source.external}}
-        </div>
-
-        <div class="media-right">
-            <nav class="level is-mobile">
-                <div class="level-left">
-
-                    <a class="tooltip level-item" href="copy/" data-tooltip="Copy">
-                        <span class="icon has-text-link">{{>ic-copy}}</span>
-                    </a>
-
-                    <label class="toggler has-text-warning level-item">
-                        <input data-target="project.star"
-                               data-action="change->project#changeStar"
-                               type="checkbox" class="is-filter-tag"
-                               {{#IsProjectStarred project}}checked{{/IsProjectStarred}}>
-                        <span class="is-checked tooltip icon " data-tooltip="Favorite">{{>ic-star}}</span>
-                        <span class="is-unchecked tooltip icon " data-tooltip="Favorite">{{>ic-star_border}}</span>
-                    </label>
-                </div>
-            </nav>
+        <div class="level-right">
+            <label class="toggler has-text-warning level-item">
+                <input data-target="project.star"
+                       data-action="change->project#changeStar"
+                       type="checkbox" class="is-filter-tag"
+                       {{#IsProjectStarred project}}checked{{/IsProjectStarred}}>
+                <span class="is-checked tooltip icon " data-tooltip="Favorite">{{>ic-star}}</span>
+                <span class="is-unchecked tooltip icon " data-tooltip="Favorite">{{>ic-star_border}}</span>
+            </label>
         </div>
     </div>
 </div>
 
 {{/content}}
-{{/layout}}
+{{/main-nav-layout}}

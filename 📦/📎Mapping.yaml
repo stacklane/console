@@ -1,3 +1,6 @@
+# DEPRECATED because so is Project.mapping
+
+
 # Fields which (along with other data such as namespace/source) will be used to generate a mapping:
 
 domain:

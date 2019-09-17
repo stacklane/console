@@ -1,34 +1,40 @@
 
-# Name (shared) to use if not overridden by ProjectUser#name:
-name:
+#
+# Largest Stacklane concept, which is an entry point for bringing together many other concepts.
+#
+# ----------
+
+org?: Org
+
+name: # For UI use
   type: string
   min: 2
 
-# Icon
-icon: svg-icon
+icon: svg-icon # For UI use
 
-# Associate an Account responsible for billing:
-account:
-  optional: true
-  type: Account
+simple?: ProjectVersion # If linked, then "simple mode" -- for testing *and* production == no granular ProjectVersion's
 
-source:
-  type: source
+account?: Account # Responsible for billing of this Project (when deployed)
 
-mapping:
-  type: Mapping
-  optional: true
+############
+# Live Only
+############
+
+region?:
+  type: options
+  values:
+    us: United States
+    eu: European Union
 
 data:
   type: namespace
   init: true
 
-properties:
-  type: map
-  optional: true
 
-region:
-  type: options
-  values:
-    us: United States
-    eu: European Union
+# DEPRECATED
+
+mapping?: Mapping
+
+source?: source
+
+properties?: map

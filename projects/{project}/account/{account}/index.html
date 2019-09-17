@@ -1,22 +1,15 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/_nav/ as nav }}
+{{% partial /_nav/ as main-nav }}
+{{% partial /projects/{project}/_nav/ as nav }}
+
 {{% svg /_icons/ as ic }}
-{{% partial /_layout }}
 
 {{% import {project} from '🔗' }}
 
-{{% partial /projects/{project}/_project-side }}
-{{% partial /projects/{project}/_project-nav }}
+{{< main-nav-layout}}
 
-{{< layout}}
-
-{{$nav}}
-{{> project-nav}}
-{{/nav}}
-
-{{$side}}
-{{> project-side}}
-{{/side}}
+{{$nav}}{{> nav-top}}{{/nav}}
+{{$side}}{{> nav-side}}{{/side}}
 
 {{$content}}
 
@@ -40,7 +33,7 @@
 <div data-controller="get" data-get-href="fragment" class="is-loading">Loading</div>
 -->
 
-{{% import {ProjectsForAccount, GetProjectNameModel} from '📤' }}
+{{% import {ProjectsForAccount} from '📤' }}
 
 <div class="columns">
 
@@ -58,7 +51,7 @@
         <table class="table is-striped is-bordered is-fullwidth">
             {{#ProjectsForAccount as project}}
             <tr>
-                <td>{{GetProjectNameModel project}}</td>
+                <td>{{project.name}}</td>
             </tr>
             {{/ProjectsForAccount}}
         </table>
@@ -77,4 +70,4 @@
 </div>
 
 {{/content}}
-{{/layout}}
+{{/main-nav-layout}}

@@ -1,4 +1,4 @@
-(function () {
+(()=>{
     'use strict';
 
     App.register("modal", class extends Stimulus.Controller {

@@ -5,7 +5,7 @@
  * better compatibility with having turbolinks swap out bodies
  * (therefore persisting messages across multiple bodies).
  */
-(function (window) {
+((window)=>{
     'use strict';
 
     const AUTO_HIDE_MS = 5500;

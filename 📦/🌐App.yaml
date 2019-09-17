@@ -1,0 +1,20 @@
+
+#
+# Collection of AppVersion's
+#
+# Case dependent as to whether an App *must* explicitly use versioning,
+# as opposed to directly updating AppVersion#source
+#
+# AKA Repository, Source, Package, Module
+#
+# These can ultimately represent *anything* definable as Stacklane "source",
+# including sites, apps, module (of models), connector, etc.
+#
+# App/AppVersion's themselves are not deployed --
+# they are deployed only through a ProjectVersion association.
+#
+# Put differently, App/AppVersion's are "installed" into Project/ProjectVersion's.
+#
+# -----------------
+
+org?: Org

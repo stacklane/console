@@ -2,7 +2,7 @@
  * TODO remember last tab selection in a local/session storage, by current path and ID of content
  *      retain tab selection on page re-visits.
  */
-(function () {
+(()=>{
     'use strict';
 
     const ALL_TAG = '*';

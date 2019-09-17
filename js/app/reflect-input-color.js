@@ -2,7 +2,7 @@
  * Expects an 'input' and 'canvas' within the controller.
  * We use canvas instead of CSS to avoid CSP issues.
  */
-(function (window) {
+((window)=>{
     'use strict';
 
     App.register("reflect-input-color", class extends Stimulus.Controller {

@@ -1,19 +1,15 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/nav as nav-item }}
-{{% partial /_layout }}
+{{% partial /_nav/ as main-nav }}
 {{% svg /_icons/ as ic }}
 {{% svg /_brand/ as brand }}
 
 {{% import {MyProjects} from '📤' }}
 
-{{< layout}}
+{{< main-nav-layout}}
 
-{{$nav}}
-<span class="navbar-item is-nav-title">Projects</span>
-{{/nav}}
+{{$nav}}{{> main-nav-top-home}}{{/nav}}
 
 {{$side}}
-
 <div class="is-hidden"
      data-controller="filter"
      data-filter-content="#projects"
@@ -28,26 +24,12 @@
         <span>All Projects</span>
     </span>
 </div>
-
-<!-- Does not yet work how we'd want, which is to only show if filters exist
-  in other words:  we do not want it to show if empty will be shown
-<nav>
-    <ul>
-        <li>
-            <a href="/projects/new">
-                <span class="icon is-small is-icon-ui">{{> ic-add_circle}}</span>
-                <span>Add Project</span>
-            </a>
-        </li>
-    </ul>
-</nav>
--->
-
 {{/side}}
 
 {{$content}}
 
 <div id="projects" class="is-hidden">
+
     {{#MyProjects as item}}
     <div class="box-card is-hoverable is-filterable is-hiding-ready is-hidden"
          data-controller="project"
@@ -58,26 +40,34 @@
         {{/item.tags}}
 
         <a class="box-card-content" href="/projects/{{item.project.id}}/">
-            <div class="media">
-                <div class="media-left">
-                    <span class="icon is-block">
-                        {{& item.project.icon }}
-                    </span>
-                </div>
-                <div class="media-content">
-                    <h5 class="title is-5">{{item.name}}</h5>
+            <div class="level is-mobile">
+                <div class="level-left">
+                    <div class="level-item">
+                        <span class="icon is-medium is-block">
+                            {{& item.project.icon }}
+                        </span>
+                    </div>
+                    <div class="level-item">
+                        <h5 class="title is-5">{{item.name}}</h5>
+                    </div>
                 </div>
             </div>
         </a>
         <div class="box-card-right">
-            <label class="toggler has-text-warning">
-                <input data-target="project.star" data-action="change->project#changeStar"
-                       type="checkbox" class="is-filter-tag"
-                       data-filter-tag-value=":star"
-                       {{#item.star}}checked{{/item.star}}>
-                <span class="icon is-checked tooltip" data-tooltip="Favorite">{{>ic-star}}</span>
-                <span class="icon is-unchecked tooltip" data-tooltip="Favorite">{{>ic-star_border}}</span>
-            </label>
+            <div class="level is-mobile">
+                <div class="level-right">
+                    <div class="level-item">
+                        <label class="toggler has-text-warning">
+                            <input data-target="project.star" data-action="change->project#changeStar"
+                                   type="checkbox" class="is-filter-tag"
+                                   data-filter-tag-value=":star"
+                                   {{#item.star}}checked{{/item.star}}>
+                            <span class="icon is-checked tooltip" data-tooltip="Favorite">{{>ic-star}}</span>
+                            <span class="icon is-unchecked tooltip" data-tooltip="Favorite">{{>ic-star_border}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {{/MyProjects}}
@@ -115,4 +105,4 @@
 </div>
 
 {{/content}}
-{{/layout}}
+{{/main-nav-layout}}

@@ -1,0 +1,73 @@
+<!--TEMPLATE mustache-->
+{{% partial /_nav/ as main-nav }}
+{{% partial /projects/{project}/{version}/keys/_new/ as new }}
+{{% partial /projects/{project}/{version}/_nav/ as nav }}
+
+{{% svg /_icons/ as ic }}
+
+{{% import {VersionSource} from '📤' }}
+
+{{< main-nav-layout}}
+
+{{$nav}}{{> nav-top}}{{/nav}}
+{{$side}}{{> nav-side}}{{/side}}
+
+{{$content}}
+
+<div class="box">
+    <div class="media">
+        <div class="media-left">
+            <span class="icon is-medium has-text-grey">
+                {{> ic-key}}
+            </span>
+        </div>
+        <div class="media-content">
+            <h5 class="title is-5">Create a Key</h5>
+            <p class="subtitle is-6">
+                Keys are stored in a secure vault and values are only used for connecting to services.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <div class="tabs {{#🎨.tabs-boxed}}is-boxed{{/🎨.tabs-boxed}}" data-controller="tabs">
+        <ul>
+            <li class="is-active"><a id="api-tab" href="#api"><span class="icon">{{>ic-extension}}</span>&nbsp;<span>Third Party API</span></a></li>
+            <li><a id="email-tab" href="#email"><span class="icon">{{>ic-email}}</span>&nbsp;<span>Email</span></a></li>
+            <li><a id="user-tab" href="#user"><span class="icon">{{>ic-verified_user}}</span>&nbsp;<span>Users</span></a></li>
+            {{#VersionSource.ssh}}<li><a id="ssh-tab" href="#ssh"><span class="icon">{{>ic-lock}}</span>&nbsp;<span>SSH Key</span></a></li>{{/VersionSource.ssh}}
+
+            {{! TODO only for external source }}
+            <li><a id="dev-tab" href="#dev"><span class="icon">{{>ic-dev_mode}}</span> <span>Dev Token</span></a></li>
+        </ul>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane is-active" id="api" aria-labelledby="api-tab">
+            {{> new-api }}
+        </div>
+
+        <div class="tab-pane" id="email" aria-labelledby="email-tab">
+            {{> new-email }}
+        </div>
+
+        <div class="tab-pane" id="user" aria-labelledby="user-tab">
+            {{> new-user }}
+        </div>
+
+        {{#VersionSource.ssh}}
+        <div class="tab-pane" id="ssh" aria-labelledby="ssh-tab">
+            {{> new-ssh }}
+        </div>
+        {{/VersionSource.ssh}}
+
+        {{! TODO only for external source }}
+        <div class="tab-pane" id="dev" aria-labelledby="dev-tab">
+            {{> new-dev }}
+        </div>
+    </div>
+</div>
+
+{{/content}}
+{{/main-nav-layout}}

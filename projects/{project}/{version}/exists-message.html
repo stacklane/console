@@ -1,0 +1,38 @@
+<!--TEMPLATE mustache-->
+{{% import {project, version} from '🔗' }}
+
+{{% import {VersionSource, VersionSourceNotExists, VersionSourceExistsCacheControlSeconds} from '📤' }}
+
+{{% Render-If VersionSourceNotExists }}
+{{% Cache-Control-Seconds VersionSourceExistsCacheControlSeconds }}
+
+{{#VersionSource.ssh}}
+    {{^VersionSource.exists}}
+        <div class="message is-warning">
+            <div class="message-body">
+                We could not connect to this private repository
+                and verify that it has a manifest file.
+
+                {{#VersionSource.hasKey}}
+                An SSH key has already been <a href="/projects/{{project.id}}/{{version.id}}/keys/">generated</a>.
+                Make sure it is setup in {{VersionSource.type}}.
+                {{/VersionSource.hasKey}}
+
+                {{^VersionSource.hasKey}}
+                <a href="/projects/{{project.id}}/{{version.id}}/keys/new#ssh">Generate</a> an SSH key and set it up in {{VersionSource.type}}.
+                {{/VersionSource.hasKey}}
+            </div>
+        </div>
+    {{/VersionSource.exists}}
+{{/VersionSource.ssh}}
+
+{{^VersionSource.ssh}}
+    {{^VersionSource.exists}}
+        <div class="message is-warning">
+            <div class="message-body">
+                This does not appear to be a valid public Stacklane repository.
+                Please double check that it exists and has a manifest file.
+            </div>
+        </div>
+    {{/VersionSource.exists}}
+{{/VersionSource.ssh}}

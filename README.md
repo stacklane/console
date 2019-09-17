@@ -1,3 +1,3 @@
 # Stacklane Console
 
-The Stacklane administrative / management console.
+The Stacklane management console.

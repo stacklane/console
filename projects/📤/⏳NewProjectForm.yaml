@@ -1,7 +1,8 @@
-📦.Project:
-  Begin:
+App:
+  📦.AppVersion:
     - source
-  +End:
+
+Project:
+  📦.Project:
     - name:
         label: Project Name
-    - region

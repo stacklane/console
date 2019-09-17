@@ -1,0 +1,123 @@
+
+/**
+ * Secondary Nav
+ *
+ * A ".column" which gets its padding/spacing from contained LI's.
+ * If there are no LI's, then the sidebar takes up no space.
+ *
+ * .is-active can be on the LI or the A
+ */
+#sidebar{
+  padding:0;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title{
+    display:none;
+  }
+
+  li{
+    padding: $column-gap 0px;
+
+    &.is-active {
+      a{
+        font-weight: 700;
+        color: $nav-active-color;
+      }
+    }
+  }
+
+  a{
+    font-size: 14px;
+    font-weight: 400;
+    color: $nav-text-color;
+
+    margin-right: 6px; // On mobile these are horizontal, so give them space between
+
+    /* similar to level-item, lets icon+text line up nicely */
+    align-items: center;
+    display: flex;
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .icon{
+      margin-right: 2px;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &.is-active{
+      font-weight: 700;
+      color: $nav-active-color;
+    }
+  }
+}
+
+@include tablet(){
+  #sidebar-sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: $navbar-height + $navbar-padding-vertical;
+  }
+
+  #sidebar{
+    padding: $column-gap 0 0;
+    flex: none; // == is-narrow-tablet -- disable flex
+
+    ul{
+      display: block;
+      justify-content: normal;
+      align-items: normal;
+    }
+
+    li{
+      padding: 4px ($column-gap * 2) 4px $column-gap;
+    }
+
+    a{
+      margin: 0px;
+
+      .icon{
+        margin-right: 6px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+@include desktop(){
+  #sidebar{
+    li + .title{
+      margin-top: 1rem;
+    }
+    .title{
+      margin-bottom: 10px;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $nav-text-color;
+      opacity: .5;
+      font-size: 12px;
+    }
+    .sidebar-spacer{
+      margin-top: 1rem;
+    }
+    li{
+      min-width: 200px;
+    }
+    a{
+      .icon{
+        margin-right: 12px;
+      }
+    }
+    //nav + nav{
+    //  margin-top: 1rem;
+    //}
+  }
+}

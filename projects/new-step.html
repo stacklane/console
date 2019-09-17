@@ -1,12 +1,11 @@
 <!--TEMPLATE mustache-->
-{{% partial /_partials/_nav/ as nav }}
-{{% partial /_layout }}
+{{% partial /_nav/ as main-nav }}
 {{% svg /_icons/ as ic }}
 
 {{% json /projects/_examples as examples}}
 {{% import {NewProjectForm} from '📤' }}
 
-{{< layout}}
+{{< main-nav-layout}}
 
 {{$nav}}
 <span class="navbar-item is-nav-title">New Project</span>
@@ -14,7 +13,7 @@
 
 {{$content}}
 
-{{#NewProjectForm.Begin.view}}
+{{#NewProjectForm.App.view}}
 
     {{#ready}}
     {{!
@@ -34,8 +33,7 @@
     </div>
     {{/ready}}
 
-{{/NewProjectForm.Begin.view}}
-
+{{/NewProjectForm.App.view}}
 
 {{/content}}
-{{/layout}}
+{{/main-nav-layout}}

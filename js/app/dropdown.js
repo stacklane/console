@@ -1,7 +1,7 @@
 /**
  * For standard Bulma CSS structure.
  */
-(function () {
+(()=>{
     'use strict';
 
     App.register("dropdown", class extends Stimulus.Controller {

@@ -1,0 +1,14 @@
+
+# Optional, overarching association for top-level models.
+#
+# Org's do NOT impact user-associations to the various top-level models.
+#
+# They primarily provide a higher level association that "runs through" various top-level models,
+# without actually impacting user permissions / user associations.
+#
+# However an "OrgOwner" may have the ability to be a kind of super user for the
+# the models associated with an Org -- meaning they could manage users associated with Org-associated models.
+#
+# ---------------
+
+name: string

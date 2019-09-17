@@ -1,0 +1,26 @@
+# Effectively represents either:
+#
+#   xyz.com/
+#   www.xyz.com/
+#   sub.xyz.com/
+#
+# Must be used in/with a ProjectDeployment to be "effective".
+# --------------------
+
+org?: Org
+
+# Create a mapping:
+
+domain:
+  type: domain
+  # considered: unique: true
+
+www: boolean
+
+# Result of a successful domain mapping:
+
+ip?: string
+
+record?: string # A or CNAME
+
+name?: domain

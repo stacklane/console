@@ -1,7 +1,7 @@
 /**
  *
  */
-(function () {
+(()=>{
     'use strict';
 
     const $esc = function(s) {
@@ -66,8 +66,8 @@
             return ["done", "create", "status", "instanceTemplate"];
         }
         connect(){
-            this.projectId = this.data.get('project')
-            this.lastTestStorageKey = "builder-last-" + this.projectId;
+            let keyId = this.data.get('key-id')
+            this.lastTestStorageKey = "builder-last-" + keyId;
 
             if (localStorage.getItem(this.lastTestStorageKey)){
                 var obj = JSON.parse(localStorage.getItem(this.lastTestStorageKey));
@@ -187,7 +187,7 @@
                 thiz.building = false;
 
                 localStorage.setItem(thiz.lastTestStorageKey, JSON.stringify({
-                    project: thiz.projectId,
+                    //project: thiz.projectId,
                     url: obj.url,
                     frame: obj.frame,
                     created: created,

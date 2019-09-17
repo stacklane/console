@@ -1,0 +1,8 @@
+<!--TEMPLATE mustache-->
+{{% import {project} from '🔗' }}
+
+<a class="navbar-item is-nav-title" href="/projects/{{project.id}}/">
+    <span class="icon">{{& project.icon }}</span>
+    <span>&nbsp;</span>
+    <span>{{ project.name }}</span>
+</a>

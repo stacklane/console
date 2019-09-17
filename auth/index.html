@@ -112,36 +112,30 @@
         </div>
     </div>
     <div class="login-providers provider-list">
-        <!--
-          Provider List
-          -->
-        {{^Me.linked}}
-        {{#Providers.all as provider}}
-        <form id="{{provider.type}}" method="post" class="provider-form" action="{{provider.authPath}}">
-        <button type="submit" class="provider-button provider-{{provider.brand}}">
-            <div class="provider-icon"></div>
-            <div class="provider-text">{{🎨.login-with provider.name}}</div>
-        </button>
-        </form>
-        {{/Providers.all}}
-
-        <!--
-          Signup Link
-          -->
-        <div class="signup">Or, <a href="signup">Sign Up Here</a></div>
-        {{/Me.linked}}
-
-        <!--
-          Logout
-          -->
-        {{#Me.linked}}
-        <form method="post" class="provider-form" action="/__/auth/provider/logout">
-            <button type="submit" class="provider-button provider-logout">
+        {{! Provider List }}
+        {{^Me}}
+            {{#Providers.all as provider}}
+            <form id="{{provider.type}}" method="post" class="provider-form" action="{{provider.authPath}}">
+            <button type="submit" class="provider-button provider-{{provider.brand}}">
                 <div class="provider-icon"></div>
-                <div class="provider-text">{{🎨.logout}}</div>
+                <div class="provider-text">{{🎨.login-with provider.name}}</div>
             </button>
-        </form>
-        {{/Me.linked}}
+            </form>
+            {{/Providers.all}}
+
+            {{! Signup Link }}
+            <div class="signup">Or, <a href="signup">Sign Up Here</a></div>
+        {{/Me}}
+
+        {{! Logout }}
+        {{#Me}}
+            <form method="post" class="provider-form" action="/__/auth/provider/logout">
+                <button type="submit" class="provider-button provider-logout">
+                    <div class="provider-icon"></div>
+                    <div class="provider-text">{{🎨.logout}}</div>
+                </button>
+            </form>
+        {{/Me}}
     </div>
 </div>
 
@@ -150,10 +144,10 @@
      * Add a class to a previously authenticated provider.
      */
     try {
-        var previousSuccessId = localStorage.getItem('/auth/provider');
+        let previousSuccessId = localStorage.getItem('/auth/provider');
 
         if (previousSuccessId != null && previousSuccessId.length > 0){
-            var e = document.getElementById(previousSuccessId);
+            let e = document.getElementById(previousSuccessId);
             if (e != null) e.className += ' provider-previous';
         }
     } catch (e){ }
@@ -164,18 +158,18 @@
      * Note:  Seems Safari does not understand a disabled <button>
      *  (Update: that may be fixed in Safari 11.1)
      */
-    var disableAllButtons = function(){
-        var inputs = document.getElementsByTagName("button");
-        for (var i = 0; i < inputs.length; i++) {
+    let disableAllButtons = ()=>{
+        let inputs = document.getElementsByTagName("button");
+        for (let i = 0; i < inputs.length; i++) {
             if (inputs[i].getAttribute('type') === 'submit') {
                 inputs[i].setAttribute("disabled", "disabled");
             }
         }
     }
-    var forms = document.getElementsByTagName("form");
-    for (var f = 0; f < forms.length; f++){
-        var ele = forms[f];
-        ele.addEventListener("submit", function(){
+    let forms = document.getElementsByTagName("form");
+    for (let f = 0; f < forms.length; f++){
+        let ele = forms[f];
+        ele.addEventListener("submit", ()=>{
             disableAllButtons();
             ele.className += " submitted";
         }, false);

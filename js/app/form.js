@@ -8,7 +8,7 @@
  *
  * Considers setCustomValidity to be for server side.
  */
-(function () {
+(()=>{
     'use strict';
     const SUBMITTED = "is-submitted";
     const IS_TARGET = "is-target";
@@ -205,19 +205,19 @@
             Progress.step();
 
             if (json.messages) {
-                for (var i = 0; i < json.messages.length; i++) this._handleMsg(json.messages[i]); // Many
+                for (let i = 0; i < json.messages.length; i++) this._handleMsg(json.messages[i]); // Many
             } else {
                 this._handleMsg(json); // One
             }
 
             if (json.redirect) {
-                var path;
+                let path;
                 if (typeof json.redirect === 'string'){
                     path = json.redirect;
                 } else {
                     path = json.redirect.path;
                     if (json.redirect.messages) {
-                        for (var i = 0; i < json.redirect.messages.length; i++)
+                        for (let i = 0; i < json.redirect.messages.length; i++)
                             this._handleMsg(json.redirect.messages[i]);
                     }
                 }
@@ -225,9 +225,9 @@
                 var enabled = typeof Turbolinks !== 'undefined' && Turbolinks.supported && this.element.getAttribute('data-turbolinks') != 'false';
 
                 if (enabled) {
-                    var action = this.element.getAttribute('data-form-turbolinks-action'); // default to 'replace' for post->redirect
+                    let action = this.element.getAttribute('data-form-turbolinks-action'); // default to 'replace' for post->redirect
 
-                    var clearCache = this.element.getAttribute('data-form-turbolinks-clear-cache') != 'false';
+                    let clearCache = this.element.getAttribute('data-form-turbolinks-clear-cache') != 'false';
                     if (clearCache) Turbolinks.clearCache();
 
                     Turbolinks.visit(path, {action: (action == null ? 'replace' : action)});

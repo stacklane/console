@@ -1,0 +1,84 @@
+<!--TEMPLATE mustache-->
+{{% partial /_nav/ as main-nav }}
+{{% partial /projects/{project}/{version}/_nav/ as nav }}
+
+{{% svg /_icons/ as ic }}
+{{% svg /_brand/ as brand }}
+
+{{% import {version} from '🔗' }}
+{{% import {VersionSource} from '📤' }}
+
+{{< main-nav-layout}}
+
+{{$nav}}{{> nav-top}}{{/nav}}
+{{$side}}{{> nav-side}}{{/side}}
+
+{{$content}}
+
+<div class="box is-spacious">
+
+    <div class="has-text-centered">
+         <span class="icon is-large has-text-grey">
+             {{>ic-code}}
+         </span>
+
+        <h3 class="title is-3">Source Code</h3>
+
+        <p>
+
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="columns">
+        {{#VersionSource.external as externalHref}}
+
+        <div class="column is-half">
+            <a class="box" href="https://stacklane.com/docs/dev#ide-plugins" target="_blank">
+
+                <div class="has-flex-centered">
+                    <span class="tags has-addons">
+                        <span class="tag is-dark">{{VersionSource.type}}</span>
+                        <span class="tag is-light">{{VersionSource.short}}</span>
+                        <span class="tag is-primary">{{VersionSource.reference}}</span>
+                    </span>
+                </div>
+
+                <br>
+                <br>
+
+                <div class="has-text-centered">
+                    <div class="icon is-medium">
+                        {{> brand-webstorm}}
+                    </div>
+
+                    <div class="icon is-medium">
+
+                    </div>
+
+                    <div class="icon is-medium">
+                        {{> brand-stacklane}}
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+                <div class="has-text-centered">
+                    WebStorm + Stacklane Plugin
+                </div>
+            </a>
+        </div>
+        {{/VersionSource.external}}
+
+        <div class="column is-half">
+
+
+        </div>
+    </div>
+
+</div>
+
+{{/content}}
+{{/main-nav-layout}}

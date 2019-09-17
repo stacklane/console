@@ -8,8 +8,10 @@
  * http://accessibility.athena-ict.com/aria/examples/tabpanel2.shtml
  *
  * Use data-tabs-remember="[KEY]" if the last selected tab should be remembered + re-selected.
+ *
+ * Also supports including the tab in the URL hash portion.
  */
-(function () {
+(()=>{
     'use strict';
 
     const ACTIVE = "is-active";
