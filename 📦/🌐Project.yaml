@@ -16,9 +16,7 @@ simple?: ProjectVersion # If linked, then "simple mode" -- for testing *and* pro
 
 account?: Account # Responsible for billing of this Project (when deployed)
 
-############
-# Live Only
-############
+# ------------
 
 region:
   type: options
