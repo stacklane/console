@@ -9,18 +9,10 @@
 
 org?: Org
 
-# Create a mapping:
+name: # denormalized for uniqueness
+  type: string
+  unique: true
 
-domain:
+domain: # considered: unique: true
   type: domain
-  # considered: unique: true
 
-www: boolean
-
-# Result of a successful domain mapping:
-
-ip?: string
-
-record?: string # A or CNAME
-
-name?: domain

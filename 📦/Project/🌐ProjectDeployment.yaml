@@ -14,10 +14,20 @@
 #
 # ----------------------
 
-
 version: ProjectVersion # In the future ProjectDeployment's may be used to represent other 'instructions' == OPTIONAL
+
+# Deployment/Mapping Location Instructions:
 
 domain: Domain
 
-path?: string # Undefined == "/" root
+path: string # "/"
 
+www: boolean
+
+# Successful Result:
+
+ip?: string
+
+record?: string # A or CNAME
+
+name?: domain

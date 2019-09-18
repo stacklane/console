@@ -20,8 +20,9 @@ account?: Account # Responsible for billing of this Project (when deployed)
 # Live Only
 ############
 
-region?:
+region:
   type: options
+  init: true
   values:
     us: United States
     eu: European Union
