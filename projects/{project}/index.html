@@ -23,6 +23,14 @@
      class="is-loading is-quiet"></div>
 {{/ProjectModeSimple}}
 
+{{^ProjectModeSimple}}
+<div class="message is-warning">
+    <div class="message-body">
+        This Project has not been migrated.
+    </div>
+</div>
+{{/ProjectModeSimple}}
+
 <div class="box"
      data-controller="project"
      data-project-id="{{project.id}}"

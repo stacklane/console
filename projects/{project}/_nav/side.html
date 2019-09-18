@@ -47,13 +47,6 @@
         <li class="title">
             Settings
         </li>
-        {{^ProjectModeSimple}}
-        <li>
-            <form method="post" action="/projects/{{project.id}}/settings/migrate">
-                <button class="button is-outlined is-fullwidth is-small is-rounded" type="submit">Migrate</button>
-            </form>
-        </li>
-        {{/ProjectModeSimple}}
         <li>
             <a href="/projects/{{project.id}}/settings/">
                 <span class="icon is-small is-icon-ui">{{>ic-settings}}</span>
