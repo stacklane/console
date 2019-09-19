@@ -17,4 +17,6 @@
 #
 # -----------------
 
+# TBD it may make sense for an App to require an Org.
+#   or at least it should be required before before the App was used by other Projects.
 org?: Org

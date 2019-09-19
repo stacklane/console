@@ -4,7 +4,7 @@
 {{% svg /_icons/ as ic }}
 
 
-{{% import {project,key} from '🔗' }}
+{{% import {project,key,version} from '🔗' }}
 {{% import {KeyIsUserType,KeyIsApiType,KeyIsSSHType,KeySSHPublic,KeyIsEnabled} from '📤' }}
 
 {{% partial /projects/{project}/{version}/_nav/ as nav }}
@@ -85,7 +85,7 @@
     <div class="message is-warning">
         <div class="message-body">
             This public key will only be visible for a short time.
-            Copy the entire public key and add it to the {{project.source.type}} UI.
+            Copy the entire public key and add it to the {{version.source.type}} UI.
             <br>
             <br>
             <div class="field">

@@ -28,12 +28,3 @@ region:
 data:
   type: namespace
   init: true
-
-
-# DEPRECATED
-
-mapping?: Mapping
-
-source?: source
-
-properties?: map
