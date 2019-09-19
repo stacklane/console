@@ -6,7 +6,6 @@ auth: required
 
 default:
   stripe.com: all
-  📦.Mapping: all # deprecated
   📦.ProjectUser: access, list
   📦.AccountUser: access
   📦.AppUser: access
@@ -33,7 +32,6 @@ DomainOwner:
 ProjectOwner:
   📦.Project: all
   📦.ProjectUser: all
-  📦.ProjectKey: all # deprecated
   📦.ProjectVersion: all
   📦.ProjectVersionKey: all
   📦.ProjectDeployment: all
