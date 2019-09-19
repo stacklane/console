@@ -33,7 +33,7 @@ try {
             buffered.push({
                 $event: {last: true},
                 level: "error",
-                value: 'Build failed'
+                value: 'Build failed: ' + error
             });
         });
 } catch (e){
