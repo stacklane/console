@@ -1,5 +1,5 @@
 
-import {emailProviderType, emailScopeType, emailFrom, emailUsername, emailPassword} from "form";
+import {emailProviderType, emailScopeType, emailFrom, emailFromName, emailUsername, emailPassword} from "form";
 import {ProjectVersionKey} from '📦';
 import {KeysRedirect} from '📤';
 
@@ -10,7 +10,7 @@ let pk = new ProjectVersionKey().type(ProjectVersionKey.type.email).name(emailPr
 
 if (emailScopeType) pk.context(emailScopeType);
 
-pk.data().put('from', emailFrom);
+pk.data().put('from', '"' + emailFromName + '" <' + emailFrom + '>');
 pk.data().put('user', emailUsername);
 pk.data().put('pass', emailPassword);
 

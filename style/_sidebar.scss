@@ -47,8 +47,14 @@
 
     .icon{
       margin-right: 2px;
+
       width: 1rem;
       height: 1rem;
+
+      > svg{
+        width: 1rem;
+        height: 1rem;
+      }
     }
 
     &.is-active{
@@ -84,8 +90,14 @@
 
       .icon{
         margin-right: 6px;
+
         width: 20px;
         height: 20px;
+
+        > svg{
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }

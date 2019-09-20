@@ -140,6 +140,7 @@ body > header {
       width: 32px;
       margin-top: .5rem;
       border-radius: $radius-rounded;
+      justify-content: center;
 
       &:hover{
         background: white !important;
@@ -220,10 +221,33 @@ $transition-fade:  opacity .15s linear !default;
 /**
  * .icon > .svg
  */
+/* problematic for form input icons
 .icon > svg{
   width: 100%;
   height: 100%;
+}*/
+.icon {
+  > svg{
+    height: $icon-dimensions;
+    width: $icon-dimensions;
+  }
+
+  &.is-small > svg{
+    height: $icon-dimensions-small;
+    width: $icon-dimensions-small;
+  }
+
+  &.is-medium > svg {
+    height: $icon-dimensions-medium;
+    width: $icon-dimensions-medium;
+  }
+
+  &.is-large > svg{
+    height: $icon-dimensions-large;
+    width: $icon-dimensions-large;
+  }
 }
+
 .media-left > .icon {
   /**
    * Typical case is a *single* icon in media-left (only element),
@@ -255,7 +279,7 @@ a:hover{
     }
   }
 }
-.is-active .icon svg{
+.is-active > .icon > svg, .is-active.icon > svg{
   fill: $icon-active-color;
 
   .icon-accent {
