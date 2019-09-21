@@ -59,6 +59,10 @@
     }
   }
 
+  .simple-list-item:last-child{
+
+  }
+
   .simple-list-item + .simple-list-item{
     border-top: .1rem solid $box-background-color;
   }

@@ -6,7 +6,7 @@
 {{% svg /_brand/ as brand }}
 
 {{% import {version} from '🔗' }}
-{{% import {VersionSource} from '📤' }}
+{{% import {VersionSource, ProjectVersionDisplay} from '📤' }}
 
 {{< main-nav-layout}}
 
@@ -38,11 +38,7 @@
             <a class="box" href="https://stacklane.com/docs/dev#ide-plugins" target="_blank">
 
                 <div class="has-flex-centered">
-                    <span class="tags has-addons">
-                        <span class="tag is-dark">{{VersionSource.type}}</span>
-                        <span class="tag is-light">{{VersionSource.short}}</span>
-                        <span class="tag is-primary">{{VersionSource.reference}}</span>
-                    </span>
+                    {{{ ProjectVersionDisplay version.get }}}
                 </div>
 
                 <br>
