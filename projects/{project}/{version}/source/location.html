@@ -1,0 +1,17 @@
+<!--TEMPLATE mustache-->
+
+{{% import {VersionSource} from '📤' }}
+
+<div class="field">
+    <label class="label" for="ref">Branch / Tag</label>
+    <div class="control">
+        <div class="select">
+            <select id="ref" name="ref" required>
+                <option value="">Choose...</option>
+                {{#VersionSource.references as ref}}
+                <option value="{{ref.value}}">{{ref.name}}</option>
+                {{/VersionSource.references}}
+            </select>
+        </div>
+    </div>
+</div>

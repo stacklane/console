@@ -15,6 +15,7 @@
 @import "/bulma/elements/tag";
 @import "/bulma/elements/title";
 @import "/bulma/elements/table";
+@import "/bulma/elements/other";
 
 //@import "/bulma/components/card";
 @import "/bulma/components/dropdown";
@@ -84,6 +85,10 @@ $icon-active-color-accent: rgb(146,186,248);
 
 a{
   font-weight: 500;
+}
+
+.modal-card-foot.has-text-right{
+  justify-content: flex-end;
 }
 
 /**

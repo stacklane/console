@@ -6,7 +6,7 @@
 {{% svg /_brand/ as brand }}
 
 {{% import {version} from '🔗' }}
-{{% import {VersionSource, ProjectVersionDisplay} from '📤' }}
+{{% import {VersionSource, VersionSourceNotExists, ProjectVersionDisplay, VersionSourceType} from '📤' }}
 
 {{< main-nav-layout}}
 
@@ -31,49 +31,134 @@
 
     <hr>
 
-    <div class="columns">
-        {{#VersionSource.external as externalHref}}
+    {{#VersionSource.external as externalHref}}
 
-        <div class="column is-half">
-            <a class="box" href="https://stacklane.com/docs/dev#ide-plugins" target="_blank">
-
-                <div class="has-flex-centered">
-                    {{{ ProjectVersionDisplay version.get }}}
-                </div>
-
-                <br>
-                <br>
-
-                <div class="has-text-centered">
-                    <div class="icon is-medium">
-                        {{> brand-webstorm}}
-                    </div>
-
-                    <div class="icon is-medium">
-
-                    </div>
-
-                    <div class="icon is-medium">
-                        {{> brand-stacklane}}
-                    </div>
-                </div>
-
-                <br>
-                <br>
-
-                <div class="has-text-centered">
-                    WebStorm + Stacklane Plugin
-                </div>
-            </a>
+    {{#VersionSourceNotExists}}
+    <div class="message is-warning">
+        <div class="message-body">
+            Ensure the source exists and that any access keys are configured for it.
         </div>
-        {{/VersionSource.external}}
+    </div>
+    {{/VersionSourceNotExists}}
 
-        <div class="column is-half">
-
-
+    <div class="columns">
+        <div class="column is-three-fifths">
+            <div class="field">
+                <label class="label">Type</label>
+                <div class="control">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <span class="icon">
+                                {{#VersionSourceType.github}}{{>brand-github}}{{/VersionSourceType.github}}
+                                {{#VersionSourceType.bitbucket}}{{>brand-bitbucket}}{{/VersionSourceType.bitbucket}}
+                                </span>
+                            </div>
+                            <div class="level-item">
+                                {{VersionSource.type}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Location</label>
+                <div class="control">
+                    <a href="{{externalHref}}" class="tooltip" data-tooltip="{{externalHref}}"
+                       target="_blank">{{VersionSource.short}}</a>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Branch/Tag</label>
+                <div class="control">
+                    {{VersionSource.reference}}
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="buttons">
+                <a href="#" class="button is-fullwidth is-rounded" data-controller="modal"
+                   data-action="modal#show" data-modal-id="editDialog">
+                    IDE Details
+                </a>
+                <a href="#" class="button is-fullwidth is-rounded" data-controller="modal"
+                   data-action="modal#show" data-modal-id="locationDialog">
+                    Change Branch/Tag
+                </a>
+            </div>
         </div>
     </div>
 
+    {{/VersionSource.external}}
+
+</div>
+
+<div class="modal" id="editDialog">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">IDE</p>
+            <a class="delete is-modal-hide" aria-label="close"></a>
+        </header>
+        <section class="modal-card-body">
+            <div class="has-text-centered has-text-weight-bold">
+                WebStorm + Stacklane Plugin
+            </div>
+
+            <br>
+            <br>
+
+            <div class="has-text-centered">
+                <div class="icon is-medium">
+                    {{> brand-webstorm}}
+                </div>
+
+                <div class="icon is-medium">
+
+                </div>
+
+                <div class="icon is-medium">
+                    {{> brand-stacklane}}
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="has-text-centered">
+                <a class="button is-rounded is-fullwidth"
+                   href="https://stacklane.com/docs/dev#ide-plugins" target="_blank">
+                    Learn More
+                </a>
+            </div>
+        </section>
+        <footer class="modal-card-foot has-text-right">
+            <button class="button is-primary is-modal-hide">Close</button>
+        </footer>
+    </div>
+</div>
+
+<div class="modal" id="locationDialog">
+    <form method="post"
+          action="location"
+          data-controller="form"
+          data-form-validate="true" data-form-ajax="true">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Source Location</p>
+                <a class="delete is-modal-hide" aria-label="close"></a>
+            </header>
+            <section class="modal-card-body">
+                <div data-controller="get"
+                     data-get-href="location"
+                     class="is-loading"></div>
+            </section>
+            <footer class="modal-card-foot has-text-right">
+                <button class="button is-primary is-modal-save" type="submit">Update</button>
+            </footer>
+        </div>
+    </form>
 </div>
 
 {{/content}}
