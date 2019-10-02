@@ -17,7 +17,8 @@ account(()=>{
 });
 
 subscription_items(account.get().stripeSubItemId).update({
-    quantity: AccountProjectCount + 1
+    quantity: AccountProjectCount + 1,
+    prorate: false
 });
 
 project.get().account = account;

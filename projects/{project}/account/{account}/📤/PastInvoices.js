@@ -13,7 +13,7 @@ let out = {
 
 past.data.forEach((invoice)=>{
     out.items.push({
-        date: invoice.date,
+        date: invoice.created,
         amount: invoice.amount_paid / 100,
         currency: invoice.currency
     });

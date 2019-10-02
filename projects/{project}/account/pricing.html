@@ -1,18 +1,43 @@
 <!--TEMPLATE mustache-->
 
-{{% import {PlanInfo} from '📤' }}
-{{% import {project} from '🔗' }}
+{{% import {StarterPlan} from '📤' }}
 
 <div class="simple-list">
     <div class="simple-list-header">
+        {{StarterPlan.name}}
+
         <div class="simple-list-price">
             <span class="simple-list-price-amount"
                   data-controller="currency"
-                  data-currency-code="{{PlanInfo.currency}}"
+                  data-currency-code="{{StarterPlan.currency}}"
                   data-currency-symbol-class="simple-list-price-currency">
-                {{PlanInfo.amount}}
+                {{StarterPlan.amount}}
             </span>
-            / {{PlanInfo.interval}}
+            / {{StarterPlan.interval}}
         </div>
+    </div>
+    <div class="simple-list-item">
+        <span class="simple-list-label">{{🎨.feature-hosting-location}}</span>
+        <span class="has-text-weight-bold">{{StarterPlan.baseLocations}}+ Geographic Areas</span>
+    </div>
+    <div class="simple-list-item">
+        <span class="simple-list-label">{{🎨.feature-hosting-units}}</span>
+        <span class="has-text-weight-bold"><span data-controller="number">{{StarterPlan.baseUnits}}</span></span>
+    </div>
+    <div class="simple-list-item">
+        <span class="simple-list-label">{{🎨.feature-hosting-units-add}}</span>
+        <span class="has-text-weight-bold">
+            +<span data-controller="number">{{StarterPlan.usageUnitGroup}}</span>:
+
+            <span class="simple-list-price">
+                <span class="simple-list-price-amount"
+                      data-controller="currency"
+                      data-currency-code="{{StarterPlan.currency}}"
+                      data-currency-symbol-class="simple-list-price-currency">
+                    {{StarterPlan.usageUnitAmount}}
+                </span>
+                / {{StarterPlan.interval}}
+            </span>
+        </span>
     </div>
 </div>

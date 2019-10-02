@@ -6,23 +6,25 @@
 {{% partial /_partials/_util/disable-spell }}
 
 <!--suppress XmlDuplicatedId -->
-<div class="box is-spacious">
+<div class="box-stack is-spacious">
 
     {{^NewProjectInfo.visible}}
 
-    <div class="message is-danger">
-        <div class="message-body">
-            Unable to find the public GIT repository
-            with valid Stacklane manifest file (🎛.yaml).
-            Please <a href="/projects/new">start over</a>.
+    <section>
+        <div class="message is-danger">
+            <div class="message-body">
+                Unable to find the public GIT repository
+                with valid Stacklane manifest file (🎛.yaml).
+                Please <a href="/projects/new">start over</a>.
+            </div>
         </div>
-    </div>
+    </section>
 
     {{/NewProjectInfo.visible}}
 
     {{#NewProjectInfo.visible}}
 
-    <div class="has-text-centered">
+    <section class="has-text-centered">
         <span class="has-text-grey">
             <span class="icon is-large">
                 {{% show NewProjectInfo.icon }}
@@ -36,16 +38,15 @@
         <p>
 
         </p>
-    </div>
-
-    <hr>
+    </section>
 
     {{#NewProjectForm.view}}
-    <form method="post" action="new-step?_form={{id}}"
+    <form method="post"
+          action="new-step?_form={{id}}"
           data-controller="form"
           data-form-validate="true"
           data-form-ajax="true">
-
+    <section class="is-offset">
         {{#NewProjectInfo.ssh}}
         <div class="message is-info">
             <div class="message-body">
@@ -67,18 +68,13 @@
                 {{/Project.view}}
             </div>
         </div>
+    </section>
 
-        <hr>
-
-        <p class="has-text-right">
-            <button class="button is-primary" type="submit">Create</button>
-        </p>
+    <section class="buttons">
+        <button class="button is-primary" type="submit">Create</button>
+    </section>
     </form>
     {{/NewProjectForm.view}}
 
     {{/NewProjectInfo.visible}}
 </div>
-
-
-
-

@@ -19,24 +19,16 @@ $action-next: 'Next';
 $submitting: 'Submitting';
 
 $feature-hosting-location: 'Hosting Locations';
-$feature-hosting-location-about: 'Code is securely replicated across a minimum of 3 geographically isolated regions, \
-  automatically routing traffic to the closest available region worldwide.';
+$feature-hosting-location-about: 'Code is replicated across many geographically isolated regions, \
+  automatically routing traffic to the closest available.';
 
-$feature-users: 'User Management';
-$feature-users-about: 'Native user profile storage and management, connected to 3rd party identity providers such as Google and Microsoft.';
-
-$feature-data-size: 'Model Data Size';
-$feature-data-size-about: 'Massively scalable and redundant, with larger data storage sizes available upon request.';
+$feature-hosting-units: 'Included Stack Units';
+$feature-hosting-units-add: 'Additional Stack Units';
 
 $feature-data-location: 'Model Storage Area';
 $feature-data-location-about: 'The general geographical area where data is stored and encrypted-at-rest. \
   Data is replicated across multiple regions in this geographic area, and further replicated across multiple zones in a region. \
   Data storage can withstand the loss of entire regions and maintain availability without losing data.';
-
-$feature-cdn: 'Content Delivery Network';
-$feature-cdn-about: 'The content delivery network (CDN) is standard, and ensures that large assests such as images are \
-  stored and delivered closets to visitors, in over 80 locations worldwide.';
-
 
 
 /*********************
@@ -49,15 +41,7 @@ $feature-cdn-about: 'The content delivery network (CDN) is standard, and ensures
 $tabs-boxed: true;
 
 /**
- * Stripe
- */
-
-/**
- * @title Stripe Plan ID
- */
-$stripe-plan-id: '';
-
-/**
  * @title Stripe Public Key
  */
 $stripe-pk: '';
+

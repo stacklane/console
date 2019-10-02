@@ -32,9 +32,9 @@
 
     <div class="columns">
 
-        <!--
+        {{!
           TODO we need some way to identify these accounts
-          -->
+          }}
         {{#AccountUser.me.all as accountUser}}
         <div class="column is-half-tablet is-half-desktop is-one-third-widescreen is-one-third-fullhd">
             <form method="post" action="{{accountUser.account.id}}/choose"

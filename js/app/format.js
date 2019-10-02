@@ -35,6 +35,22 @@
         }
     });
 
+    App.register("number", class extends Stimulus.Controller {
+        connect() {
+            var val = VAL(this);
+            if (!val) return;
+
+            var e = this.element;
+
+            try {
+                var str = parseFloat(val).toLocaleString(); // all defaults
+                e.innerText = str;
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+    });
+
     const DEFAULT_CURRENCY = "USD";
     App.register("currency", class extends Stimulus.Controller {
         connect() {

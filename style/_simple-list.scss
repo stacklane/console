@@ -19,24 +19,24 @@
   }
 
   .simple-list-price{
-    background-color: #fff;
-    color: #4a4a4a;
-    font-size: .75rem;
+    //background-color: #fff;
+    //color: #4a4a4a;
+    //font-size: .75rem;
     font-weight: 400;
-    padding: .75em;
+   // padding: .75em;
     align-content: center;
     text-align: center;
 
     .simple-list-price-amount{
-      font-size: 2.5rem;
+     // font-size: 2.5rem;
       font-weight: 700;
 
       .simple-list-price-currency{
-        vertical-align: super;
-        font-size: 1rem !important;
+    //    vertical-align: super;
+      //  font-size: 1rem !important;
         font-weight: 400 !important;
-        color: #4a4a4a;
-        margin-right: .25rem;
+      //  color: #4a4a4a;
+      //  margin-right: .25rem;
       }
     }
   }
@@ -53,9 +53,10 @@
     .simple-list-label{
       display: block;
       font-weight: 600;
-      font-size: .75rem;
-      color: #b5b5b5;
-      margin-bottom: .25rem;
+      font-size: .8rem;
+      opacity: .8;
+     // color: #b5b5b5;
+      margin-bottom: .5rem;
     }
   }
 

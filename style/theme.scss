@@ -65,6 +65,7 @@ $icon-active-color-accent: rgb(146,186,248);
 @import "/style/toggler";
 @import "/style/simple-list";
 @import "/style/box-card";
+@import "/style/box-spacious";
 @import "/style/sidebar";
 
 ////////////
@@ -432,28 +433,6 @@ $proposed-transition: opacity .2s ease-in-out;
   will-change: opacity, box-shadow;
 }
 
-/**
- * a.box
- */
-
-/**
- * .box.is-spacious
- *
- * Typically for a full page ".box"
- */
-.box.is-spacious{
-  padding: 30px;
-}
-@include tablet(){
-  .box.is-spacious {
-    padding: 60px 30px;
-  }
-}
-@include desktop(){
-  .box.is-spacious {
-    padding: 80px 40px;
-  }
-}
 
 /**
  * Nested .box (non-root)

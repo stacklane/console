@@ -13,6 +13,10 @@
 
 # If present, contains the 'source of the source' (and which may no longer match).
 # The App itself may also have a later version available than this AppVersion.
+#
+# Important:  The ProjectVersion should duplicate any essential properties from the AppVersion.
+#             The ProjectVersion should not require the AppVersion to continue to operate.
+
 app?: AppVersion
 
 source: source

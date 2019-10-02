@@ -19,6 +19,8 @@ if (DomainValue.verify(deploymentDomain.domain)){
             .www(deployment.www)
             .theme(version.properties)
             .keys(version)
+            .metadata('billing.base.units', project.account.get().baseUnits + '')
+            .metadata('billing.stripe.usage.id', project.account.get().stripeSubItemUsageId)
             .register();
 
         deployment.ip = result.address;

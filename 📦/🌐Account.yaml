@@ -1,9 +1,21 @@
 
-
-# Billing target
+#
+# Billing target, which aggregates billing across multiple Project's into a single subscription.
+#
+# ---------
 
 org?: Org
 
+baseUnits:
+  type: integer
+  init: true
+
 stripeCustomerId: string
+
 stripeSubId: string
-stripeSubItemId: string
+
+stripeSubItemId: string # Fixed per-Project plan
+
+stripeSubItemBaseId?: string # Included plan
+
+stripeSubItemUsageId?: string # Metered plan
