@@ -1,8 +1,8 @@
 
-import {StripePlanInfo} from '📤';
+import {StripePlanInfo, CurrencyParam} from '📤';
 import {plans} from 'stripe.com';
 
-let currency = 'usd';
+let currency = CurrencyParam;
 let interval = 'month';
 let planId = 'starter';
 
@@ -14,6 +14,8 @@ let planList = planListRaw.data.filter(
 
 let fullPlan = {
     name: 'Starter Plan',
+    eur: currency == 'eur',
+    usd: currency == 'usd',
     currency: currency,
     interval: interval,
     amount: 0,

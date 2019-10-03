@@ -6,6 +6,8 @@
 
 {{% import {project} from '🔗' }}
 
+{{% import {CurrencyParam} from '📤' }}
+
 {{< main-nav-layout}}
 
 {{$nav}}{{> nav-top}}{{/nav}}
@@ -31,7 +33,7 @@
 
 <div class="box">
 
-<form method="post" action="new"
+<form method="post" action="new?currency={{CurrencyParam}}"
       data-controller="form"
       data-form-validate="true"
       data-form-ajax="true"
@@ -63,7 +65,7 @@
         </div>
     </div>
     <div class="column">
-        <div data-controller="get" data-get-href="pricing" class="is-loading">Loading</div>
+        <div data-controller="get" data-get-href="pricing?currency={{CurrencyParam}}" class="is-loading">Loading</div>
     </div>
 </div>
 

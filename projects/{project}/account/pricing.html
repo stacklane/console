@@ -14,6 +14,12 @@
                 {{StarterPlan.amount}}
             </span>
             / {{StarterPlan.interval}}
+
+            <div class="is-size-7">
+                <br>
+                {{#StarterPlan.eur}}<a href="?currency=usd">Switch to USD</a>{{/StarterPlan.eur}}
+                {{#StarterPlan.usd}}<a href="?currency=eur">Switch to EUR</a>{{/StarterPlan.usd}}
+            </div>
         </div>
     </div>
     <div class="simple-list-item">
