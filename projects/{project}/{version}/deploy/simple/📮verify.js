@@ -15,6 +15,7 @@ if (DomainValue.verify(deploymentDomain.domain)){
             .domain(deploymentDomain.domain)
             .source(version.source)
             .region(project.region)
+            .users(project.users)
             .namespace(project.data)
             .www(deployment.www)
             .theme(version.properties)
@@ -26,6 +27,7 @@ if (DomainValue.verify(deploymentDomain.domain)){
         deployment.ip = result.address;
         deployment.record = result.recordType;
         deployment.name = result.domain;
+        deployment.token = result.token;
 
         ({redirect: '.', success: `Domain successfully verified and registered`});
     } catch (e){

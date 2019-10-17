@@ -11,14 +11,16 @@
 #
 # ----------------
 
-# If present, contains the 'source of the source' (and which may no longer match).
+#
+# If AppVersion is present, it contains the 'source of the source' (which may no longer match).
+#
 # The App itself may also have a later version available than this AppVersion.
 #
-# Important:  The ProjectVersion should duplicate any essential properties from the AppVersion.
-#             The ProjectVersion should not require the AppVersion to continue to operate.
-
+# Critical: This ProjectVersion *should* duplicate any essential properties from the AppVersion.
+#           This ProjectVersion should *not* require the AppVersion to continue to operate.
+#
 app?: AppVersion
 
-source: source
+source: source # Denormalized value, even if using an AppVersion
 
 properties?: map

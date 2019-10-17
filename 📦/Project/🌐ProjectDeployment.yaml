@@ -14,7 +14,9 @@
 #
 # ----------------------
 
-version: ProjectVersion # In the future ProjectDeployment's may be used to represent other 'instructions' == OPTIONAL
+# In the future, ProjectDeployment's may be used to represent other 'instructions'.
+#   At which time this would be changed to optional: true
+version: ProjectVersion
 
 # Deployment/Mapping Location Instructions:
 
@@ -25,6 +27,10 @@ path: string # "/"
 www: boolean
 
 # Successful Result:
+
+token?:
+  type: string
+  protected: true
 
 ip?: string
 

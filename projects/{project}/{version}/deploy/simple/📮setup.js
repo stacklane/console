@@ -12,21 +12,15 @@ if (!DomainValue.isValid(domainName)) throw ({field:'domain', error: 'Invalid do
 /**
  * For simple mode, only expect one ProjectDeployment
  */
-try{
-    ProjectDeployment.version(version).get();
+if (ProjectDeployment.version(version).exists()) {
     throw ({error: 'A deployment already exists.'});
-} catch ($ModelNotFound){
-    // Good
 }
 
 /**
  * Check if Domain already exists
  */
-try {
-    Domain.name(domainName).get();
+if (Domain.name(domainName).exists()){
     throw ({field:'domain', error: 'Domain is already reserved: ' + domainName});
-} catch ($ModelNotFound){
-    // Good
 }
 
 let domainValue = DomainValue.of(domainName);

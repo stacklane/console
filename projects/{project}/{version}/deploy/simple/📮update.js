@@ -11,7 +11,11 @@ let resultDomain = deployment.name;
 
 if (deploymentDomainValue.verified && Mapping.exists(resultDomain)){
     try {
-        if (Mapping.domain(resultDomain).theme(version.properties).keys(version).update()){
+        if (Mapping.domain(resultDomain)
+                   .theme(version.properties)
+                   .keys(version)
+                   .token(deployment.token)
+                   .update()){
             ({redirect: Redirect.index().success('Allow 5-10 minutes for changes to propagate')});
         } else {
             ({error: `Domain update failed`});
