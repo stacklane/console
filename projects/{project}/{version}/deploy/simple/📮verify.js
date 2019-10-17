@@ -5,7 +5,7 @@ import {Me} from '👤'
 import {ProjectDeployment} from '📦';
 
 let project = projectPath.get();
-let version = versionPath.get();;
+let version = versionPath.get();
 let deployment = ProjectDeployment.version(version).get();
 let deploymentDomain = deployment.domain.get();
 
