@@ -59,8 +59,7 @@ $box-spacious-horizontal-desktop: 40px;
     padding: 16px 20px;
 
     &.is-offset{
-      //background-color: #f7fafc;
-      background-color: rgba(0,0,0,.01);
+      background-color: $offset-color;
     }
 
     &.buttons{ /* standard Bulma class */
@@ -82,6 +81,10 @@ $box-spacious-horizontal-desktop: 40px;
   }
   section:last-child{
     padding-bottom: $box-spacious-vertical-default;
+  }
+  section.is-offset{
+    padding-top: $box-spacious-vertical-default !important;
+    padding-bottom: $box-spacious-vertical-default !important;
   }
 }
 

@@ -121,6 +121,20 @@ body > header {
   color: $nav-text-color;
 
   .navbar{
+
+    .navbar-dropdown{
+      a.navbar-item{
+        color: $link;
+      }
+      a.navbar-item:hover{
+        color: $link-hover;
+      }
+    }
+
+    .navbar-brand{
+      margin-left: -.6rem; // Looks better
+    }
+
     .is-nav-title{
       font-size: 16px;
       font-weight: 500;
@@ -141,25 +155,38 @@ body > header {
       padding-right: ($main-padding-side * 2) - .5rem;
     }
 
-    .navbar-item.is-special{
-      box-shadow: $shadow-for-bg-small;
-      background: white;
-      height: 32px;
-      width: 32px;
-      margin-top: .5rem;
-      border-radius: $radius-rounded;
-      justify-content: center;
+    //.navbar-item.is-spacer{
+    //  padding-left: .25rem;
+    //  padding-right: .25rem;
+    //}
 
-      &:hover{
+
+    .navbar-item.is-special:hover{
+      .is-special-container {
         background: white !important;
         box-shadow: $shadow-for-bg;
         transition: box-shadow .2s ease-in-out;
       }
     }
 
-    .navbar-brand .is-special{
-      margin-left: 1px; // Needs more on the left
+    .navbar-dropdown a.navbar-item:hover{
+      background-color: $offset-color !important;
     }
+
+    .navbar-item > .is-special-container{
+      box-shadow: $shadow-for-bg-small;
+      background: white;
+      height: $icon-dimensions-medium;
+      width: $icon-dimensions-medium;
+      border-radius: $radius-rounded;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    //.navbar-brand .is-special{
+    //  margin-left: 1px; // Needs more on the left
+    //}
 
     /**
      * Provide same svg 'fill' as text 'color'
