@@ -9,7 +9,7 @@
 
 {{% import {project, version} from '🔗' }}
 {{% import {ProjectHasAccount, Deployment} from '📤' }}
-{{% import {Project} from '📦' }}
+{{% import {Project, ProjectDeployment} from '📦' }}
 
 {{< main-nav-layout}}
 
@@ -154,24 +154,31 @@
             </div>
 
             <div class="field">
-                <label class="label" for="region">{{🎨.feature-data-location}}</label>
+                <label class="label" >{{🎨.feature-data-location}}</label>
                 <div class="control">
-                    <div class="select">
-                        <select id="region" name="region" required>
-                            <option value="{{Project.region.us}}">{{Project.region.optionLabel Project.region.us}} (Default)</option>
-                            <option value="{{Project.region.eu}}">{{Project.region.optionLabel Project.region.eu}}</option>
-                        </select>
+                    <div class="field">
+                        {{#ProjectDeployment.region.us as us}}
+                        <input class="is-checkradio" id="region_{{us}}" type="radio"
+                               value="{{us}}" name="region" checked="checked">
+                        <label for="region_{{us}}">
+                            {{ProjectDeployment.region.optionLabel us}}
+                            &mdash;
+                            Best for <strong>worldwide</strong> visitors, <em>or</em> primarily North American visitors.
+                        </label>
+                        {{/ProjectDeployment.region.us}}
+                    </div>
+                    <div class="field">
+                        {{#ProjectDeployment.region.eu as eu}}
+                        <input class="is-checkradio" id="region_{{eu}}" type="radio"
+                               value="{{eu}}" name="region" checked="checked">
+                        <label for="region_{{eu}}">
+                            {{ProjectDeployment.region.optionLabel eu}}
+                            &mdash;
+                            Best for primarily Western/Eastern European visitors.
+                        </label>
+                        {{/ProjectDeployment.region.eu}}
                     </div>
                 </div>
-                <p class="help">
-                    Use the default {{Project.region.optionLabel Project.region.us}},
-                    unless there is a business case for using the {{Project.region.optionLabel Project.region.eu}}.
-                    All regions share identical performance and durability characteristics.
-
-                    {{! TODO make this a link which shows a dialog
-                    <span class="tooltip" data-tooltip="🎨.feature-data-location-about">Learn More</span>
-                    }}
-                </p>
             </div>
 
             <hr>

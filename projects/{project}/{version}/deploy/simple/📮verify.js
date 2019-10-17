@@ -14,7 +14,7 @@ if (DomainValue.verify(deploymentDomain.domain)){
         let result = MappingBuilder
             .domain(deploymentDomain.domain)
             .source(version.source)
-            .region(project.region)
+            .region(deployment.region)
             .users(project.users)
             .namespace(project.data)
             .www(deployment.www)

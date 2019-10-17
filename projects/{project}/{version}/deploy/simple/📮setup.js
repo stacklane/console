@@ -30,10 +30,8 @@ let domain = new Domain().name(domainName).domain(domainValue);
 
 new DomainUser(domain).role(Role.DomainOwner).user(Me);
 
-// Update Project.region:
-version.get().project().region(region);
-
 new ProjectDeployment()
+    .region(region)
     .version(version)
     .domain(domain)
     .www(false)

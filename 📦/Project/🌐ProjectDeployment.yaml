@@ -26,6 +26,13 @@ path: string # "/"
 
 www: boolean
 
+region?: # Legacy null
+  type: options
+  init: true
+  values:
+    us: United States
+    eu: European Union
+
 # Successful Result:
 
 token?:

@@ -23,13 +23,6 @@ account?: Account # Responsible for billing of this Project
 #
 # ------------
 
-region:
-  type: options
-  init: true
-  values:
-    us: United States
-    eu: European Union
-
 users?: # Legacy null
   type: namespace
   init: true

@@ -2,7 +2,7 @@
 {{% import {ProjectHasAccount, Deployment, ProjectVersionDisplay} from '📤' }}
 {{% svg /_icons/ as ic }}
 {{% import {project} from '🔗' }}
-{{% import {Project} from '📦' }}
+{{% import {Project, ProjectDeployment} from '📦' }}
 
 {{#Deployment as deploy}}
 {{#deploy.domain.get.domain as domain}}
@@ -60,10 +60,12 @@
                     {{! cname? deploy.name }}
                     <span class="has-text-weight-bold">{{deploy.record}} {{deploy.ip}}</span>
                 </div>
+                {{#deploy.region}}
                 <div class="simple-list-item">
                     <span class="simple-list-label">{{🎨.feature-data-location}}</span>
-                    <span class="has-text-weight-bold">{{Project.region.optionLabel project.get.region}}</span>
+                    <span class="has-text-weight-bold">{{ProjectDeployment.region.optionLabel deploy.region}}</span>
                 </div>
+                {{/deploy.region}}
             </div>
         </div>
         <div class="column is-one-third">
