@@ -33,13 +33,13 @@
 <div class="box">
     <div class="tabs {{#🎨.tabs-boxed}}is-boxed{{/🎨.tabs-boxed}}" data-controller="tabs">
         <ul>
-            <li class="is-active"><a id="api-tab" href="#api"><span class="icon">{{>ic-extension}}</span>&nbsp;<span>Third Party API</span></a></li>
-            <li><a id="email-tab" href="#email"><span class="icon">{{>ic-email}}</span>&nbsp;<span>Email</span></a></li>
-            <li><a id="user-tab" href="#user"><span class="icon">{{>ic-verified_user}}</span>&nbsp;<span>Users</span></a></li>
-            {{#VersionSource.ssh}}<li><a id="ssh-tab" href="#ssh"><span class="icon">{{>ic-lock}}</span>&nbsp;<span>SSH Key</span></a></li>{{/VersionSource.ssh}}
+            <li class="is-active"><a id="api-tab" href="#api"><span class="icon is-icon-ui">{{>ic-extension}}</span>&nbsp;<span>Third Party API</span></a></li>
+            <li><a id="email-tab" href="#email"><span class="icon is-icon-ui">{{>ic-email}}</span>&nbsp;<span>Email</span></a></li>
+            <li><a id="user-tab" href="#user"><span class="icon is-icon-ui">{{>ic-verified_user}}</span>&nbsp;<span>Users</span></a></li>
+            {{#VersionSource.ssh}}<li><a id="ssh-tab" href="#ssh"><span class="icon is-icon-ui">{{>ic-lock}}</span>&nbsp;<span>SSH Key</span></a></li>{{/VersionSource.ssh}}
 
             {{! TODO only for external source }}
-            <li><a id="dev-tab" href="#dev"><span class="icon">{{>ic-dev_mode}}</span> <span>Dev Token</span></a></li>
+            <li><a id="dev-tab" href="#dev"><span class="icon is-icon-ui">{{>ic-dev_mode}}</span> <span>Dev Token</span></a></li>
         </ul>
     </div>
 

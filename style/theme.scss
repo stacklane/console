@@ -74,11 +74,6 @@ $nav-active-color: $link;
   justify-content: center;
 }
 
-.icon.is-micro{
-  width: .75rem;
-  height: .75rem;
-}
-
 .has-multiple-form-buttons form{
   display: inline;
 }
@@ -119,13 +114,30 @@ body > header {
   color: $nav-text-color;
 
   .navbar{
+    padding-top: 0px;
+    padding-left: $main-padding-side - .5rem;
+    padding-right: $main-padding-side - .5rem;
+
+    &.is-transparent{
+      background: transparent;
+      background: $body-background-color; // same, so that the header doesn't appear transparent when scrolling with 'sticky'
+    }
+
+    @include desktop {
+      padding-top: $main-padding-top;
+      padding-left: ($main-padding-side * 2) - .5rem;
+      padding-right: ($main-padding-side * 2) - .5rem;
+    }
 
     .navbar-dropdown{
       a.navbar-item{
         color: $link;
-      }
-      a.navbar-item:hover{
-        color: $link-hover;
+        padding: 0.375rem 1rem; // Reset odd default Bulma padding -- see _navbar.scss
+
+        &:hover{
+          color: $link-hover;
+          background-color: $offset-color !important;
+        }
       }
     }
 
@@ -137,34 +149,6 @@ body > header {
       font-size: 16px;
       font-weight: 500;
       color: $nav-text-color;
-    }
-
-    &.is-transparent{
-      background: transparent;
-      background: $body-background-color; // same, so that the header doesn't appear transparent when scrolling with 'sticky'
-    }
-
-    padding-top: 0px;
-    padding-left: $main-padding-side - .5rem;
-    padding-right: $main-padding-side - .5rem;
-
-    @include desktop {
-      padding-top: $main-padding-top;
-      padding-left: ($main-padding-side * 2) - .5rem;
-      padding-right: ($main-padding-side * 2) - .5rem;
-    }
-
-    //.navbar-item.is-spacer{
-    //  padding-left: .25rem;
-    //  padding-right: .25rem;
-    //}
-
-    .navbar-dropdown a.navbar-item{
-      padding: 0.375rem 1rem; // Reset odd default Bulma padding -- see _navbar.scss
-
-      &:hover{
-        background-color: $offset-color !important;
-      }
     }
 
     .navbar-item.is-special {
@@ -197,22 +181,6 @@ body > header {
         }
       }
     }
-
-    //.navbar-brand .is-special{
-    //  margin-left: 1px; // Needs more on the left
-    //}
-
-    /**
-     * Provide same svg 'fill' as text 'color'
-     * Meaning: we want svg's to have same color as the text.
-
-    @each $name, $pair in $colors {
-      $color-invert: nth($pair, 2);
-      &.is-#{$name} {
-        fill: $color-invert !important;
-      }
-    }
-     */
 
     /**
      * <span class='icon'>...</span>
@@ -302,8 +270,12 @@ $transition-fade:  opacity .15s linear !default;
     height: $icon-dimensions-large;
     width: $icon-dimensions-large;
   }
-}
 
+  &.is-micro{
+    width: .75rem;
+    height: .75rem;
+  }
+}
 .media-left > .icon {
   /**
    * Typical case is a *single* icon in media-left (only element),
@@ -314,7 +286,7 @@ $transition-fade:  opacity .15s linear !default;
 }
 
 /**
- * Icons
+ * .is-icon-ui
  */
 .icon.is-icon-ui {
   svg {
@@ -335,7 +307,8 @@ a:hover {
     }
   }
 }
-.is-active > .icon > svg, .is-active.icon > svg{
+.is-active /* any ancestor */ .icon.is-icon-ui > svg,
+.is-active.icon.is-icon-ui > svg{
   @include icon-svg-active;
 }
 
