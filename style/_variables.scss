@@ -83,6 +83,10 @@ $icon-link-accent-color: rgb(146,186,248);
 $icon-link-active-color: $link-active;
 $icon-link-active-accent-color: $link-active;
 
+$icon-ui-color: rgb(79,86,107);   ///rgb(67,71,109)
+$icon-ui-accent-color: rgb(163,172,185);
+$icon-ui-accent-opacity: 1;
+
 @mixin icon-svg-link {
   fill: $icon-link-color;
 

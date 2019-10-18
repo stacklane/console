@@ -136,6 +136,7 @@ body > header {
     .is-nav-title{
       font-size: 16px;
       font-weight: 500;
+      color: $nav-text-color;
     }
 
     &.is-transparent{
@@ -158,28 +159,43 @@ body > header {
     //  padding-right: .25rem;
     //}
 
+    .navbar-dropdown a.navbar-item{
+      padding: 0.375rem 1rem; // Reset odd default Bulma padding -- see _navbar.scss
 
-    .navbar-item.is-special:hover{
-      .is-special-container {
-        background: white !important;
-        box-shadow: $shadow-for-bg;
-        transition: box-shadow .2s ease-in-out;
+      &:hover{
+        background-color: $offset-color !important;
       }
     }
 
-    .navbar-dropdown a.navbar-item:hover{
-      background-color: $offset-color !important;
-    }
+    .navbar-item.is-special {
+      &:hover {
+        .is-special-container {
+          background: white !important;
+          box-shadow: $shadow-for-bg;
+        }
+      }
 
-    .navbar-item > .is-special-container{
-      box-shadow: $shadow-for-bg-small;
-      background: white;
-      height: $icon-dimensions-medium;
-      width: $icon-dimensions-medium;
-      border-radius: $radius-rounded;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      .is-special-container{
+        box-shadow: $shadow-for-bg-small;
+        background: white;
+        height: $icon-dimensions-medium;
+        width: $icon-dimensions-medium;
+        border-radius: $radius-rounded;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: box-shadow .2s ease-in-out;
+
+        .icon svg {
+          fill: $icon-ui-accent-color;
+
+          .icon-accent {
+            opacity: 1;
+            fill: $icon-ui-accent-color;
+            stroke: $icon-ui-accent-color; // unclear why this is needed
+          }
+        }
+      }
     }
 
     //.navbar-brand .is-special{
@@ -302,11 +318,11 @@ $transition-fade:  opacity .15s linear !default;
  */
 .icon.is-icon-ui {
   svg {
-    fill: rgb(67,71,109); // TODO get into variables
+    fill: $icon-ui-color;
 
     .icon-accent {
-      fill: rgb(172,183,195); // TODO get into variables
-      opacity: 1; // Material two tone defaults opacity to .3
+      fill: $icon-ui-accent-color;
+      opacity: $icon-ui-accent-opacity
     }
   }
 }
