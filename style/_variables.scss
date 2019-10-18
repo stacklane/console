@@ -18,6 +18,8 @@ $shadow-for-bg-large: 0 15px 35px 0 rgba(59,65,94, 0.1), 0 5px 15px 0 rgba(0, 0,
 $zindex-sticky: 39; // less than $modal-z
 
 $offset-color: #f7fafc; // OR: rgba(0,0,0,.01);
+$offset-border-color: #e3e8ee;
+$offset-box-shadow: inset 0 -1px $offset-border-color;
 
 /**
  * Overrides
@@ -34,8 +36,15 @@ $body-size: 15px; //14px; //1rem; // // Assumes the browser default, typically `
 $body-line-height: normal;
 $body-weight: $weight-normal;
 
-$link: #586ada;
-$link-hover: #2b2d50;
+$link: rgb(84, 105, 212);
+$link-invert: $blue-invert !default;
+$link-visited: $purple !default;
+$link-hover: rgb(26, 31, 54);
+$link-hover-border: $grey-light !default;
+$link-focus: $grey-darker !default;
+$link-focus-border: $blue !default;
+$link-active: $grey-darker !default;
+$link-active-border: $grey-dark !default;
 
 $card-shadow: $shadow-for-bg;
 $card-shadow-hover: $shadow-for-bg-large;
@@ -56,7 +65,7 @@ $size-small: .8rem; // primarily done for form .help
 
 $label-weight: $weight-semibold;
 
-/*
+/**
  * Use bootstrap breakpoints
  */
 $tablet: 576px;
@@ -64,3 +73,34 @@ $desktop: 768px /*+ 2 * $gap*/;
 $widescreen: 992px /*+ 2 * $gap*/;
 $fullhd: 1200px /*+ 2 * $gap*/;
 
+/**
+ * Icons
+ */
+
+$icon-link-color: $link;
+$icon-link-accent-color: rgb(146,186,248);
+
+$icon-link-active-color: $link-active;
+$icon-link-active-accent-color: $link-active;
+
+@mixin icon-svg-link {
+  fill: $icon-link-color;
+
+  .icon-accent {
+    fill: $icon-link-accent-color;
+    opacity: .3;
+  }
+}
+
+@mixin icon-svg-active {
+  @include icon-svg-link
+}
+
+@mixin icon-svg-link-active {
+  fill: $icon-link-active-color;
+
+  .icon-accent {
+    fill: $icon-link-active-accent-color;
+    opacity: .3;
+  }
+}

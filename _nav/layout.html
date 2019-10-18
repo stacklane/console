@@ -32,7 +32,7 @@
     }}
     <script defer src="/js/app/init.js"></script>
     <script defer src="/js/app/format.js"></script>
-    <script defer src="/js/app/dropdown.js"></script>
+    <script defer src="/js/app/activator.js"></script>
     <script defer src="/js/app/get.js"></script>
     <script defer src="/js/app/progress.js"></script>
     <script defer src="/js/app/message.js"></script>
@@ -73,22 +73,22 @@
                 <a href="https://stacklane.com/status/" class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Fully Operational"><span class="icon is-small has-text-success"> > ic-adjust  </span></a>
                 }}
 
-                <div class="navbar-item has-dropdown" data-controller="dropdown">
-                    <a class="navbar-link is-arrowless is-dropdown-activator">
+                <div class="navbar-item has-dropdown" data-controller="activator" data-activator-deactivate=".has-dropdown">
+                    <a class="navbar-link is-arrowless is-activator">
                         <span class="icon is-icon-ui">{{>ic-help}}</span>
                     </a>
 
                     <div class="navbar-dropdown is-boxed is-right">
-                        <a class="navbar-item" href="https://stacklane.com/docs/" target="_blank">
-                            <span class="icon is-icon-ui is-small">{{>ic-books}}</span>
+                        <a class="navbar-item is-deactivator" href="{{🎨.docs}}" target="_blank">
+                            <span class="icon is-icon-ui is-small">{{>ic-read-docs}}</span>
                             <span>&nbsp;</span>
                             <span>Documentation</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="navbar-item has-dropdown" data-controller="dropdown">
-                    <a class="navbar-item is-arrowless is-special is-dropdown-activator">
+                <div class="navbar-item has-dropdown" data-controller="activator" data-activator-deactivate=".has-dropdown">
+                    <a class="navbar-item is-arrowless is-special is-activator">
                         <div class="is-special-container">
                             <span class="icon is-icon-ui">{{>ic-account_circle}}</span>
                         </div>
@@ -103,7 +103,7 @@
                         </span>
                         <hr class="navbar-divider">
                         <form method="post" data-controller="form" action="/__/auth/provider/logout">
-                            <a href="#" class="navbar-item" data-action="form#submit">Sign Out</a>
+                            <a href="#" class="navbar-item is-deactivator" data-action="form#submit">Sign Out</a>
                         </form>
                     </div>
                 </div>

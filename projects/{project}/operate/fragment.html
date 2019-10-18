@@ -1,0 +1,128 @@
+<!--TEMPLATE mustache-->
+
+{{% svg /_icons/ as ic }}
+
+{{% import {project} from '🔗' }}
+{{% import {Project} from '📦' }}
+{{% import {IsProjectStarred, ProjectModeSimple, ProjectModeSimpleNav} from '📤' }}
+
+{{#ProjectModeSimple}}
+
+{{! TODO this whole thing should be hidden if it's deployed }}
+
+<div class="box">
+<ul class="tasks"
+    data-controller="activator"
+    data-activator-mode="target"
+    data-activator-deactivate="others">
+
+    <li class="task is-activator">
+        <div class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <span class="task-icon icon is-small">{{>ic-code}}</span>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <h6 class="task-title">Develop your project</h6>
+                        <blockquote class="task-content">
+                            Explore our documentation, open for your favorite IDE, and code.
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <div class="task-content">
+                        <a class="button" target="_blank" href="{{🎨.docs}}">Docs</a>
+                    </div>
+                </div>
+                <div class="level-item">
+                    <div class="task-content">
+                        <a class="button" href="{{ProjectModeSimpleNav.source}}">Source</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+    <li class="task is-activator">
+        <div class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <span class="task-icon icon is-small">{{>ic-web-test}}</span>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <h6 class="task-title">Start testing</h6>
+                        <blockquote class="task-content">
+                            Create a temporary test instance and shareable link.
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <div class="task-content">
+                        <a class="button" href="{{ProjectModeSimpleNav.test}}">Test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+    {{^project.account.linked}}
+    <li class="task is-activator">
+        <div class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <span class="task-icon icon is-small">{{>ic-billing}}</span>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <h6 class="task-title">Setup billing</h6>
+                        <blockquote class="task-content">
+                            Setup billing information for this Project.
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <div class="task-content">
+                        <a class="button" href="/projects/{{project.id}}/account/" data-turbolinks="false">Billing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    {{/project.account.linked}}
+
+    <li class="task is-activator">
+        <div class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <span class="task-icon icon is-small">{{>ic-domain}}</span>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <h6 class="task-title">Deploy and go live</h6>
+                        <blockquote class="task-content">
+                            Configure a domain and go live
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <div class="task-content">
+                        <a class="button" href="{{ProjectModeSimpleNav.live}}">Setup</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+</div>
+
+{{/ProjectModeSimple}}

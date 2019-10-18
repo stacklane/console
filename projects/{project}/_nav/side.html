@@ -1,6 +1,6 @@
 <!--TEMPLATE mustache-->
 {{% import {project} from '🔗' }}
-{{% import {ProjectModeSimple} from '📤' }}
+{{% import {ProjectModeSimple, ProjectModeSimpleNav} from '📤' }}
 {{% svg /_icons/ as ic }}
 <nav data-controller="nav">
     <ul>
@@ -9,13 +9,13 @@
             Develop
         </li>
         <li>
-            <a href="/projects/{{project.id}}/{{project.simple.id}}/source/">
+            <a href="{{ProjectModeSimpleNav.source}}">
                 <span class="icon is-icon-ui">{{>ic-code}}</span>
                 <span>Source</span>
             </a>
         </li>
         <li>
-            <a href="/projects/{{project.id}}/{{project.simple.id}}/keys/">
+            <a href="{{ProjectModeSimpleNav.keys}}">
                 <span class="icon is-icon-ui">{{>ic-key}}</span>
                 <span>Keys</span>
             </a>
@@ -25,19 +25,19 @@
             Deploy
         </li>
         <li>
-            <a href="/projects/{{project.id}}/{{project.simple.id}}/test/">
-                <span class="icon is-icon-ui">{{>ic-web}}</span>
+            <a href="{{ProjectModeSimpleNav.test}}">
+                <span class="icon is-icon-ui">{{>ic-web-test}}</span>
                 <span>Test</span>
             </a>
         </li>
         <li>
-            <a href="/projects/{{project.id}}/{{project.simple.id}}/deploy/simple/">
+            <a href="{{ProjectModeSimpleNav.live}}">
                 <span class="icon is-icon-ui">{{>ic-domain}}</span>
                 <span>Live</span>
             </a>
         </li>
         <li>
-            <a href="/projects/{{project.id}}/{{project.simple.id}}/properties/">
+            <a href="{{ProjectModeSimpleNav.properties}}">
                 <span class="icon is-icon-ui">{{>ic-style}}</span>
                 <span>Properties</span>
             </a>
@@ -56,7 +56,7 @@
         <li>
             {{! Disable Turbolinks because of redirection permutations }}
             <a href="/projects/{{project.id}}/account/" data-turbolinks="false">
-                <span class="icon is-icon-ui">{{>ic-credit_card}}</span>
+                <span class="icon is-icon-ui">{{>ic-billing}}</span>
                 <span>Billing</span>
             </a>
         </li>

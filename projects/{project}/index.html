@@ -6,7 +6,7 @@
 
 {{% import {project} from '🔗' }}
 {{% import {Project} from '📦' }}
-{{% import {IsProjectStarred, ProjectModeSimple} from '📤' }}
+{{% import {IsProjectStarred, ProjectModeSimple, ProjectModeSimpleNav} from '📤' }}
 
 {{% partial /projects/{project}/_nav/ as nav }}
 
@@ -38,10 +38,10 @@
     <div class="level is-mobile">
         <div class="level-left">
             <div class="level-item">
-                <span class="icon is-large">{{& project.icon }}</span>
+                <span class="icon is-medium">{{& project.icon }}</span>
             </div>
             <div class="level-item">
-                <h5 class="is-size-5 title has-text-weight-semibold">
+                <h5 class="is-5 title">
                     {{project.name}}
                 </h5>
             </div>
@@ -58,6 +58,8 @@
         </div>
     </div>
 </div>
+
+<div data-controller="get" data-get-href="operate/fragment" class="is-loading is-quiet">Loading</div>
 
 {{/content}}
 {{/main-nav-layout}}

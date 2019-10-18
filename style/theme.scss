@@ -57,9 +57,6 @@ $main-padding-side: .75rem;
 $nav-text-color: #2b2d50;
 $nav-active-color: $link;
 
-$icon-active-color: $link;
-$icon-active-color-accent: rgb(146,186,248);
-
 ////////////
 
 @import "/style/prism";
@@ -68,6 +65,7 @@ $icon-active-color-accent: rgb(146,186,248);
 @import "/style/box-card";
 @import "/style/box-spacious";
 @import "/style/sidebar";
+@import "/style/tasks";
 
 ////////////
 
@@ -228,12 +226,7 @@ main{
  * .no-select
  */
 .no-select {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  @include unselectable;
 }
 
 
@@ -309,29 +302,25 @@ $transition-fade:  opacity .15s linear !default;
  */
 .icon.is-icon-ui {
   svg {
-    fill: rgb(67,71,109);
+    fill: rgb(67,71,109); // TODO get into variables
 
     .icon-accent {
-      fill: rgb(172,183,195);
+      fill: rgb(172,183,195); // TODO get into variables
       opacity: 1; // Material two tone defaults opacity to .3
     }
   }
 }
-a:hover{
-  .is-icon-ui{
-    svg{
-      .icon-accent{
-        fill: rgb(139,152,168);
+a:hover {
+  .is-icon-ui {
+    svg {
+      .icon-accent {
+        fill: rgb(139, 152, 168); // TODO get into variables
       }
     }
   }
 }
 .is-active > .icon > svg, .is-active.icon > svg{
-  fill: $icon-active-color;
-
-  .icon-accent {
-    fill: $icon-active-color-accent;
-  }
+  @include icon-svg-active;
 }
 
 /**
