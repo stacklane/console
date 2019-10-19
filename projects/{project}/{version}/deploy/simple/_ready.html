@@ -57,7 +57,7 @@
                 </div>
                 <div class="simple-list-item">
                     <span class="simple-list-label">DNS Record</span>
-                    {{! cname? deploy.name }}
+                    {{! cname? deploy.name }} <!-- {{deploy.name}} -->
                     <span class="has-text-weight-bold">{{deploy.record}} {{deploy.ip}}</span>
                 </div>
                 {{#deploy.region}}

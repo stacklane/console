@@ -24,26 +24,42 @@
         return val;
     };
 
+    App.register("percent", class extends Stimulus.Controller {
+        connect() {
+            let val = VAL(this); if (!val) return;
+            let e = this.element;
+
+            try {
+                let v = parseFloat(val);
+                // CSS attribute targets:
+                if (v == 0) e.setAttribute('data-percent-direction', 'even');
+                else if (v > 0) e.setAttribute('data-percent-direction', 'up');
+                else if (v < 0) e.setAttribute('data-percent-direction', 'down');
+                let str = v.toLocaleString(); // all defaults
+                e.innerText = str + '%'; // TODO formatting other locales
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+    });
+
     /**
      * <span data-controller="date-seconds" data-date-seconds-value="..">..</span>
      */
     App.register("date-seconds", class extends Stimulus.Controller {
         connect(){
-            var val = VAL(this);
-            if (!val) return;
+            let val = VAL(this); if (!val) return;
             this.element.innerText = new Date(parseInt(val) * 1000).toLocaleDateString();
         }
     });
 
     App.register("number", class extends Stimulus.Controller {
         connect() {
-            var val = VAL(this);
-            if (!val) return;
-
-            var e = this.element;
+            let val = VAL(this); if (!val) return;
+            let e = this.element;
 
             try {
-                var str = parseFloat(val).toLocaleString(); // all defaults
+                let str = parseFloat(val).toLocaleString(); // all defaults
                 e.innerText = str;
             } catch (e) {
                 console.warn(e);
@@ -54,13 +70,12 @@
     const DEFAULT_CURRENCY = "USD";
     App.register("currency", class extends Stimulus.Controller {
         connect() {
-            var val = VAL(this);
-            if (!val) return;
+            let val = VAL(this); if (!val) return;
 
-            var currency = this.data.get('code');
+            let currency = this.data.get('code');
             if (!currency) currency = DEFAULT_CURRENCY;
 
-            var e = this.element;
+            let e = this.element;
 
             try {
                 var str = parseFloat(val).toLocaleString(
