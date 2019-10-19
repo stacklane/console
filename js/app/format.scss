@@ -1,10 +1,11 @@
 @import "/style/variables";
 
 /**
+ * TODO
  * data-controller="percent"
  *
  * Note: Not all percents should be colored on up/down (good/bad).
- */
+
 [data-controller="percent"].has-percent-direction-coloring{
   color: $grey;
 
@@ -15,5 +16,4 @@
   &.[data-percent-direction="down"]{
     color: $red;
   }
-
-}
+}*/
