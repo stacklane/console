@@ -2,18 +2,20 @@
 
 {{% import {UpcomingInvoice, UpcomingInvoiceLines} from '📤' }}
 
-<div class="box">
-    <p class="title is-5">
-        Upcoming Invoice
-    </p>
+<div class="box is-stacked">
+    <header class="is-stack">
+        <p class="title is-5">
+            Upcoming Invoice
+        </p>
 
-    <p class="subtitle is-6">
-        <span data-controller="currency" data-currency-code="{{UpcomingInvoice.currency}}" data-currency-value="{{UpcomingInvoice.amountDue}}"></span>
-        <span> on </span>
-        <span class="subtitle is-6" data-controller="date-seconds" data-date-seconds-value="{{UpcomingInvoice.nextPaymentAttempt}}"></span>
-    </p>
+        <p class="subtitle is-6">
+            <span data-controller="currency" data-currency-code="{{UpcomingInvoice.currency}}" data-currency-value="{{UpcomingInvoice.amountDue}}"></span>
+            <span> on </span>
+            <span class="subtitle is-6" data-controller="date-seconds" data-date-seconds-value="{{UpcomingInvoice.nextPaymentAttempt}}"></span>
+        </p>
+    </header>
 
-    <table class="table is-striped is-bordered is-fullwidth">
+    <table class="is-stack table">
         {{#UpcomingInvoiceLines}}
         <tr>
             <td>{{this}}</td>

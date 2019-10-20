@@ -2,13 +2,15 @@
 
 {{% import {PastInvoices} from '📤' }}
 
-<div class="box">
-    <p class="title is-5">
-        Past Invoices
-    </p>
+<div class="box is-stacked">
+    <header class="is-stack">
+        <p class="title is-5">
+            Past Invoices
+        </p>
+    </header>
 
     {{#PastInvoices.has}}
-    <table class="table is-striped is-bordered is-fullwidth">
+    <table class="is-stack table">
         {{#PastInvoices.items}}
         <tr>
             <td>
@@ -21,6 +23,8 @@
     {{/PastInvoices.has}}
 
     {{^PastInvoices.has}}
+    <section class="is-stack">
     None
+    </section>
     {{/PastInvoices.has}}
 </div>

@@ -15,18 +15,3 @@ icon: svg-icon # For UI use
 simple?: ProjectVersion # If linked, then "simple mode" -- for testing *and* production == no granular ProjectVersion's
 
 account?: Account # Responsible for billing of this Project
-
-# ------------
-#
-# The following are primarily used to initialize settings for *new* ProjectDeployment's.
-# They are not a source-of-truth for what is within any given ProjectDeployment.
-#
-# ------------
-
-users?: # Legacy null
-  type: namespace
-  init: true
-
-data:
-  type: namespace
-  init: true

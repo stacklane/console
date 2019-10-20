@@ -8,41 +8,36 @@
 
 {{#ProjectDeployment.all as deploy}}
 {{#deploy.name}}
-  {{!deploy.name}}
-
-  {{#GetUnits deploy as unit}}
-    <div class="box">
-        <div class="level is-mobile">
-            <div class="level-left">
-                <div class="level-item title is-5">
-                    {{unit.name}}
-                </div>
-            </div>
-            <div class="level-right">
-                <div class="level-item has-text-centered">
+    {{! TODO handle the EMPTY case of units... }}
+    <div class="box is-stacked">
+        <table class="is-stack is-offset is-big">
+        {{#GetUnits deploy as unit}}
+            <tr>
+                <td><p class="title is-5">{{unit.name}}</p></td>
+                <td class="has-text-centered">
                     <div>
                         <p class="heading">Now</p>
                         <p class="title has-text-primary" data-controller="number">{{unit.value}}</p>
                     </div>
-                </div>
+                </td>
                 {{#unit.hasPrevious}}
-                <div class="level-item has-text-centered is-hidden-mobile">
+                <td class="has-text-centered">
                     <div>
                         <p class="heading">Change</p>
                         <p class="title has-text-grey" data-controller="percent">{{unit.changePercent}}</p>
                     </div>
-                </div>
-                <div class="level-item has-text-centered is-hidden-mobile">
+                </td>
+                <td class="has-text-centered">
                     <div>
                         <p class="heading">Last Week</p>
                         <p class="title has-text-grey-dark" data-controller="number">{{unit.previous}}</p>
                     </div>
-                </div>
+                </td>
                 {{/unit.hasPrevious}}
-            </div>
-        </div>
+            </tr>
+        {{/GetUnits}}
+        </table>
     </div>
-  {{/GetUnits}}
 {{/deploy.name}}
 {{/ProjectDeployment.all}}
 

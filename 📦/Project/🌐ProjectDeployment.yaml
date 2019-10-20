@@ -20,6 +20,14 @@ version: ProjectVersion
 
 # Deployment/Mapping Location Instructions:
 
+users?: # Legacy null
+  type: namespace
+  init: true
+
+data:
+  type: namespace
+  init: true
+
 domain: Domain
 
 path: string # "/"
