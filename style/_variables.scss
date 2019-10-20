@@ -36,8 +36,9 @@ $body-size: 15px; //14px; //1rem; // // Assumes the browser default, typically `
 $body-line-height: normal;
 $body-weight: $weight-normal;
 
-$link: rgb(84, 105, 212);
-$link-invert: $blue-invert !default;
+$primary: #3367d6; //rgb(84, 105, 212);
+$link: $primary;
+$link-invert: $primary-invert !default;
 $link-visited: $purple !default;
 $link-hover: rgb(26, 31, 54);
 $link-hover-border: $grey-light !default;
@@ -65,11 +66,17 @@ $size-small: .8rem; // primarily done for form .help
 
 $label-weight: $weight-semibold;
 
-// Doesn't work? Must occur here to pick up overrides:
-//$colors: mergeColorMaps(("white": ($white, $black), "black": ($black, $white), "light": ($light, $light-invert), "dark": ($dark, $dark-invert), "primary": ($primary, $primary-invert), "link": ($link, $link-invert), "info": ($info, $info-invert), "success": ($success, $success-invert), "warning": ($warning, $warning-invert), "danger": ($danger, $danger-invert)), $custom-colors) !default;
-//$shades: mergeColorMaps(("black-bis": $black-bis, "black-ter": $black-ter, "grey-darker": $grey-darker, "grey-dark": $grey-dark, "grey": $grey, "grey-light": $grey-light, "grey-lighter": $grey-lighter, "white-ter": $white-ter, "white-bis": $white-bis), $custom-shades) !default;
+/**
+ * Why aren't these colors properly overridden?
+ */
 .has-text-link{
   color: $link !important; //??
+}
+.has-text-primary{
+  color: $primary !important; //??
+}
+.button.is-primary{
+  background-color: $primary !important;
 }
 
 /**

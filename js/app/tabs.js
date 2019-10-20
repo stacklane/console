@@ -18,7 +18,7 @@
 
     App.register("tabs", class extends Stimulus.Controller {
         _panes(){
-            return this.element.nextElementSibling.getElementsByClassName('tab-pane');
+            return this.tabContent.getElementsByClassName('tab-pane');
         }
         _tabs(){
             return this.element.getElementsByTagName('a');
@@ -48,9 +48,8 @@
             }
         }
         connect(){
-            if (!this.element.nextElementSibling.classList.contains('tab-content')){
-                throw new Error("expected next sibling to be 'tab-content'");
-            }
+            this.tabContent = this.element.parentElement.querySelector(this.data.get('content'));
+            if (!this.tabContent) throw new Error("Expected data-tabs-content " + this.data.get('content'));
 
             this.element.setAttribute('role', 'tablist');
 

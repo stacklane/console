@@ -15,31 +15,26 @@
 
 {{$content}}
 
-<div class="box is-spacious">
-
-    <div class="has-text-centered">
+<div class="box is-stacked is-spacious">
+    <header class="is-stack has-text-centered">
          <span class="icon is-large has-text-grey">
              {{>ic-code}}
          </span>
 
         <h3 class="title is-3">Source Code</h3>
-
-        <p>
-
-        </p>
-    </div>
-
-    <hr>
+    </header>
 
     {{#VersionSource.external as externalHref}}
 
     {{#VersionSourceNotExists}}
-    <div class="message is-warning">
+    <section class="is-stack message is-warning">
         <div class="message-body">
             Ensure the source exists and that any access keys are configured for it.
         </div>
-    </div>
+    </section>
     {{/VersionSourceNotExists}}
+
+    <section class="is-stack">
 
     <div class="columns">
         <div class="column is-three-fifths">
@@ -88,9 +83,8 @@
             </div>
         </div>
     </div>
-
+    </section>
     {{/VersionSource.external}}
-
 </div>
 
 <div class="modal" id="editDialog">

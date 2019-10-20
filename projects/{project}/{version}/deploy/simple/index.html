@@ -103,43 +103,36 @@
 
 {{^Deployment}}
 
-<div class="box is-spacious">
+<div class="box is-stacked is-spacious">
 
-    <div class="has-text-centered">
+    <header class="is-stack has-text-centered">
          <span class="icon is-large has-text-grey">
              {{>ic-domain}}
          </span>
 
-        <h3 class="title is-3">Domain Setup</h3>
+        <h3 class="title is-3">Deployment</h3>
+    </header>
 
-        <p>
+    {{^ProjectHasAccount}}
+    <section class="is-stack message is-danger">
+        <div class="message-body">
+            To configure a domain, first setup <a href="/projects/{{project.id}}/account/">billing</a>.
+        </div>
+    </section>
+    {{/ProjectHasAccount}}
 
-        </p>
-    </div>
-
-    <hr>
-
-    <div class="message is-info">
+    {{#ProjectHasAccount}}
+    <section class="is-stack message is-info">
         <div class="message-body">
             Before setting up a domain, ensure that it's purchased and that
             you have access to its DNS configuration.
         </div>
-    </div>
+    </section>
 
-    {{^ProjectHasAccount}}
-    <div class="message is-danger">
-        <div class="message-body">
-            To configure a domain, first setup <a href="/projects/{{project.id}}/account/">billing</a>.
-        </div>
-    </div>
-    {{/ProjectHasAccount}}
-
-    {{#ProjectHasAccount}}
-    <div>
-        <form method="post" action="setup"
-              data-controller="form"
-              data-form-validate="true" data-form-ajax="true">
-
+    <form method="post" action="setup"
+          data-controller="form"
+          data-form-validate="true" data-form-ajax="true">
+        <section class="is-stack is-offset">
             <div class="field">
                 <label class="label">Domain Name</label>
                 <div class="control">
@@ -180,14 +173,12 @@
                     </div>
                 </div>
             </div>
+        </section>
 
-            <hr>
-
-            <p class="has-text-right">
-                <button class="button is-primary" type="submit">Next</button>
-            </p>
-        </form>
-    </div>
+        <footer class="is-stack buttons">
+            <button class="button is-primary" type="submit">Next</button>
+        </footer>
+    </form>
     {{/ProjectHasAccount}}
 
 </div>

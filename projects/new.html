@@ -16,9 +16,9 @@
 
 {{$content}}
 
-<div class="box is-spacious">
+<div class="box is-stacked is-spacious">
 
-    <div class="has-text-centered">
+    <header class="is-stack has-text-centered">
         <span class="has-text-grey">
             <span class="icon is-medium">{{>ic-git_pull_request}}</span>
         </span>
@@ -29,29 +29,27 @@
             Projects are associated with a source code repository.
             They contain live deployments, test instances, keys, and data.
         </p>
-    </div>
+    </header>
 
-    <hr>
-
-    <div class="tabs {{#🎨.tabs-boxed}}is-boxed{{/🎨.tabs-boxed}}" data-controller="tabs" data-tabs-remember="repoType">
+    <section class="is-stack tabs" data-controller="tabs" data-tabs-remember="repoType" data-tabs-content=".tab-content">
         <ul>
             <li><a id="example-tab" href="#example"><span class="icon is-icon-ui">{{>ic-library_add}}</span>&nbsp;<span>Examples</span></a></li>
             <li><a id="bitbucket-tab" href="#bitbucket"><span class="icon is-icon-ui">{{>brand-bitbucket}}</span>&nbsp;<span>Bitbucket</span></a></li>
             <li><a id="github-tab" href="#github"><span class="icon is-icon-ui">{{>brand-github}}</span>&nbsp;<span>GitHub</span></a></li>
         </ul>
-    </div>
+    </section>
 
     {{#NewProjectForm.App.view}}
     {{#source as field}}
     <div class="tab-content">
         <div class="tab-pane" id="example" aria-labelledby="example-tab">
-            <div class="message is-info">
+            <section class="is-stack message is-info">
                 <div class="message-body">
                     Quickly get started with one of our open source examples.
                 </div>
-            </div>
+            </section>
 
-            <div class="columns">
+            <section class="is-stack columns">
                 {{#examples as example}}
                 <div class="column is-half">
                     <form method="post" action="new?_form={{id}}" data-controller="form" data-form-ajax="true">
@@ -75,29 +73,27 @@
                     </form>
                 </div>
                 {{/examples}}
-            </div>
+            </section>
         </div>
 
         <div class="tab-pane" id="bitbucket" aria-labelledby="bitbucket-tab">
-            <div class="message is-info">
-                <div class="message-body">
-                    Stacklane supports both public and private repositories.
+            <form method="post" action="new?_form={{id}}"
+                  data-controller="form"
+                  data-form-validate="true"
+                  data-form-ajax="true">
+                <section class="is-stack message is-info">
+                    <div class="message-body">
+                        Stacklane supports both public and private repositories.
 
-                    For public HTTPS repositories, initialize a public repository at
-                    <a target="_blank" href="https://bitbucket.org">bitbucket.org</a>
-                    with the required manifest file (🎛.yaml).
+                        For public HTTPS repositories, initialize a public repository at
+                        <a target="_blank" href="https://bitbucket.org">bitbucket.org</a>
+                        with the required manifest file (🎛.yaml).
 
-                    For private SSH repositories, initialize a private repository and use its SSH URL.
-                    After creating the project you'll be able to generate an SSH key to provide Bitbucket.
-                </div>
-            </div>
-
-            <div>
-                <form method="post" action="new?_form={{id}}"
-                      data-controller="form"
-                      data-form-validate="true"
-                      data-form-ajax="true">
-
+                        For private SSH repositories, initialize a private repository and use its SSH URL.
+                        After creating the project you'll be able to generate an SSH key to provide Bitbucket.
+                    </div>
+                </section>
+                <section class="is-stack">
                     <div class="field">
                         <label class="label">Bitbucket Repository URL</label>
                         <div class="control">
@@ -109,36 +105,31 @@
                             Both URL types end with <code>.git</code>.
                         </p>
                     </div>
-
-                    <hr>
-
-                    <p class="has-text-right">
-                        <button class="button is-primary" type="submit">Next</button>
-                    </p>
-                </form>
-            </div>
+                </section>
+                <footer class="is-stack buttons">
+                    <button class="button is-primary" type="submit">Next</button>
+                </footer>
+            </form>
         </div>
 
         <div class="tab-pane" id="github" aria-labelledby="github-tab">
-            <div class="message is-info">
-                <div class="message-body">
-                    Stacklane supports both public and private repositories.
+            <form method="post" action="new?_form={{id}}"
+                  data-controller="form"
+                  data-form-validate="true"
+                  data-form-ajax="true">
+                <section class="is-stack message is-info">
+                    <div class="message-body">
+                        Stacklane supports both public and private repositories.
 
-                    For public HTTPS repositories, initialize a public repository at
-                    <a target="_blank" href="https://github.com">github.com</a>
-                    with the required manifest file (🎛.yaml).
+                        For public HTTPS repositories, initialize a public repository at
+                        <a target="_blank" href="https://github.com">github.com</a>
+                        with the required manifest file (🎛.yaml).
 
-                    For private SSH repositories, initialize a private repository and use its SSH URL.
-                    After creating the project you'll be able to generate an SSH key to provide GitHub.
-                </div>
-            </div>
-
-            <div>
-                <form method="post" action="new?_form={{id}}"
-                      data-controller="form"
-                      data-form-validate="true"
-                      data-form-ajax="true">
-
+                        For private SSH repositories, initialize a private repository and use its SSH URL.
+                        After creating the project you'll be able to generate an SSH key to provide GitHub.
+                    </div>
+                </section>
+                <section class="is-stack">
                     <div class="field">
                         <label class="label">GitHub Repository URL</label>
                         <div class="control">
@@ -150,18 +141,16 @@
                             Both URL types end with <code>.git</code>.
                         </p>
                     </div>
-
-                    <hr>
-
-                    <p class="has-text-right">
-                        <button class="button is-primary" type="submit">Next</button>
-                    </p>
-                </form>
-            </div>
+                </section>
+                <footer class="is-stack buttons">
+                    <button class="button is-primary" type="submit">Next</button>
+                </footer>
+            </form>
         </div>
     </div>
     {{/source}}
     {{/NewProjectForm.App.view}}
+
 </div>
 
 {{/content}}

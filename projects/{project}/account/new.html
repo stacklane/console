@@ -31,13 +31,14 @@
     </div>
 </div>
 
-<div class="box">
+<div class="box is-stacked">
 
 <form method="post" action="new?currency={{CurrencyParam}}"
       data-controller="form"
       data-form-validate="true"
       data-form-ajax="true"
       data-form-ctrl="KeyN">
+    <section class="is-stack">
     <div class="columns">
     <div class="column is-three-fifths">
         <div class="field" >
@@ -67,15 +68,12 @@
     <div class="column">
         <div data-controller="get" data-get-href="pricing?currency={{CurrencyParam}}" class="is-loading">Loading</div>
     </div>
-</div>
-
-<hr>
-
-<p class="has-text-right">
-    {{! must be type='button' for Safari CORS + stripe tokenization? }}
-    <button type="submit" class="button is-primary">Upgrade</button>
-</p>
-
+    </div>
+    </section>
+    <footer class="is-stack buttons">
+        {{! must be type='button' for Safari CORS + stripe tokenization? }}
+        <button type="submit" class="button is-primary">Upgrade</button>
+    </footer>
 </form>
 
 </div>

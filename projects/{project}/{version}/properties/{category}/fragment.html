@@ -5,11 +5,12 @@
 {{% partial /_partials/_util/disable-spell }}
 
 {{#HasSelectedProperties}}
-<div class="box">
+<div class="box is-stacked">
 <form method="post" action="update"
       data-controller="form"
       data-form-validate="true" data-form-ajax="true">
 
+    <section class="is-stack">
     {{#SelectedProperties as prop}}
 
     <div class="field" >
@@ -38,21 +39,15 @@
             </label>
         </div>
         {{/prop.boolean}}
-
-        <!--
-
-        <p class="help">
-        </p>
-        -->
     </div>
 
     {{/SelectedProperties}}
 
-    <hr>
+    </section>
 
-    <p class="has-text-right">
+    <footer class="is-stack buttons">
         <button class="button is-primary" type="submit">Update</button>
-    </p>
+    </footer>
 </form>
 </div>
 {{/HasSelectedProperties}}

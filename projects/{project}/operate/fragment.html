@@ -22,7 +22,7 @@
                 <div class="level-item has-text-centered">
                     <div>
                         <p class="heading">Now</p>
-                        <p class="title has-text-link" data-controller="number">{{unit.value}}</p>
+                        <p class="title has-text-primary" data-controller="number">{{unit.value}}</p>
                     </div>
                 </div>
                 {{#unit.hasPrevious}}
@@ -48,13 +48,13 @@
 
 {{^ProjectDeployment.all}}
 {{#ProjectModeSimple}}
-<div class="box">
-<ul class="tasks"
-    data-controller="activator"
-    data-activator-mode="target"
-    data-activator-deactivate="others">
+<div class="box is-stacked">
+    <div
+        data-controller="activator"
+        data-activator-mode="target"
+        data-activator-deactivate="others">
 
-    <li class="task is-activator">
+    <section class="is-stack task is-activator">
         <div class="level is-mobile">
             <div class="level-left">
                 <div class="level-item">
@@ -82,9 +82,9 @@
                 </div>
             </div>
         </div>
-    </li>
+    </section>
 
-    <li class="task is-activator">
+    <section class="is-stack task is-activator">
         <div class="level is-mobile">
             <div class="level-left">
                 <div class="level-item">
@@ -107,10 +107,10 @@
                 </div>
             </div>
         </div>
-    </li>
+    </section>
 
     {{^project.account.linked}}
-    <li class="task is-activator">
+    <section class="is-stack task is-activator">
         <div class="level is-mobile">
             <div class="level-left">
                 <div class="level-item">
@@ -133,10 +133,10 @@
                 </div>
             </div>
         </div>
-    </li>
+    </section>
     {{/project.account.linked}}
 
-    <li class="task is-activator">
+    <section class="is-stack task is-activator">
         <div class="level is-mobile">
             <div class="level-left">
                 <div class="level-item">
@@ -159,8 +159,8 @@
                 </div>
             </div>
         </div>
-    </li>
-</ul>
+    </section>
+</div>
 </div>
 {{/ProjectModeSimple}}
 {{/ProjectDeployment.all}}

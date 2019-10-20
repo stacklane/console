@@ -6,11 +6,10 @@
 {{% partial /_partials/_util/disable-spell }}
 
 <!--suppress XmlDuplicatedId -->
-<div class="box-stack is-spacious">
+<div class="box is-stacked is-spacious">
 
     {{^NewProjectInfo.visible}}
-
-    <section>
+    <section class="is-stack">
         <div class="message is-danger">
             <div class="message-body">
                 Unable to find the public GIT repository
@@ -19,12 +18,10 @@
             </div>
         </div>
     </section>
-
     {{/NewProjectInfo.visible}}
 
     {{#NewProjectInfo.visible}}
-
-    <section class="has-text-centered">
+    <header class="is-stack has-text-centered">
         <span class="has-text-grey">
             <span class="icon is-large">
                 {{% show NewProjectInfo.icon }}
@@ -34,11 +31,7 @@
         <h3 class="title is-3">
             {{NewProjectInfo.name}}
         </h3>
-
-        <p>
-
-        </p>
-    </section>
+    </header>
 
     {{#NewProjectForm.view}}
     <form method="post"
@@ -46,33 +39,33 @@
           data-controller="form"
           data-form-validate="true"
           data-form-ajax="true">
-    <section class="is-offset">
-        {{#NewProjectInfo.ssh}}
-        <div class="message is-info">
-            <div class="message-body">
-                This is a private / SSH repository.
-                After creating the project, you'll be able to generate an SSH key
-                which can then be added through {{NewProjectInfo.type}}'s UI.
+        <section class="is-stack is-offset">
+            {{#NewProjectInfo.ssh}}
+            <div class="message is-info">
+                <div class="message-body">
+                    This is a private / SSH repository.
+                    After creating the project, you'll be able to generate an SSH key
+                    which can then be added through {{NewProjectInfo.type}}'s UI.
+                </div>
             </div>
-        </div>
-        {{/NewProjectInfo.ssh}}
+            {{/NewProjectInfo.ssh}}
 
-        <div class="columns">
-            <div class="column is-half">
-                {{#App.view}}
-                {{{ FieldStatic source }}}
-                {{/App.view}}
+            <div class="columns">
+                <div class="column is-half">
+                    {{#App.view}}
+                    {{{ FieldStatic source }}}
+                    {{/App.view}}
 
-                {{#Project.view NewProjectInfo.newProjectViewValues}}
-                {{{ Field name }}}
-                {{/Project.view}}
+                    {{#Project.view NewProjectInfo.newProjectViewValues}}
+                    {{{ Field name }}}
+                    {{/Project.view}}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="buttons">
-        <button class="button is-primary" type="submit">Create</button>
-    </section>
+        <footer class="is-stack buttons">
+            <button class="button is-primary" type="submit">Create</button>
+        </footer>
     </form>
     {{/NewProjectForm.view}}
 

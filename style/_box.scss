@@ -1,0 +1,178 @@
+
+/**
+ * .box.is-empty
+ */
+.box.is-empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 300px;
+}
+@include tablet(){
+  .box.is-empty{
+    min-height: 500px;
+  }
+}
+
+/**
+ * General .tabs within in any .box
+ */
+.box{
+  .tabs{
+    li.is-active a{
+      background: white;
+      border-bottom-color: $primary;
+    }
+    a{
+      padding: $box-padding 0rem;
+      background: $offset-color;
+
+      margin-bottom: 0px;
+      border-bottom-width: 2px;
+      border-bottom-color: $offset-color; // same as background
+    }
+    ul{
+      border: 0px;
+    }
+    li{
+      flex-grow: 1;
+      flex-shrink: 0;
+      border-left: 1px solid $offset-border-color;
+
+      &:first-child{
+        border-left: 0px;
+      }
+    }
+  }
+}
+
+/**
+ * section.is-stack.task
+ */
+.box.is-stacked{
+  section.is-stack.task{
+    position: relative;
+
+    .task-title{
+      font-size: $size-6;
+      font-weight: $weight-medium;
+    }
+
+    &.is-activator{
+      .task-icon{
+        svg{
+          @include icon-svg-link;
+        }
+      }
+      .task-title{
+        cursor: pointer;
+        color: $link;
+      }
+
+      &:hover{
+        background: $offset-color;
+        cursor: pointer;
+      }
+    }
+
+    .task-content{
+      display:none;
+    }
+
+    &.is-active{
+      cursor: default;
+      background-color: $offset-color;
+
+      .task-icon{
+        svg{
+          @include icon-svg-link-active;
+        }
+      }
+      .task-content{
+        display: initial;
+      }
+      .task-title{
+        color: $link-active;
+      }
+    }
+  }
+}
+
+/**
+ * .is-stacked is composed of header, section's, and footer.
+ * All optional, and all requiring .is-stack)
+ * Each takes up the full width of the .box
+ * NOTE: This probably can't be nested.
+ */
+.box.is-stacked{
+  padding: 0rem !important; // Receive padding from header/section/footer
+  overflow: hidden; // Keeps .box border-radius from being obstructed by various child backgrounds
+
+  footer.is-stack{
+    &.buttons{ /* standard Bulma class */
+      justify-content: flex-end;
+    }
+  }
+
+  section.is-stack.tabs{
+    padding: 0rem !important; // Receive padding from each tab / li
+
+    li a{
+      margin-bottom: 1px; // Necessary for showing the box-shadow
+    }
+  }
+
+  /**
+   * Allow .tabs against .box top, bottom, or full area.
+   */
+  > section.is-stack.tabs{
+    &:last-child{
+      a{
+        margin-bottom: 0px; // Reset from 1px above
+      }
+    }
+  }
+
+  section.is-stack.message{
+    border: none;
+    font-size: .9rem;
+    border-radius:0px;
+
+    > .message-body{
+      padding: 0px;
+      border: 0px;
+      border-radius: 0px;
+    }
+  }
+
+  > header.is-stack, section.is-stack, footer.is-stack {
+    padding: $box-padding;
+    margin: 0;
+    box-shadow: $offset-box-shadow;
+
+    &.is-offset{
+      background-color: $offset-color;
+    }
+
+    &:last-child{
+      box-shadow: none;
+    }
+  }
+
+  /**
+   * .is-stacked.is-spacious provides more padding
+   */
+  &.is-spacious{
+    > header.is-stack, section.is-stack, footer.is-stack {
+      padding: $box-padding + 1rem;
+    }
+
+    // TBD more padding complexity based on tablet/desktop
+
+    > header.is-stack {
+      padding-top: $box-padding + 3rem;
+      //padding-bottom: $box-padding + 2rem;
+    }
+  }
+}

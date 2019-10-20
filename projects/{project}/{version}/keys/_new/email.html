@@ -2,91 +2,92 @@
 
 {{% svg /_icons/ as icon }}
 
-<div class="message is-info">
+<section class="is-stack message is-info">
     <div class="message-body">
         Defines connection information for a third party email service.
     </div>
-</div>
+</section>
 
 <form method="post" action="new/email"
       data-controller="form"
       data-form-validate="true"
       data-form-ajax="true">
-    <div class="field">
-        <label class="label" for="emailScopeType">Scope</label>
-        <div class="control">
-            <div class="select">
-                <select id="emailScopeType" name="emailScopeType">
-                    <option value="">Always Applies</option>
-                    <option value="test">Testing Only</option>
-                    <option value="live">Live Only</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="field">
-        <label class="label" for="emailProviderType">Provider</label>
-        <div class="control">
-            <div class="select">
-                <select id="emailProviderType" name="emailProviderType" required>
-                    <option value="">Choose...</option>
-                    <option value="gmail">Google Gmail</option>
-                    <option value="mailgun">Mailgun</option>
-                    <option value="ses-us-east-1">Amazon SES (us-east-1)</option>
-                    <option value="ses-us-east-1">Amazon SES (us-west-1)</option>
-                </select>
-            </div>
-        </div>
-        <p class="help">
-            Choose the third party email provider which you have separately setup credentials for.
-        </p>
-    </div>
-    <div class="columns">
-        <div class="column is-half">
-            <div class="field">
-                <label class="label" for="emailUsername">Username</label>
-                <div class="control">
-                    <input type="text" class="input" id="emailUsername" name="emailUsername" placeholder="" required>
+    <section class="is-stack">
+        <div class="field">
+            <label class="label" for="emailScopeType">Scope</label>
+            <div class="control">
+                <div class="select">
+                    <select id="emailScopeType" name="emailScopeType">
+                        <option value="">Always Applies</option>
+                        <option value="test">Testing Only</option>
+                        <option value="live">Live Only</option>
+                    </select>
                 </div>
-                <p class="help">SMTP username as given by the provider.</p>
             </div>
         </div>
-        <div class="column is-half">
-            <div class="field">
-                <label class="label" for="emailPassword">Password</label>
-                <div class="control">
-                    <input type="text" class="input" id="emailPassword" name="emailPassword" placeholder="" required>
+        <div class="field">
+            <label class="label" for="emailProviderType">Provider</label>
+            <div class="control">
+                <div class="select">
+                    <select id="emailProviderType" name="emailProviderType" required>
+                        <option value="">Choose...</option>
+                        <option value="gmail">Google Gmail</option>
+                        <option value="mailgun">Mailgun</option>
+                        <option value="ses-us-east-1">Amazon SES (us-east-1)</option>
+                        <option value="ses-us-east-1">Amazon SES (us-west-1)</option>
+                    </select>
                 </div>
-                <p class="help">SMTP password as given by the provider.</p>
             </div>
+            <p class="help">
+                Choose the third party email provider which you have separately setup credentials for.
+            </p>
         </div>
-    </div>
-    <div class="columns">
-        <div class="column is-half">
-            <div class="field">
-                <label class="label" for="emailFrom">From Name</label>
-                <div class="control">
-                    <input type="text" class="input" id="emailFromName" name="emailFromName" placeholder="ABC Company" required>
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="emailUsername">Username</label>
+                    <div class="control">
+                        <input type="text" class="input" id="emailUsername" name="emailUsername" placeholder="" required>
+                    </div>
+                    <p class="help">SMTP username as given by the provider.</p>
                 </div>
-                <p class="help">Email sent will have this from display name.</p>
             </div>
-        </div>
-        <div class="column is-half">
-            <div class="field">
-                <label class="label" for="emailFrom">From Email</label>
-                <div class="control has-icons-left">
-                    <input type="email" class="input" id="emailFrom" name="emailFrom" placeholder="name@company.com" required>
-                    <span class="icon is-small is-left">
-                {{> icon-email }}
-            </span>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="emailPassword">Password</label>
+                    <div class="control">
+                        <input type="text" class="input" id="emailPassword" name="emailPassword" placeholder="" required>
+                    </div>
+                    <p class="help">SMTP password as given by the provider.</p>
                 </div>
-                <p class="help">Email sent will have this from email address.</p>
             </div>
         </div>
-    </div>
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="emailFrom">From Name</label>
+                    <div class="control">
+                        <input type="text" class="input" id="emailFromName" name="emailFromName" placeholder="ABC Company" required>
+                    </div>
+                    <p class="help">Email sent will have this from display name.</p>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="emailFrom">From Email</label>
+                    <div class="control has-icons-left">
+                        <input type="email" class="input" id="emailFrom" name="emailFrom" placeholder="name@company.com" required>
+                        <span class="icon is-small is-left">
+                    {{> icon-email }}
+                </span>
+                    </div>
+                    <p class="help">Email sent will have this from email address.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <hr>
-    <div class="has-text-right">
+    <footer class="is-stack buttons">
         <button class="button is-primary" type="submit">Create</button>
-    </div>
+    </footer>
 </form>
