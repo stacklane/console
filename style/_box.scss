@@ -60,6 +60,8 @@
     }
 
     &.is-activator{
+      @include unselectable;
+
       .task-icon{
         svg{
           @include icon-svg-link;
