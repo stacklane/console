@@ -30,7 +30,7 @@ let domain = new Domain().name(domainName).domain(domainValue);
 
 new DomainUser(domain).role(Role.DomainOwner).user(Me);
 
-new ProjectDeployment()
+new ProjectDeployment(version.get().project())
     .region(region)
     .version(version)
     .domain(domain)
