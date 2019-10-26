@@ -6,7 +6,7 @@ import {ProjectDeployment} from '📦';
 
 let project = projectPath.get();
 let version = versionPath.get();
-let deployment = ProjectDeployment.version(version).get();
+let deployment = ProjectDeployment.project(project).version(version).get();
 let deploymentDomain = deployment.domain.get();
 
 if (DomainValue.verify(deploymentDomain.domain)){

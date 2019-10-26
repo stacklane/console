@@ -1,7 +1,7 @@
 
 import {domain as domainName, region} from 'form';
 import {Domain as DomainValue} from '🔌';
-import {version} from '🔗';
+import {version, project} from '🔗';
 import {Me, Role} from '👤'
 import {Domain, ProjectDeployment, DomainUser} from '📦';
 import {ProjectHasAccount} from '📤';
@@ -12,7 +12,7 @@ if (!DomainValue.isValid(domainName)) throw ({field:'domain', error: 'Invalid do
 /**
  * For simple mode, only expect one ProjectDeployment
  */
-if (ProjectDeployment.version(version).exists()) {
+if (ProjectDeployment.project(project).version(version).exists()) {
     throw ({error: 'A deployment already exists.'});
 }
 
@@ -30,7 +30,7 @@ let domain = new Domain().name(domainName).domain(domainValue);
 
 new DomainUser(domain).role(Role.DomainOwner).user(Me);
 
-new ProjectDeployment(version.get().project())
+new ProjectDeployment(project)
     .region(region)
     .version(version)
     .domain(domain)

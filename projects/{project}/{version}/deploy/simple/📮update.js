@@ -1,10 +1,10 @@
 
 import {Mapping} from '🔌';
-import {version as versionPath} from '🔗';
+import {version as versionPath, project} from '🔗';
 import {ProjectDeployment} from '📦';
 
 let version = versionPath.get();
-let deployment = ProjectDeployment.version(version).get();
+let deployment = ProjectDeployment.project(project).version(version).get();
 let deploymentDomain = deployment.domain.get();
 let deploymentDomainValue = deploymentDomain.domain;
 let resultDomain = deployment.name;
