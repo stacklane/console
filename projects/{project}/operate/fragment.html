@@ -6,7 +6,7 @@
 {{% import {Project, ProjectDeployment} from '📦' }}
 {{% import {IsProjectStarred, ProjectDeployment deployment, ProjectModeSimple, ProjectModeSimpleNav, GetUnits} from '📤' }}
 
-{{#ProjectDeployment.all as deploy}}
+{{#ProjectDeployment.project project as deploy}}
 {{#deploy.name}}
     {{! TODO handle the EMPTY case of units... }}
     <div class="box is-stacked">
@@ -39,9 +39,9 @@
         </table>
     </div>
 {{/deploy.name}}
-{{/ProjectDeployment.all}}
+{{/ProjectDeployment.project}}
 
-{{^ProjectDeployment.all}}
+{{^ProjectDeployment.project project}}
 {{#ProjectModeSimple}}
 <div class="box is-stacked">
     <div
@@ -158,4 +158,4 @@
 </div>
 </div>
 {{/ProjectModeSimple}}
-{{/ProjectDeployment.all}}
+{{/ProjectDeployment.project}}

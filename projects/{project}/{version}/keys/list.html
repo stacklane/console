@@ -2,10 +2,11 @@
 {{% svg /_icons/ as ic }}
 
 {{% import {ProjectVersionKey} from '📦' }}
+{{% import {version} from '🔗' }}}
 
 <div>
 
-{{#ProjectVersionKey.all as key}}
+{{#ProjectVersionKey.version version as key}}
 <a class="box is-block" href="{{key.id}}/">
     <div class="media">
         <div class="media-content">
@@ -18,7 +19,7 @@
         </div>
     </div>
 </a>
-{{/ProjectVersionKey.all}}
+{{/ProjectVersionKey.version}}
 
 <a class="box is-proposed is-hoverable is-block" href="new">
     <div class="media">

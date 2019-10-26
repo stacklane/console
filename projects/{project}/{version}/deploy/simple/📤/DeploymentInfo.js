@@ -2,8 +2,6 @@
 import {version, project} from '🔗';
 import {ProjectDeployment} from '📦';
 
-let deployment = ProjectDeployment.version(version).optional();
-
-//let hasDeployment = deployment != null;
+let deployment = ProjectDeployment.project(project).version(version).optional();
 
 export {deployment as Deployment};
