@@ -14,8 +14,8 @@ import {Me} from '👤';
  * @param project - Model
  */
 let GetProjectTagsModel = (project)=>{
-    //let p = project(()=>ProjectUser.me().get());
-    let p = ProjectUser.project(project).user(Me).one();
+    // TODO let p = ProjectUser.me().get(project);
+    let p = ProjectUser.project(project).user(Me).get();
 
     let out = [];
 
@@ -38,8 +38,8 @@ let GetProjectUserDetails = (v)=>{
 };
 
 let IsProjectStarred = (project)=>{
-    //return project(()=>ProjectUser.me().get()).star;
-    return ProjectUser.project(project).user(Me).one().star;
+    //TODO return ProjectUser.me().get(project).star;
+    return ProjectUser.project(project).user(Me).get().star;
 };
 
 export {
