@@ -5,7 +5,7 @@ import {ProjectVersionKey} from '📦';
 import {KeysRedirect} from '📤';
 
 let pk = ProjectVersionKey
-    .newSSH('stacklane')
+    .newSSH(version)
     .name(version.source.withRepository(sshRepo).main);
 
 ({redirect: KeysRedirect.dir(pk.id).success('New SSH key generated')});

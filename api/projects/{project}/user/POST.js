@@ -2,8 +2,9 @@
 import {star, tag /*, title*/} from 'form';
 import {ProjectUser} from '📦';
 import {GetProjectUserDetails} from '📤';
+import {project} from '🔗';
 
-let p = ProjectUser.me().get();
+let p = ProjectUser.me().get(project);
 
 if (star != null){
     p.star = (star == 'true');
