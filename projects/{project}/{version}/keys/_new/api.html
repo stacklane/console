@@ -1,5 +1,7 @@
 <!--TEMPLATE mustache-->
 
+{{% partial /_partials/_util/disable-spell }}
+
 <section class="is-stack message is-info">
     <div class="message-body">
         Defines a token for connecting to a third party API.
@@ -33,9 +35,36 @@
         <div class="field">
             <label class="label" for="token">Token</label>
             <div class="control">
-                <input type="text" class="input" id="token" name="token" placeholder="" required>
+                <input type="text" class="input" id="token" name="token" placeholder="" required {{>disable-spell}}>
             </div>
-            <p class="help">Authentication token obtained from the third party provider.</p>
+            <p class="help">
+                Authentication token obtained from the third party provider.
+                If the API uses OAuth, this is the <b>non-expiring</b> "Refresh Token",
+                which will be used to generate Access Tokens as needed.
+            </p>
+        </div>
+    </section>
+    <section class="is-stack message is-info">
+        <div class="message-body">
+            If the third party API uses the OAuth 2.0 protocol,
+            then follow its instructions for obtaining an OAuth Client ID and Client Secret.
+            For OAuth, the "Token" field above should be a non-expiring "Refresh Token".
+        </div>
+    </section>
+    <section class="is-stack">
+        <div class="field">
+            <label class="label" for="clientId">OAuth Client ID (optional)</label>
+            <div class="control">
+                <input type="text" class="input" id="clientId" name="clientId" placeholder="" {{>disable-spell}}>
+            </div>
+            <p class="help">If the API uses OAuth, enter the Client ID.</p>
+        </div>
+        <div class="field">
+            <label class="label" for="clientSecret">OAuth Client Secret (optional)</label>
+            <div class="control">
+                <input type="text" class="input" id="clientSecret" name="clientSecret" placeholder="" {{>disable-spell}}>
+            </div>
+            <p class="help">If the API uses OAuth, enter the Client Secret.</p>
         </div>
     </section>
 
