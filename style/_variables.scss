@@ -1,4 +1,37 @@
 
+/**
+ * Branding
+ */
+
+$blue: #0c84cd;
+$blue-light: #238cd6;
+$blue-lighter: #409ce7;
+
+$primary: $blue;
+$info: $blue;
+
+$black: #14171A;
+$black-bis: #14171A;
+$black-ter: #14171A;
+
+$white: #ffffff;
+$white-ter: #F5F8FA;
+$white-bis: #F5F8FA;
+
+$grey-darker: #2a3137;
+$grey-dark: #414c56;
+$grey: #657786;
+$grey-light: #aab8c2;
+$grey-lighter: #E1E8ED;
+$grey-lightest: #F5F8FA;
+
+$shadow-color-for-body-background-only: rgba(#343d45 /* 25% darker than $grey-dark */, 0.1);
+
+
+/**
+ * Import
+ */
+
 @import "/bulma/utilities/initial-variables";
 @import "/bulma/utilities/functions";
 @import "/bulma/utilities/derived-variables";
@@ -11,14 +44,14 @@ $shadow-sm: 0 .125rem .25rem rgba($black, .075) !default;
 $shadow: 0 .5rem 1rem rgba($black, .15) !default;
 $shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
 
-$shadow-for-bg-small: 0 2px 5px 0 rgba(59,65,94, 0.1), 0 1px 1px 0 rgba(0, 0, 0, .07) !default;
-$shadow-for-bg: 0 7px 14px 0 rgba(59,65,94, 0.1), 0 3px 6px 0 rgba(0, 0, 0, .07) !default;
-$shadow-for-bg-large: 0 15px 35px 0 rgba(59,65,94, 0.1), 0 5px 15px 0 rgba(0, 0, 0, .07) !default;
+$shadow-for-bg-small: 0 2px 5px 0 $shadow-color-for-body-background-only, 0 1px 1px 0 rgba(0, 0, 0, .07) !default;
+$shadow-for-bg: 0 7px 14px 0 $shadow-color-for-body-background-only, 0 3px 6px 0 rgba(0, 0, 0, .07) !default;
+$shadow-for-bg-large: 0 15px 35px 0 $shadow-color-for-body-background-only, 0 5px 15px 0 rgba(0, 0, 0, .07) !default;
 
 $zindex-sticky: 39; // less than $modal-z
 
-$offset-color: #f7fafc; // OR: rgba(0,0,0,.01);
-$offset-border-color: #e3e8ee;
+$offset-color: $grey-lightest;
+$offset-border-color: $grey-lighter;
 $offset-box-shadow: inset 0 -1px $offset-border-color;
 
 /**
@@ -30,22 +63,10 @@ $family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "R
 
 $input-border-color: $grey-lighter;
 
-$body-background-color: #e3e8ee;
-$body-color: #4e566d; //#212529; //$gray-900;
-$body-size: 15px; //14px; //1rem; // // Assumes the browser default, typically `16px`
+$body-background-color: $grey-lighter;
+$body-size: 15px;
 $body-line-height: normal;
 $body-weight: $weight-normal;
-
-$primary: #3367d6; //rgb(84, 105, 212);
-$link: $primary;
-$link-invert: $primary-invert !default;
-$link-visited: $purple !default;
-$link-hover: rgb(26, 31, 54);
-$link-hover-border: $grey-light !default;
-$link-focus: $grey-darker !default;
-$link-focus-border: $blue !default;
-$link-active: $grey-darker !default;
-$link-active-border: $grey-dark !default;
 
 $card-shadow: $shadow-for-bg;
 $card-shadow-hover: $shadow-for-bg-large;
@@ -91,14 +112,14 @@ $fullhd: 1200px /*+ 2 * $gap*/;
  * Icons
  */
 
-$icon-link-color: $link;
-$icon-link-accent-color: rgb(146,186,248);
+$icon-link-color: $blue;
+$icon-link-accent-color: $blue-light;
 
 $icon-link-active-color: $link-active;
-$icon-link-active-accent-color: $link-active;
+$icon-link-active-accent-color: $link-active; // TODO doesn't seem right, but where does it appear?
 
-$icon-ui-color: rgb(79,86,107);   ///rgb(67,71,109)
-$icon-ui-accent-color: rgb(163,172,185);
+$icon-ui-color: $grey-dark;
+$icon-ui-accent-color: $grey-light;
 $icon-ui-accent-opacity: 1;
 
 @mixin icon-svg-link {
