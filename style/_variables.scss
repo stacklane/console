@@ -25,9 +25,6 @@ $grey-light: #aab8c2;
 $grey-lighter: #E1E8ED;
 $grey-lightest: #F5F8FA;
 
-$shadow-color-for-body-background-only: rgba(#343d45 /* 25% darker than $grey-dark */, 0.1);
-
-
 /**
  * Import
  */
@@ -44,9 +41,9 @@ $shadow-sm: 0 .125rem .25rem rgba($black, .075) !default;
 $shadow: 0 .5rem 1rem rgba($black, .15) !default;
 $shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
 
-$shadow-for-bg-small: 0 2px 5px 0 $shadow-color-for-body-background-only, 0 1px 1px 0 rgba(0, 0, 0, .07) !default;
-$shadow-for-bg: 0 7px 14px 0 $shadow-color-for-body-background-only, 0 3px 6px 0 rgba(0, 0, 0, .07) !default;
-$shadow-for-bg-large: 0 15px 35px 0 $shadow-color-for-body-background-only, 0 5px 15px 0 rgba(0, 0, 0, .07) !default;
+$shadow-for-bg-small: 0 2px 5px 0 rgba($black, 0.1), 0 1px 1px 0 rgba($black, .07) !default;
+$shadow-for-bg: 0 7px 14px 0 rgba($black, 0.1), 0 3px 6px 0 rgba($black, .07) !default;
+$shadow-for-bg-large: 0 15px 35px 0 rgba($black, 0.1), 0 5px 15px 0 rgba($black, .07) !default;
 
 $zindex-sticky: 39; // less than $modal-z
 
