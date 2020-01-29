@@ -8,8 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" type="image/png" href="/auth/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/auth/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/auth/fav/16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/auth/fav/32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/auth/fav/192.png" sizes="192x192" />
 
     <link itemprop='content-security-policy' data-form-action-auth='true' data-img-src-data='true'/>
 
@@ -18,13 +19,18 @@
 
     {{% import {Me, Providers} from '👤' }}
 
+    {{% svg /_brand/ as brand }}
+
     {{% partial /auth/_prefetch }}
     {{> prefetch}}
 
     <style>
         body {
             margin: 0;
-            background: white;
+            background: #F5F8FA;
+        }
+        a, a:visited, a:active{
+            color: #0c84cd;
         }
 
         .login-widget{
@@ -40,18 +46,30 @@
             text-align: center;
             padding-top: 1.5rem;
             padding-bottom: 1.5rem;
-            color: #333;
+            color: #2a3137;
             position: relative;
             overflow: hidden;
             box-sizing: border-box;
-            background-color: rgba(241,241,241,0.8);
+            border-bottom: 1px solid #E1E8ED;
+            background-color: #F5F8FA;
+        }
+        .login-footer{
+            text-align: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            color: #2a3137;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            border-top: 1px solid #E1E8ED;
+            margin-top: .5rem;
+            background-color: #F5F8FA;
+            font-size: .8rem;
         }
 
         @media only screen and (min-width: 481px){
             body{
-                background: radial-gradient(#40404b, #111118) rgba(34,34,40,0.94);
-                background-repeat: no-repeat;
-                background-attachment: fixed;
+                background: rgba(34, 34, 40, 0.94) radial-gradient(#414c56, #14171A) no-repeat fixed;
                 background-size: 100%;
             }
             .login-widget{
@@ -60,11 +78,14 @@
                 border-radius: 5px;
                 width: 300px;
                 max-height: 100vh;
-                box-shadow: 0 0 40px 4px #111118;
+                box-shadow: 0 0 40px 4px #14171A;
                 margin-top: 2rem;
             }
             .login-header{
                 border-radius: 5px 5px 0 0;
+            }
+            .login-footer{
+                border-radius: 0 0 5px 5px;
             }
         }
         @keyframes fade-up-onload-kf {
@@ -91,15 +112,7 @@
             color: black;
             padding-left: .25rem;
         }
-
-        .signup{
-            font-size: .8rem;
-            text-align: center;
-            margin-top: 1.5rem;
-        }
     </style>
-
-    {{% svg /auth/stacklane as logo }}
 </head>
 
 <body>
@@ -107,8 +120,8 @@
 <div class="login-widget">
     <div class="login-header">
         <div class="logo">
-            <a href="https://stacklane.com" title="Stacklane">{{>logo}}</a>
-            <a href="https://console.stacklane.com" title="Console" class="ext">console</a>
+            <a href="https://stacklane.com" title="Stacklane">{{>brand-stacklane-text}}</a>
+            {{!<a href="https://console.stacklane.com" title="Console" class="ext">console</a>}}
         </div>
     </div>
     <div class="login-providers provider-list">
@@ -122,9 +135,6 @@
             </button>
             </form>
             {{/Providers.all}}
-
-            {{! Signup Link }}
-            <div class="signup">Or, <a href="signup">Sign Up Here</a></div>
         {{/Me}}
 
         {{! Logout }}
@@ -137,6 +147,12 @@
             </form>
         {{/Me}}
     </div>
+    {{! Signup Link }}
+    {{^Me}}
+    <div class="login-footer">
+       Or, <a href="signup">Sign Up Here</a>
+    </div>
+    {{/Me}}
 </div>
 
 <script type="text/javascript">
