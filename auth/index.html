@@ -8,13 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" type="image/png" href="/auth/fav/16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="/auth/fav/32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/auth/fav/192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="/fav/16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/fav/32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/fav/192.png" sizes="192x192" />
 
     <link itemprop='content-security-policy' data-form-action-auth='true' data-img-src-data='true'/>
 
-    <link rel="stylesheet" href="normalize.scss">
+    <link rel="stylesheet" href="/style/theme.scss">
     <link rel="stylesheet" href="providers.scss">
 
     {{% import {Me, Providers} from '👤' }}
@@ -25,140 +25,90 @@
     {{> prefetch}}
 
     <style>
-        body {
-            margin: 0;
-            background: #F5F8FA;
+        .box{
+            margin: 0px auto;
+            max-width: 448px;
+            width: 100%;
+            padding: 2.5rem;
         }
-        a, a:visited, a:active{
-            color: #0c84cd;
-        }
-
-        .login-widget{
-            margin: 0 auto;
-            height: 100%;
-            background: #fff;
-            position: relative;
-        }
-        .login-providers{
-            padding: 1rem;
-        }
-        .login-header{
+        .logo{
             text-align: center;
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-            color: #2a3137;
-            position: relative;
-            overflow: hidden;
-            box-sizing: border-box;
-            border-bottom: 1px solid #E1E8ED;
-            background-color: #F5F8FA;
-        }
-        .login-footer{
-            text-align: center;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            color: #2a3137;
-            position: relative;
-            overflow: hidden;
-            box-sizing: border-box;
-            border-top: 1px solid #E1E8ED;
-            margin-top: .5rem;
-            background-color: #F5F8FA;
-            font-size: .8rem;
-        }
-
-        @media only screen and (min-width: 481px){
-            body{
-                background: rgba(34, 34, 40, 0.94) radial-gradient(#414c56, #14171A) no-repeat fixed;
-                background-size: 100%;
-            }
-            .login-widget{
-                opacity: 1;
-                animation: fade-up-onload-kf .4s;
-                border-radius: 5px;
-                width: 300px;
-                max-height: 100vh;
-                box-shadow: 0 0 40px 4px #14171A;
-                margin-top: 2rem;
-            }
-            .login-header{
-                border-radius: 5px 5px 0 0;
-            }
-            .login-footer{
-                border-radius: 0 0 5px 5px;
-            }
-        }
-        @keyframes fade-up-onload-kf {
-            from {
-                transform: translateY(100%) scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0%) scale(1);
-                opacity: 1;
-            }
-        }
-
-        .logo a, .logo a:visited, .logo a:hover{
-            text-decoration: none;
-            display:inline-block;
+            margin-top: 5rem;
+            margin-bottom: 2rem;
+            padding-right: 1rem; /* looks better for words */
         }
         .logo svg{
-            height: 1.5rem;
-            vertical-align:text-bottom;
+            height: 2rem;
         }
-        .logo .ext{
-            font-weight: 500;
-            color: black;
-            padding-left: .25rem;
+        .login-content{
+            flex-grow: 1;
+        }
+        .login-wrapper{
+            min-height: 100vh;
+            flex-grow: 1;
+            flex-direction: column;
+            display: flex;
+        }
+        .login-footer{
+            padding-top: 2rem;
+            padding-bottom: 2rem;
         }
     </style>
 </head>
 
 <body>
+<div class="login-wrapper">
+    <div class="logo">
+        <a href="https://stacklane.com" title="Stacklane">{{>brand-stacklane-text}}</a>
+    </div>
 
-<div class="login-widget">
-    <div class="login-header">
-        <div class="logo">
-            <a href="https://stacklane.com" title="Stacklane">{{>brand-stacklane-text}}</a>
-            {{!<a href="https://console.stacklane.com" title="Console" class="ext">console</a>}}
+    <div class="login-content">
+        <div class="box">
+            {{^Me}}
+            <div class="title is-size-5 has-text-weight-semibold">
+                Sign in to your account
+            </div>
+            {{/Me}}
+            <div class="provider-list">
+                {{! Provider List }}
+                {{^Me}}
+                {{#Providers.all as provider}}
+                <form id="{{provider.type}}" method="post" class="provider-form" action="{{provider.authPath}}">
+                    <button type="submit" class="provider-button provider-{{provider.brand}}">
+                        <div class="provider-icon"></div>
+                        <div class="provider-text">{{🎨.login-with provider.name}}</div>
+                    </button>
+                </form>
+                {{/Providers.all}}
+                {{/Me}}
+
+                {{! Logout }}
+                {{#Me}}
+                <form method="post" class="provider-form" action="/__/auth/provider/logout">
+                    <button type="submit" class="provider-button provider-logout">
+                        <div class="provider-icon"></div>
+                        <div class="provider-text">{{🎨.logout}}</div>
+                    </button>
+                </form>
+                {{/Me}}
+            </div>
         </div>
-    </div>
-    <div class="login-providers provider-list">
-        {{! Provider List }}
         {{^Me}}
-            {{#Providers.all as provider}}
-            <form id="{{provider.type}}" method="post" class="provider-form" action="{{provider.authPath}}">
-            <button type="submit" class="provider-button provider-{{provider.brand}}">
-                <div class="provider-icon"></div>
-                <div class="provider-text">{{🎨.login-with provider.name}}</div>
-            </button>
-            </form>
-            {{/Providers.all}}
+        <div class="has-text-centered">
+            Don't have an account? <a href="signup">Sign up</a>
+        </div>
         {{/Me}}
+    </div>
 
-        {{! Logout }}
-        {{#Me}}
-            <form method="post" class="provider-form" action="/__/auth/provider/logout">
-                <button type="submit" class="provider-button provider-logout">
-                    <div class="provider-icon"></div>
-                    <div class="provider-text">{{🎨.logout}}</div>
-                </button>
-            </form>
-        {{/Me}}
+    <div class="login-footer has-text-centered">
+        <a href="https://stacklane.com" class="has-text-grey">&nbsp;© Stacklane&nbsp;</a>
+
+        <a href="https://stacklane.com/contact" class="has-text-grey">&nbsp;Contact&nbsp;</a>
     </div>
-    {{! Signup Link }}
-    {{^Me}}
-    <div class="login-footer">
-       Or, <a href="signup">Sign Up Here</a>
-    </div>
-    {{/Me}}
 </div>
 
-<script type="text/javascript">
-    /**
-     * Add a class to a previously authenticated provider.
-     */
+<script>
+    // Add class to a previously authenticated provider.
     try {
         let previousSuccessId = localStorage.getItem('/auth/provider');
 
@@ -168,12 +118,7 @@
         }
     } catch (e){ }
 
-    /**
-     * Form submission handler
-     *
-     * Note:  Seems Safari does not understand a disabled <button>
-     *  (Update: that may be fixed in Safari 11.1)
-     */
+    // Form submission handler
     let disableAllButtons = ()=>{
         let inputs = document.getElementsByTagName("button");
         for (let i = 0; i < inputs.length; i++) {
@@ -181,7 +126,7 @@
                 inputs[i].setAttribute("disabled", "disabled");
             }
         }
-    }
+    };
     let forms = document.getElementsByTagName("form");
     for (let f = 0; f < forms.length; f++){
         let ele = forms[f];
