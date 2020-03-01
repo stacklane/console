@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{🎨.name}}</title>
+    <title>{{🎨.name}}: Sign In</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,9 +33,14 @@
         }
         .logo{
             text-align: center;
-            margin-top: 5rem;
+            margin-top: 2rem;
             margin-bottom: 2rem;
-            padding-right: 1rem; /* looks better for words */
+            padding-right: 1rem; /* looks better for symbol+words */
+        }
+        @media screen and (min-width: 768px) {
+            .logo{
+                margin-top: 5rem;
+            }
         }
         .logo svg{
             height: 2rem;
@@ -45,7 +50,7 @@
         }
         .login-wrapper{
             min-height: 100vh;
-            flex-grow: 1;
+            /*flex-grow: 1;*/
             flex-direction: column;
             display: flex;
         }
@@ -102,7 +107,6 @@
 
     <div class="login-footer has-text-centered">
         <a href="https://stacklane.com" class="has-text-grey">&nbsp;© Stacklane&nbsp;</a>
-
         <a href="https://stacklane.com/contact" class="has-text-grey">&nbsp;Contact&nbsp;</a>
     </div>
 </div>

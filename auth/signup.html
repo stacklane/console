@@ -2,121 +2,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{🎨.name}}</title>
+    <title>{{🎨.name}}: Register</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" type="image/png" href="/auth/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/auth/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/fav/16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/fav/32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/fav/192.png" sizes="192x192" />
 
     <link itemprop='content-security-policy' data-form-action-auth='true' data-img-src-data='true'/>
 
+    <link rel="stylesheet" href="/style/theme.scss">
     <link rel="stylesheet" href="providers.scss">
 
     {{% import {Providers} from '👤' }}
 
     {{% svg /_brand/ as brand }}
+    {{% svg /_icons/check-blue as check }}
 
     {{% partial /auth/_prefetch }}
     {{> prefetch}}
 
     <style>
-        body{
-            margin: 0;
-            padding: 0;
-            background-color: #F5F8FA;
-            color: #14171A;
-            line-height: 2;
+        html{
+            background: #F5F8FA; /* $grey-lightest */
         }
         .signup{
-            padding: 20px 0;
-            font-size: 16px;
+            min-height: 100vh;
+            flex-direction: row;
+            display: flex;
+            justify-content: center;
         }
-        @media only screen and (min-width: 768px){
-            .signup{
-                padding: 20px 10px;
-            }
+        .signup-intro .logo{
+            margin-left: -2px;
+            margin-bottom: 2rem;
         }
-        @media only screen and (min-width: 992px){
-            .signup{
-                padding: 40px 20px;
-            }
+        .signup-intro .logo svg{
+            height: 2rem;
         }
-        .signup-container{
-            max-width: 1016px;
-            margin-right: auto;
-            margin-left: auto;
-            padding: 0;
+        .signup-intro{
+            flex-basis: 380px;
+            flex-grow: 45;
+            border-right: 1px solid rgba(0,0,0,.1);
+            justify-content: flex-end;
+            flex-direction: row;
+            display: flex;
         }
-        @media (min-width: 768px) {
-            .signup-container {
-                width: auto !important;
-            }
+        .signup-intro > div{
+            padding-left: 20px;
+            padding-right: 40px;
+            display:flex;
+            justify-content: space-between;
+            flex-direction: column;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
-
-        .pull-right{
-            float: none;
+        .signup-intro > div > div{
+            width: 280px;
         }
-        .pull-left{
-            float: none;
-        }
-
-        @media (min-width: 768px) {
-            .pull-right {
-                float: right !important;
-            }
-            .pull-left {
-                float: left !important;
-            }
-            .col-sm-6 {
-                width: 50%;
-            }
-        }
-
-        .signup-providers{
-            border: 1px solid #E1E8ED;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 3px;
-            background-clip: padding-box;
-            margin-left: 15px;
-            margin-right: 15px;
-            margin-bottom: 1rem;
-        }
-        @media (min-width: 992px) {
-            .signup-providers {
-                padding: 40px 50px;
-            }
-        }
-
-        h2 {
-            font-weight: normal;
-            margin: 0 0 2rem;
+        .signup-intro .check svg{
+            height: 1rem;
+            margin-top: 2px;
         }
 
         .signup-content{
-            margin-left: 15px;
-            margin-right: 15px;
+            background: white;
+            flex-basis: 464px;
+            flex-grow: 55;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .signup-content > div{
+            padding-left: 20px;
+            max-width: 424px;
+            width: 424px;
+        }
+        .signup-content .logo{
             margin-top: 2rem;
-        }
-        @media (min-width: 768px) {
-            .signup-content {
-                padding-right: 40px;
-                margin-top: 0rem;
-            }
-        }
-
-        .logo{
             margin-bottom: 2rem;
         }
-        .logo a, .logo a:visited, .logo a:hover{
-            text-decoration: none;
-            display:inline-block;
-        }
-        .logo svg{
+        .signup-content .logo svg{
             height: 2rem;
+        }
+        .signup-content-footer{
+            display:none;
+            margin-top: 3rem;
+            text-align:center;
+        }
+
+        .provider-list{
+            margin-top: 2rem;
+        }
+
+        @media screen and (max-width: 767px) {
+            .signup-intro{
+                display: none;
+            }
+            .signup-content-footer{
+                display: block;
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .signup-intro > div{
+                padding-right: 80px;
+            }
+            .signup-content{
+                display: block; /* disable flex */
+            }
+            .signup-content > div{
+                padding-left: 80px;
+            }
+            .signup-content .logo{
+                visibility: hidden;
+            }
         }
     </style>
 </head>
@@ -124,15 +125,64 @@
 <body>
 
 <div class="signup">
-    <div class="signup-container">
-        <div class="col-sm-6 pull-right">
-            <div class="signup-providers">
-                <h2>{{🎨.signup}}</h2>
-
+    <div class="signup-intro">
+        <div>
+            <div>
+                <div>
+                    <div class="logo">
+                        <a href="https://stacklane.com" title="Stacklane">{{>brand-stacklane-text}}</a>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-1 check">{{>check}}</div>
+                        <div class="column">
+                            <div class="title is-size-6">Quick and free sign‑up</div>
+                            <div class="subtitle is-size-6">
+                               Use a single sign-on (SSO) account you already have from GitHub or Google.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-1 check">{{>check}}</div>
+                        <div class="column">
+                            <div class="title is-size-6">Always free development</div>
+                            <div class="subtitle is-size-6">
+                                Development and testing of your Stacklane web app area always free.
+                                Setup an account when you're ready to go live.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-1 check">{{>check}}</div>
+                        <div class="column">
+                            <div class="title is-size-6">Still looking?</div>
+                            <div class="subtitle is-size-6">
+                                Check out our <a href="http://stacklane.com/guide/">Evaluation Guide</a>
+                                and <a href="http://stacklane.com/docs/">Developer Docs</a>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="https://stacklane.com" class="has-text-grey">&nbsp;© Stacklane&nbsp;</a>
+                <a href="https://stacklane.com/contact" class="has-text-grey">&nbsp;Contact&nbsp;</a>
+            </div>
+        </div>
+    </div>
+    <div class="signup-content">
+        <div>
+            <div class="logo">
+                <a href="https://stacklane.com" title="Stacklane">{{>brand-stacklane-text}}</a>
+            </div>
+            <div>
+                <div class="title has-text-weight-normal is-size-4">Create your Stacklane account</div>
+                <div class="subtitle has-text-weight-normal is-size-6">
+                    Already have an account? <a href="/auth/">Sign in</a>.
+                </div>
                 <div class="provider-list">
                     {{#Providers.all as provider}}
-                    <form method="post" class="provider-form" action="{{provider.authPath}}">
-                        <button type="submit" class="provider-button large provider-{{provider.brand}}">
+                    <form id="{{provider.type}}" method="post" class="provider-form" action="{{provider.authPath}}">
+                        <button type="submit" class="provider-button provider-{{provider.brand}}">
                             <div class="provider-icon"></div>
                             <div class="provider-text">{{🎨.signup-with provider.name}}</div>
                         </button>
@@ -140,18 +190,9 @@
                     {{/Providers.all}}
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6 pull-left">
-            <div class="signup-content">
-                <div class="logo">
-                    <a href="https://stacklane.com" title="Stacklane">{{>brand-stacklane-text}}</a>
-                </div>
-
-                <h2>Start building scalable, serverless web apps on our global platform today!</h2>
-                <p>
-                    Let Stacklane handle the complexities of geographically replicated NoSQL data, global endpoints,
-                    security, and user authentication.
-                </p>
+            <div class="signup-content-footer">
+                <a href="https://stacklane.com" class="has-text-grey">&nbsp;© Stacklane&nbsp;</a>
+                <a href="https://stacklane.com/contact" class="has-text-grey">&nbsp;Contact&nbsp;</a>
             </div>
         </div>
     </div>
