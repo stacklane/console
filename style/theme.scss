@@ -71,6 +71,18 @@ $button-transition: background-color 200ms ease, box-shadow 200ms ease;
 
 ////////////
 
+.logo.is-logo-color-mono-dark{
+  svg{
+    fill: $grey-dark;
+  }
+
+  a:hover{
+    svg {
+      fill: $blue;
+    }
+  }
+}
+
 .button{
   transition: $button-transition;
 
