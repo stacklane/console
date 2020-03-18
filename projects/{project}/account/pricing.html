@@ -29,7 +29,7 @@
     <div class="simple-list-item">
         <span class="simple-list-label">{{🎨.feature-hosting-units}}</span>
         <span class="has-text-weight-bold"><span data-controller="number">{{StarterPlan.baseUnits}}</span></span>
-        <div><a href="#" data-controller="modal" data-action="modal#show" data-modal-id="unitInfoDialog">Learn more</a></div>
+        <div><a target="_blank" href="https://stacklane.com/pricing#stack-units">Learn more →</a></div>
     </div>
     <div class="simple-list-item">
         <span class="simple-list-label">{{🎨.feature-hosting-units-add}}</span>
@@ -46,78 +46,5 @@
                 / {{StarterPlan.interval}}
             </span>
         </span>
-    </div>
-</div>
-
-<div class="modal" id="unitInfoDialog">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-        <header class="modal-card-head">
-            <p class="modal-card-title"><b>About Stack Units</b></p>
-            <a class="delete is-modal-hide" aria-label="close"></a>
-        </header>
-        <section class="modal-card-body">
-            <p>
-                Stacklane pricing plans are based on virtual units.
-                Units include storage, access, and operation.
-                Using units ensures that plans are automatically adaptable to a wide range of sites and applications.
-            </p>
-
-            <br>
-            <br>
-
-            <table class="table is-fullwidth">
-                <thead>
-                <tr>
-                    <th scope="col">Unit Name</th>
-                    <th scope="col">Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        Universal Model Record
-                        <br>
-                        <small>
-                            Use and storage of a single Universal model record.
-                        </small>
-                    </td>
-                    <td>1 Unit</td>
-                </tr>
-                <tr>
-                    <td>Content Model Record
-                        <br>
-                        <small>
-                            Use and storage of a single Content model record.
-                        </small>
-                    </td>
-                    <td>2 Units</td>
-                </tr>
-                <tr>
-                    <td>Model Image
-                        <br>
-                        <small>
-                            Use and storage usage of a single image.
-                            <br>
-                            For example, a Universal model with 1 image would be 4 units total.
-                        </small>
-                    </td>
-                    <td>3 Units</td>
-                </tr>
-                <tr>
-                    <td>User &amp; Profile Records
-                        <br>
-                        <small>
-                            Use and storage of a single User, along with any number of its Profile models.
-                        </small>
-                    </td>
-                    <td>100 Units</td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-        <footer class="modal-card-foot has-text-right">
-            <button class="button is-modal-hide">Close</button>
-        </footer>
     </div>
 </div>
