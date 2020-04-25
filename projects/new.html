@@ -50,7 +50,7 @@
             </section>
 
             <section class="is-stack columns">
-                {{#examples as example}}
+                {{#examples.items as example}}
                 <div class="column is-half">
                     <form method="post" action="new?_form={{id}}" data-controller="form" data-form-ajax="true">
                         <input type="hidden" name="{{field.path}}" value="{{example.src}}">
@@ -72,7 +72,7 @@
                         </div>
                     </form>
                 </div>
-                {{/examples}}
+                {{/examples.items}}
             </section>
         </div>
 

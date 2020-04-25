@@ -1,4 +1,4 @@
-[
+{"items":[
   {
     "title":"Tasks",
     "desc":"Add, rename, complete, and prioritize tasks.",
@@ -9,4 +9,4 @@
     "desc":"Image storage, display, and upload progress.",
     "src":"https://github.com/stacklane-blueprints/images.git"
   }
-]
+]}
