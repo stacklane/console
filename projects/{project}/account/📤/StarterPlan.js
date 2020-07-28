@@ -13,7 +13,7 @@ let planList = planListRaw.data.filter(
 );
 
 let fullPlan = {
-    name: 'Starter Plan',
+    name: 'Launch Plan',
     eur: currency == 'eur',
     usd: currency == 'usd',
     currency: currency,
