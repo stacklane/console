@@ -4,7 +4,7 @@
 
 @import "/bulma/utilities/all";
 
-@import "/bulma/base/_all";
+@import "/bulma/base/all";
 
 @import "/bulma/elements/box";
 @import "/bulma/elements/button";
@@ -17,7 +17,6 @@
 @import "/bulma/elements/table";
 @import "/bulma/elements/other";
 
-//@import "/bulma/components/card";
 @import "/bulma/components/dropdown";
 @import "/bulma/components/media";
 @import "/bulma/components/navbar";
@@ -25,11 +24,12 @@
 @import "/bulma/components/modal";
 @import "/bulma/components/message";
 @import "/bulma/components/level";
-//@import "/bulma/grid/tiles";
 
 @import "/bulma/grid/columns";
 
-@import "/bulma/form/_all";
+@import "/bulma/form/all";
+
+@import "/bulma/helpers/all";
 
 ////////
 
