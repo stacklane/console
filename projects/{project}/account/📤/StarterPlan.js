@@ -30,7 +30,9 @@ let fullPlan = {
     usageId: '',
 
     projectId: '',
-    projectAmount: 0
+    projectAmount: 0,
+
+    firstMonthFree: true
 };
 
 planList.forEach(plan=>{

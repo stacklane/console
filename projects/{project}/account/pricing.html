@@ -22,6 +22,12 @@
             </div>
         </div>
     </div>
+    {{#StarterPlan.firstMonthFree}}
+    <div class="simple-list-item">
+        <span class="simple-list-label">Discount Applied</span>
+        <span class="has-text-weight-bold">First Month Free!</span>
+    </div>
+    {{/StarterPlan.firstMonthFree}}
     <div class="simple-list-item">
         <span class="simple-list-label">{{🎨.feature-hosting-location}}</span>
         <span class="has-text-weight-bold">{{StarterPlan.baseLocations}}+ Geographic Areas</span>

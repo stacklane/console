@@ -1,6 +1,6 @@
 
 import {coupons, customers, subscriptions, subscription_items} from 'stripe.com';
-import {stripeToken, promo} from 'form';
+import {stripeToken, promo, heard} from 'form';
 import {Me, Role} from '👤';
 import {Account, AccountUser} from '📦';
 import {project} from '🔗';
@@ -40,7 +40,9 @@ try {
         "items[2][plan]": plan.usageId,
         customer: customer.id,
         coupon: promo,
-        "metadata[account]": account.id
+        "metadata[account]": account.id,
+        "metadata[heard]": heard,
+        trial_period_days: plan.firstMonthFree ? 31 : 0
     });
 
     let projectPlanItem = subscription.items.data[0];
